@@ -1,0 +1,105 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MsCorLib/System"
+      xmlns:me="Me"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images">
+
+  <UI Name="ProgressBar">
+    <Properties>
+      <a:Config Name="Config" Config="$Required"/>
+      <cor:Single Name="PercentWatched" Single="0.0"/>
+      <!--size of the progress bar-->
+      <Size Name="Size" Size="75,15"/>
+    </Properties>
+
+    <Locals>
+      <!-- PercentWatched.Value will be bound to the Right percent of this input -->
+      <FormLayoutInput Name="ProgressInput"
+                       Left="Parent,0"
+                       Right="Parent,0.5"
+                       Top="Parent,0"
+                       Bottom="Parent,1"/>
+      <FormLayoutInput Name="DummyInput"
+                       Left="Parent,0"
+                       Right="Parent,0.5"
+                       Top="Parent,0"
+                       Bottom="Parent,1"/>
+    </Locals>
+
+    <Rules>
+
+
+      <!-- Apply the calculated ColorFill Size -->
+      <Changed Source="[PercentWatched]"
+               InitialEvaluate="true">
+        <Actions>
+          <Set Target="[ProgressInput.Right.Percent]"
+               Value="[PercentWatched]" />
+          <!-- Change the layout to a dummy layout and then back to force Media Center to recognize that the -->
+          <!-- layout changed.                                                                               -->
+          <Set Target="[Bar.LayoutInput]"
+               Value="[DummyInput]"
+               ExclusiveApply="false"/>
+          <Set Target="[Bar.LayoutInput]"
+               Value="[ProgressInput]"/>
+        </Actions>
+      </Changed>
+
+      <!--Convert to text with percentage symbol (ie: .2 = 20%)-->
+      <Binding Source="[PercentWatched]" Target="[ProgressPercent.Content]">
+        <Transformer>
+          <FormatTransformer Format="Watched {0}" ExtendedFormat="P0" />
+        </Transformer>
+      </Binding>
+
+      <Binding Source="[Config.AlphaBlending!cor:Single]" Target="[Back.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+
+    </Rules>
+
+    <Content>
+      <Panel Layout="Center" MinimumSize="[Size]" MaximumSize="[Size]">
+
+        <Children>
+
+          <!--Watched Percentage Text-->
+          <Text Name="ProgressPercent" Font="Segoe Media Center,10" Color="White">
+            <Animations>
+              <Animation Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" RelativeTo="Absolute" Value="0"/>
+                  <AlphaKeyframe Time="0.5" RelativeTo="Absolute" Value="0" Interpolation="EaseIn"/>
+                  <AlphaKeyframe Time="1.5" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </Text>
+          
+          <Graphic Name="Back" Content="image://vi:PBBack" Layout="Form" MinimumSize="[Size]" MaximumSize="[Size]">
+            <Children>
+              <Graphic Name="Bar" Content="image://vi:PBFill" Alpha=".5" Margins="10,12,10,11">
+                <Animations>
+                  <Animation Type="Show">
+                    <Keyframes>
+                      <SizeKeyframe Time="0" RelativeTo="Absolute" Value="1,17,0"/>
+                      <SizeKeyframe Time="0.5" RelativeTo="Absolute" Value="1,17,0" Interpolation="SCurve"/>
+                      <SizeKeyframe Time="1.5" RelativeTo="Final"/>
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+              </Graphic>
+            </Children>
+          </Graphic>
+
+          <!--border-->
+          <!--<ColorFill Content="White" MinimumSize="[Size]" MaximumSize="[Size]" Alpha="0.5" />-->
+        </Children>
+      </Panel>
+
+    </Content>
+  </UI>
+
+</Mcml>

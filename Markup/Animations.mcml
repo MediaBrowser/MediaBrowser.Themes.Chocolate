@@ -1,0 +1,106 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System">
+
+  
+
+  <Animation Name="ShowSlideRight" Type="ContentChangeShow">
+    <Keyframes>
+      <PositionKeyframe Time="0" RelativeTo="Final" Value="1,0,0" Interpolation="Log"/>
+      <PositionKeyframe Time=".65" RelativeTo="Final"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="ShowSlideLeft" Type="ContentChangeShow">
+    <Keyframes>
+      <PositionKeyframe Time="0" RelativeTo="Final" Value="-1,0,0" Interpolation="Log"/>
+      <PositionKeyframe Time=".65" RelativeTo="Final"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="HideSlideRight" Type="ContentChangeHide">
+    <Keyframes>
+      <PositionKeyframe Time="0" RelativeTo="Final" Interpolation="Log"/>
+      <PositionKeyframe Time=".65" RelativeTo="Final"  Value="-1,0,0"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="HideSlideLeft" Type="ContentChangeHide">
+    <Keyframes>
+      <PositionKeyframe Time="0" RelativeTo="Final" Interpolation="Log"/>
+      <PositionKeyframe Time=".65" RelativeTo="Final" Value="1,0,0"/>
+    </Keyframes>
+  </Animation>
+
+  <Animation Name="ListViewItem.NavigateToForward" Type="Show" CenterPointPercent="0, 0.5, 0.0">
+    <Keyframes>
+      <PositionKeyframe Time="0.0" Value="-60, 40, 0" RelativeTo="Final"/>
+      <PositionKeyframe Time="0.5" Value="-60, 40, 0" RelativeTo="Final" Interpolation="Log, 2.0"/>
+      <PositionKeyframe Time="0.9" Value="0, 0, 0" RelativeTo="Final"/>
+      <ScaleKeyframe Time="0.0" Value="0.8, 0.8, 1.0" RelativeTo="Final"/>
+      <ScaleKeyframe Time="0.5" Value="0.8, 0.8, 1.0" RelativeTo="Final" Interpolation="Log, 2.0"/>
+      <ScaleKeyframe Time="0.9" RelativeTo="Final"/>
+      <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute" Interpolation="Log"/>
+      <AlphaKeyframe Time="0.9" RelativeTo="Final"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="ListViewItem.NavigateToBackward" Type="Show" CenterPointPercent="0, 0.5, 0.0">
+    <Keyframes>
+      <ScaleKeyframe Time="0.0" Value="1.2, 1.2, 1.0" RelativeTo="Final"/>
+      <ScaleKeyframe Time="0.5" Value="1.2, 1.2, 1.0" RelativeTo="Final" Interpolation="EaseIn, 2.0, 0.4"/>
+      <ScaleKeyframe Time="0.9" RelativeTo="Final"/>
+      <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute" Interpolation="Log"/>
+      <AlphaKeyframe Time="0.9" RelativeTo="Final"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="ListViewItem.NavigateAwayForward" Type="Hide" CenterPointPercent="0, 0.5, 0.0">
+    <Keyframes>
+      <ScaleKeyframe Time="0.0" RelativeTo="Current" Interpolation="Log"/>
+      <ScaleKeyframe Time="0.4" Value="1.2, 1.2, 1.0" RelativeTo="Current"/>
+      <AlphaKeyframe Time="0.0" RelativeTo="Current" Interpolation="Log"/>
+      <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="ListViewItem.NavigateAwayBackward" Type="Hide" CenterPointPercent="0, 0.5, 0.0">
+    <Keyframes>
+      <ScaleKeyframe Time="0.0" RelativeTo="Current" Interpolation="Log"/>
+      <ScaleKeyframe Time="0.4" Value="0.8, 0.8, 1.0" RelativeTo="Current"/>
+      <AlphaKeyframe Time="0.0" RelativeTo="Current" Interpolation="Log"/>
+      <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="NavigateToForward" Type="Show">
+    <Keyframes>
+      <PositionKeyframe Time="0.0" Value="400, 0, 0" RelativeTo="Final"/>
+      <PositionKeyframe Time="0.5" Value="400, 0, 0" RelativeTo="Final" Interpolation="EaseIn, 3.0, 0.2"/>
+      <PositionKeyframe Time="1.4" Value="0, 0, 0" RelativeTo="Final"/>
+      <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="1.4" Value="1.0" RelativeTo="Absolute"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="NavigateToBackward" Type="Show" CenterPointPercent="0.0, 0.5, 0.0">
+    <Keyframes>
+      <ScaleKeyframe Time="0.0" Value="1.1, 1.1, 1.0"/>
+      <ScaleKeyframe Time="0.5" Value="1.1, 1.1, 1.0" Interpolation="Log"/>
+      <ScaleKeyframe Time="0.9" Value="1.0, 1.0, 1.0"/>
+      <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute" Interpolation="Exp"/>
+      <AlphaKeyframe Time="0.9" Value="1.0" RelativeTo="Absolute"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="NavigateAwayForward" Type="Hide" CenterPointPercent="0.0, 0.5, 0.0">
+    <Keyframes>
+      <ScaleKeyframe Time="0.0" RelativeTo="Current" Interpolation="Exp"/>
+      <ScaleKeyframe Time="0.4" Value="1.2, 1.2, 1.0" RelativeTo="Current"/>
+      <AlphaKeyframe Time="0.0" RelativeTo="Current"/>
+      <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="NavigateAwayBackward" Type="Hide" CenterPointPercent="0.0, 0.5, 0.0">
+    <Keyframes>
+      <ScaleKeyframe Time="0.0" RelativeTo="Current" Interpolation="Exp"/>
+      <ScaleKeyframe Time="0.4" Value="0.5, 0.5, 1.0"/>
+      <AlphaKeyframe Time="0.0" RelativeTo="Current"/>
+      <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
+    </Keyframes>
+  </Animation>
+</Mcml>

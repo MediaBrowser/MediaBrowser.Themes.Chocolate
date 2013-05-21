@@ -1,0 +1,130 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	    xmlns:cor="assembly://MSCorLib/System"
+      xmlns:lb="resx://Chocolate/Chocolate.Resources/ListButton"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+	    xmlns:s="file://Styles_DoNotEdit.mcml"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+      xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
+      xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+      xmlns:ch="assembly://Chocolate/Chocolate">
+
+	<UI Name="ListScroller">
+
+		<Properties>
+			<a:Application Name="Application" Application="$Required"/>
+			<lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+		</Properties>
+
+		<Locals>
+			<!-- Use the MouseWheel handler to handle the mouse wheel.  -->
+			<ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollingHandler"/>
+			<ScrollingData Name="ScrollingData" BeginPadding="5" EndPadding="35" />
+      <GridLayout Name="MyLayout" Orientation="Horizontal" AllowWrap="true" Spacing="0,0" Repeat="Always" RepeatGap="0" MinorAlignment="Center" />
+      <cor:Int32 Name="Startup"/>
+    </Locals>
+   
+		<Rules>
+
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
+			<Default Target="[ScrollingData.Repeater]" Value="[MyRepeater]"/>
+
+      
+			<Binding Source="[Folder.SelectedChildIndex.ToString]" Target="[List_Counter.Content]" >
+        <Transformer>
+          <MathTransformer Add="1" />
+        </Transformer>
+			</Binding>
+
+			<!--`Bind the current number of Folder Items to the List Total -->
+			<Binding Source="[Folder.Children.Count]" Target="[List_Total.Content]" >
+				<Transformer>
+					<FormatTransformer Format="| {0}" />
+				</Transformer>
+			</Binding>
+
+			<Binding Source="[Folder.Children]" Target="[MyRepeater.Source]"/>
+
+      <!--The below default dummy rule is used to navigate to the proper first item.  using a generic rule or changed does not work the first time-->
+      <Default Target="[Startup]" Value="1" ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Application.NavigatingForward]" Value="true"/>
+          <Equality Source="[Folder.Children.Count]" ConditionOp="GreaterThan" Value="0" />
+        </Conditions>
+        <Actions>
+          <Invoke Target="[MyRepeater.NavigateIntoIndex]"  index="[Folder.FirstUnwatchedIndex]"/>
+        </Actions>
+      </Default>
+      
+			<Changed Source="[Folder.JILShift]">
+				<Actions>
+					<Invoke Target="[ScrollingData.Scroll]"  amount="[Folder.JILShift]"/>
+				</Actions>
+			</Changed>
+
+			<Changed Source="[Application]" InitialEvaluate="true">
+				<Actions>
+					<Invoke Target="[Application.FixRepeatRate]" scroller="[Scroller]" val="50" />
+				</Actions>
+			</Changed>
+
+		</Rules>
+
+		<Content>
+      
+          <Panel Layout="Form">
+            <LayoutInput>
+              <DockLayoutInput Alignment="Fill" Position="Client"/>
+            </LayoutInput>
+            
+            <Children>
+              <!-- List Counter -->
+              <Panel>
+                <LayoutInput>
+                  <FormLayoutInput Bottom="Parent,1" Right="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <Panel Layout="HorizontalFlow" Margins="0,5,0,0" >
+                    <Children>
+                      <Text Name="List_Counter" Content="0" Color="color://uc:Medium" Font="font://uf:LightMediumMinus" />
+                      <Text Name="List_Total" Content="0" Color="color://uc:Medium" Font="font://uf:LightMediumMinus" Margins="0,0,20,0" />
+                    </Children>
+                  </Panel>
+                </Children>
+              </Panel>
+
+              <!-- List Repeater -->
+              <Scroller Orientation="Vertical" Name="Scroller" Navigation="RememberFocus" ScrollingData="[ScrollingData]" FadeSize="10"  >
+                <LayoutInput>
+                  <FormLayoutInput Top="Parent,0" Bottom="Parent,1,-40"/>
+                </LayoutInput>
+                <Children>
+                  <Repeater  Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" DiscardOffscreenVisuals="false">
+                    <Layout>
+                      <FlowLayout Orientation="Vertical" Spacing="1,1"/>
+                    </Layout>
+                    <Animations>
+                      <Animation Type="Move">
+                        <Keyframes>
+                          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+                          <PositionKeyframe Time="0.55" RelativeTo="Final"  />
+                        </Keyframes>
+                      </Animation>
+                    </Animations>
+                  </Repeater>
+                </Children>
+              </Scroller>
+                
+            </Children>
+             
+          </Panel>
+        
+      
+    </Content>
+		<Content Name="BaseItem">
+			<lb:ListButton Application="[Application]" Folder="[Folder]" Index="[RepeatedItemIndex]" Item="[RepeatedItem!lib:Item]"  Font="font://uf:LightMediumMinus" ThemeHelper="[ThemeHelper]"/>
+		</Content>
+	</UI>
+
+</Mcml>

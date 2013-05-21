@@ -1,0 +1,220 @@
+﻿<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	  xmlns:cor="assembly://MSCorLib/System"
+    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	  xmlns:cb="resx://MediaBrowser/MediaBrowser.Resources/CheckBox"
+	  xmlns:s="file://Styles_DoNotEdit.mcml"
+	  xmlns:f="file://Fonts_DoNotEdit.mcml"
+    xmlns:ch="assembly://Chocolate/Chocolate"
+    xmlns:ss="resx://MediaBrowser/MediaBrowser.Resources/SimpleSpinner"
+    xmlns:st="resx://MediaBrowser/MediaBrowser.Resources/SpinnerText"
+    xmlns:i="resx://Chocolate/Chocolate.Resources/Images"
+      
+      
+>
+  <!--*****************************************************************************************************************
+
+    This is an example of a config panel for your theme.  Modify this to include any theme-specific options you require.
+    You must also handle the saving/loading of any of these options somewhere in your assembly.
+
+  *********************************************************************************************************************-->
+
+  <UI Name="ConfigPanelViews">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <EditableText Name="FocusItem" />
+      <ch:ChocHelper Name="Helper"/>
+    </Properties>
+    <Locals>
+      <Inset Name="CMargin" Inset="25,0,0,0" />
+      
+      <!--EHS Options-->
+      <BooleanChoice Name="SmallEhs" Value="[Helper.Config.SmallEhs]" />
+      <BooleanChoice Name="UseSeasonPoster" Value="[Helper.Config.UseSeasonPoster]" />
+      <BooleanChoice Name="ShowWeather" Value="[Helper.Config.ShowWeather]" />
+      <BooleanChoice Name="EnableEHSBackdrop" Value="[Helper.Config.EnableEHSBackdrop]" />
+      <BooleanChoice Name="EnableStripBackdrop" Value="[Helper.Config.EnableStripBackdrop]" />
+      <BooleanChoice Name="DisableEHSMovieTitle" Value="[Helper.Config.DisableEHSMovieTitle]" />
+      <!--CoverFlow Options-->
+      <BooleanChoice Name="ShowCoverFlowTitle" Value="[Helper.Config.ShowCoverFlowTitle]" />
+      <BooleanChoice Name="ShowCoverFlowOverlay" Value="[Helper.Config.ShowCoverFlowOverlay]" />
+      <BooleanChoice Name="ShowCoverFlowLogos" Value="[Helper.Config.ShowCoverFlowLogos]" />
+      <BooleanChoice Name="ShowCoverFlowEndTime" Value="[Helper.Config.ShowCoverFlowEndTime]" />
+      <BooleanChoice Name="ShowCoverflowIndicator" Value="[Helper.Config.ShowCoverflowIndicator]" />
+      <BooleanChoice Name="ShowCoverflowPosterOverlay" Value="[Helper.Config.ShowCoverflowPosterOverlay]" />
+      <BooleanChoice Name="ShowCoverflowTotalNumber" Value="[Helper.Config.ShowCoverflowTotalNumber]" />
+      <!--List Options-->
+      <BooleanChoice Name="ShowListLogos" Value="[Helper.Config.ShowListLogos]" />
+      <BooleanChoice Name="ShowListEndTime" Value="[Helper.Config.ShowListEndTime]" />
+      <!--Poster Options-->
+      <BooleanChoice Name="ShowPosterLogos" Value="[Helper.Config.ShowPosterLogos]" />
+      <BooleanChoice Name="ShowPosterEndTime" Value="[Helper.Config.ShowPosterEndTime]" />
+      <!--Thumb Options-->
+      <BooleanChoice Name="ShowThumbLogos" Value="[Helper.Config.ShowThumbLogos]" />
+      <BooleanChoice Name="ShowThumbEndTime" Value="[Helper.Config.ShowThumbEndTime]" />
+      <!--Strip Options-->
+      <BooleanChoice Name="ShowStripLogos" Value="[Helper.Config.ShowStripLogos]" />
+    </Locals>
+    <Rules>
+      <!--EHS Options-->
+      <Changed Source="[SmallEhsCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.SmallEhs]" Value="[SmallEhsCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+      <Changed Source="[UseSeasonPosterCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.UseSeasonPoster]" Value="[UseSeasonPosterCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowWeatherCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowWeather]" Value="[ShowWeatherCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+      <Changed Source="[EnableEHSBackdropCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.EnableEHSBackdrop]" Value="[EnableEHSBackdropCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[EnableStripBackdropCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.EnableStripBackdrop]" Value="[EnableStripBackdropCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[DisableEHSMovieTitleCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.DisableEHSMovieTitle]" Value="[DisableEHSMovieTitleCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <!--CoverFlow Options-->
+      <Changed Source="[ShowCoverFlowTitleCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowCoverFlowTitle]" Value="[ShowCoverFlowTitleCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowCoverFlowOverlayCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowCoverFlowOverlay]" Value="[ShowCoverFlowOverlayCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowCoverFlowLogosCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowCoverFlowLogos]" Value="[ShowCoverFlowLogosCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowCoverFlowEndTimeCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowCoverFlowEndTime]" Value="[ShowCoverFlowEndTimeCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowCoverflowIndicatorCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowCoverflowIndicator]" Value="[ShowCoverflowIndicatorCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowCoverflowPosterOverlayCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowCoverflowPosterOverlay]" Value="[ShowCoverflowPosterOverlayCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowCoverflowTotalNumberCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowCoverflowTotalNumber]" Value="[ShowCoverflowTotalNumberCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <!--List Options-->
+      <Changed Source="[ShowListLogosCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowListLogos]" Value="[ShowListLogosCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowListEndTimeCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowListEndTime]" Value="[ShowListEndTimeCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <!--Poster Options-->
+      <Changed Source="[ShowPosterLogosCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowPosterLogos]" Value="[ShowPosterLogosCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowPosterEndTimeCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowPosterEndTime]" Value="[ShowPosterEndTimeCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <!--Thumb Options-->
+      <Changed Source="[ShowThumbLogosCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowThumbLogos]" Value="[ShowThumbLogosCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowThumbEndTimeCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowThumbEndTime]" Value="[ShowThumbEndTimeCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <!--Strip Options-->
+      <Changed Source="[ShowStripLogosCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowStripLogos]" Value="[ShowStripLogosCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+    </Rules>
+
+    <Content>
+      <Panel Layout="HorizontalFlow">
+        <Children>
+          <!--EHS Options Panel-->
+          <Panel Layout="VerticalFlow" MaximumSize="450,400">
+            <Children>
+              <Text Content="EHS Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="EnableEHSBackdropCB" Label="[Application.LocalStrings.#EnableEHSBackdrop!cor:String]" Checked="[EnableEHSBackdrop]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowWeatherCB" Label="[Application.LocalStrings.#ShowWeather!cor:String]" Checked="[ShowWeather]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="SmallEhsCB" Label="[Application.LocalStrings.#SmallEhs!cor:String]" Checked="[SmallEhs]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="UseSeasonPosterCB" Label="[Application.LocalStrings.#UseSeasonPoster!cor:String]" Checked="[UseSeasonPoster]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="EnableStripBackdropCB" Label="[Application.LocalStrings.#EnableStripBackdrop!cor:String]" Checked="[EnableStripBackdrop]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="DisableEHSMovieTitleCB" Label="[Application.LocalStrings.#DisableEHSMovieTitle!cor:String]" Checked="[DisableEHSMovieTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+          <!--List Options Panel-->
+              <Text Content="List Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="ShowListLogosCB" Label="[Application.LocalStrings.#ShowListLogos!cor:String]" Checked="[ShowListLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowListEndTimeCB" Label="[Application.LocalStrings.#ShowListEndTime!cor:String]" Checked="[ShowListEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+            </Children>
+          </Panel>
+          <!--CoverFlow Options Panel-->
+          <Panel Layout="VerticalFlow" MaximumSize="500,400">
+            <Children>
+              <Text Content="CoverFlow Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="ShowCoverFlowTitleCB" Label="[Application.LocalStrings.#ShowCoverFlowTitle!cor:String]" Checked="[ShowCoverFlowTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverFlowOverlayCB" Label="[Application.LocalStrings.#ShowCoverFlowOverlay!cor:String]" Checked="[ShowCoverFlowOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverFlowLogosCB" Label="[Application.LocalStrings.#ShowCoverFlowLogos!cor:String]" Checked="[ShowCoverFlowLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverFlowEndTimeCB" Label="[Application.LocalStrings.#ShowCoverFlowEndTime!cor:String]" Checked="[ShowCoverFlowEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverflowIndicatorCB" Label="[Application.LocalStrings.#ShowCoverflowIndicator!cor:String]" Checked="[ShowCoverflowIndicator]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverflowPosterOverlayCB" Label="[Application.LocalStrings.#ShowCoverflowPosterOverlay!cor:String]" Checked="[ShowCoverflowPosterOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverflowTotalNumberCB" Label="[Application.LocalStrings.#ShowCoverflowTotalNumber!cor:String]" Checked="[ShowCoverflowTotalNumber]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--Strip Options Panel-->
+              <Text Content="Strip Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="ShowStripLogosCB" Label="[Application.LocalStrings.#ShowStripLogos!cor:String]" Checked="[ShowStripLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+            </Children>
+          </Panel>
+          <!--Thumb Options Panel-->
+          <Panel Layout="VerticalFlow" MaximumSize="500,400">
+            <Children>
+              <Text Content="Thumb Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="ShowThumbLogosCB" Label="[Application.LocalStrings.#ShowThumbLogos!cor:String]" Checked="[ShowThumbLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowThumbEndTimeCB" Label="[Application.LocalStrings.#ShowThumbEndTime!cor:String]" Checked="[ShowThumbEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--Poster Options Panel-->
+              <Text Content="Poster Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="ShowPosterLogosCB" Label="[Application.LocalStrings.#ShowPosterLogos!cor:String]" Checked="[ShowPosterLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowPosterEndTimeCB" Label="[Application.LocalStrings.#ShowPosterEndTime!cor:String]" Checked="[ShowPosterEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+            </Children>
+          </Panel>
+        </Children>
+      </Panel>
+    </Content>
+
+  </UI>
+
+</Mcml>

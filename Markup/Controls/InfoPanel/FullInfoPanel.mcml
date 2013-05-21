@@ -1,0 +1,373 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	  xmlns:cor="assembly://MSCorLib/System"
+    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+    xmlns:i="resx://Chocolate/Chocolate.Resources/Images"    
+    xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
+    xmlns:ch="assembly://Chocolate/Chocolate"
+    xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
+    xmlns:lv="resx://Chocolate/Chocolate.Resources/LabelValue"
+    xmlns:mpaa="resx://Chocolate/Chocolate.Resources/MPAARating"
+    xmlns:pb="resx://MediaBrowser/MediaBrowser.Resources/PersonButton"
+    xmlns:c="file://Styles_DoNotEdit.mcml"
+    xmlns:f="file://Fonts_DoNotEdit.mcml"
+      
+      
+      
+      xmlns:me = "Me"
+      >
+  <UI Name="InfoPanelSelector">
+    <Properties>
+      <lib:Item Name="Item" Item="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+      <a:Application Name="Application" Application="$Required"/>
+      <cor:Boolean Name="ShowActors" Boolean="false"/>
+    </Properties>
+    
+    <Rules>
+      <Binding Target="[MovieInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[SeriesInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[SeasonInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[EpisodeInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[SongInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[ArtistAlbumInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[GameInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[ConsoleInfoPanel.Item]" Source="[Item]"/>
+
+
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Movie" Target="[MovieInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Series" Target="[SeriesInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Season" Target="[SeasonInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode" Target="[EpisodeInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Song" Target="[SongInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="ArtistAlbum" Target="[ArtistAlbumInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="GameItem" Target="[GameInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="ConsoleFolder" Target="[ConsoleInfoPanel.Visible]" Value="true" />
+
+    </Rules>
+    <Content>
+      <Panel>
+        <Children>
+          <Panel Name="InfoPanels">
+            <Children>
+              <me:MovieInfoPanel Name="MovieInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:MovieInfoPanel>
+              <me:SeriesInfoPanel Name="SeriesInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:SeriesInfoPanel>
+              <me:SeasonInfoPanel Name="SeasonInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:SeasonInfoPanel>
+              <me:EpisodeInfoPanel Name="EpisodeInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:EpisodeInfoPanel>
+              <me:SongInfoPanel Name="SongInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:SongInfoPanel>
+              <me:ArtistAlbumInfoPanel Name="ArtistAlbumInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:ArtistAlbumInfoPanel>
+              <me:GameInfoPanel Name="GameInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:GameInfoPanel>
+              <me:ConsoleInfoPanel Name="ConsoleInfoPanel" Application="[Application]" Item="[Item]" ThemeHelper="[ThemeHelper]" Visible="false"></me:ConsoleInfoPanel>
+            </Children>
+          </Panel>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+  
+	<UI Name="InfoPanel">
+
+		<Properties>
+      <lib:Item Name="Item" Item="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+
+    <Locals>
+      <Environment Name="Environment"/>
+    </Locals>
+    
+    <Rules>
+      <Binding Target="[Summary.Text]" Source="[Item.Overview]"/>
+      <Binding Source="[Item.PrimaryImage]" Target="[ItemImage.Content]"/>
+      <Binding Source="[Environment.IsWidescreen]" Target="[ItemImage.Visible]">
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.AlwaysShowPoster]" Value="false"/>
+        </Conditions>        
+      </Binding>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Environment.IsWidescreen]" Value="false"/>
+          <Equality Source="[ThemeHelper.Config.AlwaysShowPoster]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Panel.MaximumSize]" Value="500,0"/>
+        </Actions>
+      </Rule>
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Equality Source="[Environment.IsWidescreen]" Value="true"/>
+          <Equality Source="[ThemeHelper.Config.AlwaysShowPoster]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Panel.MaximumSize]" Value="0,0"/>
+        </Actions>
+      </Rule>
+      <Condition Source="[Environment.IsWidescreen]" SourceValue="true" Target="[SummaryPanel.MaximumSize]" Value="766,130"/>
+      <Condition Source="[Environment.IsWidescreen]" SourceValue="false" Target="[SummaryPanel.MaximumSize]" Value="460,130"/>
+      <Condition Source="[Environment.IsWidescreen]" SourceValue="false" Target="[ItemImage.MaximumSize]" Value="200,0"/>
+      <Condition Source="[Environment.IsWidescreen]" SourceValue="true" Target="[ItemImage.MaximumSize]" Value="300,0"/>
+      
+    </Rules>
+    
+    
+		<Content>
+      <Panel Layout="Form">
+        <Children>
+
+          <Graphic Padding="8,8,8,8">
+            <Layout>
+              <FlowLayout Orientation="Horizontal" Spacing="10,10"/>
+            </Layout>
+            <LayoutInput>
+              <FormLayoutInput Horizontal="Fill" Vertical="Fill"/>
+            </LayoutInput>
+            <Children>
+
+              <Graphic Margins="0,0,0,0" Name="ItemImage" MaximumSize="0,0" MinimumSize="130,120" MaintainAspectRatio="true"/>
+              <ColorFill Margins="0,0,0,0" Content="Transparent">
+                <Layout>
+                  <FlowLayout Orientation="Vertical" StripAlignment="Near"/>
+                </Layout>
+                <Children>
+                  <Panel Layout="HorizontalFlow">
+                    <Children>
+                      <Text Content="[Application.LocalStrings.#Synopsis!cor:String]" Font="font://f:Choc_Label" Color="color://c:Choc_Label" Margins="0,0,0,5"/>
+                      <Text Content=":" Font="font://f:Choc_Label" Color="color://c:Choc_Label" Margins="0,0,0,5"/>
+                    </Children>
+                  </Panel>
+                  <Panel Name="SummaryPanel" Layout="VerticalFlow" MaximumSize="480,130">
+                    <Children>
+                      <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="font://f:OverviewFont" Color="color://c:OverviewColor"/>
+                    </Children>
+                  </Panel>
+                </Children>
+              </ColorFill>
+              <Panel Name="Panel" Layout="VerticalFlow" MaximumSize="0,0" Padding=" 0,-10,0,0">
+                <Layout>
+                  <FlowLayout Orientation="Vertical" StripAlignment="Near" ItemAlignment="Near"/>
+                </Layout>
+                <Children>
+                  <lv:LabelValue Name="TitleSupportlv"></lv:LabelValue>
+                  <lv:LabelValue Name="TitleSupportlv1"></lv:LabelValue>
+                  <lv:LabelValue Name="TitleSupportlv2"></lv:LabelValue>
+                  <lv:LabelValue Name="TitleSupportlv3"></lv:LabelValue>
+                  <Panel Layout="HorizontalFlow" Name="RuntimeInfo" Visible="true">
+                    <Children>
+                      <lv:LabelValue Name="SideInfo"></lv:LabelValue>
+                      <lv:LabelValue Name="SideInfo1"></lv:LabelValue>
+                    </Children>
+                  </Panel>
+                  <sr:StarRating Margins="0,4,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
+                </Children>
+              </Panel>
+
+            </Children>
+          </Graphic>
+        </Children>
+      </Panel>
+      
+		</Content>
+
+	</UI>
+
+  <UI Name="MovieInfoPanel" BaseUI="me:InfoPanel">
+   
+    <Rules>
+      
+      <Default Target="[TitleSupportlv.Label]" Value="[Application.LocalStrings.#Director!cor:String]"/>
+      <Default Target="[TitleSupportlv.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv.Value]" Source="[Item.DirectorString]"/>
+      <Default Target="[TitleSupportlv.MaxLines]" Value="1"/>
+
+      <Default Target="[TitleSupportlv1.Label]" Value="[Application.LocalStrings.#Genres!cor:String]"/>
+      <Default Target="[TitleSupportlv1.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv1.Value]" Source="[ThemeHelper.GenreString]"/>
+
+      <Default Target="[TitleSupportlv2.Label]" Value="[Application.LocalStrings.#Year!cor:String]"/>
+      <Default Target="[TitleSupportlv2.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv2.Value]" Source="[Item.ProductionYear.ToString]"/>
+
+      <Binding Source="[Item.ImdbRating]" Target="[StarRating.Value]"/>
+
+      <Binding Source="[Item.RunningTimeString]" Target="[SideInfo.Value]"/>
+      <Default Value="[Application.LocalStrings.#Runs!cor:String]" Target="[SideInfo.Label]"/>
+      <Default Value=": " Target="[SideInfo.LabelSuffix]"/>
+
+      <Binding Source="[ThemeHelper.EndTime]" Target="[SideInfo1.Value]"/>
+      <Default Value=" " Target="[SideInfo1.LabelPrefix]"/>
+      <Default Value="[Application.LocalStrings.#Ends!cor:String]" Target="[SideInfo1.Label]"/>
+      <Default Value=": " Target="[SideInfo1.LabelSuffix]"/>
+      
+    </Rules>
+    
+  </UI>
+
+  <UI Name="SeriesInfoPanel" BaseUI="me:InfoPanel">
+
+    <Rules>
+
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Series">
+        <Actions>
+          <Set Target="[TitleSupportlv.Value]" Value="[Item!lib:FolderModel.Folder.Children.Count.ToString]"/>
+        </Actions>
+      </Condition>
+      <Default Target="[TitleSupportlv.Label]" Value="[Application.LocalStrings.#Seasons!cor:String]"/>
+      <Default Target="[TitleSupportlv.LabelSuffix]" Value=": "/>
+
+      <Default Target="[TitleSupportlv1.Label]" Value="[Application.LocalStrings.#Genres!cor:String]"/>
+      <Default Target="[TitleSupportlv1.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv1.Value]" Source="[ThemeHelper.GenreString]"/>
+
+      <Binding Source="[Item.ImdbRating]" Target="[StarRating.Value]"/>
+
+      <Binding Source="[Item.RunningTimeString]" Target="[SideInfo.Value]"/>
+      <Default Value="[Application.LocalStrings.#Runs!cor:String]" Target="[SideInfo.Label]"/>
+      <Default Value=": " Target="[SideInfo.LabelSuffix]"/>
+
+      <Binding Source="[ThemeHelper.EndTime]" Target="[SideInfo1.Value]"/>
+      <Default Value=" " Target="[SideInfo1.LabelPrefix]"/>
+      <Default Value="[Application.LocalStrings.#Ends!cor:String]" Target="[SideInfo1.Label]"/>
+      <Default Value=": " Target="[SideInfo1.LabelSuffix]"/>
+      
+    </Rules>
+
+  </UI>
+
+  <UI Name="SeasonInfoPanel" BaseUI="me:InfoPanel">
+
+    <Rules>
+
+      <Default Target="[TitleSupportlv.Label]" Value="[Application.LocalStrings.#Episodes!cor:String]"/>
+      <Default Target="[TitleSupportlv.LabelSuffix]" Value=": "/>
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Season">
+        <Actions>
+          <Set Target="[TitleSupportlv.Value]" Value="[Item!lib:FolderModel.Folder.Children.Count.ToString]" />
+        </Actions>
+      </Condition>
+      
+      <Binding Source="[Item.PhysicalParent.ImdbRating]" Target="[StarRating.Value]">
+        <Conditions>
+          <IsValid Source="[Item.PhysicalParent]"/>
+        </Conditions>
+      </Binding>
+      <Binding Source="[Item.PhysicalParent.RunningTimeString]" Target="[SideInfo.Value]">
+        <Conditions>
+          <IsValid Source="[Item.PhysicalParent]"/>
+        </Conditions>
+      </Binding>
+      <Default Value="[Application.LocalStrings.#Runs!cor:String]" Target="[SideInfo.Label]"/>
+      <Default Value=": " Target="[SideInfo.LabelSuffix]"/>
+
+      <Binding Source="[ThemeHelper.EndTime]" Target="[SideInfo1.Value]"/>
+      <Default Value=" " Target="[SideInfo1.LabelPrefix]"/>
+      <Default Value="[Application.LocalStrings.#Ends!cor:String]" Target="[SideInfo1.Label]"/>
+      <Default Value=": " Target="[SideInfo1.LabelSuffix]"/>
+
+    </Rules>
+
+  </UI>
+  <UI Name="EpisodeInfoPanel" BaseUI="me:InfoPanel">
+
+    <Rules>
+      
+      <Default Target="[TitleSupportlv.Label]" Value="[Application.LocalStrings.#Director!cor:String]"/>
+      <Default Target="[TitleSupportlv.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv.Value]" Source="[Item.DirectorString]"/>
+
+      <Binding Source="[Item.ImdbRating]" Target="[StarRating.Value]"/>      
+      
+    </Rules>
+  </UI>
+
+  <UI Name="SongInfoPanel" BaseUI="me:InfoPanel">
+    <Rules>
+      <Binding Source="[Item.PhysicalParent.PreferredImage]" Target="[ItemImage.Content]">
+        <Conditions>
+          <IsValid Source="[Item.PhysicalParent]"/>
+        </Conditions>
+      </Binding>
+      
+      <Default Target="[TitleSupportlv.Label]" Value="[Application.LocalStrings.#Album!cor:String]"/>
+      <Default Target="[TitleSupportlv.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv.Value]" Source="[ThemeHelper.Album]"/>
+
+      <Default Target="[TitleSupportlv1.Label]" Value="[Application.LocalStrings.#Artist!cor:String]"/>
+      <Default Target="[TitleSupportlv1.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv1.Value]" Source="[ThemeHelper.Artist]"/>
+
+      <Default Target="[SideInfo.Label]" Value="[Application.LocalStrings.#Duration!cor:String]"/>
+      <Default Target="[SideInfo.LabelSuffix]" Value=": "/>
+      <Binding Target="[SideInfo.Value]" Source="[ThemeHelper.Duration]"/>
+
+
+      <Binding Target="[SideInfo1.Value]" Source="[ThemeHelper.ProductionYear]"/>
+      <Default Target="[SideInfo1.LabelPrefix]" Value=" "/>
+      <Default Target="[SideInfo1.Label]" Value="[Application.LocalStrings.#Year!cor:String]"/>
+      <Default Target="[SideInfo1.LabelSuffix]" Value=": "/>
+    </Rules>
+
+  </UI>
+  <UI Name="ArtistAlbumInfoPanel" BaseUI="me:InfoPanel">
+
+    <Rules>
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="ArtistAlbum">
+        <Actions>
+          <Set Target="[TitleSupportlv.Value]" Value="[Item!lib:FolderModel.Folder.Children.Count.ToString]" />
+        </Actions>
+      </Condition>
+      <Default Target="[TitleSupportlv.Label]" Value="Songs: "></Default>
+
+      <Default Target="[SideInfo.Label]" Value="Duration: "></Default>
+      <Binding Target="[SideInfo.Value]" Source="[ThemeHelper.Duration]"></Binding>
+
+    </Rules>
+
+  </UI>
+  
+  <!-- Shows up in thumbstrip view-->
+  <UI Name="GameInfoPanel" BaseUI="me:InfoPanel">
+
+    <Rules>
+      <Default Target="[TitleSupportlv.Label]" Value="[Application.LocalStrings.#Genres!cor:String]"/>
+      <Default Target="[TitleSupportlv.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv.Value]" Source="[ThemeHelper.GenreString]"/>
+
+      <Default Target="[TitleSupportlv1.Label]" Value="[Application.LocalStrings.#Year!cor:String]"/>
+      <Default Target="[TitleSupportlv1.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv1.Value]" Source="[Item.ProductionYear.ToString]"/>
+
+      <Default Target="[TitleSupportlv2.Label]" Value="[Application.LocalStrings.#Players!cor:String]"/>
+      <Default Target="[TitleSupportlv2.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv2.Value]" Source="[ThemeHelper.Players]"/>
+
+      <!--<Binding Target="[StarRating.Value]" Source ="[ThemeHelper.TgdbRating]"/>-->
+      
+    </Rules>
+
+  </UI> 
+
+  <UI Name="ConsoleInfoPanel" BaseUI="me:InfoPanel">
+
+    <Rules>
+      <Default Target="[TitleSupportlv.Label]" Value="[Application.LocalStrings.#Company!cor:String]"/>
+      <Default Target="[TitleSupportlv.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv.Value]" Source="[ThemeHelper.Company]"/>
+
+      <Default Target="[TitleSupportlv1.Label]" Value="[Application.LocalStrings.#Released!cor:String]"/>
+      <Default Target="[TitleSupportlv1.LabelSuffix]" Value=": "/>
+      <Binding Target="[TitleSupportlv1.Value]" Source="[ThemeHelper.ConsoleReleaseYear]"/>
+
+      <Default Target="[SideInfo.Label]" Value="[Application.LocalStrings.#CPU!cor:String]"/>
+      <Default Target="[SideInfo.LabelSuffix]" Value=": "/>
+      <Binding Target="[SideInfo.Value]" Source="[ThemeHelper.CpuBits]"/>
+
+      <Default Target="[SideInfo1.LabelPrefix]" Value=" "/>
+      <Default Target="[SideInfo1.Label]" Value="[Application.LocalStrings.#GPU!cor:String]"/>
+      <Default Target="[SideInfo1.LabelSuffix]" Value=": "/>
+      <Binding Target="[SideInfo1.Value]" Source="[ThemeHelper.GpuBits]"/>
+
+    </Rules>
+
+  </UI>
+</Mcml>

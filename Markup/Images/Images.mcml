@@ -1,0 +1,138 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      >
+  <Image Name="BackgroundBlack"  Source="resx://Chocolate/Chocolate.Resources/BackgroundBlack" />
+  <Image Name="BackgroundDefault" Source="resx://MediaBrowser/MediaBrowser.Resources/BackgroundDefault" />
+  <Image Name="MenuOptionConfiguration" Source="resx://Chocolate/Chocolate.Resources/popconfig"/>
+  <Image Name="MenuOptionViews" Source="resx://Chocolate/Chocolate.Resources/view"/>
+  <Image Name="MenuOptionSort" Source="resx://Chocolate/Chocolate.Resources/sort"/>
+  <Image Name="MenuOptionIndex" Source="resx://Chocolate/Chocolate.Resources/index"/>
+  <Image Name="MenuOptionClose" Source="resx://Chocolate/Chocolate.Resources/close"/>
+
+  <Image Name="ButtonPanelLeft" Source="resx://Chocolate/Chocolate.Resources/ButtonPanelLeft"/>
+  <Image Name="ButtonPanelRight" Source="resx://Chocolate/Chocolate.Resources/ButtonPanelRight"/>
+  <Image Name="ButtonPanelCenter" Source="resx://Chocolate/Chocolate.Resources/ButtonPanelCenter"/>
+  <Image Name="spacer" Source="resx://Chocolate/Chocolate.Resources/spacer"/>
+  <Image Name="Config" Source="resx://Chocolate/Chocolate.Resources/config"/>
+  <Image Name="BlankGraphic" Source="resx://MediaBrowser/MediaBrowser.Resources/BlankGraphic" />
+  <Image Name="IconNowPlay" Source="resx://Chocolate/Chocolate.Resources/IconNowPlay" />
+  <Image Name="Tick" Source="resx://Chocolate/Chocolate.Resources/Tick" />
+  <Image Name="Unwatched" Source="resx://Chocolate/Chocolate.Resources/Unwatched" />
+  <Image Name="InProgress" Source="resx://Chocolate/Chocolate.Resources/InProgress" />
+  <Image Name="InProgressStrip" Source="resx://Chocolate/Chocolate.Resources/InProgressStrip" />
+
+  <Image Name="LeftMenuBorderDefault"  Source="resx://Chocolate/Chocolate.Resources/LeftMenuBorderDefault" />
+  <Image Name="RightMenuBorderDefault" Source="resx://Chocolate/Chocolate.Resources/RightMenuBorderDefault" />
+  <Image Name="LeftMenuBorderBlack"    Source="resx://Chocolate/Chocolate.Resources/LeftMenuBorderBlack" />
+  <Image Name="RightMenuBorderBlack"   Source="resx://Chocolate/Chocolate.Resources/RightMenuBorderBlack" />
+              
+  <Image Name="MenuOptionBGFocused" Source="resx://Chocolate/Chocolate.Resources/bg_focused"/>
+  <Image Name="MenuOptionBGNotFocused" Source="resx://Chocolate/Chocolate.Resources/bg_unfocused"/>
+  <Image Name="MenuOptionBGNotFocusedBlack" Source="resx://Chocolate/Chocolate.Resources/bg_unfocused"/>
+  <Image Name="MenuOptionBGSelected" Source="resx://Chocolate/Chocolate.Resources/bg_selected"/>
+  <Image Name="MenuOptionBGRed" Source="resx://Chocolate/Chocolate.Resources/bg_red"/>
+
+
+  <Image Name="UltimatePanel" Source="resx://Chocolate/Chocolate.Resources/Panel"/>
+  <Image Name="UltimateLongPanel" Source="resx://Chocolate/Chocolate.Resources/LongPanel" NineGrid="25,25,25,25"/>
+  <Image Name="UltimatePosterPanel" Source="resx://Chocolate/Chocolate.Resources/PosterPanel" NineGrid="25,25,25,25"/>
+  <Image Name="UltimateDetailPanel" Source="resx://Chocolate/Chocolate.Resources/DetailPanel" NineGrid="25,25,25,25"/>
+  <Image Name="UltimateMoviePanel" Source="resx://Chocolate/Chocolate.Resources/MoviePanel"/>
+  <Image Name="UltimateMoviePanelDetail" Source="resx://Chocolate/Chocolate.Resources/MoviePanelDetail"/>
+  <Image Name="UltimateEhsPanel" Source="resx://Chocolate/Chocolate.Resources/EhsPanel"/>
+  <Image Name="UltimateItemHolder" Source="resx://Chocolate/Chocolate.Resources/ItemHolder"/>
+  <Image Name="InfoPanelCorner" Source="resx://Chocolate/Chocolate.Resources/InfoPanelCorner"/>
+  <Image Name="TabItemTab" Source="resx://Chocolate/Chocolate.Resources/TabItemTab"/>
+  <Image Name="RootItemTab" Source="resx://Chocolate/Chocolate.Resources/RootItemTab" NineGrid="5,15,5,0"/>
+  <Image Name="ZoomPane" Source="resx://Chocolate/Chocolate.Resources/ZoomPane" NineGrid="4,4,4,4"/>
+
+  <Image Name="BlueUltimatePanel" Source="resx://Chocolate/Chocolate.Resources/BluePanel"/>
+  <Image Name="BlueUltimateLongPanel" Source="resx://Chocolate/Chocolate.Resources/BlueLongPanel" NineGrid="25,25,25,25"/>
+  <Image Name="BlueUltimatePosterPanel" Source="resx://Chocolate/Chocolate.Resources/BluePosterPanel" NineGrid="25,25,25,25"/>
+  <Image Name="BlueUltimateDetailPanel" Source="resx://Chocolate/Chocolate.Resources/BlueDetailPanel" NineGrid="25,25,25,25"/>
+  <Image Name="BlueUltimateMoviePanel" Source="resx://Chocolate/Chocolate.Resources/BlueMoviePanel"/>
+  <Image Name="BlueUltimateMoviePanelDetail" Source="resx://Chocolate/Chocolate.Resources/BlueMoviePanelDetail"/>
+  <Image Name="BlueUltimateEhsPanel" Source="resx://Chocolate/Chocolate.Resources/BlueEhsPanel"/>
+  <Image Name="BlueRootItemTab" Source="resx://Chocolate/Chocolate.Resources/BlueRootItemTab" NineGrid="5,15,5,0"/>
+  <Image Name="BlueButtonPanelLeft" Source="resx://Chocolate/Chocolate.Resources/BlueButtonPanelLeft"/>
+  <Image Name="BlueButtonPanelRight" Source="resx://Chocolate/Chocolate.Resources/BlueButtonPanelRight"/>
+  <Image Name="BlueButtonPanelCenter" Source="resx://Chocolate/Chocolate.Resources/BlueButtonPanelCenter"/>
+  <Image Name="BlueInfoPanelCorner" Source="resx://Chocolate/Chocolate.Resources/BlueInfoPanelCorner"/>
+  <Image Name="BlueTabItemTab" Source="resx://Chocolate/Chocolate.Resources/BlueTabItemTab"/>
+
+  <Image Name="Stretch" Source="resx://Chocolate/Chocolate.Resources/Stretch"/>
+  <Image Name="Fit" Source="resx://Chocolate/Chocolate.Resources/Fit"/>
+  <Image Name="Fill" Source="resx://Chocolate/Chocolate.Resources/Fill"/>
+
+  <Image Name="IconActor" Source="resx://MediaBrowser/MediaBrowser.Resources/IconActors"  />
+  <Image Name="IconPlay" Source="resx://MediaBrowser/MediaBrowser.Resources/IconPlay"  />
+  <Image Name="IconMusic" Source="resx://MediaBrowser/MediaBrowser.Resources/IconMusic"  />
+  <Image Name="IconResume" Source="resx://MediaBrowser/MediaBrowser.Resources/IconResume"  />
+  <Image Name="IconSummary" Source="resx://MediaBrowser/MediaBrowser.Resources/IconSummary"  />
+  <Image Name="IconTrailer" Source="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer"  />
+  <Image Name="IconRefresh" Source="resx://MediaBrowser/MediaBrowser.Resources/IconRefresh"  />
+  <Image Name="BlankActor" Source="resx://MediaBrowser/MediaBrowser.Resources/MissingPerson"  />
+  <Image Name="HDLogo720" Source="resx://MediaBrowser/MediaBrowser.Resources/hd720"  />
+  <Image Name="HDLogo1080" Source="resx://MediaBrowser/MediaBrowser.Resources/hd1080"  />
+
+ 
+  
+  <Image Name="MenuOptionClose" Source="resx://MediaBrowser/MediaBrowser.Resources/MenuOptionClose"/>
+  
+  
+  
+  <Image Name="MenuOptionBackdrop" Source="resx://Chocolate/Chocolate.Resources/MenuOptionBackdrop"/>
+  <Image Name="MenuOptionVertScroll" Source="resx://Chocolate/Chocolate.Resources/MenuOptionVertScroll"/>
+  <Image Name="MenuOptionLabels" Source="resx://Chocolate/Chocolate.Resources/MenuOptionLabels"/>
+  <Image Name="MenuOptionBanners" Source="resx://Chocolate/Chocolate.Resources/MenuOptionBanners"/>
+  <Image Name="MenuOptionEnlarge" Source="resx://Chocolate/Chocolate.Resources/MenuOptionEnlarge"/>
+  <Image Name="MenuOptionShrink" Source="resx://Chocolate/Chocolate.Resources/MenuOptionShrink"/>
+  <Image Name="MenuOptionName" Source="resx://Chocolate/Chocolate.Resources/MenuOptionName"/>
+  <Image Name="MenuOptionDate" Source="resx://Chocolate/Chocolate.Resources/MenuOptionDate"/>
+  <Image Name="MenuOptionRating" Source="resx://Chocolate/Chocolate.Resources/MenuOptionRating"/>
+  <Image Name="MenuOptionRuntime" Source="resx://Chocolate/Chocolate.Resources/MenuOptionRuntime"/>
+  <Image Name="MenuOptionUnwatched" Source="resx://Chocolate/Chocolate.Resources/MenuOptionUnwatched"/>
+  <Image Name="MenuOptionYear" Source="resx://Chocolate/Chocolate.Resources/MenuOptionYear"/>
+  <Image Name="MenuOptionNone" Source="resx://Chocolate/Chocolate.Resources/MenuOptionNone"/>
+  <Image Name="MenuOptionActor" Source="resx://Chocolate/Chocolate.Resources/MenuOptionActor"/>
+  <Image Name="MenuOptionGenre" Source="resx://Chocolate/Chocolate.Resources/MenuOptionGenre"/>
+  <Image Name="MenuOptionDirector" Source="resx://Chocolate/Chocolate.Resources/MenuOptionDirector"/>
+  <Image Name="MenuOptionStudio" Source="resx://Chocolate/Chocolate.Resources/MenuOptionStudio"/>
+  
+  
+  <Image Name="MenuOptionQueueAll" Source="resx://Chocolate/Chocolate.Resources/MenuOptionQueueAll"/>
+  <Image Name="MenuOptionPlayAll" Source="resx://Chocolate/Chocolate.Resources/MenuOptionPlayAll"/>
+  <Image Name="MenuOptionPlayRandom" Source="resx://Chocolate/Chocolate.Resources/MenuOptionPlayRandom"/>
+  <Image Name="MenuOptionPlayUnwatched" Source="resx://Chocolate/Chocolate.Resources/MenuOptionPlayUnwatched"/>
+  <Image Name="ViewThumb" Source="resx://Chocolate/Chocolate.Resources/viewThumb"/>
+  <Image Name="ViewCoverflow" Source="resx://Chocolate/Chocolate.Resources/viewCoverflow"/>
+  <Image Name="ViewPoster" Source="resx://Chocolate/Chocolate.Resources/viewPoster"/>
+  <Image Name="ViewDetail" Source="resx://Chocolate/Chocolate.Resources/viewDetail"/>
+  <Image Name="ViewThumbstrip" Source="resx://Chocolate/Chocolate.Resources/viewThumbstrip"/>
+   
+  <Image Name="RatedG" Source="resx://Chocolate/Chocolate.Resources/G" />
+  <Image Name="RatedNC17" Source="resx://Chocolate/Chocolate.Resources/NC" />
+  <Image Name="RatedPG13" Source="resx://Chocolate/Chocolate.Resources/_13" />
+  <Image Name="RatedPG" Source="resx://Chocolate/Chocolate.Resources/PG" />
+  <Image Name="RatedR" Source="resx://Chocolate/Chocolate.Resources/R" />
+  <Image Name="RatedNR" Source="resx://Chocolate/Chocolate.Resources/NR" />
+
+  <Image Name="TV-14" Source="resx://Chocolate/Chocolate.Resources/TV_14" />
+  <Image Name="TV-MA" Source="resx://Chocolate/Chocolate.Resources/TV_MA" />
+  <Image Name="TV-PG" Source="resx://Chocolate/Chocolate.Resources/TV_PG" />
+  <Image Name="TV-G" Source="resx://Chocolate/Chocolate.Resources/TV_G" />
+  <Image Name="TV-Y" Source="resx://Chocolate/Chocolate.Resources/TV_Y" />
+  <Image Name="TV-Y7" Source="resx://Chocolate/Chocolate.Resources/TV_Y7" />
+  <Image Name="TV-Y7-FV" Source="resx://Chocolate/Chocolate.Resources/TV_Y7_FV" />
+
+  <Image Name="ESRB-EC" Source="resx://Chocolate/Chocolate.Resources/ESRB_EC" />
+  <Image Name="ESRB-E" Source="resx://Chocolate/Chocolate.Resources/ESRB_E" />
+  <Image Name="ESRB-E10" Source="resx://Chocolate/Chocolate.Resources/ESRB_E10" />
+  <Image Name="ESRB-T" Source="resx://Chocolate/Chocolate.Resources/ESRB_T" />
+  <Image Name="ESRB-M" Source="resx://Chocolate/Chocolate.Resources/ESRB_M" />
+  <Image Name="ESRB-AO" Source="resx://Chocolate/Chocolate.Resources/ESRB_AO" />
+  <Image Name="ESRB-RP" Source="resx://Chocolate/Chocolate.Resources/ESRB_RP" />
+
+  <Image Name="PBBack" Source="resx://Chocolate/Chocolate.Resources/PBBack" NineGrid="14,14,25,21"/>
+  <Image Name="PBFill" Source="resx://Chocolate/Chocolate.Resources/PBFill" NineGrid="6,6,6,6"/>
+  
+</Mcml>

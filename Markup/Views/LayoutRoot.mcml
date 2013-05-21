@@ -1,0 +1,935 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	  xmlns:cor="assembly://MSCorLib/System"
+    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	  xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+    xmlns:s="file://Styles_DoNotEdit.mcml"
+	  xmlns:f="file://Fonts_DoNotEdit.mcml"
+    xmlns:wea="resx://Chocolate/Chocolate.Resources/Weather"
+	  xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
+    xmlns:ib="resx://Chocolate/Chocolate.Resources/ItemButton"
+    xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
+    xmlns:ups="resx://Chocolate/Chocolate.Resources/PosterScroller"
+	  xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
+	  xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
+	  xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+	  xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
+    xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+    xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
+    xmlns:ch="assembly://Chocolate/Chocolate"
+    xmlns:me="Me"
+	  >
+
+
+  <UI Name="LayoutRoot">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+    </Properties>
+
+    <Locals>
+      <lib:Item Name="EHSItem" Item="[Folder.SelectedChild]"/>
+      <lib:Item Name="SelectedItem" Item="[Folder.SelectedChild]" />
+      <Timer Name="FullDetailsTimer" Interval="300" AutoRepeat="false"/>
+
+      <ScrollingHandler Name="ScrollingHandler"  HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" />
+      <ScrollingData Name="ScrollingData" LockedAlignment="0.5" LockedPosition="0.16" />
+      <Command Name="Configure" />
+      <ShortcutHandler Name="JumpForward" Shortcut="SkipForward" HandlerStage="Bubbled" Handle="true" />
+      <ShortcutHandler Name="JumpBack" Shortcut="SkipBack" HandlerStage="Bubbled" Handle="true"/>
+
+      <!-- this timer is needed to ensure focus stas with the view properties when the viewType changes, doing it not via a timer doesn't always work-->
+      <Timer Name="RefocusViewTimer" AutoRepeat="false" Interval="150" Enabled="true" />
+
+      <!-- This must be less than anim delay -->
+      <cor:Int32 Name="FastKeyRepeat" Int32="150"/>
+      <cor:Int32 Name="AnimDelay" Int32="300" />
+
+      <!-- This must be greater than NormalKeyRepeat-->
+      <cor:Int32 Name="SpeedUpDelay" Int32="2"/>
+      <cor:Int32 Name="NormalKeyRepeat" Int32="250"/>
+
+      <IntRangedValue Name="SelectedIndex" Value="0"/>
+      <IntRangedValue Name="NavCount" Value="0" />
+      <Command Name="Refresh"/>
+      <Command Name="RootHasFocus"/>
+      <cor:Boolean Name="RootHasFocusBool" Boolean="true"/>
+      <Command Name="RootLostFocus"/>
+      <cor:Int32 Name="backFocus" Int32="[Folder.SelectedChildIndex]" />
+      <FlowLayout Name="RepeaterLayout" Orientation="Horizontal" RepeatGap="50,0" Repeat="WhenTooBig" Spacing="50,0"/>
+    </Locals>
+
+    <Rules>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Application.NavigatingForward]" Value="false"/>
+          <Equality Source="[Folder.Children.Count]" ConditionOp="GreaterThan" Value="0" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Repeater.DefaultFocusIndex]"  Value="[backFocus]"/>
+        </Actions>
+      </Rule>
+
+      <!--<Rule>
+        <Conditions>
+          <Equality Source="[Folder.Children.Count]" ConditionOp="GreaterThan" Value="3"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[RepeaterLayout.Repeat]" Value="Always"/>
+        </Actions>
+      </Rule>-->
+
+      <!-- Default Values-->
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]" />
+      <Default Target="[ScrollingData.Repeater]" Value="[Repeater]" />
+
+      <!-- Bindings -->
+      <Binding Source="[SelectedIndex.Value]" Target="[Folder.SelectedChildIndex]"/>
+      <Binding Target="[Repeater.Source]" Source="[Folder.Children]"/>
+      <Binding Target="[Application.CurrentItem]" Source="[Folder.SelectedChild]"/>
+      <Binding Target="[EHSItem]" Source="[Application.CurrentItem]">
+        <Conditions>
+          <Equality Source="[RootHasFocusBool]" Value="false"/>
+        </Conditions>
+      </Binding>
+      <Binding Target="[EHSItem]" Source="[Folder.SelectedChild]">
+        <Conditions>
+          <Equality Source="[RootHasFocusBool]" Value="true"/>
+        </Conditions>
+      </Binding>
+      <Binding Source="[EHSItem.LongName]"            Target="[Title.Content]"/>
+      <Binding Source="[EHSItem.LongName]"            Target="[TitleShadow.Content]"/>
+      <Binding Source="[EHSItem.Overview]"            Target="[Overview.Text]"/>
+      <Binding Source="[EHSItem.ImdbRating]"          Target="[StarRating.Value]"/>
+      <Binding Source="[EHSItem.RunningTimeString]"   Target="[RunTime.Content]"/>
+      <Binding Source="[EHSItem.MpaaRating]"          Target="[MPAARating.Value]"/>
+      <Binding Source="[Folder.SelectedChild.PreferredImage]"      Target="[ImageBox.Content]"/>
+
+      <Changed Source="[EHSItem]">
+        <Actions>
+          <Invoke Target="[ThemeHelper.GetLongDateString]" date="[EHSItem.CreatedDate]" ResultTarget="[DateAdded.Content]"/>
+        </Actions>
+      </Changed>
+
+      <Condition Source="[SelectedItem.ParentalAllowed]" ConditionOp="Equals" SourceValue="false" Target="[PCLock.Visible]" Value="true"/>
+
+      <!-- Commands -->
+      <Changed Source="[Configure.Invoked]">
+        <Actions>
+          <Invoke Target="[Application.OpenConfiguration]" showFullOptions="true"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Refresh.Invoked]">
+        <Actions>
+          <Invoke Target="[SelectedItem.RecentItemsChanged]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[RootHasFocus.Invoked]" InitialEvaluate="true">
+        <Actions>
+          <Set Target="[Application.CurrentItem]" Value="[Folder.SelectedChild]"/>
+          <Set Target="[RootInfo.Visible]" Value="True"/>
+          <Set Target="[ItemInfo.Visible]" Value="False"/>
+          <Set Target="[Overview.Visible]" Value="False"/>
+          <Set Target="[RootHasFocusBool]" Value="true"/>
+          <Set Target="[EHSItem]" Value="[Folder.SelectedChild]"/>
+          <Set Target="[TopLine.Content]" Value="170,100,100,100"/>
+          <Set Target="[BottomLine.Content]" Value="190,155,155,155"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[RootLostFocus.Invoked]">
+        <Actions>
+          <Set Target="[RootHasFocusBool]" Value="false"/>
+          <Set Target="[EHSItem]" Value="[Application.CurrentItem]"/>
+          <Set Target="[RootInfo.Visible]" Value="False"/>
+          <Set Target="[ItemInfo.Visible]" Value="True"/>
+          <Set Target="[Overview.Visible]" Value="True"/>
+          <Set Target="[TopLine.Content]" Value="50,100,100,100"/>
+          <Set Target="[BottomLine.Content]" Value="70,155,155,155"/>
+        </Actions>
+      </Changed>
+
+      <!-- Folder/Item Selection -->
+      <Changed Source="[Folder.SelectedChildIndex]">
+        <Conditions>
+          <Equality ConditionOp="NotEquals" Source="[Folder.SelectedChildIndex]" Value="-1"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[SelectedItem]" Value="[Folder.SelectedChild]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[SelectedItem]">
+        <Conditions>
+          <Equality Source="[SelectedItem.ShowNewestItems]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[RefocusViewTimer.Enabled]" Value="true" />
+          <Set Target="[RecentItemsPanel.Visible]" Value="true"/>
+        </Actions>
+      </Changed>
+
+      <Condition Source="[ThemeHelper.Config.SmallEhs]" SourceValue="true">
+        <Actions>
+          <Set Target="[RecentItemsPanel.Scale]" Value="0.8,0.8,0.8"/>
+        </Actions>
+      </Condition>
+      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[AlphaPanel.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[EhsPanel.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+
+      <Rule>
+        <Conditions>
+          <Modified Source="[RefocusViewTimer.Tick]"  />
+          <IsType Source="[SelectedItem]" Type="lib:FolderModel"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[RefocusViewTimer.Enabled]" Value="false" />
+          <Invoke Target="[ItemMenuPanel.NavigateInto]" />
+          <Set Target="[RecentItemsPanel.Folder]" Value="[SelectedItem!lib:FolderModel]"/>
+        </Actions>
+      </Rule>
+      <Changed Source="[SelectedItem]">
+        <Conditions>
+          <Equality Source="[SelectedItem]" Value="[Folder.SelectedChild]"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[RecentItemsPanel.ForceRefresh]"/>
+        </Actions>
+      </Changed>
+
+      <!-- Typing Handler / Jump List -->
+      <Changed Source="[Application]" InitialEvaluate="true">
+        <Actions>
+          <Invoke Target="[Application.FixRepeatRate]" scroller="[Scroller]" val="[NormalKeyRepeat]" />
+        </Actions>
+      </Changed>
+      <Changed Source="[NavCount.Value]">
+        <Conditions>
+          <Equality Source="[NavCount.Value]" ConditionOp="Equals" Value="[SpeedUpDelay]"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Application.FixRepeatRate]" scroller="[Scroller]" val="[FastKeyRepeat]" />
+        </Actions>
+      </Changed>
+      <Changed Source="[NavCount.Value]">
+        <Conditions>
+          <Equality Source="[NavCount.Value]" ConditionOp="Equals" Value="0"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Application.FixRepeatRate]" scroller="[Scroller]" val="[NormalKeyRepeat]" />
+        </Actions>
+      </Changed>
+      <Changed Source="[Folder.JILShift]">
+        <Actions>
+          <Invoke Target="[ScrollingData.Scroll]"  amount="[Folder.JILShift]"/>
+        </Actions>
+      </Changed>
+      <Rule>
+        <Conditions>
+          <Modified Source="[JumpForward.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ScrollingData.PageDown]"/>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Modified Source="[JumpBack.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ScrollingData.PageUp]"/>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Modified Source="[JumpForward.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ScrollingData.PageDown]"/>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Modified Source="[JumpBack.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ScrollingData.PageUp]"/>
+        </Actions>
+      </Rule>
+
+      <Binding Source="[ThemeHelper.Config.ShowWeather]" Target="[WeatherPanel.Visible]"/>
+      <Binding Source="[ThemeHelper.Config.DisableEHSMovieTitle]" Target="[Title.Visible]"/>
+      <Binding Source="[ThemeHelper.Config.DisableEHSMovieTitle]" Target="[TitleShadow.Visible]"/>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[AlphaPanel.Content]" Value="image://vi:UltimatePosterPanel"/>
+          <Set Target="[Scrollers.Content]" Value="150,0,0,0"/>
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[AlphaPanel.Content]" Value="image://vi:BlueUltimatePosterPanel"/>
+          <Set Target="[Scrollers.Content]" Value="150,10,56,114"/>
+        </Actions>
+      </Rule>
+
+    </Rules>
+
+    <Content>
+      <Panel>
+        <Children>
+          <Clip Layout="Form" Padding="[Application.Config.OverScanPadding]" Scale="[Application.Config.OverScanScaling]"
+                CenterPointPercent="0.5,0.5,0.5">
+            <Children>
+
+              <!--Weather Panel-->
+              <wea:YahooWeatherLarge Name="WeatherPanel">
+                <LayoutInput>
+                  <AnchorLayoutInput Top="Parent,0,15" Left="Parent,0,35"/>
+                </LayoutInput>
+              </wea:YahooWeatherLarge>
+
+              <!-- Gradient Center Panel Borders -->
+              <Panel>
+                <LayoutInput>
+                  <AnchorLayoutInput Bottom="ItemMenuPanel,0" Top="Parent,0" Horizontal="Fill"/>
+                </LayoutInput>
+                <Children>
+                  <Clip FadeSize="50" Orientation="Horizontal" FadeAmount="1" >
+                    <Children>
+                      <ColorFill Content="color://s:Choc_Trim" Alpha="0" Layout="Fill" MaximumSize="0,1" />
+                    </Children>
+                  </Clip>
+                </Children>
+              </Panel>
+              <Panel >
+                <LayoutInput>
+                  <AnchorLayoutInput Top="ItemMenuPanel,1" Horizontal="Fill"/>
+                </LayoutInput>
+                <Children>
+                  <Clip FadeSize="50" Orientation="Horizontal" FadeAmount="1" >
+                    <Children>
+                      <ColorFill Content="color://s:Choc_Trim" Alpha="0" Layout="Fill" MaximumSize="0,1" />
+                    </Children>
+                  </Clip>
+                </Children>
+              </Panel>
+
+              <!-- Center Scrolling Panel -->
+              <Graphic Name="ItemMenuPanel" Layout="Anchor">
+                <LayoutInput>
+                  <AnchorLayoutInput  Left="Parent,0,15" Right="Parent,1" Top="Parent,1,-98" Bottom="Parent,1,-25"/>
+                </LayoutInput>
+                <Children>
+                  <Scroller Orientation="Horizontal" FadeSize="5" Name="Scroller" Navigation="ContainHorizontal, RememberFocus"
+                            ScrollingData="[ScrollingData]" Padding="50,0,50,0"  >
+                    <LayoutInput>
+                      <AnchorLayoutInput  Left="Parent,0,15" Right="Parent,1,-15" Vertical="Fill" />
+                    </LayoutInput>
+                    <Children>
+                      <Repeater Navigation="RememberFocus" Source="[Folder.Children]" Name="Repeater" Layout="[RepeaterLayout]"
+                                ContentName="BaseItem" DiscardOffscreenVisuals="false" >
+                        <Animations>
+                          <Animation Type="Move">
+                            <Keyframes>
+                              <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="Log, 2"/>
+                              <PositionKeyframe Time="1" RelativeTo="Final"/>
+                            </Keyframes>
+                          </Animation>
+                        </Animations>
+                      </Repeater>
+                    </Children>
+                  </Scroller>
+                </Children>
+              </Graphic>
+              <Graphic Name="AlphaPanel">
+                <LayoutInput>
+                  <AnchorLayoutInput Left="Parent,0,-20" Right="Parent,1,20" Top="Parent,1,-72" Bottom="Parent,1,-9"/>
+                </LayoutInput>
+              </Graphic>
+
+              <!--Security Indicator-->
+              <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Anchor" Visible="false" Name="PCLock">
+                <LayoutInput>
+                  <AnchorLayoutInput Left="Parent,0,15" Bottom="Parent,1,-15"/>
+                </LayoutInput>
+                <Children>
+                  <Graphic Name="PCLockImage" Content="image://i:Lock" Margins="0,0,5,5" MaximumSize="35,35" MaintainAspectRatio="true">
+                    <LayoutInput>
+                      <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                    </LayoutInput>
+                  </Graphic>
+                </Children>
+              </Panel>
+
+              <!--Name of the currently Selected Item-->
+              <Clip MaximumSize="0,57" Visible="true" FadeSize="25" FadeAmount="0.7" Orientation="Vertical">
+                <LayoutInput>
+                  <FormLayoutInput Bottom="Parent,0,205" Right="Parent,1,-20" Left="Parent,0,320"/>
+                </LayoutInput>
+                <Children>
+                  <Text WordWrap="true" HorizontalAlignment="Far" FadeSize="1"  Name="Title" Content="[EHSItem.Name]" Font="font://uf:EHS_Title" Color="color://s:Choc_EHS_Title" Padding="0,0,1,1"/>
+                  <Text WordWrap="true" HorizontalAlignment="Far" FadeSize="1"  Name="TitleShadow" Content="[EHSItem.Name]" Font="font://uf:EHS_Title" Color="Black" Margins="1,1,0,0"/>
+                </Children>
+              </Clip>
+
+              <!--EHS Info panel. contains the info for the currently Selected item-->
+              <Clip FadeSize="0" Layout="Fill" Name="ItemInfo" Visible="true">
+
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1,-20" Left="Parent,1,-400" Top="Parent,0,255" Bottom="Parent,1,-140"/>
+                </LayoutInput>
+
+                <Children>
+
+                  <ColorFill Padding="20,0,10,10" Layout="Form" Content="Transparent">
+                    <Children>
+
+                      <Panel Name="Details">
+                        <Layout>
+                          <FlowLayout Orientation="Vertical" Spacing="10,10"/>
+                        </Layout>
+                        <LayoutInput>
+                          <FormLayoutInput Top="Parent,0" Left ="Parent,0,-3"/>
+                        </LayoutInput>
+                        <Children>
+
+                          <Panel>
+                            <Layout>
+                              <FlowLayout Orientation="Horizontal" Spacing="10,10"/>
+                            </Layout>
+                            <Children>
+
+                              <Panel Padding="0,10,0,0">
+                                <Children>
+                                  <mp:MPAARating Name="MPAARating" MaximumSize="0,40" />
+                                </Children>
+                              </Panel>
+                              <Panel Layout="VerticalFlow">
+                                <Children>
+
+                                  <sr:StarRating Name="StarRating" />
+                                  <Text Name="RunTime" Font="font://uf:EHS_Runtime" Color="color://s:Choc_Small_Details"></Text>
+
+                                </Children>
+                              </Panel>
+
+                            </Children>
+                          </Panel>
+
+                          <Text Name="DateAdded" Font="font://uf:EHS_DateAdded" Color="color://s:Choc_Small_Details"/>
+
+                        </Children>
+                      </Panel>
+                      <Panel Layout="Fill">
+                        <LayoutInput>
+                          <FormLayoutInput Left="Parent,0" Top="Details,1,10" Bottom="Parent,1" Right="Parent,1"/>
+                        </LayoutInput>
+                        <Children>
+                          <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Overview" Text="[EHSItem.Overview]" Font="font://uf:EHS_Overview_Font" Color="color://uc:OverviewColor"/>
+                        </Children>
+                      </Panel>
+
+                    </Children>
+                  </ColorFill>
+
+                </Children>
+              </Clip>
+
+              <!--<Graphic Name="EhsPanel" Content="image://vi:UltimateEhsPanel" >-->
+              <Panel Name="EhsPanel" >
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1,-20" Left="Parent,1,-370" Top="Parent,0,210" Bottom="Parent,1,-170"/>
+                </LayoutInput>
+              </Panel>
+
+              <!--The lines at the top and bottom of the scrollers panel-->
+              <Clip FadeSize="400" Orientation="Horizontal">
+                <LayoutInput>
+                  <FormLayoutInput Bottom="Scrollers,1,1" Horizontal="Fill" Top="Scrollers,1"/>
+                </LayoutInput>
+                <Children>
+                  <ColorFill Content="0,100,100,100"></ColorFill>
+                </Children>
+              </Clip>
+
+              <Clip FadeSize="400" Orientation="Horizontal">
+                <LayoutInput>
+                  <FormLayoutInput Bottom="Scrollers,1,1" Horizontal="Fill" Top="Scrollers,1"/>
+                </LayoutInput>
+                <Children>
+                  <ColorFill Name="TopLine" Content="70,155,155,155"></ColorFill>
+                </Children>
+              </Clip>
+
+
+              <Clip FadeSize="0" Orientation="Horizontal" Layout="Center"  Name="RootInfo" Visible="false">
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1" Left="Parent,1,-395" Top="Parent,0,255" Bottom="Parent,1,-145"/>
+                </LayoutInput>
+                <Children>
+                  <Graphic Name="ImageBox" MaintainAspectRatio="true" SizingPolicy="SizeToContent" ></Graphic>
+                </Children>
+              </Clip>
+
+              <!--Area that contains the three scrollers for the EHS, Recently added, Pinned and Recently Watched-->
+              <ColorFill Layout="Form" Name="Scrollers">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Fill" Vertical="Fill" Top="Parent,0,210" Bottom="Parent,1,-100"/>
+                </LayoutInput>
+                <Children>
+                  <Panel>
+                    <LayoutInput>
+                      <FormLayoutInput Left="Parent,0" Right="Parent,1,-420" Top="Parent,0,30"/>
+                    </LayoutInput>
+                    <Children>
+                      <Panel Name="Added">
+                        <Children>
+
+                          <me:RecentItemList Scale="1,1,1" CenterPointPercent="0.5,0.5,0.5" Name="RecentItemsPanel" Application="[Application]"/>
+
+                        </Children>
+                      </Panel>
+                    </Children>
+                  </Panel>
+                </Children>
+              </ColorFill>
+
+
+              <Clip FadeSize="400" Orientation="Horizontal">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Fill" Bottom="Parent,1,-29" Top="Parent,1,-30"/>
+                </LayoutInput>
+                <Children>
+                  <ColorFill Name="BottomLine" Content="70,155,155,155"></ColorFill>
+                </Children>
+              </Clip>
+
+
+              <ColorFill Content="150,0,0,0">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Fill" Bottom="Parent,1" Top="Parent,1,-30"/>
+                </LayoutInput>
+              </ColorFill>
+
+              <Panel Layout="HorizontalFlow">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0,10" Bottom="Parent,0,210"/>
+                </LayoutInput>
+                <Children>
+                  <me:TabItem Name="tabite" Application="[Application]" Command="[Refresh]" ThemeHelper="[ThemeHelper]">
+
+                  </me:TabItem>
+
+                </Children>
+              </Panel>
+
+            </Children>
+          </Clip>
+        </Children>
+      </Panel>
+    </Content>
+    <Content Name="BaseItem">
+      <me:RootScrollerItem Item="[RepeatedItem!lib:FolderModel]" ParentFolder="[Folder]" Application="[Application]" ThemeHelper="[ThemeHelper]" SelectedIndex="[SelectedIndex]" HasFocus="[RootHasFocus]" LostFocus="[RootLostFocus]" Index="[RepeatedItemIndex.SourceValue]" NavCount="[NavCount]" />
+    </Content>
+  </UI>
+
+  <UI Name="RootScrollerItem" BaseUI="ib:ItemButton">
+    <Properties>
+      <lib:FolderModel Name="ParentFolder" FolderModel="$Required" />
+      <IntRangedValue Name="SelectedIndex" IntRangedValue="$Required"/>
+      <cor:Int32 Name="Index" Int32="0"/>
+      <IntRangedValue Name="NavCount" IntRangedValue="$Required" />
+      <Command Name="HasFocus" Command="$Required"/>
+      <Command Name="LostFocus" Command="$Required"/>
+    </Properties>
+
+
+    <Rules>
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[SelectedIndex.Value]" Value="[Index]"/>
+        </Actions>
+      </Condition>
+
+      <Changed Source="[Input.DeepKeyFocus]">
+        <Conditions>
+          <Equality Source="[Input.DeepKeyFocus]" ConditionOp="Equals" Value="True"></Equality>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[HasFocus.Invoke]"></Invoke>
+          <Set Target="[Bg.Scale]" Value="1.1,1.1,1.1"></Set>
+          <Set Target="[Bg.Alpha]" Value="1"></Set>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Input.DeepKeyFocus]">
+        <Conditions>
+          <Equality Source="[Input.DeepKeyFocus]" ConditionOp="Equals" Value="False"></Equality>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[LostFocus.Invoke]"></Invoke>
+          <Set Target="[Bg.Scale]" Value="1,1,1"></Set>
+          <Set Target="[Bg.Alpha]" Value=".9"></Set>
+        </Actions>
+      </Changed>
+
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[SelectedIndex.Value]" ConditionOp="NotEquals" Value="[Index]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Title.Color]" Value="color://s:Choc_EHS_RootItem_Idle"/>
+          <Set Target="[Bg.Content]" Value="image://i:BlankImage" />
+          <Set Target="[NavCount.Value]" Value="[NavCount.Value]" ExclusiveApply="false">
+            <Transformer>
+              <MathTransformer Add="1"/>
+            </Transformer>
+          </Set>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+          <Equality Source="[SelectedIndex.Value]" ConditionOp="Equals" Value="[Index]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Title.Color]" Value="color://s:Choc_EHS_RootItem"/>
+          <Set Target="[SelectedIndex.Value]" Value="[Index]"/>
+          <Set Target="[Bg.Content]" Value="image://vi:RootItemTab" />
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+          <Equality Source="[SelectedIndex.Value]" ConditionOp="Equals" Value="[Index]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Title.Color]" Value="color://s:Choc_EHS_RootItem"/>
+          <Set Target="[SelectedIndex.Value]" Value="[Index]"/>
+          <Set Target="[Bg.Content]" Value="image://vi:BlueRootItemTab" />
+        </Actions>
+      </Rule>
+    </Rules>
+
+    <Content>
+
+
+      <Graphic Name="Bg"   MinimumSize="0,65" MaximumSize="0,65" CenterPointPercent="0.5,0.5,0.5" Content="image://i:BlankImage" SizingPolicy="SizeToChildren" Padding="25,0,25,0" Scale="1,1,1" Alpha=".9">
+        <Animations>
+          <Animation Type="Scale">
+            <Keyframes>
+              <ScaleKeyframe Time="0" RelativeTo="Current"/>
+              <ScaleKeyframe Time="0.5" RelativeTo="Final"/>
+            </Keyframes>
+          </Animation>
+        </Animations>
+        <Children>
+          <Text Name="Title" Content="[Item.Name]" Color="color://s:Choc_EHS_RootItem_Idle" Margins="0,0,0,0" Font="font://uf:EHS_RootItem"/>
+          <Text Name="TitleShadow" Content="[Item.Name]" Color="Black" Margins="1,1,0,0" Font="font://uf:EHS_RootItem"/>
+        </Children>
+      </Graphic>
+    </Content>
+  </UI>
+
+  <UI Name="RecentItemList">
+    <Properties>
+      <lib:FolderModel Name="Folder"/>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+
+    <Locals>
+      <ScrollingData Name="SD" BeginPadding="20" BeginPaddingRelativeTo="Near" EndPadding="20" EndPaddingRelativeTo="Far"/>
+      <ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true"
+                        HandlerStage="Bubbled" Name="ScrollingHandler"/>
+      <FlowLayout Name="FlowLayout" ItemAlignment="Center" Orientation="Horizontal" Repeat="WhenTooBig" HideOffscreenItems="false"/>
+    </Locals>
+
+    <Rules>
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[SD]"/>
+      <Default Target="[SD.Repeater]" Value="[Repeater]"/>
+
+      <Binding Source="[Folder.QuickListItems]" Target="[Repeater.Source]"/>
+
+      <Condition Source="[Folder.QuickListItems.Count]" SourceValue="0" Target="[NoItems.Visible]" Value="true" />
+    </Rules>
+
+    <Content>
+      <Panel>
+        <Children>
+
+          <Scroller Orientation="Horizontal" FadeSize="10" Name="Scroller" ScrollingData="[SD]" Padding="10,10,0,0">
+            <Children>
+
+              <Repeater Name="Repeater" Layout="[FlowLayout]" DiscardOffscreenVisuals="false">
+                <Animations>
+                  <Animation Type="Move">
+                    <Keyframes>
+                      <PositionKeyframe Time="0.00" RelativeTo="Current" Interpolation="Log"/>
+                      <PositionKeyframe Time="1.00" RelativeTo="Final"/>
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+                <Content>
+                  <me:RecentItems Application="[Application]" Item="[RepeatedItem!lib:Item]"  Index="[RepeatedItemIndex]"/>
+                </Content>
+              </Repeater>
+
+            </Children>
+          </Scroller>
+
+          <Panel Name="NoItems" Visible="false">
+            <Children>
+              <Text Margins="15,200,0,0" Content="No Items" WordWrap="false" Font="font://uf:EHS_No_Items" Color="10,100,100,100"/>
+            </Children>
+          </Panel>
+
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <UI Name="RecentItems">
+    <Properties>
+      <a:Application Name="Application" Application="$Required" />
+      <lib:Item Name="Item" Item="$Required" />
+      <Index Name="Index" Index="$Required"/>
+    </Properties>
+
+    <Locals>
+      <ClickHandler Name="Clicker"/>
+      <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
+    </Locals>
+
+    <Rules>
+      <!--<Default Target="[Item]" Value="[Item.Season!lib:Item]"></Default>-->
+      <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+
+      <Binding Source="[Item.PhysicalParent.PreferredImage]" Target="[ItemPoster.Content]">
+        <Conditions>
+          <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
+          <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season"/>
+          <Equality Source="[ThemeHelper.Config.UseSeasonPoster]" Value="true"/>
+        </Conditions>
+      </Binding>
+
+      <Binding Source="[Item.PreferredImage]" Target="[ItemPoster.Content]"/>
+
+      <Condition Source="[Item.ParentalAllowed]" ConditionOp="Equals" SourceValue="false" Target="[PCLock.Visible]" Value="true"/>
+
+      <Changed Source="[Input.KeyFocus]" >
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[ItemPoster.Scale]" Value="1,1,1"/>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Input.KeyFocus]" >
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[ItemPoster.Scale]" Value="1.15,1.15,1"/>
+          <Set Target="[Application.CurrentItem]" Value="[Item]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Clicker.Invoked]">
+        <Actions>
+          <Set Target="[ThemeHelper.NavigatingForward]" Value="true"/>
+          <Set Target="[ThemeHelper.DefaultBackdrop]" Value="[ThemeHelper.CurrentBackdrop]"/>
+          <PlaySound Sound="res://ehres!MiniSelect_a.wav"/>
+          <Invoke Target="[Application.Navigate]" item="[Item]"/>
+        </Actions>
+      </Changed>
+    </Rules>
+
+
+    <Content>
+
+      <Panel MaximumSize="380,380" MinimumSize="0,380">
+        <Layout>
+          <AnchorLayout SizeToHorizontalChildren="true" SizeToVerticalChildren="false"/>
+        </Layout>
+        <Children>
+
+          <Graphic Name="ItemPoster" Content="resx://MediaBrowser/Mediabrowser.Resources/MissingPerson" MaximumSize="380,380" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Scale="1,1,1" CenterPointPercent="0.5,0.5,1.0">
+            <LayoutInput>
+              <AnchorLayoutInput ContributesToWidth="true" Vertical="Center"/>
+            </LayoutInput>
+            <Animations>
+              <Animation CenterPointPercent="0.5,0.5,1.0" Type="Scale">
+                <Keyframes>
+                  <ScaleKeyframe Time="0.0" RelativeTo="Current" Interpolation="Sine"/>
+                  <ScaleKeyframe Time="0.5" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Children>
+
+              <Graphic Name="PCLock" Visible="false" Content="image://i:Lock" MaintainAspectRatio="true" MaximumSize="30,30"/>
+
+            </Children>
+          </Graphic>
+
+        </Children>
+      </Panel>
+
+    </Content>
+  </UI>
+
+  <UI Name="TabItem">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required" />
+      <Command Name="Command" Command="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+    </Properties>
+
+    <Locals>
+      <ClickHandler Name="Clicker"/>
+    </Locals>
+
+    <Rules>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+
+
+
+      <Changed Source="[Clicker.Invoked]">
+        <Conditions>
+          <Equality Source="[Application.RecentItemOption]" ConditionOp="Equals" Value="unwatched"></Equality>
+        </Conditions>
+        <Actions>
+          <Set Target="[Application.RecentItemOption]" Value="added"></Set>
+          <Set Target="[Label.Content]" Value="[Application.LocalStrings.#Latest!cor:String]"></Set>
+          <Invoke Target="[Command.Invoke]"></Invoke>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Clicker.Invoked]">
+        <Conditions>
+          <Equality Source="[Application.RecentItemOption]" ConditionOp="Equals" Value="added"></Equality>
+        </Conditions>
+        <Actions>
+          <Set Target="[Application.RecentItemOption]" Value="watched"></Set>
+          <Set Target="[Label.Content]" Value="[Application.LocalStrings.#Watched!cor:String]"></Set>
+          <Invoke Target="[Command.Invoke]"></Invoke>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Clicker.Invoked]">
+        <Conditions>
+          <Equality Source="[Application.RecentItemOption]" ConditionOp="Equals" Value="watched"></Equality>
+        </Conditions>
+        <Actions>
+          <Set Target="[Application.RecentItemOption]" Value="unwatched"></Set>
+          <Set Target="[Label.Content]" Value="[Application.LocalStrings.#Unwatched!cor:String]"></Set>
+          <Invoke Target="[Command.Invoke]"></Invoke>
+        </Actions>
+      </Changed>
+
+      <!--<Changed Source="[Clicker.Invoked]">
+        <Conditions>
+          <Equality Source="[Application.RecentItemOption]" ConditionOp="Equals" Value="unwatched"></Equality>
+        </Conditions>
+        <Actions>
+          <Set Target="[Application.RecentItemOption]" Value="inprogress"></Set>
+          <Set Target="[Label.Content]" Value="[Application.LocalStrings.#InProgressCapEHS!cor:String]"></Set>
+          <Invoke Target="[Command.Invoke]"></Invoke>
+        </Actions>
+      </Changed>-->
+
+      <Condition Source="[Application.RecentItemOption]" ConditionOp="Equals" SourceValue="watched" Target="[Label.Content]" Value="[Application.LocalStrings.#Watched!cor:String]"></Condition>
+      <Condition Source="[Application.RecentItemOption]" ConditionOp="Equals" SourceValue="added" Target="[Label.Content]" Value="[Application.LocalStrings.#Latest!cor:String]"></Condition>
+      <Condition Source="[Application.RecentItemOption]" ConditionOp="Equals" SourceValue="unwatched" Target="[Label.Content]" Value="[Application.LocalStrings.#Unwatched!cor:String]"></Condition>
+      <!--<Condition Source="[Application.RecentItemOption]" ConditionOp="Equals" SourceValue="inprogress" Target="[Label.Content]" Value="[Application.LocalStrings.#InProgressCapEHS!cor:String]"></Condition>-->
+
+      <Default Target="[Label.Content]" Value="Newest Items"></Default>
+
+      <Changed Source="[Input.KeyFocus]" >
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" Value="true" />
+        </Conditions>
+        <Actions>
+
+          <Set Target="[Label.Color]" Value="255,255,255"></Set>
+          <Set Target="[Label.Scale]" Value="1.1,1.1,1"></Set>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Input.KeyFocus]" >
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" Value="false" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Label.Color]" Value="133,133,133"></Set>
+        </Actions>
+      </Changed>
+
+      <Binding Target="[Label.Content]" Source="[Application.RecentItemOption]"></Binding>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[StauesTab.Content]" Value="image://vi:TabItemTab"/>
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[StauesTab.Content]" Value="image://vi:BlueTabItemTab"/>
+        </Actions>
+      </Rule>
+      
+    </Rules>
+
+    <Content>
+      <Panel>
+        <Children>
+          <Panel MaximumSize="200,45" MinimumSize="200,45" Layout="Center">
+            <Children>
+              <Text Margins="0,13,0,0" CenterPointPercent="0.5,0.5,0.5" Name="Label" Scale="1,1,1"  Content="Testing" Font="font://uf:EHS_Label" Color="color://uc:Medium">
+                <LayoutInput>
+                  <FormLayoutInput Vertical="Center" Horizontal="Center"/>
+                </LayoutInput>
+                <Animations>
+                  <Animation Type="Scale">
+                    <Keyframes>
+                      <ScaleKeyframe RelativeTo="Current" Time="0"/>
+                      <ScaleKeyframe RelativeTo="Final" Time="0.3"/>
+
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+              </Text>
+            </Children>
+          </Panel>
+          <Graphic Alpha="0.55" Name="StauesTab" MaximumSize="200,45" MinimumSize="200,45"></Graphic>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

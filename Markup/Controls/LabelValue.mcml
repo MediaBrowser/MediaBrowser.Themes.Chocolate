@@ -1,0 +1,62 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	  xmlns:cor="assembly://MSCorLib/System"
+    xmlns:c="file://Styles_DoNotEdit.mcml"
+    xmlns:f="file://Fonts_DoNotEdit.mcml"
+>
+
+	<UI Name="LabelValue">
+
+		<Properties>
+			
+      <Font Name="LabelFont" Font="font://f:Choc_Label"/>
+      <Font Name="ValueFont" Font="font://f:Choc_Value"/>
+      <Color Name="ValueColor" Color="color://c:Choc_Value"/>
+      <Color Name="LabelColor" Color="color://c:Choc_Label"/>
+      <cor:String Name="Label" String=""/>
+      <cor:String Name="Value" String=""/>
+      <cor:String Name="LabelPrefix" String=""/>
+      <cor:String Name="LabelSuffix" String=""/>
+      <cor:Int32 Name="MaxLines" Int32="2"/>
+		</Properties>
+    
+		<Rules>
+      <Binding Target="[LabelPrefixText.Content]" Source="[LabelPrefix]"></Binding>
+      <Binding Target="[LabelText.Content]" Source="[Label]"></Binding>
+      <Binding Target="[LabelSuffixText.Content]" Source="[LabelSuffix]"></Binding>
+      <Binding Target="[ValueText.Content]" Source="[Value]"></Binding>
+
+      <Condition Source="[Value]" ConditionOp="Equals" SourceValue="" ConditionLogicalOp="Or">
+        <Conditions>
+          <Equality Source="[Value]" ConditionOp="Equals" Value="-1"></Equality>
+        </Conditions>
+        <Actions>
+          <Set Target="[Panel.Visible]" Value="false"></Set>
+        </Actions>
+      </Condition>
+                 
+      
+		</Rules>
+
+		<Content>
+      <Panel Layout="Anchor" Name="Panel" Visible="true">
+        <Children>
+          <Panel Name="LabelPanel" Layout="HorizontalFlow">
+            <Children>
+              <Text Name="LabelPrefixText" Color="[LabelColor]" Font="[LabelFont]"/>
+              <Text Name="LabelText" Color="[LabelColor]" Font="[LabelFont]"/>
+              <Text Name="LabelSuffixText" Color="[LabelColor]" Font="[LabelFont]"/>
+            </Children>
+          </Panel>
+          <Text Name="ValueText" Color="[ValueColor]" WordWrap="true" MaximumLines="[MaxLines]" Font="[ValueFont]">
+            <LayoutInput>
+              <AnchorLayoutInput Left="LabelPanel,1" Bottom="LabelPanel,1"/>
+            </LayoutInput>
+          </Text>
+        </Children>
+      </Panel>
+			
+		</Content>
+
+	</UI>
+
+</Mcml>

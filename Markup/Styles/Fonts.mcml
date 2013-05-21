@@ -1,0 +1,85 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml">
+
+  <!-- ========== EHS ========== -->
+
+  <Font Name="EHS_Title" Font="Segoe Media Center Light,32"/>
+  <Font Name="EHS_RootItem" Font="Segoe Media Center Light,32"/>
+  <Font Name="EHS_Overview_Font" Font="Segoe Media Center Bold,16"/>
+  <Font Name="EHS_No_Items" Font="Segoe Media Center Bold,120"/>
+  <Font Name="EHS_Label" Font="Segoe Media Center Bold,16"/>
+  <Font Name="EHS_Runtime" Font="Segoe Media Center Light,16"/>
+  <Font Name="EHS_DateAdded" Font="Segoe Media Center Light,16"/>
+  
+  <!-- ========== Cover Flow View ========== -->
+
+  <Font Name="CF_TotalItems" Font="Segoe Media Center Light,16"/>
+  <Font Name="CF_EndTime" Font="Segoe Media Center Light,16"/>
+  <Font Name="CF_Title" Font="Segoe Media Center Light,27"/>
+  
+  <!-- ========== List View ========== -->
+
+  <Font Name="List_Title" Font="Segoe Media Center Light,26"/>
+  <Font Name="List_Overview" Font="Segoe Media Center Bold,16"/>
+  <Font Name="List_Genres" Font="Segoe Media Center Bold,18"/>
+  <Font Name="List_RunTime" Font="Segoe Media Center Bold,18"/>
+  <Font Name="List_Item" Font="Segoe Media Center Bold,14"/>
+
+  <!-- ========== Poster View ========== -->
+
+  <Font Name="Poster_TotalItems" Font="Segoe Media Center Light,16"/>
+  <Font Name="Poster_EndTime" Font="Segoe Media Center Light,16"/>
+  <Font Name="Poster_Title" Font="Segoe Media Center Light,27"/>
+  <Font Name="Poster_TopLabel" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Poster_Label" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Poster_Unwatched" Font="Segoe Media Center Bold,16"/>
+  
+  <!-- ========== Thumb View ========== -->
+
+  <Font Name="Thumb_TotalItems" Font="Segoe Media Center Light,16"/>
+  <Font Name="Thumb_EndTime" Font="Segoe Media Center Light,16"/>
+  <Font Name="Thumb_Title" Font="Segoe Media Center Light,26"/>
+  <Font Name="Thumb_Overview" Font="Segoe Media Center Bold,16"/>
+
+  <!-- ========== Strip View ========== -->
+
+  <Font Name="Strip_TotalItems" Font="Segoe Media Center Light,16"/>
+  <Font Name="Strip_Unwatched" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Strip_ListItems" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Strip_Title" Font="Segoe Media Center Light,27"/>
+
+  <!-- ========== Detail Page ========== -->
+
+  <Font Name="Detail_Overview" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Detail_Actors" Font="Segoe Media Center, 12"/>
+  <Font Name="Detail_Title" Font="Segoe Media Center Light,26"/>
+  <Font Name="Detail_Genres" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Detail_Star_Spacer" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Detail_Produced" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Detail_Produced_Spacer" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Detail_RunTime" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Detail_RunTime_Spacer" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Detail_Director_Label" Font="Segoe Media Center Light,16"/>
+  <Font Name="Detail_Director" Font="Segoe Media Center Bold,16"/>
+
+  <!-- ========== Context Menu ========== -->
+
+  <Font Name="ContextMenu_Title" Font="Segoe Media Center Light,28"/>
+  <Font Name="ContextMenu_Button" Font="Segoe Media Center Light,22"/>
+  <Font Name="ContextMenu_Close" Font="Segoe Media Center Bold,16"/>
+
+  <!-- ========== Misc ========== -->
+  
+  <Font Name="LightMediumMinus" Font="Segoe Media Center Light,18"/>
+  <Font Name="Choc_Label" Font="Segoe Media Center Light,16"/>
+  <Font Name="OverviewFont" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Choc_Value" Font="Segoe Media Center Bold,16"/>
+
+  <!-- ========== Config Panel ========== -->
+  <Font Name="CP_ConfigTitleFont" Font="Segoe Media Center Light, 25" />
+  <Font Name="CP_ConfigItemFont" Font="Segoe Media Center Semibold,11" />
+  <Font Name="CP_ConfigHeaderFont" Font="Segoe Media Center Semibold, 14" />
+  <Font Name="CP_ButtonFont" Font="Segoe Media Center, 14" />
+  <Font Name="CP_ColorSpinnerValueFont" Font="Segoe Media Center,7" />
+  <Font Name="CP_VersionFont" Font="Segoe Media Center, 10" />
+  
+</Mcml>

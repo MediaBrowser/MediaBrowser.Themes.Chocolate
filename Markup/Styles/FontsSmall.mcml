@@ -1,0 +1,40 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml">
+  
+  <Font Name="Choc_EHS_Title" Font="Segoe Media Center Light,28"/>
+  <Font Name="Choc_EHS_RootItem" Font="Segoe Media Center Light,28"/>
+
+  <Font Name="Choc_Overview" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Choc_Small_Details" Font="Segoe Media Center Light,14"/>
+
+  <Font Name="Choc_Label" Font="Segoe Media Center Light,16"/>
+  <Font Name="Choc_Value" Font="Segoe Media Center Bold,16"/>
+
+  <Font Name="Choc_TitleFont" Font="Segoe Media Center Light,26"/>
+
+  <Font Name="Choc_ContextMenu_Title" Font="Segoe Media Center Light,28"/>
+  <Font Name="Choc_ContextMenu_Button" Font="Segoe Media Center Light,22"/>
+  <Font Name="Choc_ContextMenu_Close" Font="Segoe Media Center Bold,16"/>
+
+  <Font Name="LightXLarge" Font="Segoe Media Center Light,120"/>
+  <Font Name="LightLarge" Font="Segoe Media Center Light,32"/>
+  <Font Name="LightMedium" Font="Segoe Media Center Light,27"/>
+  <Font Name="LightMediumMinus" Font="Segoe Media Center Light,18"/>
+  <Font Name="LightSmall" Font="Segoe Media Center Bold,16"/>
+
+  <Font Name="BoldXLarge" Font="Segoe Media Center Bold,120"/>
+  <Font Name="BoldLarge" Font="Segoe Media Center Bold,32"/>
+  <Font Name="BoldMedium" Font="Segoe Media Center Bold,26"/>
+  <Font Name="BoldMediumMinus" Font="Segoe Media Center Bold,18"/>
+  <Font Name="BoldSmall" Font="Segoe Media Center Bold,16"/>
+
+
+  <Font Name="OverviewFont" Font="Segoe Media Center Bold,16"/>
+  <Font Name="TitleFont" Font="Segoe Media Center Light,26"/>
+  <Font Name="LargeTitleFont" Font="Segoe Media Center Light,32"/>
+
+  <Font Name="ListItemFont" Font="Segoe Media Center Bold,14"/>
+  <Font Name="SmallDetailsFont" Font="Segoe Media Center Light,16"/>
+
+  <Font Name="Choc_UnwatchedCountFont" Font="Segoe Media Center, 12"/>
+  
+</Mcml>

@@ -1,0 +1,220 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	    xmlns:cor="assembly://MSCorLib/System"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:c="file://Styles_DoNotEdit.mcml"
+      xmlns:f="file://Fonts_DoNotEdit.mcml"
+      xmlns:me="Me"
+      >
+  
+  <UI Name="RadioGroup" >
+
+    <Properties>
+      <Choice Name="Model" Choice="$Required" />
+      <Size Name="Size" Size="135,135"/>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+
+    <Rules>
+      <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+      <Binding Source="[Model.Options]" Target="[Repeater.Source]" />
+    </Rules>
+    <Content>
+      <Panel>
+        <Children>
+          <Repeater Name="Repeater" ContentName="RadioButton" Navigation="RememberFocus" DefaultFocusIndex="[Model.DefaultIndex]" >
+            <Layout>
+              <FlowLayout Orientation="Horizontal" Spacing="5,0" AllowWrap="true"/>
+            </Layout>
+          </Repeater>
+        </Children>
+      </Panel>
+    </Content>
+    <Content Name="RadioButton">
+      <me:ViewButtons Application="[Application]" Model="[Model]" Option="[RepeatedItem!cor:String]" Size="[Size]"/>
+    </Content>
+  </UI>
+
+  <UI Name="ViewButtons">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <Choice     Name="Model" Choice="$Required"/>
+      <cor:String Name="Option" String="$Required"/>
+      <Size       Name="Size" Size="135,135"/>
+    </Properties>
+    <Locals>
+      <ClickHandler Name="Clicker" HandleEnterSpaceKeys ="true" HandlePrimaryMouseButton ="true" HandlerStage="Bubbled"/>
+      <Image Name="Image" Image="image://vi:MenuOptionBGNotFocused" />
+      <Image Name="ViewThumb" Image="image://vi:ViewThumb" />
+      <Image Name="ViewCoverflow" Image="image://vi:ViewCoverflow" />
+      <Image Name="ViewPoster" Image="image://vi:ViewPoster" />
+      <Image Name="ViewDetail" Image="image://vi:ViewDetail" />
+      <Image Name="ViewThumbstrip" Image="image://vi:ViewThumbstrip" />
+      <Image Name="MenuOptionName" Image="image://vi:MenuOptionName"/>
+      <Image Name="MenuOptionDate" Image="image://vi:MenuOptionDate"/>
+      <Image Name="MenuOptionRating" Image="image://vi:MenuOptionRating"/>
+      <Image Name="MenuOptionRuntime" Image="image://vi:MenuOptionRuntime"/>
+      <Image Name="MenuOptionUnwatched" Image="image://vi:MenuOptionUnwatched"/>
+      <Image Name="MenuOptionYear" Image="image://vi:MenuOptionYear"/>
+      <Image Name="MenuOptionNone" Image="image://vi:MenuOptionNone"/>
+      <Image Name="MenuOptionActor" Image="image://vi:MenuOptionActor"/>
+      <Image Name="MenuOptionGenre" Image="image://vi:MenuOptionGenre"/>
+      <Image Name="MenuOptionDirector" Image="image://vi:MenuOptionDirector"/>
+      <Image Name="MenuOptionStudio" Image="image://vi:MenuOptionStudio"/>
+      <Image Name="MenuOptionClose" Image="image://vi:MenuOptionClose"/>
+      <Image Name="FocusImage" Image="image://vi:MenuOptionBGFocused" />
+      <Image Name="NoFocusImage" Image="image://vi:MenuOptionBGNotFocused" />
+      <Image Name="SelectedImage" Image="image://vi:MenuOptionBGSelected" />
+      <Image Name="BlankImage" Image="null" />
+    </Locals>
+    <Rules>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+
+      <Changed Source="[Clicker.Invoked]">
+        <Actions>
+          <Set Target="[Model.Chosen]" Value="[Option]"/>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Model.Chosen]">
+        <Conditions>
+          <Equality Source="[Model.Chosen]" Value="[Option]" />
+          <Equality Source="[Input.KeyFocus]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Model.Chosen]">
+        <Conditions>
+          <Equality Source="[Model.Chosen]" Value="[Option]" />
+          <Equality Source="[Input.KeyFocus]" Value="false" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[NoFocusImage]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Model.Chosen]">
+        <Conditions>
+          <Equality Source="[Model.Chosen]"  ConditionOp="NotEquals" Value="[Option]" />
+          <Equality Source="[Input.KeyFocus]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Model.Chosen]">
+        <Conditions>
+          <Equality Source="[Model.Chosen]" ConditionOp="NotEquals" Value="[Option]" />
+          <Equality Source="[Input.KeyFocus]" Value="false" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[NoFocusImage]" />
+        </Actions>
+      </Changed>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Model.Chosen]" Value="[Option]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Model.Chosen]" ConditionOp="NotEquals" Value="[Option]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="false">
+        <Conditions>
+          <Equality Source="[Model.Chosen]" Value="[Option]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[SelectedImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="false">
+        <Conditions>
+          <Equality Source="[Model.Chosen]"  ConditionOp="NotEquals" Value="[Option]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[NoFocusImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#PosterDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[ViewPoster]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#PosterDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#POSTER!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DetailDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[ViewDetail]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DetailDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#LIST!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#CoverFlowDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[ViewCoverflow]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#CoverFlowDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#COVERFLOW!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#ThumbDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[ViewThumb]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#ThumbDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#THUMB!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#ThumbStripDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[ViewThumbstrip]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#ThumbStripDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#STRIP!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#NameDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionName]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#NameDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#NAME!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DateDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionDate]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DateDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#DATE!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RatingDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionRating]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RatingDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#RATING!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RuntimeDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionRuntime]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RuntimeDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#RUNTIME!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#UnWatchedDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionUnwatched]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#UnWatchedDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#UNWATCHED!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#YearDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionYear]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#YearDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#YEAR!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#NoneDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionNone]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#NoneDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#NONE!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#ActorDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionActor]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#ActorDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#ACTOR!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#GenreDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionGenre]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#GenreDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#GENRE!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DirectorDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionDirector]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DirectorDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#DIRECTOR!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#StudioDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionStudio]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#StudioDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#STUDIO!cor:String]"/>
+    </Rules>
+
+    <Content>
+      <Panel Name="Root">
+        <Children>          
+          <Graphic Name="BoxImage" Content="[BlankImage]" SizingPolicy="SizeToChildren">
+            <Children>
+              <Panel >
+                <Children>
+                  <Graphic Name="GraphicImage" Content="[Image]" MaximumSize="[Size]" MaintainAspectRatio="true">
+                    <Children>
+                      <Panel Layout="Form">
+                        <Children>
+                          <Text Name="GraphicLabel" Font="font://f:Choc_Label" Color="color://c:Choc_Label" Margins="0,0,0,3">
+                            <LayoutInput>
+                              <FormLayoutInput Horizontal="Center" Vertical="Far"/>
+                            </LayoutInput>
+                          </Text>
+                        </Children>
+                      </Panel>
+                    </Children>
+                  </Graphic>                  
+                </Children>
+              </Panel>
+            </Children>
+          </Graphic>
+        </Children>
+      </Panel>      
+    </Content>
+
+  </UI>
+
+</Mcml>

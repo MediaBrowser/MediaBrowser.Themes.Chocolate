@@ -1,0 +1,120 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"	    
+	    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+      xmlns:vmb="resx://Chocolate/Chocolate.Resources/MenuButton"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+	    xmlns:me="Me"
+	  >
+
+	<UI Name="PopupPlay">
+      <Properties>        
+        <lib:Item Name="Item" Item="$Required" />
+        <Command Name="Close" Command="$Required"/>
+        <a:Application Name="Application" Application="$Required"/>
+        
+      </Properties>
+    
+      <Locals>
+        <ShortcutHandler Name="BackHandler"  Handle="true" Shortcut="Back" HandlerStage="Bubbled" Command="[Close]"/>
+        <Command Name="CmdPlayAll" />
+        <Command Name="CmdAddToQueue"/>
+        <Command Name="CmdPlayRandom"/>
+        <Command Name="CmdPlayUnwatched"/>
+        <!--<Command Name="CmdPin"/>-->
+        
+      </Locals>
+    
+      <Rules>
+        <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
+        <Default Target="[Input.KeyInteractive]" Value="true" />
+        <Default Target="[Input.CreateInterestOnFocus]" Value="true" />
+
+        <Binding Target="[PlayUnwatchedButton.Visible]" Source="[Item.IsNotVideo]">
+          <Transformer>
+            <BooleanTransformer Inverse="true"/>
+          </Transformer>
+        </Binding>
+
+        
+        
+        <Changed Source="[CmdPlayAll.Invoked]">
+          <Conditions>
+            <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Song"></Equality>
+          </Conditions>
+          <Actions>
+            <Invoke Target="[Close.Invoke]" InvokePolicy="AsynchronousNormal" />
+            <Invoke Target="[Application.Play]" item="[Item]" />            
+          </Actions>
+        </Changed>
+        
+        <Changed Source="[CmdPlayAll.Invoked]">
+          <Conditions>
+            <Equality Source="[Item.ItemTypeString]" ConditionOp="Equals" Value="Song"></Equality>
+          </Conditions>
+          <Actions>
+            <Invoke Target="[Close.Invoke]" InvokePolicy="AsynchronousNormal" />
+            <Invoke Target="[Application.Play]" item="[Item.PhysicalParent]" />
+          </Actions>
+        </Changed>
+        
+        <Changed Source="[CmdAddToQueue.Invoked]">
+          <Actions>
+            <Invoke Target="[Close.Invoke]" InvokePolicy="AsynchronousNormal" />
+            <Invoke Target="[Application.AddToQueue]" item="[Item]" />
+          </Actions>
+        </Changed>
+
+        <Changed Source="[CmdPlayRandom.Invoked]">
+          <Actions>
+            <Invoke Target="[Close.Invoke]" InvokePolicy="AsynchronousNormal" />
+            <Invoke Target="[Application.Shuffle]" item="[Item]" />
+          </Actions>
+        </Changed>
+
+        <Changed Source="[CmdPlayUnwatched.Invoked]">
+          <Actions>
+            <Invoke Target="[Close.Invoke]" InvokePolicy="AsynchronousNormal" />
+            <Invoke Target="[Application.Unwatched]" item="[Item]" />
+          </Actions>
+        </Changed>
+
+        <!--<Changed Source="[CmdPin.Invoked]">
+          <Actions>
+            <Invoke Target="[Close.Invoke]" InvokePolicy="AsynchronousNormal" />
+            <PlaySound Sound="sound://sounds:Miniselect" />
+            <Invoke Target="[Application.PinItem]" item="[Item]" />
+            --><!--<Invoke Target="[Item.SetPinned]" />--><!--
+            --><!--<Set Target="[Item.Path]" Value="C:\"></Set>--><!--
+          </Actions>
+        </Changed>-->
+
+
+        
+
+        
+        
+        
+        
+      </Rules>
+    
+    
+      <Content>
+        <Panel Navigation="ContainAll">
+          <Layout>
+            <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
+          </Layout>
+          <Children>
+            <vmb:MenuButton Label="[Application.LocalStrings.#PLAYALL!cor:String]" Command="[CmdPlayAll]" Image="image://vi:MenuOptionPlayAll"/>
+            <vmb:MenuButton Label="[Application.LocalStrings.#QUEUEALL!cor:String]" Command="[CmdAddToQueue]" Image="image://vi:MenuOptionQueueAll" Visible="[Item.IsNotVideo]"/>
+            <vmb:MenuButton Label="[Application.LocalStrings.#PLAYRANDOM!cor:String]" Command="[CmdPlayRandom]" Image="image://vi:MenuOptionPlayRandom"/>
+            <vmb:MenuButton Label="[Application.LocalStrings.#PLAYUNWATCHED!cor:String]" Name="PlayUnwatchedButton" Command="[CmdPlayUnwatched]" Image="image://vi:MenuOptionPlayUnwatched"  Visible="[Item.IsNotVideo]"></vmb:MenuButton>
+            <!--<vmb:MenuButton Name="Pin" Visible="false" Command="[CmdPin]" Image="image://vi:MenuOptionPin"></vmb:MenuButton>-->
+            <!--<vmb:MenuButton Name="Unpin" Visible="false" Command="[CmdPin]" Image="image://vi:MenuOptionUnpin"></vmb:MenuButton>-->
+            <vmb:MenuButton Label="[Application.LocalStrings.#CLOSE!cor:String]" Command="[Close]" Image="image://vi:MenuOptionClose" Red="true"/>
+          </Children>
+        </Panel>
+      </Content>
+    </UI>
+</Mcml>

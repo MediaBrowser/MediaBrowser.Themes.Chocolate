@@ -1,0 +1,197 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	  xmlns:cor="assembly://MSCorLib/System"
+    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	  xmlns:cb="resx://MediaBrowser/MediaBrowser.Resources/CheckBox"
+	  xmlns:s="file://Styles_DoNotEdit.mcml"
+	  xmlns:f="file://Fonts_DoNotEdit.mcml"
+    xmlns:ch="assembly://Chocolate/Chocolate"
+    xmlns:ss="resx://MediaBrowser/MediaBrowser.Resources/SimpleSpinner"
+    xmlns:st="resx://MediaBrowser/MediaBrowser.Resources/SpinnerText"
+    xmlns:i="resx://Chocolate/Chocolate.Resources/Images"
+      
+      
+>
+  <!--*****************************************************************************************************************
+
+    This is an example of a config panel for your theme.  Modify this to include any theme-specific options you require.
+    You must also handle the saving/loading of any of these options somewhere in your assembly.
+
+  *********************************************************************************************************************-->
+
+  <UI Name="ConfigPanel">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <EditableText Name="FocusItem" />
+      <ch:ChocHelper Name="Helper"/>
+    </Properties>
+    <Locals>
+      <Inset Name="CMargin" Inset="25,0,0,0" />
+      
+      <BooleanChoice Name="ShowInfoIcons" Value="[Helper.Config.ShowInfoIcons]" />
+      <BooleanChoice Name="ShowInfoIconsBackground" Value="[Helper.Config.ShowInfoIconsBackground]" />
+      <BooleanChoice Name="Enable24hr" Value="[Helper.Config.Enable24hr]" />
+      <BooleanChoice Name="ShowLogosOnMovieDetail" Value="[Helper.Config.ShowLogosOnMovieDetail]" />
+      
+      <BooleanChoice Name="AlwaysShowPoster" Value="[Helper.Config.AlwaysShowPoster]" />
+      <BooleanChoice Name="BackdropStretch" Value="[Helper.Config.BackdropStretch]" />
+      <BooleanChoice Name="BackdropFill" Value="[Helper.Config.BackdropFill]" />
+      <BooleanChoice Name="BackdropFit" Value="[Helper.Config.BackdropFit]" />
+
+      <BooleanChoice Name="ShowConfig" Value="[Helper.Config.ShowConfig]" />
+      <BooleanChoice Name="EnableVideoBackdrop" Value="[Helper.Config.EnableVideoBackdrop]" />
+      <BooleanChoice Name="ShowNowPlayingIcon" Value="[Helper.Config.ShowNowPlayingIcon]" />
+      <BooleanChoice Name="ShowNPV" Value="[Helper.Config.ShowNPV]" />
+
+      <Choice Name="NPVAR">
+        <Options>
+          <cor:String String="Normal" />
+          <cor:String String="Double" />
+          <cor:String String="Triple" />
+        </Options>
+      </Choice>
+
+      <Choice Name="ThemeCustomFont">
+        <Options>
+          <cor:String String="Default" />
+          <cor:String String="Custom" />
+        </Options>
+      </Choice>
+
+      <Choice Name="ThemeStyleOptions">
+        <Options>
+          <cor:String String="Classic" />
+          <cor:String String="Blue" />
+        </Options>
+      </Choice>
+      
+    </Locals>
+    
+    <Rules>
+
+      <Binding Source="[NPVAR.Chosen!cor:String]"                 Target="[Helper.Config.NPVAR]"/>
+      <Binding Source="[ThemeCustomFont.Chosen!cor:String]"       Target="[Helper.Config.ThemeCustomFont]"/>
+      <Binding Source="[ThemeStyleOptions.Chosen!cor:String]"     Target="[Helper.Config.ThemeStyle]"/>
+      
+      <Changed Source="[ShowInfoIconsCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowInfoIcons]" Value="[ShowInfoIconsCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowInfoIconsBackgroundsCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowInfoIconsBackground]" Value="[ShowInfoIconsBackgroundsCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+      <Changed Source="[Enable24hrCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.Enable24hr]" Value="[Enable24hrCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowLogosOnMovieDetailCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowLogosOnMovieDetail]" Value="[ShowLogosOnMovieDetailCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[ShowConfigCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowConfig]" Value="[ShowConfigCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[EnableVideoBackdropCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.EnableVideoBackdrop]" Value="[EnableVideoBackdropCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowNowPlayingIconCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowNowPlayingIcon]" Value="[ShowNowPlayingIconCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowNPVCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowNPV]" Value="[ShowNPVCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      
+      <Changed Source="[BackdropStretchCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.BackdropStretch]" Value="[BackdropStretchCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[BackdropFillCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.BackdropFill]" Value="[BackdropFillCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[BackdropFitCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.BackdropFit]" Value="[BackdropFitCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[AlwaysShowPosterCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.AlwaysShowPoster]" Value="[AlwaysShowPosterCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>      
+      <Condition Source="[BackdropStretchCB.Checked.Value]" SourceValue="true" Target="[BackdropImage.Content]" Value="image://i:Stretch"/>
+      <Condition Source="[BackdropFillCB.Checked.Value]" SourceValue="true" Target="[BackdropImage.Content]" Value="image://i:Fill"/>
+      <Condition Source="[BackdropFitCB.Checked.Value]" SourceValue="true" Target="[BackdropImage.Content]" Value="image://i:Fit"/>
+      
+    </Rules>
+
+    <Content>
+      <Panel Layout="HorizontalFlow">
+        <Children>
+          <!--General Options Panel-->
+          <Panel Layout="VerticalFlow" MaximumSize="500,400">
+            <Children>
+              <Text Content="General Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
+              <cb:CheckBox Name="ShowConfigCB" Label="[Application.LocalStrings.#ShowConfig!cor:String]" Checked="[ShowConfig]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="Enable24hrCB" Label="[Application.LocalStrings.#Enable24hr!cor:String]" Checked="[Enable24hr]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowLogosOnMovieDetailCB" Label="[Application.LocalStrings.#ShowLogosOnMovieDetail!cor:String]" Checked="[ShowLogosOnMovieDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--Media Options Panel-->
+              <Text Content="Media Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
+              <cb:CheckBox Name="ShowInfoIconsCB" Label="[Application.LocalStrings.#ShowInfoIcons!cor:String]" Checked="[ShowInfoIcons]" FocusItem="[FocusItem]"  Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowInfoIconsBackgroundsCB" Label="[Application.LocalStrings.#ShowInfoIconsBackgrounds!cor:String]" Checked="[ShowInfoIconsBackground]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--Font Options Panel-->
+              <Text Content="Font Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
+              <st:SpinnerText Name="ThemeCustomFontSpinner"  Model="[ThemeCustomFont]"     FocusItem="[FocusItem]"  Color="color://s:FontColorMedium" Label="[Application.LocalStrings.#ThemeCustomFont!cor:String]" Font="font://f:CP_ConfigItemFont" ValueFont="font://f:CP_ConfigItemFont" Margins="0,0,0,5" DefaultString="[Helper.Config.ThemeCustomFont]"/>
+              </Children>
+          </Panel>
+          <!--Now Playing Options Panel-->
+          <Panel Layout="VerticalFlow" MaximumSize="500,400">
+            <Children>
+              <Text Content="Now Playing Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
+              <cb:CheckBox Name="EnableVideoBackdropCB" Label="[Application.LocalStrings.#EnableVideoBackdrop!cor:String]" Checked="[EnableVideoBackdrop]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowNowPlayingIconCB" Label="[Application.LocalStrings.#ShowNowPlayingIcon!cor:String]" Checked="[ShowNowPlayingIcon]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowNPVCB" Label="[Application.LocalStrings.#ShowNPV!cor:String]" Checked="[ShowNPV]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <st:SpinnerText Name="NPVARSpinner" Model="[NPVAR]" FocusItem="[FocusItem]" Color="color://s:FontColorMedium" Label="[Application.LocalStrings.#NPVAR!cor:String]" Font="font://f:CP_ConfigItemFont" ValueFont="font://f:CP_ConfigItemFont" Margins="0,0,0,5" DefaultString="[Helper.Config.NPVAR]"/>
+              <!--Style Options Panel-->
+              <Text Content="Style Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
+              <st:SpinnerText Name="ThemeStyleSpinner"  Model="[ThemeStyleOptions]"   FocusItem="[FocusItem]"  Color="color://s:FontColorMedium" Label="[Application.LocalStrings.#ThemeStyle!cor:String]"      Font="font://f:CP_ConfigItemFont" ValueFont="font://f:CP_ConfigItemFont" Margins="0,0,0,5" DefaultString="[Helper.Config.ThemeStyle]"/>
+            </Children>
+          </Panel>
+          <!--4:3 Options Panel-->
+          <Panel Layout="VerticalFlow" MaximumSize="500,400">
+            <Children>
+              <Text Content="4:3 Layout Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
+              <cb:CheckBox Name="AlwaysShowPosterCB" Label="[Application.LocalStrings.#AlwaysShowPoster!cor:String]" Checked="[AlwaysShowPoster]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="BackdropStretchCB" Label="[Application.LocalStrings.#BackdropStretch!cor:String]" Checked="[BackdropStretch]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="BackdropFillCB" Label="[Application.LocalStrings.#BackdropFill!cor:String]" Checked="[BackdropFill]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="BackdropFitCB" Label="[Application.LocalStrings.#BackdropFit!cor:String]" Checked="[BackdropFit]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <Graphic Name="BackdropImage" Content="image://i:Stretch" MaintainAspectRatio="true" SizingPolicy="SizeToContent">
+                <LayoutInput>
+                  <AnchorLayoutInput Left="Parent,0,445" Top="Parent,1,-262" ContributesToHeight="true"/>
+                </LayoutInput>
+              </Graphic>
+            </Children>
+          </Panel>
+        </Children>
+      </Panel>
+    </Content>
+
+  </UI>
+
+</Mcml>

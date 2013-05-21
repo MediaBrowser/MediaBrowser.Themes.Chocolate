@@ -1,0 +1,52 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:vmb="resx://Chocolate/Chocolate.Resources/MenuButton"
+      xmlns:vrb="resx://Chocolate/Chocolate.Resources/RadioButton"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	    xmlns:me="Me"
+	  >
+
+  <UI Name="PopupRadioMenu">
+    <Properties>
+      <Choice Name="Choice" Choice="$Required" />
+      <Command Name="Close" Command="$Required"/>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+    <Locals>
+      <ShortcutHandler Name="BackHandler"  Handle="true" Shortcut="Back" HandlerStage="Bubbled" Command="[Close]"/>
+    </Locals>
+    <Rules>
+      <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+      <Default Target="[Input.CreateInterestOnFocus]" Value="true" />
+    </Rules>
+
+    <Content>
+      <Panel  Navigation="ContainAll,RememberFocus">
+        <Layout>
+          <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
+        </Layout>
+        <Animations>
+          <Animation Name="AlphaAnimation" Type="Show">
+            <Keyframes>
+              <AlphaKeyframe Time="0.0" Value="0" RelativeTo="Current" Interpolation="EaseIn"/>
+              <AlphaKeyframe Time="0.5" Value="1" RelativeTo="Final"/>
+            </Keyframes>
+          </Animation>
+          <Animation Name="AlphaAnimation" Type="Hide">
+            <Keyframes>
+              <AlphaKeyframe Time="0.0" Value="1" RelativeTo="Current" Interpolation="EaseIn"/>
+              <AlphaKeyframe Time="0.5" Value="0" RelativeTo="Final"/>
+            </Keyframes>
+          </Animation>
+        </Animations>
+        <Children>
+          <vrb:RadioGroup Application="[Application]" Model="[Choice]" Size="135,135"/>
+          <vmb:MenuButton Label="[Application.LocalStrings.#CLOSE!cor:String]" Command="[Close]" Image="image://vi:MenuOptionClose" Red="true"/>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+  
+</Mcml>

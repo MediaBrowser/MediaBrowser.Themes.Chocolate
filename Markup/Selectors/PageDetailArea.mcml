@@ -1,0 +1,335 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	    xmlns:cor="assembly://MSCorLib/System"
+	    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:gb="resx://MediaBrowser/MediaBrowser.Resources/PluginUpdateButton"
+      xmlns:f="file://Fonts_DoNotEdit.mcml"
+      xmlns:ch="assembly://Chocolate/Chocolate"
+	    xmlns:lpo="resx://Chocolate/Chocolate.Resources/LayoutPoster"
+	    xmlns:lth="resx://Chocolate/Chocolate.Resources/LayoutThumb"
+	    xmlns:lde="resx://Chocolate/Chocolate.Resources/LayoutDetails"
+	    xmlns:lcf="resx://Chocolate/Chocolate.Resources/LayoutCoverflow"
+	    xmlns:lr="resx://Chocolate/Chocolate.Resources/LayoutRoot"
+	    xmlns:lts="resx://Chocolate/Chocolate.Resources/LayoutThumbStrip"
+      xmlns:iip="resx://Chocolate/Chocolate.Resources/InfoIconsPanel"
+      xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
+      xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop">
+
+
+  <UI Name="PageDetailAreaChocolate">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+      <Command Name="BackCmd"/>
+    </Properties>
+
+    <Locals>
+      <cor:String Name="Direction" String="Right"/>
+      <KeyHandler Name="LeftKey" Key="Left" Handle="false" HandlerStage="Routed"/>
+      <KeyHandler Name="RightKey" Key="Right" Handle="false" HandlerStage="Routed"/>
+      <KeyHandler Name="UpKey" Key="Up" Handle="false" HandlerStage="Routed"/>
+      <KeyHandler Name="DownKey" Key="Down" Handle="false" HandlerStage="Routed"/>
+      <MouseWheelHandler Name="Wheel" Handle="false" HandlerStage="Routed"/>
+      <ShortcutHandler Name="BackBtn" Shortcut="Back" Handle="false" HandlerStage="Routed" Command="[BackCmd]"/>
+    </Locals>
+
+    <Rules>
+      <Binding Source="[Direction]" Target="[Backdrops.Direction]"/>
+      <Binding Source="[Direction]" Target="[ThumbStripView.Direction]"/>
+      <Binding Source="[Direction]" Target="[InfoIconsPanel.Direction]"/>
+      <Changed Source="[LeftKey.Invoked]">
+        <Actions>
+          <Set Target="[Direction]" Value="Left"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[RightKey.Invoked]">
+        <Actions>
+          <Set Target="[Direction]" Value="Right"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[DownKey.Invoked]">
+        <Actions>
+          <Set Target="[Direction]" Value="Right"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[UpKey.Invoked]">
+        <Actions>
+          <Set Target="[Direction]" Value="Left"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Wheel.DownInvoked]">
+        <Actions>
+          <Set Target="[Direction]" Value="Right"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Wheel.UpInvoked]">
+        <Actions>
+          <Set Target="[Direction]" Value="Left"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Folder.JILShift]">
+        <Conditions>
+          <Equality Source="[Folder.JILShift]" ConditionOp="GreaterThan" Value="0"/>
+          <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" Value="Detail"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Direction]" Value="Right"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Folder.JILShift]">
+        <Conditions>
+          <Equality Source="[Folder.JILShift]" ConditionOp="LessThan" Value="0"/>
+          <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" Value="Detail"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Direction]" Value="Left"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Folder.JILShift]">
+        <Conditions>
+          <Equality Source="[Folder.JILShift]" ConditionOp="GreaterThan" Value="0"/>
+          <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="Detail"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Direction]" Value="Down"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Folder.JILShift]">
+        <Conditions>
+          <Equality Source="[Folder.JILShift]" ConditionOp="LessThan" Value="0"/>
+          <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="Detail"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Direction]" Value="Up"/>
+        </Actions>
+      </Changed>
+
+      <Rule ConditionLogicalOp ="And">
+        <Conditions >
+          <Equality Source="[Folder.IsRoot]" Value="true"/>
+          <Equality Source="[Application.Config.EnableRootPage]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[LayoutRoot.Visible]" Value="true"/>
+          <Set Target="[DetailsView.Visible]" Value="false"/>
+          <Set Target="[PosterView.Visible]" Value="false"/>
+          <Set Target="[ThumbView.Visible]" Value="false"/>
+          <Set Target="[ThumbStripView.Visible]" Value="false"/>
+          <Set Target="[CoverFlow.Visible]" Value="false"/>
+        </Actions>
+      </Rule>
+
+      <Condition Source="[ThemeHelper.ButtonPanelHasFocus]" SourceValue="true" Target="[MainPanel.Alpha]" Value="0.2"/>
+      <Condition Source="[ThemeHelper.IsMenuOpen]"          SourceValue="true" Target="[MainPanel.Alpha]" Value="0.2"/>
+      <Condition Source="[ThemeHelper.ButtonPanelHasFocus]" SourceValue="false" Target="[MainPanel.Alpha]" Value="1"/>
+      <Condition Source="[ThemeHelper.IsMenuOpen]"          SourceValue="false" Target="[MainPanel.Alpha]" Value="1"/>
+
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Detail" Target="[DetailsView.Visible]" Value="true" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="Detail" Target="[DetailsView.Visible]" Value="false" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Poster" Target="[PosterView.Visible]" Value="true" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="Poster" Target="[PosterView.Visible]" Value="false" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Thumb" Target="[ThumbView.Visible]" Value="true" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="Thumb" Target="[ThumbView.Visible]" Value="false" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="ThumbStrip" Target="[ThumbStripView.Visible]" Value="true" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="ThumbStrip" Target="[ThumbStripView.Visible]" Value="false" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="CoverFlow" Target="[CoverFlow.Visible]" Value="true" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="CoverFlow" Target="[CoverFlow.Visible]" Value="false" />
+
+      <Binding Source="[Application.Information.DisplayText]" Target="[InfoPanelText.Content]"/>
+      <Binding Source="[Application.Information.MajorActivity]" Target="[ActivityInd.Visible]"/>
+      <Condition Source="[InfoPanelText.Content]" ConditionOp="NotEquals" SourceValue="" Target="[InfoPanelText.Visible]" Value="true"/>
+      <Condition Source="[InfoPanelText.Content]" ConditionOp="NotEquals" SourceValue="" Target="[InfoPanel.Visible]" Value="true"/>
+      <Default Target="[InfoPanelText.Visible]" Value="false"/>
+      <Default Target="[InfoPanel.Visible]" Value="false"/>
+
+
+      <Changed Source="[BackBtn.Invoked]">
+        <Actions>
+          <Set Target="[ThemeHelper.NavigatingForward]" Value="false"/>
+        </Actions>
+      </Changed>
+      
+      <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[ThemeHelper.NavigatingForward]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
+          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateToBackward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateAwayBackward" ExclusiveApply="false"/>
+          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
+          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[ThemeHelper.NavigatingForward]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
+          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateToForward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateAwayForward" ExclusiveApply="false"/>
+          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
+          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
+          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
+        </Actions>
+      </Changed>
+
+      <Binding Source="[Folder]" Target="[InfoIconsPanel.Folder]"/>
+    </Rules>
+
+    <Content>
+      <Panel Layout="Form">
+        <Children>
+          <Panel Name="MainPanel" Layout="Form">
+            <Animations>
+              <Animation Name="AlphaAnimation" Type="Alpha">
+                <Keyframes>
+                  <AlphaKeyframe Time="0.0"  RelativeTo="Current" Interpolation="EaseIn"/>
+                  <AlphaKeyframe Time="0.3"  RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Children>
+
+              <!-- Info Panel-->
+              <Panel Layout="Anchor">
+                <LayoutInput>
+                  <AnchorLayoutInput Top="Parent,0" Bottom="Parent,0,30"  Right="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <Panel Layout="Form" >
+                    <Children>
+                      <gb:GreenBallIndicator Name="ActivityInd" MaximumSize="30,30" Padding="5,5,5,5" Visible="false">
+                        <LayoutInput>
+                          <FormLayoutInput Right="Parent,1" />
+                        </LayoutInput>
+                        <Animations>
+                          <Animation Type="Show">
+                            <Keyframes>
+                              <AlphaKeyframe Time="0" Value="0"/>
+                              <AlphaKeyframe Time="0.4" Value="0"/>
+                              <AlphaKeyframe Time=".8" Value="1"/>
+                            </Keyframes>
+                          </Animation>
+                          <Animation Type="Hide">
+                            <Keyframes>
+                              <AlphaKeyframe Time="0" Value="1"/>
+                              <AlphaKeyframe Time="0.6" Value="0"/>
+                            </Keyframes>
+                          </Animation>
+                        </Animations>
+                      </gb:GreenBallIndicator>
+                      <Text Name="InfoPanelText" Font="font://f:P_ClockFont"  Color="White" MaximumSize="900,0" Visible="false">
+                        <LayoutInput>
+                          <FormLayoutInput Right="Parent,1,-35" />
+                        </LayoutInput>
+                        <Animations>
+                          <Animation Type="Show">
+                            <Keyframes>
+                              <PositionKeyframe Time="0" RelativeTo="Current" Value="450,0,0"/>
+                              <AlphaKeyframe Time="0" Value="0"/>
+                              <AlphaKeyframe Time="0.45" Value="0"/>
+                              <AlphaKeyframe Time=".9" Value="1"/>
+                              <PositionKeyframe Time=".9" RelativeTo="Final" Value="0,0,0"/>
+                            </Keyframes>
+                          </Animation>
+                          <Animation Type="Hide">
+                            <Keyframes>
+                              <PositionKeyframe Time="0" RelativeTo="Current" Value="0,0,0"/>
+                              <AlphaKeyframe Time="0" Value="1"/>
+                              <AlphaKeyframe Time="0.6" Value="0"/>
+                              <PositionKeyframe Time="0.6" RelativeTo="Final" Value="450,0,0"/>
+                            </Keyframes>
+                          </Animation>
+                        </Animations>
+                      </Text>
+                      <ColorFill Name="InfoPanel" Content="Black" Alpha="0.65" Visible="false">
+                        <LayoutInput>
+                          <AnchorLayoutInput Top="InfoPanelText,0" Bottom="InfoPanelText,1" Left="InfoPanelText,0,-10"
+                                             Right="Parent,1"/>
+                        </LayoutInput>
+                        <Animations>
+                          <Animation Type="Show">
+                            <Keyframes>
+                              <PositionKeyframe Time="0" Value="450,0,0"/>
+                              <AlphaKeyframe Time="0" Value="0"/>
+                              <AlphaKeyframe Time=".7" Value="1"/>
+                              <PositionKeyframe Time=".7" Value="0,0,0"/>
+                            </Keyframes>
+                          </Animation>
+                          <Animation Type="Hide">
+                            <Keyframes>
+                              <PositionKeyframe Time="0" Value="0,0,0"/>
+                              <AlphaKeyframe Time="0" Value="1"/>
+                              <AlphaKeyframe Time="0.6" Value="0"/>
+                              <PositionKeyframe Time="0.6" Value="450,0,0"/>
+                            </Keyframes>
+                          </Animation>
+                        </Animations>
+                      </ColorFill>
+                    </Children>
+                  </Panel>
+                </Children>
+              </Panel>
+
+              <iip:InfoIconsPanel Name="InfoIconsPanel" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="Parent,0" Bottom="Parent,0,80"/>
+                </LayoutInput>
+                <Animations>
+                  <Animation Type="Show" CenterPointPercent="0, 0.5, 0.0">
+                    <Keyframes>
+                      <PositionKeyframe Time="0.0" Value="0, -90, 0" RelativeTo="Final"/>
+                      <PositionKeyframe Time="0.5" Value="0, -90, 0" RelativeTo="Final" Interpolation="EaseIn, 3.0, 0.2"/>
+                      <PositionKeyframe Time="1.4" Value="0, 0, 0" RelativeTo="Final"/>
+                      <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
+                      <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute"/>
+                      <AlphaKeyframe Time="1.4" Value="1.0" RelativeTo="Absolute"/>
+                    </Keyframes>
+                  </Animation>
+                  <Animation Type="Hide" CenterPointPercent="0, 0.5, 0.0">
+                    <Keyframes>
+                      <PositionKeyframe Time="0.0" RelativeTo="Current" Interpolation="EaseIn, 3.0, 0.2"/>
+                      <PositionKeyframe Time="0.4" Value="0, -90, 0" RelativeTo="Current"/>
+                      <AlphaKeyframe Time="0.0" RelativeTo="Current" Interpolation="Log"/>
+                      <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+              </iip:InfoIconsPanel>
+
+              <!--  View Details-->
+              <lr:LayoutRoot ThemeHelper="[ThemeHelper]" Name="LayoutRoot" Folder="[Folder]" Application="[Application]" Visible="false" Navigation="RememberFocus"/>
+
+              <lde:ChocolateLayoutDetails ThemeHelper="[ThemeHelper]" Name="DetailsView" Visible="false" Folder="[Folder]" Application="[Application]"/>
+
+              <lpo:ChocolateLayoutPoster ThemeHelper="[ThemeHelper]" Name="PosterView" Visible="false" Application="[Application]" Folder="[Folder]"/>
+
+              <lth:ChocolateLayoutThumb ThemeHelper="[ThemeHelper]" Name="ThumbView" Visible="false" Folder="[Folder]" Application="[Application]"/>
+
+              <lcf:ChocolateLayoutCoverflow ThemeHelper="[ThemeHelper]" Name="CoverFlow" Visible="false" Folder="[Folder]" Application="[Application]"/>
+
+              <lts:ChocolateLayoutThumbStrip ThemeHelper="[ThemeHelper]" Name="ThumbStripView" Visible="false" Folder="[Folder]" Application="[Application]"/>
+
+            </Children>
+          </Panel>
+          
+          <bd:Backdrops Name="Backdrops" Application="[Application]" Folder="[Folder]" BackCmd="[BackCmd]" Direction="Right"/>
+          
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

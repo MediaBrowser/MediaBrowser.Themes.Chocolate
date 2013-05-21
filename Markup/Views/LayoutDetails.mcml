@@ -1,0 +1,329 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	  xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	  xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+	  xmlns:cor="assembly://MSCorLib/System"
+    xmlns:ch="assembly://Chocolate/Chocolate"
+    xmlns:ls="resx://Chocolate/Chocolate.Resources/ListScroller"
+    xmlns:it="resx://Chocolate/Chocolate.Resources/Images"
+    xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
+    xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
+    xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
+	  xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+    xmlns:ast="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
+    xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
+    xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
+    xmlns:gl="resx://MediaBrowser/MediaBrowser.Resources/GenreList"
+	  xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
+    xmlns:me="Me"
+    >
+  
+  <UI Name="ChocolateLayoutDetails">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"></ch:ChocHelper>
+    </Properties>
+
+    <Locals>
+      <lib:Item Name="SelectedItem" Item="[Folder.SelectedChild]"/>
+      <ScrollingData Name="ScrollData"/>
+      <ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollHandler"/>
+      <Timer AutoRepeat="false" Enabled="true" Interval="3000" Name="NaviTime" />
+      
+    </Locals>
+
+    <Rules>
+
+      <Binding Target="[ThemeHelper.CurrentItem]" Source="[Folder.SelectedChild]">
+        <Actions>
+          <Invoke Target="[ItemInfoPanel.ForceRefresh]"/>
+        </Actions>
+      </Binding>
+      <Binding Target="[ItemInfoPanel.Item]" Source="[Folder.SelectedChild]"/>
+      <Binding Target="[Application.CurrentItem]" Source="[Folder.SelectedChild]"/>
+      
+      
+      <Changed Source="[NaviTime.Tick]" ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.DeepKeyFocus]" Value="false"/>
+          <Equality Source="[ThemeHelper.IsMenuOpen]" ConditionOp="Equals" Value="false"/>
+          <Equality Source="[ThemeHelper.ButtonPanelHasFocus]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ListItems.NavigateInto]"/>
+        </Actions>
+      </Changed>
+      
+      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[AlphaPanel.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+      
+      <Binding Target="[ScrollHandler.ScrollingData]" Source="[ScrollData]"/>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[AlphaPanel.Content]" Value="image://it:UltimateLongPanel"/>
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[AlphaPanel.Content]" Value="image://it:BlueUltimateLongPanel"/>
+        </Actions>
+      </Rule>
+      
+    </Rules>
+    
+    
+
+    <Content>
+      <Panel Layout="Form">
+        <Children>
+
+          <!-- DetailView List Panel -->
+          <Panel Name="DetailViewListing" Layout="Dock" Margins="0,0,0,0">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0,14" Top="Parent,0,95" Bottom="Parent,1,-15" Right="Parent,0,420" ContributesToWidth="false"/>
+            </LayoutInput>
+            <Children>
+              <ls:ListScroller FocusOrder="1" Name="ListItems" Visible="True" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]"/>
+            </Children>
+          </Panel>
+
+          <Graphic Name="AlphaPanel" MaintainAspectRatio="true">
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Parent,0,80" Bottom="Parent,1,1" Right="Parent,0,440"/>
+            </LayoutInput>
+          </Graphic>
+
+          <me:TypePanelSelector Name="ItemInfoPanel" Helper="[ThemeHelper]" Item="[Folder.SelectedChild]" Application="[Application]" >
+            <LayoutInput>
+              <FormLayoutInput Left="DetailViewListing,1,-5" Top="Parent,0.60" Bottom="Parent,1" Right="Parent,1"/>
+            </LayoutInput>
+          </me:TypePanelSelector>
+          
+        </Children>
+      </Panel>
+    </Content>
+
+   
+  </UI>
+  
+  <UI Name="TypePanelSelector">
+    <Properties>
+      <lib:Item Name="Item" Item="$Required"></lib:Item>
+      <a:Application Name="Application" Application="$Required"/>
+      <ch:ChocHelper Name="Helper" ChocHelper="$Required"/>
+    </Properties>
+    <Locals>
+      <Environment Name="Environment"/>
+      <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
+    </Locals>
+    
+    <Rules>
+
+      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[DetailAlphaPanel.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+      
+      <Binding Target="[PosterImage.Content]" Source="[Item.PrimaryImage]"/>
+      <Binding Target="[PosterImage.Visible]" Source="[Environment.IsWidescreen]">
+        <Conditions>
+          <Equality Source="[Helper.Config.AlwaysShowPoster]" Value="false"/>
+        </Conditions>
+      </Binding>
+      <Rule>
+        <Conditions>
+          <Equality Source="[PosterImage.Visible]" Value="true"/>
+          <Equality Source="[Application.Config.ShowHDIndicatorOnPosters]" Value="true"/>
+          <Equality Source="[Item.IsHD]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[HDIndicator.Visible]" Value="true"/>
+        </Actions>
+      </Rule>
+      
+      <!--Display Logo/Title-->
+      <Binding Target="[Title.Text]"       Source="[Item.Name]"/>
+      <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowListLogos]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.HasLogoImage]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Season"/>
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[LogoImage.Visible]" Value="true" />
+          <Set Target="[Title.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+      <Default Target="[LogoImage.Visible]" Value="false"/>
+      <Default Target="[Title.Visible]" Value="true"/>
+
+      <!--End Dislay Logo/Title Code-->
+      
+      
+      <Binding Target="[Summary.Text]" Source="[Item.Overview]"/>
+      <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"/>
+      <Binding Target="[Genres.SourceData]" Source="[Item.Genres]"/>
+      
+      <Binding Target="[TxtRuntime.Content]"   Source="[Item.RunningTimeString]"/>
+
+      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://i:HDLogo720" />
+      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://i:HDLogo1080" />
+      
+      <Condition Source="[Item.RunningTimeString]" ConditionOp="Equals" SourceValue="">
+        <Actions>          
+          <Set Target="[TxtRuntimeLbl.Visible]" Value="false"/>
+          <Set Target="[TxtRuntimeSpacer.Visible]" Value="false"/>
+          <Set Target="[RunEndSpacer.Visible]" Value="false"/>
+          <Set Target="[EndTimeLblSpacer.Visible]" Value="false"/>
+          <Set Target="[EndTimeLbl.Visible]" Value="false"/>
+          <Set Target="[EndTime.Visible]" Value="false"/>
+        </Actions>
+      </Condition>
+
+      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
+      <Condition Source="[Item.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
+      <Condition Source="[Item.HasMediaInfo]" SourceValue="false" Target="[EndTimeLblSpacer.Visible]" Value="false"/>
+      <Condition Source="[Item.HasMediaInfo]" SourceValue="false" Target="[RunEndSpacer.Visible]" Value="false"/>
+
+      <!--Hide/Show Options-->
+      <Binding Source="[ThemeHelper.Config.ShowListEndTime]" Target="[EndTimeLbl.Visible]"/>
+      <Binding Source="[ThemeHelper.Config.ShowListEndTime]" Target="[EndTimeLblSpacer.Visible]"/>
+      <Binding Source="[ThemeHelper.Config.ShowListEndTime]" Target="[EndTime.Visible]"/>
+      <Binding Source="[ThemeHelper.Config.ShowListEndTime]" Target="[RunEndSpacer.Visible]"/>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[DetailAlphaPanel.Content]" Value="image://it:UltimateLongPanel"/>
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[DetailAlphaPanel.Content]" Value="image://it:BlueUltimateLongPanel"/>
+        </Actions>
+      </Rule>
+
+
+    </Rules>
+    <Content>
+      <Panel Layout="Fill">
+        <Children>
+          <Panel Layout="Form" Margins="30,23,30,22">
+            <Children>
+              <Panel  Scale="1,1,1" MaximumSize="48,35" Padding="0,0,0,0" Visible="false" Name="HDIndicator">
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1" Bottom="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true" />
+                </Children>
+              </Panel>
+              
+              <Panel Name="PosterPanel" Padding="0,0,0,0">
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1" Top="Parent,0" Bottom="Parent,1"/>
+                </LayoutInput>
+                <Layout>
+                  <FlowLayout ItemAlignment="Center" Orientation="Vertical" StripAlignment="Center"/>
+                </Layout>
+                <Children>
+                  <Graphic Name="PosterImage" MaximumSize="300,0" Content="[Item.PrimaryImage]" MaintainAspectRatio="true"  
+                           SizingPolicy="SizeToContent"/>
+                </Children>
+              </Panel>
+              
+              
+              
+              <Panel Name="MpaaPanel" Alpha="0.7">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0,-2" Top="Parent,0"/>
+                </LayoutInput>
+                <Children>
+                  <mp:MPAARating Name="MPAARating" MaximumSize="0,32"/>
+                </Children>
+              </Panel>
+              
+              <Panel Name="TitlePanel">
+               <LayoutInput>
+                  <FormLayoutInput Top="Parent, 0,-15" Left="MpaaPanel, 1,5" Right="PosterPanel, 0,-5" Bottom="Parent,0,43"
+                                   Horizontal="Near" Vertical="Center"/>
+                </LayoutInput>
+                <Children>
+                  <ast:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[Item.Name]" Font="font://uf:List_Title" Color="color://uc:TitleColor" Visible="false"/>
+                  <Graphic Name="LogoImage" Margins="0,5,0,5" Content="[Item.LogoImage]" MaintainAspectRatio="true" Visible="false"/>
+                </Children>
+              </Panel>
+
+              <Panel Name="OverviewPanel">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="TitlePanel,1,-5" Bottom="Parent,1,-60" Right="PosterPanel,0,-15"/>
+                </LayoutInput>
+                <Children>
+                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="font://uf:List_Overview" Color="color://uc:OverviewColor"/>
+                </Children>
+              </Panel>
+
+              <Panel Name="GenrePanel">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="OverviewPanel,1,5" Bottom="Parent,1,-30" Right="PosterPanel,0,-15"/>
+                </LayoutInput>
+                <Layout>
+                  <FlowLayout Orientation="Horizontal"/>
+                </Layout>
+                <Children>
+                  <gl:GenreList Name="Genres" SourceData="[Item.Genres]" Font="font://uf:List_Genres" Color="color://uc:Light"/>
+                </Children>
+              </Panel>
+
+              <Panel Name="TimePanel">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="GenrePanel,1,5" Bottom="Parent,1" Right="PosterPanel,0,-15"/>
+                </LayoutInput>
+                <Layout>
+                  <FlowLayout Orientation="Horizontal"/>
+                </Layout>
+                <Children>
+                  <Text Name="TxtRuntimeLbl" Font="font://uf:List_RunTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#Runs!cor:String]" Visible="true"/>
+                  <Text Name="TxtRuntimeSpacer" Content=": " Font="font://uf:List_RunTime" Color="color://uc:Light" Visible="true" Alpha="0.6"  />
+                  <Text Name="TxtRuntime" Font="font://uf:List_RunTime" Color="color://uc:Light"/>
+                  <Text Name="RunEndSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Light" Alpha="0.6" Visible="true"  />
+                  <Text Name="EndTimeLbl" Font="font://uf:List_RunTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#Ends!cor:String]" Visible="true"/>
+                  <Text Name="EndTimeLblSpacer" Font="font://uf:List_RunTime" Color="color://uc:Dark" Content=": " Visible="true"/>
+                  <Text Name="EndTime" Font="font://uf:List_RunTime" Color="color://uc:Light" Content="Nothing"/>
+                </Children>
+              </Panel>
+              
+            </Children>
+            
+          </Panel>
+          <Graphic Name="DetailAlphaPanel" />
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+  
+  
+  
+</Mcml>

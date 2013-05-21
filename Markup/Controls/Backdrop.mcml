@@ -1,0 +1,477 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:s="file://Styles_DoNotEdit.mcml"
+      xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:ch="assembly://Chocolate/Chocolate"
+      xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
+      xmlns:an="resx://MediaBrowser/MediaBrowser.Resources/Animations"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:me="Me">
+
+  <UI Name="Backdrops">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper"/>
+      <cor:String Name="Direction" String="Right"/>
+      <Command Name="BackCmd"/>
+    </Properties>
+
+    <Locals>
+      <cor:Boolean Name="ShowingEHSBackdrop" Boolean="false"/>
+      <cor:Boolean Name="ShowingStripBackdrop" Boolean="false"/>
+      <lib:Item Name="CurrentItem" Item="[Application.CurrentItem]"/>
+    </Locals>
+
+    <Rules>
+
+      <Binding Source="[Direction]" Target="[StripBackdrop.Direction]"/>
+
+      <!--Show Recent EHSBackdrops-->
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.EnableEHSBackdrop]" Value="true"/>
+          <Equality Source="[Folder.IsRoot]" Value="true"/>
+          <Equality Source="[Application.Config.EnableRootPage]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[ShowingEHSBackdrop]" Value="true"/>
+          <Set Target="[EHSBackdrop.Visible]" Value="true"/>
+        </Actions>
+      </Rule>
+      <Default Target="[ShowingEHSBackdrop]" Value="false"/>
+      <Default Target="[EHSBackdrop.Visible]" Value="false"/>
+
+      <!--Show StripBackdrop ?-->
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.EnableStripBackdrop]" Value="true"/>
+          <Equality Source="[Application.Config.ShowBackdrop]" Value="true"/>
+          <Equality Source="[Folder.DisplayPrefs.UseBackdrop.Value]" Value="true"/>
+          <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="ThumbStrip"/>
+          <Equality Source="[ShowingEHSBackdrop]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[ShowingStripBackdrop]" Value="true"/>
+          <Set Target="[StripBackdrop.Visible]" Value="true"/>
+          <Set Target="[Backdrop.Visible]" Value="false"/>
+        </Actions>
+      </Rule>
+      <Default Target="[ShowingStripBackdrop]" Value="false"/>
+      <Default Target="[StripBackdrop.Visible]" Value="false"/>
+
+      <!--Show Backdrop -->
+      <Rule>
+        <Conditions>
+          <Equality Source="[ShowingEHSBackdrop]" Value="false"/>
+          <Equality Source="[ShowingStripBackdrop]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Backdrop.Visible]" Value="true"/>
+        </Actions>
+      </Rule>
+      <Default Target="[Backdrop.Visible]" Value="false"/>
+
+      <!--CurrentItem-->
+      <Changed Source="[BackCmd.Invoked]">
+        <Actions>
+          <Set Target="[ThemeHelper.DefaultBackdrop]" Value="[ThemeHelper.CurrentBackdrop]"/>
+        </Actions>
+      </Changed>
+      <Condition Source="[Folder!lib:Item.ItemTypeString]" SourceValue="Season" Target="[CurrentItem]" Value="[Folder!lib:Item]"/>
+      <Binding Source="[Application.CurrentItem]" Target="[CurrentItem]"/>
+
+      <!--Backdrop Source-->
+      <Binding Source="[CurrentItem.BackdropImage]" Target="[StripBackdrop.Image]"/>
+      <Binding Source="[CurrentItem]" Target="[Backdrop.Item]"/>
+      <Binding Source="[Folder.SelectedChild!lib:FolderModel]" Target="[EHSBackdrop.Folder]"/>
+      <Binding Source="[ThemeHelper.CurrentPage]" Target="[Test.Content]"/>
+
+    </Rules>
+
+    <Content>
+      <Panel Layout="Form">
+        <Children>
+          <Text Name="Test" BackColor="Black" Color="AntiqueWhite" Visible="false"/>
+
+          <Panel Layout="Form">
+            <Animations>
+              <Animation Type="Hide">
+                <Keyframes>
+                  <AlphaKeyframe Time="0.0" Value="1" RelativeTo="Absolute"/>
+                  <AlphaKeyframe Time="0.299" Value="1" RelativeTo="Absolute"/>
+                  <AlphaKeyframe Time="0.3" Value="0" RelativeTo="Absolute"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Children>
+
+              <me:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]"/>
+
+              <me:Backdrop4 Name="Backdrop" Item="[Folder.SelectedChild]" Application="[Application]" Visible="true"/>
+
+              <me:StripBackdrop Name="StripBackdrop" Image="[Folder.SelectedChild.BackdropImage]" Direction="Right" Visible="false"/>
+
+              <me:EHSBackdrop Name="EHSBackdrop" Application="[Application]" Visible="false" Folder="[Folder.SelectedChild!lib:FolderModel]">
+                
+                <Animations>
+                  <Animation Type="Hide">
+                    <Keyframes>
+                      <AlphaKeyframe RelativeTo="Current" Time="0.0" Value="1"/>
+                      <AlphaKeyframe RelativeTo="Current" Time="[Application.Config.BackdropTransitionInterval]" Value="0"/>
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+              </me:EHSBackdrop>
+
+            </Children>
+          </Panel>
+
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+  
+<!--Video Backdrop-->
+  <UI Name="NowPlayingBackdrop">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper"/>
+    </Properties>
+    <Rules>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.EnableVideoBackdrop]" Value="true" />
+          <Equality Source="[Application.PlaybackController.IsPlayingVideo]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[VideoBackdrop.Visible]" Value="true" />
+        </Actions>
+      </Rule>
+      <Default Target="[VideoBackdrop.Visible]" Value="false"/>
+      
+    </Rules>
+    
+    <Content>
+      <Video Name="VideoBackdrop" Layout="Fill" LetterboxColor="black"/>
+    </Content>
+  </UI>
+
+  <!--Rotate Recent Backdrops On EHS-->
+  <UI Name="EHSBackdrop" BaseUI="me:StripBackdrop">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <cor:String Name="Direction" String="Right"/>
+    </Properties>
+    <Locals>
+      <lib:Item Name="ChosenItem" lib:Item="[Folder!lib:Item]"/>
+      <Timer Name="BackdropTimer" AutoRepeat="true" Enabled="false"/>
+      <Timer Name="StartTimer" AutoRepeat="true" Enabled="true" Interval="100"/>
+      <Choice Name="BackdropItems">
+        <Options>
+          <lib:Item Item="[Folder!lib:Item]"/>
+        </Options>
+      </Choice>
+      <cor:Random Name="RandomNumberGenerator"/>
+    </Locals>
+    <Rules>
+      <Binding Source="[Application.Config.BackdropRotationInterval]" Target="[BackdropTimer.Interval]">
+        <Transformer>
+          <MathTransformer MultiplyInt="1000"/>
+        </Transformer>
+      </Binding>
+
+      <Changed Source="[Folder]">
+        <Actions>
+          <Invoke Target="[StartTimer.Stop]"/>
+          <Invoke Target="[StartTimer.Start]"/>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[StartTimer.Tick]">
+        <Conditions>
+          <IsValid Source="[Folder.NewestItems]"/>
+          <Equality Source="[Folder.NewestItems.Count]" ConditionOp="GreaterThan" Value="0"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BackdropItems.Options]" Value="[Folder.NewestItems]"/>
+          <Invoke ResultTarget="[BackdropItems.ChosenIndex]" Target="[RandomNumberGenerator.Next]" maxValue="[BackdropItems.Options.Count]"/>
+          <Set Target="[BackdropTimer.Enabled]" Value="true"/>
+          <Set Target="[StartTimer.Enabled]" Value="false"/>
+        </Actions>
+      </Changed>
+
+      <!--Seqential RecentItems-->
+      <Changed Source="[BackdropTimer.Tick]">
+        <Conditions>
+          <Equality Source="[Application.Config.RotateBackdrops]" Value="true"/>
+          <Equality Source="[Application.Config.RandomizeBackdrops]" Value="false"/>
+          <IsValid Source="[Folder.NewestItems]"/>
+          <Equality Source="[Folder.NewestItems.Count]" ConditionOp="GreaterThan" Value="0"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BackdropItems.Options]" Value="[Folder.NewestItems]"/>
+          <Invoke Target="[BackdropItems.NextValue]"
+                  allowWrap="true"/>
+        </Actions>
+      </Changed>
+      
+      <!--Random RecentItems-->
+      <Changed Source="[BackdropTimer.Tick]">
+        <Conditions>
+          <Equality Source="[Application.Config.RotateBackdrops]" Value="true"/>
+          <Equality Source="[Application.Config.RandomizeBackdrops]" Value="true"/>
+          <IsValid Source="[Folder.NewestItems]"/>
+          <Equality Source="[Folder.NewestItems.Count]" ConditionOp="GreaterThan" Value="0"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BackdropItems.Options]" Value="[Folder.NewestItems]"/>
+          <Invoke ResultTarget="[BackdropItems.ChosenIndex]"
+                  Target="[RandomNumberGenerator.Next]"
+                  maxValue="[BackdropItems.Options.Count]"/>
+        </Actions>
+      </Changed>
+
+      <Binding Source="[BackdropItems.Chosen!lib:Item]" Target="[ChosenItem]">
+        <Conditions>
+          <IsValid Source="[BackdropItems.Options]"/>
+          <Equality Source="[BackdropItems.Options.Count]" ConditionOp="GreaterThan" Value="0"/>
+        </Conditions>
+      </Binding>
+
+      <!--Use Season backdrop for episodes-->
+      <Binding Source="[ChosenItem.BackdropImage]" Target="[Image]">
+        <Conditions>
+          <IsValid Source="[ChosenItem]"/>
+          <Equality Source="[ChosenItem.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
+        </Conditions>
+      </Binding>
+      <Binding Source="[ChosenItem.PhysicalParent.BackdropImage]" Target="[Image]">
+        <Conditions>
+          <IsValid Source="[ChosenItem]"/>
+          <Equality Source="[ChosenItem.ItemTypeString]" ConditionOp="Equals" Value="Episode"/>
+        </Conditions>
+      </Binding>
+
+    </Rules>
+  </UI>
+  
+  <!--Backdrop Used For Strip View Only-->
+  <UI Name="StripBackdrop">
+    <Properties>
+      <Image Name="Image" Image="null"/>
+      <cor:String Name="Direction" String="$Required"/>
+    </Properties>
+
+    <Locals>
+      <ch:ChocHelper Name="ThemeHelper"/>
+      <TransformByAttributeAnimation Name="ShowSlideRight" Attribute="Width" Magnitude="0.99" Source="animation://anim:ShowSlideRight"/>
+      <TransformByAttributeAnimation Name="ShowSlideLeft" Attribute="Width" Magnitude="0.99" Source="animation://anim:ShowSlideLeft"/>
+      <TransformByAttributeAnimation Name="HideSlideRight" Attribute="Width" Magnitude="0.99" Source="animation://anim:HideSlideRight"/>
+      <TransformByAttributeAnimation Name="HideSlideLeft" Attribute="Width" Magnitude="0.99" Source="animation://anim:HideSlideLeft"/>
+      <Environment Name="Environment"/>
+      <Image Name="LoadBackdropImage" Image="null"/>
+      <Timer Name="ChangeDelay" Interval="150" AutoRepeat="false" Enabled="true"/>
+    </Locals>
+
+    <Rules>
+      <Changed Source="[Image]">
+        <Actions>
+          <Set Target="[LoadBackdropImage]" Value="[Image]"/>
+          <Invoke Target="[ChangeDelay.Start]"/>
+        </Actions>
+      </Changed>
+
+      <Rule>
+        <Conditions>
+          <Modified Source="[Image]" InitialEvaluate="true"/>
+          <Equality Source="[Direction]" Value="Right"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Backdrop.AttachAnimation]" animation="[ShowSlideRight]" InvokePolicy="Synchronous" ExclusiveApply="false"/>
+          <Invoke Target="[Backdrop.AttachAnimation]" animation="[HideSlideRight]" InvokePolicy="Synchronous" ExclusiveApply="false"/>
+          <Invoke Target="[ChangeDelay.Start]"/>
+          <!--<Set Target="[Backdrop.Content]" Value="[Image]"/>-->
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Modified Source="[Image]" InitialEvaluate="true"/>
+          <Equality Source="[Direction]" Value="Left"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Backdrop.AttachAnimation]" animation="[ShowSlideLeft]" InvokePolicy="Synchronous" ExclusiveApply="false"/>
+          <Invoke Target="[Backdrop.AttachAnimation]" animation="[HideSlideLeft]" InvokePolicy="Synchronous" ExclusiveApply="false"/>
+          <Invoke Target="[ChangeDelay.Start]"/>
+          <!--<Set Target="[Backdrop.Content]" Value="[Image]"/>-->
+        </Actions>
+      </Rule>
+
+      <Changed Source="[ChangeDelay.Tick]">
+        <Actions>
+          <Set Target="[Backdrop.Content]" Value="[Image]"/>
+          <Set Target="[ThemeHelper.CurrentBackdrop]" Value="[Image]"/>
+        </Actions>
+      </Changed>
+
+    </Rules>
+
+    <Content>
+      <Panel Layout="Form">
+        <Children>
+          <Graphic Name="Backdrop" Content="[ThemeHelper.DefaultBackdrop]" CenterPointPercent="0.5,0.5,0.5" SizingPolicy="SizeToContent">
+            <LayoutInput>
+              <AnchorLayoutInput Left="Parent,0.5,-683" Top="Parent,0" Right="Parent,0.5,683" Bottom="Parent, 1" ContributesToWidth="false"/>
+            </LayoutInput>
+          </Graphic>
+        </Children>
+      </Panel>
+
+    </Content>
+  </UI>
+
+  <UI Name="Backdrop4">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <Image Name="Image" Image="null"/>
+      <lib:Item Name="Item" Item="$Required"/>
+      <Image Name="LoadBackdropImage" Image="null"/>
+    </Properties>
+
+    <Locals>
+      <a:MultiBackdrop Name="MultiBackdrop"/>
+      <a:Config Name="Config" Config="[Application.Config]"/>
+      <Timer Name="StartupTimer" Interval="50" AutoRepeat="false" Enabled="true"/>
+      <Timer Name="ChangeDelay" Interval="[Application.Config.BackdropLoadDelay]" AutoRepeat="false" Enabled="true"/>
+      <ch:ChocHelper Name="ThemeHelper"/>
+      <Environment Name="Environment"/>
+      <AnchorLayoutInput Name="LayoutInputFill" Left="Parent,0.5,-683" Top="Parent,0" Right="Parent,0.5,683" Bottom="Parent, 1" ContributesToWidth="false"/>
+    </Locals>
+
+    <Rules>
+
+      <Changed Source="[Item]">
+        <Actions>
+          <Invoke Target="[ChangeDelay.Start]"></Invoke>
+          <Set Target="[StartupTimer.Enabled]" Value="true"/>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Item.BackdropImage]">
+        <Actions>
+          <Invoke Target="[ChangeDelay.Start]"></Invoke>
+        </Actions>
+      </Changed>
+
+      <!--Show Backdrops-->
+      <Changed Source="[ChangeDelay.Tick]">
+        <Conditions>
+          <Equality Source="[ThemeHelper.ShowBackdrop]" Value="true"/>
+          <Equality Source="[Application.Config.ShowBackdrop]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Backdrop.Content]" Value="[Item.BackdropImage]"/>
+        </Actions>
+      </Changed>
+
+      <!--Initial Folder Tier-->
+      <Changed Source="[ChangeDelay.Tick]">
+        <Conditions>
+          <Equality Source="[Application.Config.ShowRootBackground]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Backdrop.Content]" Value="[Application.MainBackdrop!Image]"/>
+        </Actions>
+      </Changed>
+
+      
+      <!--Show ThemeBackground-->
+      <Binding Source="[Application.Config.ShowThemeBackground]" Target="[ThemeBackground.Visible]" />
+      
+      <!--Backdrop Rotation-->
+      <Rule>
+        <Conditions>
+          <Modified Source="[StartupTimer.Tick]"  />
+        </Conditions>
+        <Actions>
+          <Invoke Target="[MultiBackdrop.BeginRotation]" InvokePolicy="AsynchronousLowPri" >
+            <item>
+              <lib:Item Item="[Item]" />
+            </item>
+          </Invoke>
+        </Actions>
+      </Rule>
+      
+      <!--4:3 Resize Options-->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Equality Source="[Environment.IsWidescreen]" Value="false"/>
+          <Equality Source="[ThemeHelper.Config.BackdropStretch]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Clip.ShowFar]" Value="false"/>
+          <Set Target="[Backdrop.MaintainAspectRatio]" Value="false"/>
+          <Set Target="[Clip.LayoutInput]" Value="[LayoutInputFill]"/>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Environment.IsWidescreen]" Value="false"/>
+          <Equality Source="[ThemeHelper.Config.BackdropFit]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Clip.ShowFar]" Value="true"/>
+          <Set Target="[Backdrop.MaintainAspectRatio]" Value="true"/>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Environment.IsWidescreen]" Value="false"/>
+          <Equality Source="[ThemeHelper.Config.BackdropFill]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Clip.ShowFar]" Value="false"/>
+          <Set Target="[Backdrop.MaintainAspectRatio]" Value="false"/>
+          <Set Target="[Clip.LayoutInput]" Value="[LayoutInputFill]"/>
+        </Actions>
+      </Rule>
+
+    </Rules>
+
+    <Content>
+      <!--- Backdrop support -->
+      <Panel Layout="Form">
+        <Children>
+
+          <Clip Name="Clip" Orientation="Vertical" ShowNear="false" ShowFar="false" FadeSize="75">
+            <LayoutInput>
+              <FormLayoutInput Vertical="Near" Horizontal="Fill"/>
+            </LayoutInput>
+            <Children>
+              <Graphic Name="Backdrop" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Visible="true">
+                <Animations>
+                  <Animation Type="ContentChangeHide">
+                    <Keyframes>
+                      <AlphaKeyframe RelativeTo="Current" Time="0.0" Value="1"/>
+                      <AlphaKeyframe RelativeTo="Current" Time="[Application.Config.BackdropTransitionInterval]" Value="0"/>
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+              </Graphic>
+              <Graphic Name="ThemeBackground" Content="image://vi:BackgroundBlack" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Visible="false">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent,0" Bottom="Parent,1" />
+                </LayoutInput>
+              </Graphic>
+            </Children>
+          </Clip>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+  
+</Mcml>

@@ -1,0 +1,104 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	    xmlns:cor="assembly://MSCorLib/System"
+      xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images" 
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:c="file://Styles_DoNotEdit.mcml"
+      xmlns:f="file://Fonts_DoNotEdit.mcml"
+      xmlns:me="Me"
+      >
+
+  <UI Name="MenuButton">
+    <Properties>
+      <ICommand Name="Command" ICommand="$Required"/>
+      <Image Name="Image" Image="image://i:ConfigImg"/>
+      <cor:String Name="Label" String=""/>
+      <cor:Boolean Name="Red" Boolean="false"/>
+    </Properties>
+    <Locals>
+      <ClickHandler Name="Clicker" Command="[Command]"/>
+      <Image Name="FocusImage" Image="image://vi:MenuOptionBGFocused" />
+      <Image Name="NoFocusImage" Image="image://vi:MenuOptionBGNotFocused" />
+      <Image Name="SelectedImage" Image="image://vi:MenuOptionBGSelected" />
+      <Image Name="RedImage" Image="image://vi:MenuOptionBGRed" />
+      <Image Name="BlankImage" Image="null" />
+    </Locals>
+    <Rules>
+
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+
+      <Changed Source="[Clicker.Invoked]">
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+        </Actions>
+      </Changed>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]"/>
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Clicker.Clicking]" SourceValue="true" >
+        <Actions>
+          <PlayAnimation Target="[BoxImage]" Animation="animation://me:ButtonPress"/>
+          <Set Target="[BoxImage.Content]" Value="[SelectedImage]"/>
+        </Actions>
+      </Condition>
+
+      <Rule ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" ConditionOp="Equals" Value="false"/>
+          <Equality Source="[Red]" ConditionOp="Equals" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[RedImage]"/>
+        </Actions>
+      </Rule>
+      <Rule ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" ConditionOp="Equals" Value="false"/>
+          <Equality Source="[Red]" ConditionOp="Equals" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[NoFocusImage]"/>
+        </Actions>
+      </Rule>
+      <Binding Target="[ImageLabel.Content]" Source="[Label]"/>
+    </Rules>
+    <Content>
+      <Graphic Name="BoxImage" Content="[BlankImage]" SizingPolicy="SizeToChildren">
+        <Children>
+          <Panel >
+            <Children>
+              <Graphic Content="[Image]" Layout="Dock" MaximumSize="135,135" MaintainAspectRatio="true" >
+                <Children>
+                  <Panel MaximumSize="116,0" Padding="0,0,0,4">
+                    <Layout>
+                      <ScaleLayout AllowScaleDown="true" AllowScaleUp="false"/>
+                    </Layout>
+                    <LayoutInput>
+                      <DockLayoutInput Alignment="Center" Position="Bottom"/>
+                    </LayoutInput>
+                    <Children>
+                      <Text Name="ImageLabel" Font="font://f:Choc_Label" Color="color://c:Choc_Label">
+                      </Text>
+                    </Children>
+                  </Panel>
+                </Children>
+              </Graphic>
+            </Children>
+          </Panel>
+        </Children>
+      </Graphic>
+    </Content>
+  </UI>
+  
+  <Animation Name="ButtonPress" Loop="0" CenterPointPercent="0.5,0.5,1.0">
+    <Keyframes>
+      <ScaleKeyframe Time="0.00" RelativeTo="Current" Interpolation="Log"/>
+      <ScaleKeyframe Time="0.08" Value="0.9,0.9,1.0"/>
+      <ScaleKeyframe Time="0.15" Value="1.0,1.0,1.0"/>
+    </Keyframes>
+  </Animation>
+</Mcml>

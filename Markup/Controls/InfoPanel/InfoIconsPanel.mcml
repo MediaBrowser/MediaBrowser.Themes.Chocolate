@@ -1,0 +1,423 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:mip="resx://MediaBrowser/MediaBrowser.Resources/MediaInfoPanel"
+      xmlns:f="file://Fonts_DoNotEdit.mcml"
+      xmlns:ch="assembly://Chocolate/Chocolate"
+      xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations">
+
+  <UI Name="InfoIconsPanel">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+      <cor:String Name="Direction" String="Right"/>
+    </Properties>
+
+    <Locals>
+      <Timer Name="AnimTimer" Interval="[Application.Config.BackdropLoadDelay]" Enabled="false" AutoRepeat="false"/>
+      <cor:Boolean Name="ShowInfoIcons" Boolean="true"/>
+      <Animation Name="HideSlideDown" Type="ContentChangeHide">
+        <Keyframes>
+          <AlphaKeyframe Time="0" RelativeTo="Absolute" Value="1" Interpolation="EaseIn, 1.0, 0.25"/>
+          <AlphaKeyframe Time=".35" RelativeTo="Absolute" Value="0"/>
+          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+          <PositionKeyframe Time=".65" RelativeTo="Final"  Value="0,90,0"/>
+        </Keyframes>
+      </Animation>
+      <Animation Name="HideSlideUp" Type="ContentChangeHide">
+        <Keyframes>
+          <AlphaKeyframe Time="0" RelativeTo="Absolute" Value="1" Interpolation="EaseIn, 1.0, 0.25"/>
+          <AlphaKeyframe Time=".35" RelativeTo="Absolute" Value="0"/>
+          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+          <PositionKeyframe Time=".65" RelativeTo="Final"  Value="0,-90,0"/>
+        </Keyframes>
+      </Animation>
+      <TransformByAttributeAnimation Name="ShowSlideRight" Attribute="Width" Magnitude="1.0" Source="animation://anim:ShowSlideRight"/>
+      <TransformByAttributeAnimation Name="ShowSlideLeft" Attribute="Width" Magnitude="1.0" Source="animation://anim:ShowSlideLeft"/>
+      <Color Name="InfoIconsBColor" A="100"/>
+    </Locals>
+
+    <Rules>
+
+      <Changed Source="[Direction]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Direction]" Value="Left"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Logo.AttachAnimation]" animation="[ShowSlideLeft]" InvokePolicy="Synchronous" ExclusiveApply="false"/>
+          <Invoke Target="[Logo.AttachAnimation]" animation="[HideSlideDown]" InvokePolicy="Synchronous"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Direction]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Direction]" Value="Right"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Logo.AttachAnimation]" animation="[ShowSlideRight]" InvokePolicy="Synchronous" ExclusiveApply="false"/>
+          <Invoke Target="[Logo.AttachAnimation]" animation="[HideSlideUp]" InvokePolicy="Synchronous"/>
+        </Actions>
+      </Changed>
+      
+      <Condition Source="[Folder.SelectedChild.ItemTypeString]" ConditionOp="NotEquals" SourceValue="Series" Target="[Logo.AnimationsEnabled]" Value="false"/>
+      <Default Target="[Logo.AnimationsEnabled]" Value="true"/>
+
+      <Binding Source="[Folder.SelectedChild.BannerImage]" Target="[Logo.Content]"/>
+
+      <Binding Source="[Folder.SelectedChild.HasBannerImage]" Target="[Logo.Visible]"/>
+      
+      <Binding Source="[Logo.Visible]" Target="[MediaInfoPanel.Visible]">
+        <Transformer>
+          <BooleanTransformer Inverse="true"/>
+        </Transformer>
+      </Binding>
+      
+      <Rule ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Folder.SelectedChild.ItemTypeString]" Value="Series"/>
+          <Equality Source="[Folder.DisplayPrefs.UseBanner.Value]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsPanel.Visible]" Value="false"/>
+        </Actions>
+      </Rule>
+      
+      <Changed Source="[Folder.SelectedChild]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Folder.SelectedChild.HasBannerImage]" Value="false"/>
+          <Equality Source="[Folder.SelectedChild.HasMediaInfo]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[ShowInfoIcons]" Value="false"/>
+        </Actions>
+      </Changed>
+      <Default Target="[ShowInfoIcons]" Value="true"/>
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowInfoIcons]" Value="false"/>
+          <Equality Source="[Folder.IsRoot]" Value="true"/>
+          <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="Poster"/>
+          <Equality Source="[ShowInfoIcons]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsPanel.Visible]" Value="false"/>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality  Source="[ThemeHelper.Config.ShowInfoIconsBackground]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsBColor.A]" Value="0"/>
+          <Set Target="[InfoIconsCorner.Visible]" Value="false"/>
+        </Actions>
+      </Rule>
+
+      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[InfoIconsCorner.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+      <Binding Source="[Application.Config.AlphaBlending!cor:Byte]" Target="[InfoIconsBColor.A]">
+        <Transformer>
+          <MathTransformer Multiply="2.55" Type="Byte"/>
+        </Transformer>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowInfoIconsBackground]" Value="true"/>
+        </Conditions>
+      </Binding>
+      <Default Target="[InfoIconsPanel.Visible]" Value="true"/>
+
+      <Changed Source="[Folder.SelectedChild]" InitialEvaluate="true">
+        <Actions>
+          <Invoke Target="[AnimTimer.Start]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[AnimTimer.Tick]" InitialEvaluate="true">
+        <Actions>
+          <Set Target="[MediaInfoPanel.Item]" Value="[Folder.SelectedChild]"/>
+          <Invoke Target="[MediaInfoPanel.ForceContentChange]" ExclusiveApply="false"/>
+        </Actions>
+      </Changed>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:InfoPanelCorner"/>
+          <Set Target="[InfoIcons.Content]" Value="[InfoIconsBColor]"/>
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:BlueInfoPanelCorner"/>
+          <Set Target="[InfoIcons.Content]" Value="200,10,56,114"/>
+        </Actions>
+      </Rule>
+      
+    </Rules>
+
+    <Content>
+      <Panel Name="InfoIconsPanel" Layout="HorizontalFlow">
+        <Children>
+
+          <ColorFill Name="InfoIcons" Layout="HorizontalFlow" Padding="10,10,0,10" MaximumSize="0,80" MinimumSize="0,80">
+            <Children>
+
+              <Clip Layout="HorizontalFlow" Orientation="Vertical" FadeSize="10" NearOffset="-10" FarOffset="10">
+                <Children>
+                  <Clip Layout="HorizontalFlow" FadeSize="10" NearOffset="-10" FarOffset="10">
+                    <Children>
+
+                      <Graphic Name="Logo" Content="image://vi:BlankGraphic" MaintainAspectRatio="true" MaximumSize="0,70"/>
+
+                      <mip:MediaInfoPanel Name="MediaInfoPanel" Item="[Folder.SelectedChild]" MaxIconSize="0,70">
+                        <Animations>
+                          <Animation Type="ContentChangeHide">
+                            <Keyframes>
+                              <AlphaKeyframe Time="0.0" RelativeTo="Absolute" Value="1" Interpolation="EaseIn"/>
+                              <AlphaKeyframe Time="0.25" RelativeTo="Absolute" Value="0"/>
+                            </Keyframes>
+                          </Animation>
+                          <Animation Type="ContentChangeShow">
+                            <Keyframes>
+                              <AlphaKeyframe Time="0.0" RelativeTo="Absolute" Value="0"/>
+                              <AlphaKeyframe Time="0.15" RelativeTo="Absolute" Value="0" Interpolation="EaseIn"/>
+                              <AlphaKeyframe Time="0.75" RelativeTo="Absolute" Value="1"/>
+                            </Keyframes>
+                          </Animation>
+                          <Animation Type="Show">
+                            <Keyframes>
+                              <AlphaKeyframe Time="0.0" RelativeTo="Absolute" Value="0"/>
+                              <AlphaKeyframe Time="0.15" RelativeTo="Absolute" Value="0" Interpolation="EaseIn"/>
+                              <AlphaKeyframe Time="0.75" RelativeTo="Absolute" Value="1"/>
+                            </Keyframes>
+                          </Animation>
+                        </Animations>
+                      </mip:MediaInfoPanel>
+
+                    </Children>
+                  </Clip>
+                </Children>
+              </Clip>
+
+            </Children>
+            <Animations>
+              <Animation Type="Size">
+                <Keyframes>
+                  <SizeKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve"/>
+                  <SizeKeyframe Time=".25" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="0" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".35" Value="1"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Hide">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="1" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".7" Value="0"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </ColorFill>
+
+          <Graphic Name="InfoIconsCorner" MaximumSize="0,80" MaintainAspectRatio="true">
+            <Animations>
+              <Animation Type="Move">
+                <Keyframes>
+                  <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve"/>
+                  <PositionKeyframe Time=".25" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="0" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".35" Value="1"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Hide">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="1" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".7" Value="0"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </Graphic>
+          
+        </Children>
+      </Panel>
+    </Content>
+
+  </UI>
+
+  <UI Name="LogoPanel">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:Item Name="Item" Item="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+      <cor:String Name="Direction" String="Right"/>
+    </Properties>
+
+    <Locals>
+      <Animation Name="HideSlideDown" Type="ContentChangeHide">
+        <Keyframes>
+          <AlphaKeyframe Time="0" RelativeTo="Absolute" Value="1" Interpolation="EaseIn, 1.0, 0.25"/>
+          <AlphaKeyframe Time=".35" RelativeTo="Absolute" Value="0"/>
+          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+          <PositionKeyframe Time=".65" RelativeTo="Final"  Value="0,90,0"/>
+        </Keyframes>
+      </Animation>
+      <Animation Name="HideSlideUp" Type="ContentChangeHide">
+        <Keyframes>
+          <AlphaKeyframe Time="0" RelativeTo="Absolute" Value="1" Interpolation="EaseIn, 1.0, 0.25"/>
+          <AlphaKeyframe Time=".35" RelativeTo="Absolute" Value="0"/>
+          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+          <PositionKeyframe Time=".65" RelativeTo="Final"  Value="0,-90,0"/>
+        </Keyframes>
+      </Animation>
+      <TransformByAttributeAnimation Name="ShowSlideRight" Attribute="Width" Magnitude="1.0" Source="animation://anim:ShowSlideRight"/>
+      <TransformByAttributeAnimation Name="ShowSlideLeft" Attribute="Width" Magnitude="1.0" Source="animation://anim:ShowSlideLeft"/>
+      <Color Name="InfoIconsBColor" A="100"/>
+    </Locals>
+
+    <Rules>
+      <Binding Source="[Item.BannerImage]" Target="[Logo.Content]"/>
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowLogos]" Value="false"/>
+          <Equality Source="[Item.HasBannerImage]" Value="false"/>
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsPanel.Visible]" Value="false"/>
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality  Source="[ThemeHelper.Config.ShowInfoIconsBackground]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsBColor.A]" Value="0"/>
+          <Set Target="[InfoIconsCorner.Visible]" Value="false"/>
+        </Actions>
+      </Rule>
+
+      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[InfoIconsCorner.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+      <Binding Source="[Application.Config.AlphaBlending!cor:Byte]" Target="[InfoIconsBColor.A]">
+        <Transformer>
+          <MathTransformer Multiply="2.55" Type="Byte"/>
+        </Transformer>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowInfoIconsBackground]" Value="true"/>
+        </Conditions>
+      </Binding>
+      <Default Target="[InfoIconsPanel.Visible]" Value="true"/>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:InfoPanelCorner"/>
+          <Set Target="[InfoIcons.Content]" Value="[InfoIconsBColor]"/>
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:BlueInfoPanelCorner"/>
+          <Set Target="[InfoIcons.Content]" Value="200,10,56,114"/>
+        </Actions>
+      </Rule>
+      
+    </Rules>
+    
+    <Content>
+      <Panel Name="InfoIconsPanel" Layout="HorizontalFlow">
+        <Children>
+
+          <ColorFill Name="InfoIcons" Layout="HorizontalFlow" Padding="10,10,0,10" MaximumSize="0,80" MinimumSize="0,80">
+            <Children>
+
+              <Clip Layout="HorizontalFlow" Orientation="Vertical" FadeSize="10" NearOffset="-10" FarOffset="10">
+                <Children>
+                  <Clip Layout="HorizontalFlow" FadeSize="10" NearOffset="-10" FarOffset="10">
+                    <Children>
+
+                      <Graphic Name="Logo" Content="image://vi:BlankGraphic" MaintainAspectRatio="true" MaximumSize="0,70"/>
+
+                    </Children>
+                  </Clip>
+                </Children>
+              </Clip>
+
+            </Children>
+            <Animations>
+              <Animation Type="Size">
+                <Keyframes>
+                  <SizeKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve"/>
+                  <SizeKeyframe Time=".25" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="0" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".35" Value="1"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Hide">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="1" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".7" Value="0"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </ColorFill>
+
+          <Graphic Name="InfoIconsCorner" MaximumSize="0,80" MaintainAspectRatio="true">
+            <Animations>
+              <Animation Type="Move">
+                <Keyframes>
+                  <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve"/>
+                  <PositionKeyframe Time=".25" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="0" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".35" Value="1"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Hide">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" Value="1" Interpolation="SCurve"/>
+                  <AlphaKeyframe Time=".7" Value="0"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </Graphic>
+
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

@@ -1,0 +1,219 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	  xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	  xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+	  xmlns:cor="assembly://MSCorLib/System"
+    xmlns:me="Me"
+    xmlns:cfs="resx://Chocolate/Chocolate.Resources/ThumbScroller"
+    xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
+    xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
+	  xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+    xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
+    xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
+    xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
+    xmlns:it="resx://Chocolate/Chocolate.Resources/Images"
+    xmlns:ch="assembly://Chocolate/Chocolate">
+
+
+  <UI Name="ChocolateLayoutThumb">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+    </Properties>
+
+    <Locals>
+      <lib:Item Name="SelectedItem" Item="[Folder.SelectedChild]" />
+      <Timer AutoRepeat="false" Enabled="true" Interval="3000" Name="NaviTime" />
+    </Locals>
+
+    <Rules>
+      <Binding Target="[ThemeHelper.CurrentItem]" Source="[Folder.SelectedChild]"/>
+      <Binding Target="[Application.CurrentItem]" Source="[Folder.SelectedChild]"/>
+      <Binding Target="[ItemInfoPanel.Item]" Source="[Folder.SelectedChild]"/>
+      
+      <Changed Source="[NaviTime.Tick]" ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.DeepKeyFocus]" Value="false"/>
+          <Equality Source="[ThemeHelper.IsMenuOpen]" ConditionOp="Equals" Value="false"/>
+          <Equality Source="[ThemeHelper.ButtonPanelHasFocus]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[MyItems.NavigateInto]"/>
+        </Actions>
+      </Changed>
+
+      <Binding Source="[Folder.SelectedChildIndex.ToString]" Target="[List_Counter.Content]" >
+        <Transformer>
+          <MathTransformer Add="1"/>
+        </Transformer>
+      </Binding>
+      <Binding Source="[Folder.Children.Count]" Target="[List_Total.Content]" >
+        <Transformer>
+          <FormatTransformer Format="| {0}" />
+        </Transformer>
+      </Binding>
+      
+      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
+      <Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
+
+      <!--Hide/Show Options-->
+      <Binding Source="[ThemeHelper.Config.ShowThumbEndTime]" Target="[EndTimePanel.Visible]"/>
+      
+    </Rules>
+
+    <Content>
+      <Panel Layout="Form" Navigation="ContainHorizontal">
+        <Children>
+
+          <Panel Name="Counter">
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Right="Parent,1,-25"/>
+            </LayoutInput>
+            <Children>
+              <Panel Name="DateTimePosition" Layout="HorizontalFlow">
+                <Children>
+                  <Text Name="List_Counter" Content="0" Font="font://uf:Thumb_TotalItems" Color="color://uc:Light"/>
+                  <Text Name="List_Total" Content="0" Font="font://uf:Thumb_TotalItems" Color="color://uc:Dark"/>
+                </Children>
+              </Panel>
+            </Children>
+          </Panel>
+
+          <Panel Name="EndTimePanel" Layout="HorizontalFlow" >
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Right="Counter,0,-25"/>
+            </LayoutInput>
+            <Children>
+              <Text Name="EndTimeLbl" Font="font://uf:Thumb_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
+              <Text Name="EndTime" Font="font://uf:Thumb_EndTime" Color="color://uc:Light" Content="Nothing"/>
+            </Children>
+          </Panel>
+
+          <me:TypePanelSelector Name="ItemInfoPanel" Item="[Folder.SelectedChild]" Application="[Application]" >
+            <LayoutInput>
+              <FormLayoutInput Left="Parent,0" Top="Parent,0.70" Bottom="Parent,1" Right="Parent,0.5"/>
+            </LayoutInput>
+          </me:TypePanelSelector>
+
+          <!-- Coverflow Scroller -->
+          <cfs:ThumbScroller Name="MyItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]">
+            <LayoutInput>
+              <AnchorLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent, 0,100" Bottom="Parent, 1.6" />
+            </LayoutInput>
+          </cfs:ThumbScroller>
+          
+        </Children>
+      </Panel>
+
+    </Content>
+
+  </UI>
+
+  <UI Name="TypePanelSelector">
+    <Properties>
+      <lib:Item Name="Item" Item="$Required"></lib:Item>
+      <a:Application Name="Application" Application="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper"></ch:ChocHelper>
+    </Properties>
+
+    <Rules>
+
+      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[DetailAlphaPanel.Alpha]">
+        <Transformer>
+          <MathTransformer Divide="100"/>
+        </Transformer>
+      </Binding>
+      
+      <!--Display Logo/Title-->
+      <Binding Target="[Title.Text]"       Source="[Item.Name]"/>
+      <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowThumbLogos]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.HasLogoImage]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Season"/>
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[LogoImage.Visible]" Value="true" />
+          <Set Target="[Title.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+      <Default Target="[LogoImage.Visible]" Value="false"/>
+      <Default Target="[Title.Visible]" Value="true"/>
+
+      <!--End Dislay Logo/Title Code-->
+      
+      <Binding Target="[Summary.Text]" Source="[Item.Overview]"></Binding>
+      <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[DetailAlphaPanel.Content]" Value="image://it:UltimateLongPanel"/>
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[DetailAlphaPanel.Content]" Value="image://it:BlueUltimateLongPanel"/>
+        </Actions>
+      </Rule>
+      
+    </Rules>
+    
+    <Content>
+      <Panel Layout="Fill">
+        <Children>
+          <Panel Layout="Form" Margins="20,13,20,12">
+            <Children>
+
+
+
+              <Panel Name="MpaaPanel" Alpha="0.7">
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1,-5" Top="Parent,0"/>
+                </LayoutInput>
+                <Children>
+                  <mp:MPAARating Name="MPAARating" MaximumSize="0,32"/>
+                </Children>
+              </Panel>
+
+              <Panel Name="TitlePanel">
+                <LayoutInput>
+                  <FormLayoutInput Top="Parent, 0,0" Left="Parent,0,5" Right="MpaaPanel,0,-5" Bottom="Parent, 0,50" Horizontal="Near" Vertical="Center"/>
+                </LayoutInput>
+                <Children>
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[Item.Name]" Font="font://uf:Thumb_Title" Color="color://uc:TitleColor" Visible="false"/>
+                  <Graphic Name="LogoImage" Margins="0,5,0,5" Content="[Item.LogoImage]" MaintainAspectRatio="true" Visible="false"/>
+                </Children>
+              </Panel>
+
+              <Panel Name="OverviewPanel">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="TitlePanel,1,-5" Bottom="Parent,1" Right="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="font://uf:Thumb_Overview" Color="color://uc:OverviewColor"/>
+                </Children>
+              </Panel>
+
+
+
+            </Children>
+
+          </Panel>
+          <Graphic Name="DetailAlphaPanel"/>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

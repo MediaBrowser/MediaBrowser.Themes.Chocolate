@@ -1,0 +1,255 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+	    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+      xmlns:vmb="resx://Chocolate/Chocolate.Resources/MenuButton"
+      xmlns:vrb="resx://Chocolate/Chocolate.Resources/RadioButton"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:c="file://Styles_DoNotEdit.mcml"
+      xmlns:f="file://Fonts_DoNotEdit.mcml"
+	    xmlns:me="Me"
+	  >
+
+  <UI Name="PopupViewMenu">
+    <Properties>
+      <lib:DisplayPreferences Name="Prefs" DisplayPreferences="$Required" />
+      <Command Name="Close" Command="$Required"/>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+    <Locals>
+      <ShortcutHandler Name="BackHandler"  Handle="true" Shortcut="Back" HandlerStage="Bubbled" Command="[Close]"/>
+      <Command Name="Increase" />
+      <Command Name="Decrease"/>
+      <Timer AutoRepeat="false" Enabled="false" Interval="2000" Name="PosterSize" />
+    </Locals>
+    <Rules>
+      <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+      <Default Target="[Input.CreateInterestOnFocus]" Value="true" />
+      <Binding Target="[ImgSize.Content]" Source="[Prefs.ThumbConstraint.Value.Width.ToString]"></Binding>
+      <Binding Target="[ImgSize2.Content]" Source="[Prefs.ThumbConstraint.Value.Width.ToString]"></Binding>
+
+      <Changed Source="[PosterSize.Tick]">
+        <Actions>
+          <Set Target="[ImgSize.Alpha]" Value="0"></Set>
+          <Set Target="[ImgSize2.Alpha]" Value="0"></Set>
+        </Actions>
+      </Changed>
+      
+      <Changed Source="[Increase.Invoked]">
+        <Actions>
+          <Invoke Target="[Prefs.IncreaseThumbSize]"/>
+          <Set Target="[ImgSize.Alpha]" Value="1"></Set>
+          <Set Target="[ImgSize2.Alpha]" Value="1"></Set>
+          <Invoke Target="[PosterSize.Start]"></Invoke>
+        </Actions>
+      </Changed>
+      <Changed Source="[Decrease.Invoked]">
+        <Actions>
+          <Invoke Target="[Prefs.DecreaseThumbSize]"/>
+          <Set Target="[ImgSize.Alpha]" Value="1"></Set>
+          <Set Target="[ImgSize2.Alpha]" Value="1"></Set>
+          <Invoke Target="[PosterSize.Start]"></Invoke>
+        </Actions>
+      </Changed>
+    </Rules>
+    <Content>
+      <Panel Layout="Form">
+        <Children>
+          <Text Name="ImgSize" Font="Segoe Media Center Light,64" Alpha="0" Content="[Prefs.ThumbConstraint.Value.Width.ToString]" Color="200,200,200">
+            <LayoutInput>
+              <FormLayoutInput Bottom="Parent,1,-40" Horizontal="Center"/>
+            </LayoutInput>
+            <Animations>
+              <Animation Type="Alpha">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" RelativeTo="Current"/>
+                  <AlphaKeyframe Time="2" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </Text>
+          <Text Name="ImgSize2" Font="Segoe Media Center Light,64" Alpha="0" Content="[Prefs.ThumbConstraint.Value.Width.ToString]" Color="Black" Margins="2,2,0,0">
+            <LayoutInput>
+              <FormLayoutInput Bottom="Parent,1,-40" Horizontal="Center"/>
+            </LayoutInput>
+            <Animations>
+              <Animation Type="Alpha">
+                <Keyframes>
+                  <AlphaKeyframe Time="0" RelativeTo="Current"/>
+                  <AlphaKeyframe Time="2" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </Text>
+          <Panel  Navigation="WrapDirectional,ContainAll,RememberFocus">
+            <Animations>
+              <Animation Name="AlphaAnimation" Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Time="0.0" Value="0" RelativeTo="Current" Interpolation="EaseIn"/>
+                  <AlphaKeyframe Time="0.5" Value="1" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+              <Animation Name="AlphaAnimation" Type="Hide">
+                <Keyframes>
+                  <AlphaKeyframe Time="0.0" Value="1" RelativeTo="Current" Interpolation="EaseIn"/>
+                  <AlphaKeyframe Time="0.5" Value="0" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Layout>
+              <FlowLayout Orientation="Vertical" ItemAlignment="Center"/>
+            </Layout>
+            <Children>
+
+              <vrb:RadioGroup Application="[Application]" Model="[Prefs.ViewType]" Size="200,135"/>
+              <Panel>
+                <Layout>
+                  <FlowLayout Orientation="Horizontal" ItemAlignment="Center" AllowWrap="true"/>
+                </Layout>
+                <Children>
+                  <me:MenuCheckBox Label="[Application.LocalStrings.#BACKDROP!cor:String]" Name="UseBackdrop" Checked="[Prefs.UseBackdrop]" Image="image://vi:MenuOptionBackdrop"/>
+                  <me:MenuCheckBox Label="[Application.LocalStrings.#LABELS!cor:String]" Name="ShowLabels" Checked="[Prefs.ShowLabels]" Image="image://vi:MenuOptionLabels"/>
+                  <me:MenuCheckBox Label="[Application.LocalStrings.#VERTSCROLL!cor:String]" Name="VerticalScroll" Checked="[Prefs.VerticalScroll]" Image="image://vi:MenuOptionVertScroll"/>
+                  <me:MenuCheckBox Label="[Application.LocalStrings.#BANNERS!cor:String]" Name="UseBanner" Checked="[Prefs.UseBanner]" Image="image://vi:MenuOptionBanners"/>
+                  <vmb:MenuButton Label="[Application.LocalStrings.#INCREASESIZE!cor:String]" Command="[Increase]" Image="image://vi:MenuOptionEnlarge"/>
+                  <vmb:MenuButton Label="[Application.LocalStrings.#DECREASESIZE!cor:String]" Command="[Decrease]" Image="image://vi:MenuOptionShrink"/>
+                  <vmb:MenuButton Label="[Application.LocalStrings.#CLOSE!cor:String]" Command="[Close]" Image="image://vi:MenuOptionClose" Red="true"/>
+
+                </Children>
+              </Panel>
+            </Children>
+          </Panel>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <UI Name="MenuCheckBox">
+
+    <Properties>
+      <BooleanChoice Name="Checked" BooleanChoice="$Required" />
+      <Image Name="Image" Image="$Required"/>
+      <cor:String Name="Label" String=""/>
+    </Properties>
+
+    <Locals>
+      <ClickHandler Name="Clicker" />
+      <Image Name="FocusImage" Image="image://vi:MenuOptionBGFocused" />
+      <Image Name="SelectedImage" Image="image://vi:MenuOptionBGSelected" />
+      <Image Name="NoFocusImage" Image="image://vi:MenuOptionBGNotFocused" />
+      <Image Name="BlankImage" Image="image://vi:MenuOptionBGNotFocused"/>
+    </Locals>
+
+    <Rules>
+      <Binding Source="[Label]" Target="[GraphicLabel.Content]"/>
+
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+      <Binding Source="[Image]" Target="[GraphicImage.Content]"/>
+      <Changed Source="[Clicker.Invoked]">
+        <Actions>
+          <Set Target="[Checked.Value]" Value="[Checked.Value]">
+            <Transformer>
+              <BooleanTransformer Inverse="true"/>
+            </Transformer>
+          </Set>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Checked.Value]">
+        <Conditions>
+          <Equality Source="[Checked.Value]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Changed>
+
+      <Condition Source="[Clicker.Clicking]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Checked.Value]" Value="false" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Clicker.Clicking]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Checked.Value]" Value="false" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Checked.Value]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Checked.Value]" Value="false" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="false">
+        <Conditions>
+          <Equality Source="[Checked.Value]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[SelectedImage]" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="false">
+        <Conditions>
+          <Equality Source="[Checked.Value]" Value="false" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Content]" Value="[NoFocusImage]" />
+        </Actions>
+      </Condition>
+
+    </Rules>
+
+    <Content>
+      <Panel Name="Root">
+        <Children>
+          <Graphic Name="BoxImage" Content="image://vi:MenuOptionBGNotFocused" SizingPolicy="SizeToChildren">
+            <Children>
+              <Panel >
+                <Children>
+                  <Graphic Name="GraphicImage" Content="image://vi:MenuOptionBGNotFocused" MaximumSize="135,135" MaintainAspectRatio="true">
+                    <Children>
+                      <Panel Layout="Form">
+                        <Children>
+                          <Text Name="GraphicLabel" Font="font://f:Choc_Label" Color="color://c:Choc_Label" Margins="0,0,0,3">
+                            <LayoutInput>
+                              <FormLayoutInput Horizontal="Center" Vertical="Far"/>
+                            </LayoutInput>
+                          </Text>
+                        </Children>
+                      </Panel>
+                    </Children>
+                  </Graphic>
+                </Children>
+              </Panel>
+            </Children>
+          </Graphic>
+        </Children>
+      </Panel>
+    </Content>
+
+  </UI>
+</Mcml>

@@ -1,0 +1,158 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+    xmlns:cor="assembly://MSCorLib/System"
+    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+    xmlns:fs="resx://MediaBrowser/MediaBrowser.Resources/FocusSelector"
+    xmlns:pvi="resx://MediaBrowser/MediaBrowser.Resources/PosterViewItem"
+    xmlns:s="file://Styles_DoNotEdit.mcml"
+    xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+    xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"  
+    
+	  >
+
+	<UI Name="PosterScroller">
+
+		<Properties>
+			<a:Application Name="Application" Application="$Required"/>
+			<lib:FolderModel Name="Folder" />
+			
+      
+		</Properties>
+    
+		<Locals>
+
+      
+      
+			<!-- Use the MouseWheel handler to handle the mouse wheel.  -->
+			<ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true"
+							  HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollingHandler"/>
+
+			<ScrollingData Name="VScrollingData" EndPadding="70" BeginPadding="20" />
+			<ScrollingData Name="HScrollingData" EndPaddingRelativeTo="Far" EndPadding="20" BeginPadding="20" BeginPaddingRelativeTo="Near"/>
+			<ScrollingData Name="CenterScollingData" LockedAlignment="0.5" LockedPosition="0.5" />
+			<ScrollingData Name="ScrollingData" />
+
+      
+
+      <Environment Name="Environment" />
+
+			<GridLayout Name="MyLayout" Repeat="WhenTooBig" RepeatGap="100" Orientation="Vertical" Rows="0" Columns="0"
+						AllowWrap="true" Spacing="[Application.Config.GridSpacing]" MinorAlignment="Center" MajorAlignment="Center" ReferenceSize="200,200" />
+      
+      
+			
+			<IntRangedValue Name="NavCount" Value="0" />
+
+			<cor:Int32 Name="NormalKeyRepeat" Int32="20"/>
+			<!-- This must be less than anim delay -->
+
+			<cor:Int32 Name="FastKeyRepeat" Int32="10"/>
+
+			<cor:Int32 Name="AnimDelay" Int32="30" />
+			<!-- This must be greater than NormalKeyRepeat-->
+
+			<cor:Int32 Name="SpeedUpDelay" Int32="7"/>
+			<!--The number of items to got across at normal speed before speeding up -->
+			<FormLayoutInput Name="HLayout" Horizontal="Fill" Vertical="Center"/>
+			<FormLayoutInput Name="VLayout" Horizontal="Center" Vertical="Fill"/>
+
+
+      
+		</Locals>
+
+
+		<Rules>
+
+
+
+      <Default>
+        <Actions>
+          <Set Target="[Scroller.Orientation]" Value="Vertical" />
+          <Set Target="[Scroller.Navigation]" Value="ContainVertical" />
+          <Set Target="[MyLayout.Orientation]" Value="Horizontal" />
+          <Set Target="[MyLayout.Rows]" Value="0" />
+          <Set Target="[ItemPanel.Padding]" Value="0,0,0,0" />
+          <Set Target="[Scroller.LayoutInput]" Value="[VLayout]" />
+          <Set Target="[MyLayout.Repeat]" Value="WhenTooBig" />
+          <Set Target="[MyLayout.RepeatGap]" Value="[Application.Config.GridSpacing.Height]" />
+          <Set Target="[ScrollingData]" Value="[VScrollingData]" />
+        </Actions>
+      </Default>
+			
+
+			
+			
+
+
+
+			
+
+
+
+			
+
+
+			
+
+		
+			<!-- Give ScrollingData to ScrollingHandler. -->
+			<Binding Target="[ScrollingHandler.ScrollingData]" Source="[ScrollingData]"/>
+			<Binding Target="[Scroller.ScrollingData]" Source="[ScrollingData]" />
+			<!-- Give Repeater to ScrollingData. -->
+			<Default Target="[ScrollingData.Repeater]" Value="[MyRepeater]"/>
+			<Binding Target="[FocusRect.Scaling]" Source="[Folder.PosterZoom]" />
+			<Binding Target="[MyRepeater.Source]" Source="[Folder.Children]" />
+      
+      <!-- Hide focus frame image -->
+      <Condition Source="[Application.Config.HideFocusFrame]" ConditionOp="Equals" SourceValue="true"
+                 Target="[FocusRect.FocusImage]" Value="image://i:BlankImage" />
+		</Rules>
+
+		<Content>
+			<Panel Name="ItemPanel" Layout="Form" Navigation="none" >
+				<Children>
+          
+					<fs:FocusSelector Name="FocusRect">
+						<LayoutInput>
+							<FormLayoutInput Left="Focus,0,-3" Right="Focus,1,3"
+											 Top="Focus,0,-3" Bottom="Focus,1,3"
+											 ContributesToHeight="false"
+											 ContributesToWidth="false"/>
+						</LayoutInput>
+
+					</fs:FocusSelector>
+					<Scroller Orientation="Horizontal" FadeSize="-10" Name="Scroller"  ScrollingData="[ScrollingData]">
+						<Children>
+							<Repeater Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" Layout="[MyLayout]" DiscardOffscreenVisuals="false" >
+								<Animations>
+									<Animation Type="Move">
+										<Keyframes>
+											<PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+											<PositionKeyframe Time="0.75" RelativeTo="Final"  />
+                      
+                      
+										</Keyframes>
+									</Animation>
+                 
+								</Animations>
+							</Repeater>
+						</Children>
+						<LayoutInput>
+							<FormLayoutInput Horizontal="Fill" Vertical="Center"/>
+						</LayoutInput>
+					</Scroller>
+				</Children>
+			</Panel>
+		</Content>
+		<Content Name="BaseItem">
+
+      <!--[Folder.ActualThumbSize]-->
+      
+      <pvi:PosterViewItem ImageSize="200,200" AnimDelay="50"
+                         Application="[Application]" 
+                          Item="[RepeatedItem!lib:Item]" ParentItem="[Folder]" TopLabelFont="[TopLabelFont]" 
+                          LabelFont="[LabelFont]" UnwatchedCountFont="[UnwatchedCountFont]" AnimationTime="0.35"/>
+		</Content>
+	</UI>
+
+</Mcml>

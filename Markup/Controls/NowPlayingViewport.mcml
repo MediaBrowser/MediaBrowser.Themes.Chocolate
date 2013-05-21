@@ -1,0 +1,112 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:i="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:ch="assembly://Chocolate/Chocolate"
+      >
+
+  <UI Name="LargeNPV">
+
+    <Properties>
+      <ICommand Name="Command" ICommand="$Required" />
+      <Image Name="FocusImage" Image="image://i:ZoomPane" />
+      <Image Name="NoFocusImage" Image="null" />
+      <Size Name="NPVSize" Size="600,330"/>
+      <Size Name="NPVSize2" Size="1200,660"/>
+      <Size Name="NPVSize3" Size="1800,990"/>
+    </Properties>
+
+    <Locals>
+      <ClickHandler Name="Clicker" />
+      <ch:ChocHelper Name="ThemeHelper"/>
+    </Locals>
+
+    <Rules>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+      <Binding Source="[Command]"           Target="[Clicker.Command]" />
+      <Binding Source="[Command.Available]" Target="[Input.KeyInteractive]" />
+
+      <!-- Expand NPV Panel When Focused -->
+      <Changed Source="[Input.KeyFocus]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" Value="true"/>
+          <Equality Source="[ThemeHelper.Config.EnableVideoBackdrop]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Scale]" Value="1,1,1"/>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]"/>
+          <Set Target="[VideoPanel.LetterboxColor]" Value="Transparent"/>
+          <Set Target="[VideoPanel2.LetterboxColor]" Value="Transparent"/>
+          <Set Target="[VideoPanel3.LetterboxColor]" Value="Transparent"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[Input.KeyFocus]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Input.KeyFocus]" Value="true"/>
+          <Equality Source="[ThemeHelper.Config.EnableVideoBackdrop]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BoxImage.Scale]" Value="1,1,1"/>
+          <Set Target="[BoxImage.Content]" Value="[FocusImage]"/>
+          <Set Target="[VideoPanel.LetterboxColor]" Value="Transparent"/>
+          <Set Target="[VideoPanel2.LetterboxColor]" Value="Transparent"/>
+          <Set Target="[VideoPanel3.LetterboxColor]" Value="Transparent"/>
+        </Actions>
+      </Changed>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.NPVAR]" Value="Normal"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[VideoPanel.Visible]" Value="true" />
+          <Set Target="[VideoPanel2.Visible]" Value="false" />
+          <Set Target="[VideoPanel3.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.NPVAR]" Value="Double"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[VideoPanel.Visible]" Value="false" />
+          <Set Target="[VideoPanel2.Visible]" Value="true" />
+          <Set Target="[VideoPanel3.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.NPVAR]" Value="Triple"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[VideoPanel.Visible]" Value="false" />
+          <Set Target="[VideoPanel2.Visible]" Value="false" />
+          <Set Target="[VideoPanel3.Visible]" Value="true" />
+        </Actions>
+      </Rule>
+
+    </Rules>
+
+    <Content>
+      <Graphic Name="NPVPosition" Padding="10,10,10,10" SizingPolicy="SizeToChildren"  >
+        <Children>
+          <Graphic Name="BoxImage" Content="[NoFocusImage]" SizingPolicy="SizeToChildren" Padding="4,4,4,4"  CenterPointPercent="1.0,0.0,1.0">
+            <Animations>
+              <Animation Loop="0" CenterPointPercent="1.0,0.0,1.0" Type="Scale">
+                <Keyframes>
+                  <ScaleKeyframe Time="0.00" RelativeTo="Current" Interpolation="Bezier,-1.0,1.0"/>
+                  <ScaleKeyframe Time="1.00" RelativeTo="Final"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Children>
+              <Video Name="VideoPanel" MaximumSize="[NPVSize]" MinimumSize="[NPVSize]"/>
+              <Video Name="VideoPanel2" MaximumSize="[NPVSize2]" MinimumSize="[NPVSize2]"/>
+              <Video Name="VideoPanel3" MaximumSize="[NPVSize3]" MinimumSize="[NPVSize3]"/>
+            </Children>
+          </Graphic>
+        </Children>
+      </Graphic>
+    </Content>
+  </UI>
+</Mcml>

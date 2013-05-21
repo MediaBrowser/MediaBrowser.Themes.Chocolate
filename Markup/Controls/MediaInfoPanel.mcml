@@ -1,0 +1,198 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor ="assembly://mscorlib/System"
+      xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
+      xmlns:me = "Me"
+      >
+
+  <UI Name="MediaInfoPanel">
+    <Properties>
+      <lib:Item Name="Item" Item="$Required"/>
+      <Size Name="MaxIconSize" Size="0,55"/>
+    </Properties>
+
+    <Rules>
+      <Changed Source="[Item.MediaInfo]" InitialEvaluate="true">
+        <Actions>
+          <Set Target="[VideoCodec.Value]" Value="[Item.MediaInfo.VideoCodecString]"/>
+          <Set Target="[AudioCodec.Value]" Value="[Item.MediaInfo.AudioCodecString]"/>
+          <Set Target="[AspectRatio.Value]" Value="[Item.AspectRatioString]"/>
+          <Set Target="[HDResolution.Value]" Value="[Item.HDType]"/>
+          <Set Target="[MediaFormat.Value]" Value="[Item.MediaTypeString]"/>
+        </Actions>
+      </Changed>
+    </Rules>
+
+    <Content>
+      <Panel>
+        <Layout>
+          <FlowLayout Orientation="Horizontal" Spacing="1,1" AllowWrap="true"/>
+        </Layout>
+        <Children>
+          <me:MediaFormat   Name="MediaFormat"  MaximumSize="[MaxIconSize]" />
+          <me:VideoCodec    Name="VideoCodec"   MaximumSize="[MaxIconSize]" />
+
+          <me:HDResolution  Name="HDResolution" MaximumSize="[MaxIconSize]" />
+          <me:AspectRatio   Name="AspectRatio"  MaximumSize="[MaxIconSize]" />
+
+          <me:AudioCodec    Name="AudioCodec"   MaximumSize="[MaxIconSize]" />
+
+          <!--<Text Name="ItemType" Content="who knows?" Color="White" />-->
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+
+  <UI Name="VideoCodec">
+    <Properties>
+      <cor:String Name="Value" String=""/>
+    </Properties>
+    <Locals>
+      <cor:String Name="VideoCodec" String="" />
+    </Locals>
+
+    <Rules>
+      <Binding Source="[Value]" Target="[VideoCodec]">
+        <Transformer>
+          <FormatTransformer ToLower="true" />
+        </Transformer>
+      </Binding>
+
+      <Condition Source="[Image.Content]" SourceValue="image://i:BlankImage" ConditionOp="NotEquals" Target="[Image.Visible]" Value="true" />
+
+      <Condition Source="[VideoCodec]" SourceValue="xvid" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Xvid" />
+      <Condition Source="[VideoCodec]" SourceValue="divx 5" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Divx" />
+      <Condition Source="[VideoCodec]" SourceValue="divx 4" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Divx" />
+      <Condition Source="[VideoCodec]" SourceValue="divx 3 low" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Divx" />
+      <Condition Source="[VideoCodec]" SourceValue="h264" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:H264" />
+      <Condition Source="[VideoCodec]" SourceValue="vc-1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Vc1" />
+      <Condition Source="[VideoCodec]" SourceValue="wmv1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Wmv" />
+      <Condition Source="[VideoCodec]" SourceValue="wmv2" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Wmv" />
+      <Condition Source="[VideoCodec]" SourceValue="wmv3" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Wmv" />
+      <Condition Source="[VideoCodec]" SourceValue="wvc1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Wmv" />
+    </Rules>
+    <Content>
+      <Graphic Name="Image" Visible="false" Content="image://i:BlankImage" SizingPolicy="SizeToContent" MaintainAspectRatio="true" />
+    </Content>
+  </UI>
+
+
+  <UI Name="AudioCodec">
+    <Properties>
+      <cor:String Name="Value" String=""/>
+    </Properties>
+    <Locals>
+      <cor:String Name="AudioCodec" String="" />
+    </Locals>
+
+    <Rules>
+      <Binding Source="[Value]" Target="[AudioCodec]">
+        <Transformer>
+          <FormatTransformer ToLower="true" />
+        </Transformer>
+      </Binding>
+
+      <Condition Source="[Image.Content]" SourceValue="image://i:BlankImage" ConditionOp="NotEquals" Target="[Image.Visible]" Value="true" />
+
+      <Condition Source="[AudioCodec]" SourceValue="mpeg audio" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:MpegAudio" />
+      <Condition Source="[AudioCodec]" SourceValue="ac-3" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Ac3" />
+      <Condition Source="[AudioCodec]" SourceValue="aac" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aac" />
+      <Condition Source="[AudioCodec]" SourceValue="dts" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Dts" />
+      <Condition Source="[AudioCodec]" SourceValue="wma2" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Wma" />
+    </Rules>
+    <Content>
+      <Graphic Name="Image" Visible="false" Content="image://i:BlankImage" SizingPolicy="SizeToContent" MaintainAspectRatio="true" />
+    </Content>
+  </UI>
+
+
+  <UI Name="HDResolution">
+    <Properties>
+      <cor:Int32 Name="Value" Int32="0"/>
+    </Properties>
+    <Locals>
+      <cor:Int32 Name="HDValue" Int32="0" />
+    </Locals>
+    <Rules>
+      <Binding Source="[Value]" Target="[HDValue]" />
+
+      <Condition Source="[Image.Content]" SourceValue="image://i:BlankImage" ConditionOp="NotEquals" Target="[Image.Visible]" Value="true" />
+
+      <Condition Source="[HDValue]" ConditionOp="Equals" SourceValue="720" Target="[Image.Content]" Value="image://i:HDType_720" />
+      <Condition Source="[HDValue]" ConditionOp="Equals" SourceValue="1080" Target="[Image.Content]" Value="image://i:HDType_1080" />
+
+    </Rules>
+
+    <Content>
+      <Graphic Name="Image" Visible="false" Content="image://i:BlankImage" SizingPolicy="SizeToContent" MaintainAspectRatio="true" />
+    </Content>
+  </UI>
+
+
+  <UI Name="AspectRatio">
+    <Properties>
+      <cor:String Name="Value" String=""/>
+    </Properties>
+    <Locals>
+      <cor:String Name="AspectRatio" String="" />
+    </Locals>
+    <Rules>
+      <Binding Source="[Value]" Target="[AspectRatio]">
+        <Transformer>
+          <FormatTransformer ToLower="true" />
+        </Transformer>
+      </Binding>
+
+      <Condition Source="[Image.Content]" SourceValue="image://i:BlankImage" ConditionOp="NotEquals" Target="[Image.Visible]" Value="true" />
+
+      <Condition Source="[AspectRatio]" SourceValue="4:3" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_43" />
+      <Condition Source="[AspectRatio]" SourceValue="1.33:1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_43" />
+      <Condition Source="[AspectRatio]" SourceValue="3:2" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_32" />
+      <Condition Source="[AspectRatio]" SourceValue="16:9" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_169" />
+      <Condition Source="[AspectRatio]" SourceValue="1.78:1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_169" />
+      <Condition Source="[AspectRatio]" SourceValue="1.85:1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_1851" />
+      <Condition Source="[AspectRatio]" SourceValue="2.40:1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_2391" />
+      <Condition Source="[AspectRatio]" SourceValue="2.35:1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_2391" />
+      <Condition Source="[AspectRatio]" SourceValue="2.39:1" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_2391" />
+
+    </Rules>
+
+    <Content>
+      <Graphic Name="Image" Visible="false" Content="image://i:BlankImage" SizingPolicy="SizeToContent" MaintainAspectRatio="true" />
+    </Content>
+  </UI>
+
+  <UI Name="MediaFormat">
+    <Properties>
+      <cor:String Name="Value" String=""/>
+    </Properties>
+    <Locals>
+      <cor:String Name="MediaFormat" String="" />
+    </Locals>
+    <Rules>
+      <Binding Source="[Value]" Target="[MediaFormat]">
+        <Transformer>
+          <FormatTransformer ToLower="true" />
+        </Transformer>
+      </Binding>
+
+      <Condition Source="[Image.Content]" SourceValue="image://i:BlankImage" ConditionOp="NotEquals" Target="[Image.Visible]" Value="true" />
+
+      <Condition Source="[MediaFormat]" SourceValue="bluray" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Media_Bluray" />
+      <Condition Source="[MediaFormat]" SourceValue="hddvd" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Media_Hddvd" />
+      <Condition Source="[MediaFormat]" SourceValue="dvd" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Media_Dvd" />
+      <!--<Condition Source="[MediaFormat]" SourceValue="mkv" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_1851" />
+      <Condition Source="[MediaFormat]" SourceValue="avi" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_2391" />
+      <Condition Source="[MediaFormat]" SourceValue="mpg" ConditionOp="Equals" Target="[Image.Content]" Value="image://i:Aspect_2391" />-->
+
+    </Rules>
+
+    <Content>
+      <Graphic Name="Image" Visible="false" Content="image://i:BlankImage" SizingPolicy="SizeToContent" MaintainAspectRatio="true" />
+    </Content>
+  </UI>
+
+
+
+</Mcml>

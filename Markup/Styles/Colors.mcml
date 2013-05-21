@@ -1,0 +1,26 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml">
+  
+  <Color Name="Choc_EHS_Title" Color="240,240,240"/>
+  <Color Name="Choc_EHS_RootItem" Color="240,240,240"/>
+  <Color Name="Choc_EHS_RootItem_Idle" Color="200,200,200"/>
+  <Color Name="Choc_Overview" Color="255,255,255"/>
+  <Color Name="Choc_Small_Details" Color="255,255,255"/>
+
+  <Color Name="Choc_Trim" Color="180,180,180"/>
+
+  <Color Name="Choc_Label" Color="200,200,200"/>
+  <Color Name="Choc_Value" Color="250,250,250"/>
+  
+
+  <Color Name="Light" Color="240,240,240"/>
+  <Color Name="Medium" Color="200,200,200"/>
+  <Color Name="Dark" Color="140,140,140"/>
+
+  <Color Name="BlueFilter" Color="70,170,240"/>
+  
+  <Color Name="OverviewColor" Color="180,180,180"/>
+  <Color Name="TitleColor" Color="255,255,255"/>
+  <Color Name="ListItemColor" Color="200,200 ,200"/>
+
+
+</Mcml>
