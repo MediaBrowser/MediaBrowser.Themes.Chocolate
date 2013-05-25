@@ -374,6 +374,7 @@
           <Equality Source="[Item.InProgress]" Value="false"/>
         </Conditions>-->
       </Binding>
+      <Binding Source="[Item.IsFavorite]" Target="[FavIndicator.Visible]" />
       <Default Target="[UnwatchedGlow.Visible]" Value="false"/>
       <Condition Source="[Item.ParentalAllowed]" ConditionOp="Equals" SourceValue="false" Target="[PCLock.Visible]" Value="true" />
     </Rules>
@@ -453,6 +454,18 @@
                     </LayoutInput>
                     <Children>
                       <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true">
+                        <LayoutInput>
+                          <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                        </LayoutInput>
+                      </Graphic>
+                    </Children>
+                  </Panel>
+                  <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Anchor" Visible="false" Name="FavIndicator">
+                    <LayoutInput>
+                      <AnchorLayoutInput Horizontal="Near" Vertical="Far"/>
+                    </LayoutInput>
+                    <Children>
+                      <Graphic Name="FavImage" Content="image://i:Heart" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true">
                         <LayoutInput>
                           <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
                         </LayoutInput>
