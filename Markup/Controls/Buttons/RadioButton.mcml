@@ -183,6 +183,8 @@
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#GenreDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#GENRE!cor:String]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DirectorDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionDirector]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DirectorDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#DIRECTOR!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#OfficialRatingDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionRating]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#OfficialRatingDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#RATING!cor:String]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#StudioDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionStudio]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#StudioDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#STUDIO!cor:String]"/>
     </Rules>
