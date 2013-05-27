@@ -60,8 +60,9 @@
       <Command Name="ConfigOptions" />
       <Command Name="GoToNowPlaying" />
       <Command Name="SetPlayState"/>
-      <Command Name="Popup"/>
-      <Command Name="CloseContextMenu" />
+      <Command Name="ContextMenuCmd"/>
+      <Command Name="OpenContextMenu"/>
+      <Command Name="CloseContextMenu"/>
 
 
       <Timer Name="ButtonPanelTimer" AutoRepeat="false" Interval="2000" Enabled="true"/>
@@ -257,38 +258,51 @@
           <Set Target="[PopupPlay.Visible]" Value="false"/>
         </Actions>
       </Changed>
-      
+
       <!-- Context Menu -->
-      <Changed Source="[CloseContextMenu.Invoked]" >
+      <Changed Source="[TypingHandler.DisplayValue]">
+        <Conditions>
+          <Equality Source="[TypingHandler.DisplayValue]" Value="*"/>
+        </Conditions>
         <Actions>
-          <Invoke Target="[ViewPanel.NavigateInto]" />
-          <Set Target="[ContextMenu.Visible]" Value="false" />
-          <Invoke Target="[Application.ResetContextMenu]" />
-          <Set Target="[FindAsYouTypePanel.Visible]" Value="true" />
+          <Set Target="[TypingHandler.TypingPolicy]" Value="Default" ExclusiveApply="false"/>
+          <Set Target="[TypingHandler.EditableText.Value]" Value=""/>
+          <Set Target="[TypingHandler.TypingPolicy]" Value="TripleTap"/>
+          <Invoke Target="[ContextMenuCmd.Invoke]"/>
+        </Actions>
+      </Changed>
+      
+      <Changed Source="[ContextMenuCmd.Invoked]">
+        <Conditions>
+          <Equality Source="[ContextMenu.Visible]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[OpenContextMenu.Invoke]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ContextMenuCmd.Invoked]">
+        <Conditions>
+          <Equality Source="[ContextMenu.Visible]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[CloseContextMenu.Invoke]"/>
         </Actions>
       </Changed>
 
-      <Changed Source="[TypingHandler.DisplayValue]"  ConditionLogicalOp="And">
-        <Conditions>
-          <Equality Source="[TypingHandler.DisplayValue]" ConditionOp="Equals" Value="*" />
-
-        </Conditions>
+      <Changed Source="[OpenContextMenu.Invoked]">
         <Actions>
-          <Invoke Target="[Popup.Invoke]" />
-        </Actions>
-      </Changed>
-
-      <Rule>
-        <Conditions>
-          <Modified Source="[Popup.Invoked]" />
-        </Conditions>
-        <Actions>
-          <Invoke Target="[Application.ResetContextMenu]" />
+          <Invoke Target="[Application.ResetContextMenu]"/>
           <Set Target="[ContextMenu.Visible]" Value="true"/>
-          <Invoke Target="[ContextMenu.NavigateInto]" />
-          <Set Target="[FindAsYouTypePanel.Visible]" Value="false" />
+          <Invoke Target="[ContextMenu.NavigateInto]"/>
         </Actions>
-      </Rule>
+      </Changed>
+      <Changed Source="[CloseContextMenu.Invoked]">
+        <Actions>
+          <Invoke Target="[ViewPanel.NavigateInto]"/>
+          <Set Target="[ContextMenu.Visible]" Value="false"/>
+          <Invoke Target="[Application.ResetContextMenu]"/>
+        </Actions>
+      </Changed>
       
       <!--Hides Media Browser Behind Context Menu-->
       <Rule ConditionLogicalOp="Or">
