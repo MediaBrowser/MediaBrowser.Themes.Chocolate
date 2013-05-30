@@ -368,6 +368,12 @@
       </Changed>
 
       <!--Show Backdrops-->
+      <Default Target="[Backdrop.Content]" Value="[Item.BackdropImage]">
+        <Conditions>
+          <Equality Source="[ThemeHelper.ShowBackdrop]" Value="true"/>
+          <Equality Source="[Application.Config.ShowBackdrop]" Value="true"/>
+        </Conditions>
+      </Default>
       <Changed Source="[ChangeDelay.Tick]">
         <Conditions>
           <Equality Source="[ThemeHelper.ShowBackdrop]" Value="true"/>
