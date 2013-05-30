@@ -188,10 +188,10 @@
 
               <Panel Name="TitlePanel">
                 <LayoutInput>
-                  <FormLayoutInput Top="Parent, 0,0" Left="Parent,0,5" Right="MpaaPanel,0,-5" Bottom="Parent, 0,50" Horizontal="Near" Vertical="Center"/>
+                  <FormLayoutInput Top="Parent, 0,0" Left="Parent,0,5" Right="MpaaPanel,0,-5" Bottom="Parent, 0,54" Horizontal="Near" Vertical="Center"/>
                 </LayoutInput>
                 <Children>
-                  <ash:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[Item.Name]" Font="font://uf:Thumb_Title" Color="color://uc:TitleColor" Visible="false"/>
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,5" Text="[Item.Name]" Font="font://uf:Thumb_Title" Color="color://uc:TitleColor" Visible="false"/>
                   <Graphic Name="LogoImage" Margins="0,5,0,5" Content="[Item.LogoImage]" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
               </Panel>
