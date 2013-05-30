@@ -42,11 +42,11 @@
       <lib:Item Name="Item" Item="$Required"/>
       <Command Name="NextItemCommand" />
       <Command Name="PreviousItemCommand" />
+      <Command Name="PlayMovieCommand" />
     </Properties>
 
     <Locals>
       <a:Config Name="Config" Config="[Application.Config]"/>
-      <Command Name="PlayMovieCommand" />
       <Command Name="ResumeMovieCommand" />
       <Command Name="ActorCommand" />
       <Command Name="SummaryCommand" />
@@ -63,6 +63,9 @@
       <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
       <Environment Name="Environment"/>
       <BooleanChoice Name="ResumeBtnHasFocus" Value="false"/>
+      <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled" Command="[PlayMovieCommand]"/>
+      <ShortcutHandler Name="PlayPauseBtn" Handle="true" Shortcut="PlayPause" HandlerStage="Bubbled" Command="[PlayMovieCommand]"/>
+      <KeyHandler Name="PlayShortcut" Handle="true" HandlerStage="Bubbled" Key="P" Modifiers="Control" Command="[PlayMovieCommand]"/>
       <ShortcutHandler Name="ChannelDown" Shortcut="ChannelDown" Handle="true" HandlerStage="Bubbled" Command="[PreviousItemCommand]"/>
       <ShortcutHandler Name="ChannelUp" Shortcut="ChannelUp" Handle="true" HandlerStage="Bubbled" Command="[NextItemCommand]"/>
       <ShortcutHandler Name="SkipBack" Shortcut="SkipBack" Handle="true" HandlerStage="Bubbled" Command="[PreviousItemCommand]"/>
