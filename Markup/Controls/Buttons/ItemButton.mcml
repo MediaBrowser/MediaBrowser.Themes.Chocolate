@@ -21,6 +21,7 @@
       <KeyHandler Name="WatchedShortcut" Handle="true" Key="W" Modifiers="Control" HandlerStage="Bubbled"/>
 
       <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled"/>
+      <ShortcutHandler Name="PlayPauseBtn" Handle="true" Shortcut="PlayPause" HandlerStage="Bubbled"/>
       <KeyHandler Name="PlayShortcut" Handle="true" HandlerStage="Bubbled" Key="P" Modifiers="Control"/>
       <Command Name="PlayCommand"/>
 
@@ -67,6 +68,7 @@
       <Rule ConditionLogicalOp ="Or">
         <Conditions>
           <Modified Source="[PlayBtn.Invoked]"/>
+          <Modified Source="[PlayPauseBtn.Invoked]"/>
           <Modified Source="[PlayShortcut.Invoked]"/>
         </Conditions>
         <Actions>
