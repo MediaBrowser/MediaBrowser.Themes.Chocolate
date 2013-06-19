@@ -173,7 +173,7 @@
               <FormLayoutInput Vertical="Center" Top="Parent,1,-100" Bottom="Parent,1,-3"/>
             </LayoutInput>
             <Children>
-              <Graphic Name="LogoImage" Margins="0,10,0,10" Content="[SelectedItem.LogoImage]" Layout="Fill"/>
+              <Graphic Name="LogoImage" Margins="0,10,0,10" Content="[SelectedItem.LogoImage]" MaintainAspectRatio="true"/>
             </Children>
           </Panel>
           
