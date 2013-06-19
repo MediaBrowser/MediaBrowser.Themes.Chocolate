@@ -67,7 +67,16 @@
 
       <Binding Source="[Folder.SelectedChild.BannerImage]" Target="[Logo.Content]"/>
 
-      <Binding Source="[Folder.SelectedChild.HasBannerImage]" Target="[Logo.Visible]"/>
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Equality Source="[Folder.SelectedChild.ItemTypeString]" Value="Series"/>
+          <Equality Source="[Folder.SelectedChild.ItemTypeString]" Value="Season"/>
+          <Equality Source="[Folder.SelectedChild.ItemTypeString]" Value="Episode"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[Logo.Visible]" Value="[Folder.SelectedChild.HasBannerImage]" />
+        </Actions>
+      </Rule>
       
       <Binding Source="[Logo.Visible]" Target="[MediaInfoPanel.Visible]">
         <Transformer>
@@ -177,7 +186,7 @@
                   <Clip Layout="HorizontalFlow" FadeSize="10" NearOffset="-10" FarOffset="10">
                     <Children>
 
-                      <Graphic Name="Logo" Content="image://vi:BlankGraphic" MaintainAspectRatio="true" MaximumSize="0,70"/>
+                      <Graphic Name="Logo" Content="image://vi:BlankGraphic" MaintainAspectRatio="true" MaximumSize="0,70" Visible="false"/>
 
                       <mip:MediaInfoPanel Name="MediaInfoPanel" Item="[Folder.SelectedChild]" MaxIconSize="0,70">
                         <Animations>
