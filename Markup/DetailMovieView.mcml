@@ -571,13 +571,13 @@
                     </Children>
                   </Panel>
 
-                  <Clip Name="MovieTitle" Layout="HorizontalFlow" Visible="true" FadeSize="20" Orientation="Vertical" >
+                  <Clip Name="MovieTitle" Layout="HorizontalFlow" Visible="true" FadeSize="5" Orientation="Vertical" >
                     <LayoutInput>
                       <FormLayoutInput Left="Poster,1,15" Top="Parent,0.64,-5" Right="MPAA,0,-5" Bottom="Parent,0.64,60"/>
                     </LayoutInput>
                     <Children>
                       <ash:AutoScrollHorizontal Name="Title" Text="[Item.Name]" Font="font://uf:Detail_Title" Color="color://s:Choc_EHS_Title" Visible="false" Margins="0,15,0,0"/>
-                      <Graphic Name="LogoImage" Margins="0,10,0,0" Content="[Item.LogoImage]" MaximumSize="155,60" Layout="Fill" Visible="false"/>
+                      <Graphic Name="LogoImage" Margins="0,10,0,0" Content="[Item.LogoImage]" MaximumSize="155,60" MaintainAspectRatio="true" Visible="false"/>
                     </Children>
                   </Clip>
                   
