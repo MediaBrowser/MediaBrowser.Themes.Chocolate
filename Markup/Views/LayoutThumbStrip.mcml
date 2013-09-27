@@ -256,11 +256,12 @@
                       <mp:MPAARating Name="mpaa" MaximumSize="0,42">
                       </mp:MPAARating>
 
-                      <Panel  Name="TickIndicatorPanel" Alpha="0.8" MaximumSize="0,42">
+                      <Panel  Name="TickIndicatorPanel" Alpha="0.8" MaximumSize="0,37">
                         <Children>
                           <Panel Name="TickPanel">
                             <Children>
-                              <Graphic Content="image://it:Tick" MaintainAspectRatio="true" Alpha="1"/>
+                              <Graphic Content="image://i:Watched"  MaximumSize="35,35"  />
+                              <ColorFill Layout="Fill" Content="color://s:WatchedColor" MinimumSize="35,35" MaximumSize="35,35" Visible="global://s:ShowWatchedMarkerBackgrounds" Alpha="global://s:WatchedAlpha"/>
                             </Children>
                           </Panel>
                           <!--<Panel Name="InProgressPanel" MaximumSize="0,42" Margins="0,10,0,0">
@@ -271,10 +272,11 @@
                         </Children>
                       </Panel>
 
-                      <Panel Name="UnwatchedIndicator" MaximumSize="42,42" Layout="Anchor">
+                      <Panel Name="UnwatchedIndicator" MaximumSize="37,37" Layout="Anchor">
                         <Children>
                           <Text Name="UnwatchedCount" Padding="0,-5,0,0" Content="" Color="color://s:FontColorLight" Font="font://uf:Strip_Unwatched" HorizontalAlignment="Center"/>
-                          <Graphic Name="Star" Content="image://it:Unwatched" MaintainAspectRatio="true" Alpha=".8"/>
+                          <Graphic Visible="global://s:ShowWatchedMarkerBackgrounds" Content="image://i:Unwatched"  MinimumSize="35,35" MaximumSize="35,35" MaintainAspectRatio="true" Layout="Center" ></Graphic>
+                          <ColorFill Layout="Fill" Content="color://s:UnwatchedColor" MinimumSize="35,35" MaximumSize="35,35" Visible="global://s:ShowWatchedMarkerBackgrounds" Alpha="global://s:WatchedAlpha"/>
                         </Children>
                       </Panel>
 
