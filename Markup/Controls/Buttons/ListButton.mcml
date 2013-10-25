@@ -75,6 +75,17 @@
         </Actions>
       </Rule>
      
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Equality Source="[Item.IsMissing]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.IsFuture]" ConditionOp="Equals" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[ItemName.Alpha]" Value=".65" />
+          <Set Target="[ItemBanner.Alpha]" Value=".65" />
+        </Actions>
+      </Rule>
+     
       
       <Condition Source="[Input.KeyFocus]" SourceValue="true">
         <Conditions>

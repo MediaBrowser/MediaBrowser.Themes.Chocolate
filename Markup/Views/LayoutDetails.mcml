@@ -200,6 +200,8 @@
       <Condition Source="[Item.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
       <Condition Source="[Item.HasMediaInfo]" SourceValue="false" Target="[EndTimeLblSpacer.Visible]" Value="false"/>
       <Condition Source="[Item.HasMediaInfo]" SourceValue="false" Target="[RunEndSpacer.Visible]" Value="false"/>
+      <Binding Source="[Item.IsMissing]" Target="[MissingImage.Visible]" />
+      <Binding Source="[Item.IsFuture]" Target="[FutureImage.Visible]" />
 
       <!--Hide/Show Options-->
       <Binding Source="[ThemeHelper.Config.ShowListEndTime]" Target="[EndTimeLbl.Visible]"/>
@@ -241,16 +243,25 @@
                 </Children>
               </Panel>
               
+              <Graphic Name="MissingImage" Visible="false" Content="image://i:MissingBanner" Margins="0,-10,-10,0" MaximumSize="100,100" MaintainAspectRatio="true">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                </LayoutInput>
+              </Graphic>
+              <Graphic Name="FutureImage" Visible="false" Content="image://i:FutureBanner" Margins="0,-10,-10,0" MaximumSize="100,100" MaintainAspectRatio="true">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                </LayoutInput>
+              </Graphic>
+
               <Panel Name="PosterPanel" Padding="0,0,0,0">
                 <LayoutInput>
-                  <FormLayoutInput Right="Parent,1" Top="Parent,0" Bottom="Parent,1"/>
+                  <FormLayoutInput Horizontal="Far" Vertical="Center"/>
                 </LayoutInput>
-                <Layout>
-                  <FlowLayout ItemAlignment="Center" Orientation="Vertical" StripAlignment="Center"/>
-                </Layout>
                 <Children>
-                  <Graphic Name="PosterImage" MaximumSize="300,0" Content="[Item.PrimaryImage]" MaintainAspectRatio="true"  
-                           SizingPolicy="SizeToContent"/>
+                      
+                  <Graphic Name="PosterImage" MaximumSize="300,0" Content="[Item.PrimaryImage]" MaintainAspectRatio="true">
+                  </Graphic>
                 </Children>
               </Panel>
               
