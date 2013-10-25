@@ -315,6 +315,7 @@
       <Binding Target="[ActorScroller.Item]" Source="[Item]"/>
       <Binding Target="[PosterImage.Content]" Source="[Item.PreferredImage]"/>
       <Binding Target="[MediaInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[PlayMovieButton.Visible]" Source="[Item.IsPlayable]"/>
       <Changed Source="[Item]" InitialEvaluate="true">
         <Actions>
           <Set Target="[ThemeHelper.CurrentItem]" Value="[Item]"/>
