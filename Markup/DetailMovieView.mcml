@@ -33,6 +33,7 @@
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
       xmlns:progress="resx://Chocolate/Chocolate.Resources/ProgressBar"
       xmlns:iip="resx://Chocolate/Chocolate.Resources/InfoIconsPanel"
+    xmlns:cb="resx://MediaBrowser/MediaBrowser.Resources/ChapterButton"
       xmlns:me="Me">
 
   <!-- Movie Details Page -->
@@ -49,6 +50,7 @@
       <a:Config Name="Config" Config="[Application.Config]"/>
       <Command Name="ResumeMovieCommand" />
       <Command Name="ActorCommand" />
+      <Command Name="ChaptersCommand" />
       <Command Name="SummaryCommand" />
       <Command Name="MusicCommand" />
       <Command Name="TrailerCommand" />
@@ -134,6 +136,8 @@
           <Set Target="[PlayerCount.Visible]"      Value="true"/>
           <Set Target="[ActorScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ActorScroller.Visible]"    Value="false"/>
+          <Set Target="[ChapterScrollerTitle.Visible]"    Value="false"/>
+          <Set Target="[ChapterScroller.Visible]"    Value="false"/>
           <Invoke Target="[Application.Play]" item="[Item]"/>
         </Actions>
       </Changed>
@@ -153,9 +157,34 @@
           <Set Target="[PCLock.Visible]"           Value="false"/>
           <Set Target="[MediaInfo.Visible]"        Value="false"/>
           <Set Target="[PlayerCount.Visible]"      Value="false"/>
+          <Set Target="[ChapterScrollerTitle.Visible]"    Value="false"/>
+          <Set Target="[ChapterScroller.Visible]"    Value="false"/>
 
           <Set Target="[ActorScrollerTitle.Visible]"    Value="true"/>
           <Set Target="[ActorScroller.Visible]"    Value="true"/>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[ChaptersCommand.Invoked]">
+        <Actions>
+          <Set Target="[Directors.Visible]"        Value="false"/>
+          <Set Target="[MovieTitle.Visible]"       Value="false"/>
+          <Set Target="[MovieInfo.Visible]"        Value="false"/>
+          <Set Target="[GenreInfo.Visible]"        Value="false"/>
+          <Set Target="[MovieDescription.Visible]" Value="false"/>
+          <Set Target="[ExtraInfo.Visible]"        Value="false"/>
+          <Set Target="[Poster.Visible]"           Value="false"/>
+          <Set Target="[Res.Visible]"              Value="false"/>
+          <Set Target="[VidBitrate.Visible]"       Value="false"/>
+          <Set Target="[AudBitrate.Visible]"       Value="false"/>
+          <Set Target="[PCLock.Visible]"           Value="false"/>
+          <Set Target="[MediaInfo.Visible]"        Value="false"/>
+          <Set Target="[PlayerCount.Visible]"      Value="false"/>
+          <Set Target="[ActorScrollerTitle.Visible]"    Value="false"/>
+          <Set Target="[ActorScroller.Visible]"    Value="false"/>
+
+          <Set Target="[ChapterScrollerTitle.Visible]"    Value="true"/>
+          <Set Target="[ChapterScroller.Visible]"    Value="true"/>
         </Actions>
       </Changed>
 
@@ -176,6 +205,8 @@
           <Set Target="[PlayerCount.Visible]"      Value="true"/>
           <Set Target="[ActorScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ActorScroller.Visible]"    Value="false"/>
+          <Set Target="[ChapterScrollerTitle.Visible]"    Value="false"/>
+          <Set Target="[ChapterScroller.Visible]"    Value="false"/>
         </Actions>
       </Changed>
 
@@ -197,6 +228,8 @@
           <Set Target="[ExtraInfo.Visible]"        Value="false"/>
           <Set Target="[ActorScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ActorScroller.Visible]"    Value="false"/>
+          <Set Target="[ChapterScrollerTitle.Visible]"    Value="false"/>
+          <Set Target="[ChapterScroller.Visible]"    Value="false"/>
         </Actions>
       </Changed>
 
@@ -416,6 +449,7 @@
       
       <Binding Source="[ThemeHelper.Config.ShowNowPlayingIcon]" Target="[NowPlayButton.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowNPV]" Target="[NPVOption.Visible]"/>
+      <Binding Source="[Item.HasChapterInfo]" Target="[ChaptersButton.Visible]"/>
 
       <!--Display Logo/Title-->
       <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
@@ -522,6 +556,7 @@
                           <vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:IconResume"  Command="[ResumeMovieCommand]" Application="[Application]" HasFocus="[ResumeBtnHasFocus]"/>
                           <vsb:SimpleButton Name="PlayMovieButton"   ImageNoFocus="image://it:IconPlay"    Command="[PlayMovieCommand]" Application="[Application]" />
                           <vsb:SimpleButton Name="TrailerButton"     ImageNoFocus="image://it:IconTrailer" Command="[TrailerCommand]" Application="[Application]"/>
+                          <vsb:SimpleButton Name="ChaptersButton"     ImageNoFocus="image://i:IconChapter" MaximumSize="25,25" Margins="0,2,0,0" Command="[ChaptersCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="RefreshButton"     ImageNoFocus="image://it:IconRefresh" Command="[RefreshCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="SummaryButton" ImageNoFocus="image://it:IconSummary" Command="[SummaryCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="ActorsButton"  ImageNoFocus="image://it:IconActor"   Command="[ActorCommand]" Application="[Application]"/>
@@ -584,10 +619,19 @@
                   
                   <Clip Layout="HorizontalFlow" Visible="true" FadeSize="20" Orientation="Vertical">
                     <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,32" Top="Parent,0.64,-5" Right="ButtonsPanel,0,-30" Bottom="Parent,0.64,47"/>
+                      <FormLayoutInput Left="Parent,0,32" Top="Parent,0.64,-20" Right="ButtonsPanel,0,-30" Bottom="Parent,0.64,47"/>
                     </LayoutInput>
                     <Children>
                       <ash:AutoScrollHorizontal  Name="ActorScrollerTitle" Text="[Item.Name]" Font="font://uf:Detail_Title" Color="color://s:Choc_EHS_Title" Visible="false" Margins="0,15,0,0"/>
+                    </Children>
+                  </Clip>
+
+                  <Clip Layout="HorizontalFlow" Visible="true" FadeSize="20" Orientation="Vertical">
+                    <LayoutInput>
+                      <FormLayoutInput Left="Parent,0,32" Top="Parent,0.64,-20" Right="ButtonsPanel,0,-30" Bottom="Parent,0.64,47"/>
+                    </LayoutInput>
+                    <Children>
+                      <ash:AutoScrollHorizontal  Name="ChapterScrollerTitle" Text="[Item.Name]" Font="font://uf:Detail_Title" Color="color://s:Choc_EHS_Title" Visible="false" Margins="0,15,0,0"/>
                     </Children>
                   </Clip>
 
@@ -763,6 +807,16 @@
                     </LayoutInput>
                     <Children>
                       <me:ActorList Name="ActorScroller" Item="[Item]" Application="[Application]" Visible="false"/>
+                    </Children>
+                  </Panel>
+
+                  <!-- Chapters  -->
+                  <Panel Name="Chapters">
+                    <LayoutInput>
+                      <FormLayoutInput Left="Parent,0,35" Right="Parent,1,-35" Top="Parent,0.64,25" Bottom="Parent,1,-30"/>
+                    </LayoutInput>
+                    <Children>
+                      <me:ChapterList Name="ChapterScroller" Item="[Item]" Application="[Application]" Visible="false"/>
                     </Children>
                   </Panel>
 
@@ -974,6 +1028,177 @@
         <Children>
           <pb:PersonButton PersonItem="[aiw]" Size="250,100" Color="color://s:FontColorMedium" Command="[NavigateToActorsCommand]" />
 
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <!-- ChapterList-->
+  <UI Name="ChapterList">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:Item Name="Item" Item="$Required"/>
+    </Properties>
+    <Locals>
+      <ScrollingHandler Name="ScrollingHandler" HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandlePageKeys="true" HandlePageCommands="true" HandleMouseWheel="true"/>
+      <ScrollingData Name="ScrollingData" />
+      <Command Name="ScrollUpCommand" />
+      <Command Name="ScrollDownCommand" />
+
+      <GridLayout Name="MyLayout" Orientation="Horizontal" Rows="0"
+							  AllowWrap="true" Spacing="0,5"  />
+
+    </Locals>
+    <Rules>
+      <Binding Source="[Item.Chapters]" Target="[ListRepeater.Source]" />
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
+      <Changed Source="[ScrollUpCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollUp]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ScrollDownCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollDown]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ScrollUpCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollUp]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ScrollDownCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollDown]"/>
+        </Actions>
+      </Changed>
+
+      <Binding Source="[ScrollingData.CurrentPage]" Target="[CurrentPage.Content]">
+        <Transformer>
+          <FormatTransformer Format="{0:F0}"/>
+        </Transformer>
+      </Binding>
+
+      <Binding Source="[ScrollingData.TotalPages]" Target="[TotalPages.Content]">
+        <Transformer>
+          <FormatTransformer Format="{0:F0}"/>
+        </Transformer>
+      </Binding>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[Item.Chapters.Count]" ConditionOp="Equals" Value="0" />
+        </Conditions>
+        <Actions>
+          <Set Target="[NoChapters.Visible]" Value="true" />
+        </Actions>
+      </Rule>
+
+      <!-- Hides the page info display if there is only 1 page.  We may what to remove this from the
+           Scoll area and actor list since the selectable areas line up a little nicer if we leave them -->
+      <Rule>
+        <Conditions>
+          <Equality Source="[ScrollingData.TotalPages]" ConditionOp="LessThanOrEquals" Value="1" />
+        </Conditions>
+        <Actions>
+          <Set Target="[ScrollInfo.Visible]" Value="false" />
+          <Set Target="[Input.KeyInteractive]" Value="false" />
+          <Set Target ="[ImagePanel.MouseInteractive]" Value="false" />
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ScrollingData.TotalPages]" ConditionOp="GreaterThan" Value="1" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Input.KeyInteractive]" Value="true" />
+          <Set Target ="[ImagePanel.MouseInteractive]" Value="true" />
+        </Actions>
+      </Rule>
+
+    </Rules>
+    <Content>
+      <!-- Chapters -->
+      <Panel Name="Chapters" Layout="Dock">
+        <Children>
+          <Graphic Content="image://i:BlankImage" Name="ImagePanel" Layout="Form"
+							 Padding="10,5,10,0">
+            <LayoutInput>
+              <DockLayoutInput Position="Client"/>
+            </LayoutInput>
+            <Children>
+              <Scroller Name="ChapterScroller" FadeSize="-5" ScrollingData="[ScrollingData]" Orientation="Vertical">
+                <LayoutInput>
+                  <AnchorLayoutInput Horizontal="Fill" Vertical="Near"/>
+                </LayoutInput>
+
+                <Children>
+                  <Repeater Name="ListRepeater" Source="[Item.Actors]" Layout="[MyLayout]" >
+                    <Content>
+                      <me:Chapter ChapterItem="[RepeatedItem!lib:ChapterItem]" Font="font://f:MM_ActorFont" Application="[Application]" />
+                    </Content>
+                    <Animations>
+                      <Animation Type="Move">
+                        <Keyframes>
+                          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+                          <PositionKeyframe Time="0.65" RelativeTo="Final"/>
+                        </Keyframes>
+                      </Animation>
+                    </Animations>
+                  </Repeater>
+                </Children>
+
+              </Scroller>
+              <Text Name="NoChapters" Content="No Chapter Information" Visible="false" Font="Segoe UI, 48" Alpha=".7" Color="color://s:FontColorMedium" />
+            </Children>
+          </Graphic>
+
+          <!-- The pagination display at the bottom of the scroller-->
+          <Panel Name="ScrollInfo"  Visible="true">
+            <LayoutInput>
+              <DockLayoutInput Position="Bottom" Alignment="Center"/>
+            </LayoutInput>
+            <Children>
+              <Panel Layout="HorizontalFlow" Margins="0,0,0,0">
+                <Children>
+                  <Text Name="CurrentPage" Font="font://f:MM_ActorFont" Color="color://s:FontColorLight" />
+                  <Text Content="|" Font="font://f:MM_ActorFont" Color="color://s:FontColorLight" />
+                  <Text Name="TotalPages"  Font="font://f:MM_ActorFont" Color="color://s:FontColorLight" />
+                </Children>
+              </Panel>
+
+            </Children>
+          </Panel>
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <!--Chapter-->
+  <UI Name="Chapter">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:ChapterItem Name="ChapterItem" ChapterItem="$Required" />
+      <Font Name="Font" Font="$Required"/>
+    </Properties>
+
+    <Locals>
+      <Command Name="PlayCommand"/>
+    </Locals>
+
+    <Rules>
+      <Changed Source="[PlayCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ChapterItem.PlayAction]"  />
+        </Actions>
+      </Changed>
+    </Rules>
+
+    <Content>
+      <Panel Layout="HorizontalFlow" >
+        <Children>
+          <cb:ChapterButton ChapterItem="[ChapterItem]" Color="color://s:FontColorMedium" Command="[PlayCommand]" />
         </Children>
       </Panel>
     </Content>
