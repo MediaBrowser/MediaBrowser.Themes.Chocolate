@@ -474,6 +474,7 @@
             <Children>
               <Graphic Name="Backdrop" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Visible="true">
                 <Animations>
+                  <Animation Animation="animation://anim:FadeIn" />
                   <Animation Type="ContentChangeHide">
                     <Keyframes>
                       <AlphaKeyframe RelativeTo="Current" Time="0.0" Value="1"/>

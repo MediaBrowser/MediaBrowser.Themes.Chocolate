@@ -103,4 +103,10 @@
       <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
     </Keyframes>
   </Animation>
+  <Animation Name="FadeIn" Type="Show" >
+    <Keyframes>
+      <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute" Interpolation="Exp"/>
+      <AlphaKeyframe Time="0.3" RelativeTo="Final"/>
+    </Keyframes>
+  </Animation>
 </Mcml>
