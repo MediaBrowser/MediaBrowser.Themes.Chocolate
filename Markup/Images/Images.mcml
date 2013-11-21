@@ -12,7 +12,7 @@
   <Image Name="ButtonPanelRight" Source="resx://Chocolate/Chocolate.Resources/ButtonPanelRight"/>
   <Image Name="ButtonPanelCenter" Source="resx://Chocolate/Chocolate.Resources/ButtonPanelCenter"/>
   <Image Name="spacer" Source="resx://Chocolate/Chocolate.Resources/spacer"/>
-  <Image Name="Config" Source="resx://Chocolate/Chocolate.Resources/config"/>
+  <Image Name="Config" Source="resx://Chocolate/Chocolate.Resources/IconCog"/>
   <Image Name="BlankGraphic" Source="resx://MediaBrowser/MediaBrowser.Resources/BlankGraphic" />
   <Image Name="IconNowPlay" Source="resx://Chocolate/Chocolate.Resources/IconNowPlay" />
   <Image Name="Tick" Source="resx://Chocolate/Chocolate.Resources/Tick" />

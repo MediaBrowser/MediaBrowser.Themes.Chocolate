@@ -9,7 +9,9 @@
       xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
 	    xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
       xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
-      xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
+    xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
+    xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
+    xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations">
   
@@ -59,6 +61,7 @@
       <!--Display Logo/Title-->
       <Binding Target="[Title.Text]"       Source="[Folder.SelectedChild.Name]"/>
       <Binding Target="[LogoImage.Content]" Source="[Folder.SelectedChild.LogoImage]"/>
+      <Binding Target="[ItemInfoPanel.Item]" Source="[Folder.SelectedChild]"/>
 
       <Rule>
         <Conditions>
@@ -168,9 +171,16 @@
                   <AnchorLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent, 0, 100" Bottom="Parent, 1.6" />
                 </LayoutInput>
               </cfs:CoverflowScroller>
+
+              <me:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Folder.SelectedChild]"  >
+                  <LayoutInput>
+                    <FormLayoutInput Bottom="Parent, .5" Top="Parent, 0" Right="Parent, .4" Left="Parent, 0"/>
+                  </LayoutInput>
+            
+              </me:InfoPanel>
+
             </Children>
           </Panel>
-
               <ColorFill Name="CoverFlowOverlay" Content="200,0,0,0">
                 <LayoutInput>
                   <FormLayoutInput Bottom="Parent,1" Horizontal="Fill" Top="Parent,1,-150"/>
@@ -203,4 +213,65 @@
    
   </UI>
 
+  <UI Name="InfoPanel">
+    <Properties>
+      <lib:Item Name="Item" Item="$Required"></lib:Item>
+      <a:Application Name="Application" Application="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper"></ch:ChocHelper>
+    </Properties>
+
+    <Rules>
+
+      <Binding Target="[Title.Text]"       Source="[Item.Name]"/>
+
+      <Binding Target="[Summary.Text]" Source="[Item.Overview]"></Binding>
+      <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
+      <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
+      <Binding Target="[Year.Content]" Source="[Item.ProductionYearString]"></Binding>
+
+
+    </Rules>
+
+    <Content>
+          <Panel Layout="Form" Margins="30,20,0,0">
+            <Children>
+
+              <Panel Name="TitlePanel">
+                <LayoutInput>
+                  <FormLayoutInput Top="Parent, 0,0" Left="Parent,0,5" Right="Parent,1,-5" Bottom="Parent, 0,54" Horizontal="Near" Vertical="Center"/>
+                </LayoutInput>
+                <Children>
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,5" Text="[Item.Name]" Font="Segoe UI Light, 24, bold" Color="color://uc:TitleColor" />
+                </Children>
+              </Panel>
+
+              <Panel Name="InfoPanel" Layout="HorizontalFlow" >
+                <LayoutInput>
+                  <FormLayoutInput Top="TitlePanel, 1,3" Left="Parent,0,5" Right="Parent, 1" />
+                </LayoutInput>
+                <Children>
+                  <sr:StarRating Margins="0,4,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
+                  <Text Name="Year" Font="Segoe UI Light, 14, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
+                  <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,4,0,0" />
+                </Children>
+                
+              </Panel>
+
+
+              <Panel Name="OverviewPanel" Margins="0,15,0,0">
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0" Top="InfoPanel,1,-5" Bottom="Parent,1" Right="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="Segoe UI Light, 16" Color="color://uc:Light"/>
+                </Children>
+              </Panel>
+
+
+
+            </Children>
+
+          </Panel>
+    </Content>
+  </UI>
 </Mcml>

@@ -133,7 +133,13 @@
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="Thumb" Target="[ThumbView.Visible]" Value="false" />
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="ThumbStrip" Target="[ThumbStripView.Visible]" Value="true" />
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="ThumbStrip" Target="[ThumbStripView.Visible]" Value="false" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="CoverFlow" Target="[CoverFlow.Visible]" Value="true" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="CoverFlow"  >
+        <Actions>
+          <Set Target="[CoverFlow.Visible]" Value="true" />
+          <Set Target="[Backdrops.Constrain]" Value="true" />
+          <Set Target="[InfoIconsPanel.Visible]" Value="false" />
+        </Actions>
+      </Condition>
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="CoverFlow" Target="[CoverFlow.Visible]" Value="false" />
 
       <Binding Source="[Application.Information.DisplayText]" Target="[InfoPanelText.Content]"/>
