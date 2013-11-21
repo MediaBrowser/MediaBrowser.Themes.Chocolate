@@ -513,7 +513,7 @@
               </Panel>
               <Panel Name="ConfigurationKey" FocusOrder="104">
                 <Children>
-                  <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]"/>
+                  <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,3,0,0" Alpha=".8"/>
                 </Children>
               </Panel>
             </Children>
