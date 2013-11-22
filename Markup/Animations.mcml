@@ -70,21 +70,21 @@
   <Animation Name="NavigateToForward" Type="Show">
     <Keyframes>
       <PositionKeyframe Time="0.0" Value="400, 0, 0" RelativeTo="Final"/>
-      <PositionKeyframe Time="0.5" Value="400, 0, 0" RelativeTo="Final" Interpolation="EaseIn, 3.0, 0.2"/>
-      <PositionKeyframe Time="1.4" Value="0, 0, 0" RelativeTo="Final"/>
+      <PositionKeyframe Time="0.3" Value="400, 0, 0" RelativeTo="Final" Interpolation="EaseIn, 3.0, 0.2"/>
+      <PositionKeyframe Time="1.0" Value="0, 0, 0" RelativeTo="Final"/>
       <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
-      <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute"/>
-      <AlphaKeyframe Time="1.4" Value="1.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="0.3" Value="0.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="1.0" Value="1.0" RelativeTo="Absolute"/>
     </Keyframes>
   </Animation>
   <Animation Name="NavigateToBackward" Type="Show" CenterPointPercent="0.0, 0.5, 0.0">
     <Keyframes>
       <ScaleKeyframe Time="0.0" Value="1.1, 1.1, 1.0"/>
-      <ScaleKeyframe Time="0.5" Value="1.1, 1.1, 1.0" Interpolation="Log"/>
-      <ScaleKeyframe Time="0.9" Value="1.0, 1.0, 1.0"/>
+      <ScaleKeyframe Time="0.3" Value="1.1, 1.1, 1.0" Interpolation="Log"/>
+      <ScaleKeyframe Time="0.6" Value="1.0, 1.0, 1.0"/>
       <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
-      <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute" Interpolation="Exp"/>
-      <AlphaKeyframe Time="0.9" Value="1.0" RelativeTo="Absolute"/>
+      <AlphaKeyframe Time="0.3" Value="0.0" RelativeTo="Absolute" Interpolation="Exp"/>
+      <AlphaKeyframe Time="0.6" Value="1.0" RelativeTo="Absolute"/>
     </Keyframes>
   </Animation>
   <Animation Name="NavigateAwayForward" Type="Hide" CenterPointPercent="0.0, 0.5, 0.0">
@@ -106,7 +106,13 @@
   <Animation Name="FadeIn" Type="Show" >
     <Keyframes>
       <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute" Interpolation="Exp"/>
-      <AlphaKeyframe Time="0.3" RelativeTo="Final"/>
+      <AlphaKeyframe Time="0.6" RelativeTo="Final"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="FadeOut" Type="Hide" >
+    <Keyframes>
+      <AlphaKeyframe Time="0.0" RelativeTo="Current" Interpolation="Exp"/>
+      <AlphaKeyframe Time="0.3" Value="0.0" RelativeTo="Absolute"/>
     </Keyframes>
   </Animation>
 </Mcml>
