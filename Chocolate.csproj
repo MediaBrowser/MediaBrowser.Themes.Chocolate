@@ -97,6 +97,8 @@
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Icons\Icon1080.png" />
+    <Content Include="Images\Icons\Icon720.png" />
     <Content Include="Images\Icons\IconCog.png" />
     <Content Include="Images\Icons\IconNowPlay.png" />
     <Content Include="Images\Ratings\13.png" />

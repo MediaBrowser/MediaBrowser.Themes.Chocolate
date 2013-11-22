@@ -73,9 +73,11 @@
   <Image Name="BlankActor" Source="resx://MediaBrowser/MediaBrowser.Resources/MissingPerson"  />
   <Image Name="HDLogo720" Source="resx://MediaBrowser/MediaBrowser.Resources/hd720"  />
   <Image Name="HDLogo1080" Source="resx://MediaBrowser/MediaBrowser.Resources/hd1080"  />
+  <Image Name="Icon1080" Source="resx://Chocolate/Chocolate.Resources/Icon1080"/>
+  <Image Name="Icon720" Source="resx://Chocolate/Chocolate.Resources/Icon720"/>
 
- 
-  
+
+
   <Image Name="MenuOptionClose" Source="resx://MediaBrowser/MediaBrowser.Resources/MenuOptionClose"/>
   
   
