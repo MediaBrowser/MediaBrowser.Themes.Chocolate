@@ -646,7 +646,7 @@
 
                   <Panel Name="MovieInfo" Layout="HorizontalFlow" Padding="0,0,0,0">
                     <LayoutInput>
-                      <FormLayoutInput Left="Poster,1,15" Right="Parent,1,-10" Bottom="Directors,0"/>
+                      <FormLayoutInput Left="Poster,1,15" Right="Parent, .74" Bottom="Directors,0"/>
                     </LayoutInput>
                     <Layout>
                       <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
@@ -853,7 +853,12 @@
                       <FormLayoutInput Name="DetailBottomColor" Left="Parent,0,7" Top="Parent,0.63" Bottom="Parent,1" Right="MoviePanelDetail,0"/>
                     </LayoutInput>
                     <Children>
-                      <Graphic Name="DetailBackdrop" Layout="Fill" MaintainAspectRatio="false" />
+                      <Graphic Name="DetailBackdrop" Layout="Fill" MaintainAspectRatio="false" >
+                        <Animations>
+                          <Animation Animation="animation://anim:FadeIn" />
+                        </Animations>
+                        
+                      </Graphic>
                     </Children>
                   </Panel>
                   <Panel Layout="HorizontalFlow" Name="MoviePanelDetail">
