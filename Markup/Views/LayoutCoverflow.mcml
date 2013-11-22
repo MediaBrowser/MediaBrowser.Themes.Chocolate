@@ -245,7 +245,7 @@
                   <FormLayoutInput Top="TitlePanel, 1,3" Left="Parent,0,5" Right="Parent, 1" />
                 </LayoutInput>
                 <Children>
-                  <sr:StarRating Margins="0,5,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
+                  <sr:StarRating Margins="0,6,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
                   <Text Name="Year" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
                   <Graphic Name="HDType" Margins="12,6,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
