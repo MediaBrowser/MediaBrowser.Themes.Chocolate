@@ -58,45 +58,12 @@
         </Transformer>
       </Binding>
 
-      <!--Display Logo/Title-->
-      <Binding Target="[Title.Text]"       Source="[Folder.SelectedChild.Name]"/>
-      <Binding Target="[LogoImage.Content]" Source="[Folder.SelectedChild.LogoImage]"/>
+      <!--Info Panel-->
       <Binding Target="[ItemInfoPanel.Item]" Source="[Folder.SelectedChild]"/>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ShowCoverFlowLogos]" ConditionOp="Equals" Value="true" />
-          <Equality Source="[Folder.SelectedChild.HasLogoImage]" ConditionOp="Equals" Value="true" />
-          <Equality Source="[Folder.SelectedChild.ItemTypeString]" ConditionOp="NotEquals" Value="Season"/>
-          <Equality Source="[Folder.SelectedChild.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[LogoImage.Visible]" Value="true" />
-          <Set Target="[Title.Visible]" Value="false" />
-        </Actions>
-      </Rule>
-      <Default Target="[LogoImage.Visible]" Value="false"/>
-      <Default Target="[Title.Visible]" Value="true"/>
-
-      <!--End Dislay Logo/Title Code-->
-      
+     
       <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
       <Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
-
-      <Binding Source="[ThinLayoutInput]" Target="[TitlePanel.LayoutInput]">
-        <Conditions>
-          <Equality Source="[Environment.IsWidescreen]" Value="false"/>
-        </Conditions>
-      </Binding>
-      <Binding Source="[WideLayoutInput]" Target="[TitlePanel.LayoutInput]">
-        <Conditions>
-          <Equality Source="[Environment.IsWidescreen]" Value="true"/>
-        </Conditions>
-      </Binding>
-
-      <!--This needs to be modified once ClearLogos are fully supported-->
-      <Condition Source="[Folder.DisplayPrefs.UseBanner.Value]" SourceValue="true"  Target="[Title.Alpha]" Value="0"/>
-      <Condition Source="[Folder.DisplayPrefs.UseBanner.Value]" SourceValue="false" Target="[Title.Alpha]" Value="1"/>
 
       <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
         <Conditions>
@@ -118,7 +85,6 @@
       </Changed>
       
       <!--Hide/Show Options-->
-      <Binding Source="[ThemeHelper.Config.ShowCoverFlowTitle]" Target="[TitlePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowOverlay]" Target="[CoverFlowOverlay.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
@@ -154,14 +120,6 @@
                 <Children>
                   <Text Name="EndTimeLbl" Font="font://uf:CF_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
                   <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
-                </Children>
-              </Panel>
-
-              <!--Selected item title-->
-              <Panel Name="TitlePanel" LayoutInput="[WideLayoutInput]">
-                <Children>
-                  <ash:AutoScrollHorizontal  Name="Title" Margins="0,5,0,5" Text="[SelectedItem.Name]" Font="font://uf:CF_Title" Color="color://uc:Light" Visible="false"/>
-                  <Graphic Name="LogoImage" Margins="0,5,0,5" Content="[SelectedItem.LogoImage]" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
               </Panel>
 
@@ -223,11 +181,28 @@
     <Rules>
 
       <Binding Target="[Title.Text]"       Source="[Item.Name]"/>
+      <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
 
       <Binding Target="[Summary.Text]" Source="[Item.Overview]"></Binding>
       <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
       <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
       <Binding Target="[Year.Content]" Source="[Item.ProductionYearString]"></Binding>
+      
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowCoverFlowLogos]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.HasLogoImage]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Season"/>
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[LogoImage.Visible]" Value="true" />
+          <Set Target="[Title.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+      <Default Target="[LogoImage.Visible]" Value="false"/>
+      <Default Target="[Title.Visible]" Value="true"/>
+
 
 
     </Rules>
@@ -241,7 +216,8 @@
                   <FormLayoutInput Top="Parent, 0,0" Left="Parent,0,5" Right="Parent,1,-5" Bottom="Parent, 0,54" Horizontal="Near" Vertical="Center"/>
                 </LayoutInput>
                 <Children>
-                  <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,5" Text="[Item.Name]" Font="Segoe UI Light, 24, bold" Color="color://uc:TitleColor" />
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,5" Text="[Item.Name]" Font="Segoe UI Light, 26, bold" Color="color://uc:TitleColor" />
+                  <Graphic Name="LogoImage" Margins="0,5,0,5" Content="[Item.LogoImage]" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
               </Panel>
 

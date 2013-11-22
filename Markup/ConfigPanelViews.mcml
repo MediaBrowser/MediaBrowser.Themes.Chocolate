@@ -88,11 +88,11 @@
         </Actions>
       </Changed>
       <!--CoverFlow Options-->
-      <Changed Source="[ShowCoverFlowTitleCB.Checked.Value]">
+      <!--<Changed Source="[ShowCoverFlowTitleCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowCoverFlowTitle]" Value="[ShowCoverFlowTitleCB.Checked.Value]"/>
         </Actions>
-      </Changed>
+      </Changed>-->
       <Changed Source="[ShowCoverFlowOverlayCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowCoverFlowOverlay]" Value="[ShowCoverFlowOverlayCB.Checked.Value]"/>
@@ -187,7 +187,7 @@
           <Panel Layout="VerticalFlow" MaximumSize="500,400">
             <Children>
               <Text Content="CoverFlow Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
-              <cb:CheckBox Name="ShowCoverFlowTitleCB" Label="[Application.LocalStrings.#ShowCoverFlowTitle!cor:String]" Checked="[ShowCoverFlowTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--<cb:CheckBox Name="ShowCoverFlowTitleCB" Label="[Application.LocalStrings.#ShowCoverFlowTitle!cor:String]" Checked="[ShowCoverFlowTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>-->
               <cb:CheckBox Name="ShowCoverFlowOverlayCB" Label="[Application.LocalStrings.#ShowCoverFlowOverlay!cor:String]" Checked="[ShowCoverFlowOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverFlowLogosCB" Label="[Application.LocalStrings.#ShowCoverFlowLogos!cor:String]" Checked="[ShowCoverFlowLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverFlowEndTimeCB" Label="[Application.LocalStrings.#ShowCoverFlowEndTime!cor:String]" Checked="[ShowCoverFlowEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>

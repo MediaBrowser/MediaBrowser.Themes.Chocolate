@@ -22,7 +22,7 @@
     <Locals>
       <Timer Name="ScrollAnimTimer" AutoRepeat="false" Enabled="false" Interval="150"/>
       <ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollingHandler"/>
-      <ScrollingData Name="SD" LockedAlignment="0.8" LockedPosition="0.8"/>
+      <ScrollingData Name="SD" LockedAlignment="0.7" LockedPosition="0.7"/>
       <IntRangedValue Name="SelectRepeaterIndex"/>
       <GridLayout Name="MyLayout" Orientation="Horizontal" AllowWrap="true"
                   Spacing="[Application.Config.GridSpacing]" Repeat="WhenTooBig" RepeatGap="[Application.Config.GridSpacing.Width]" Rows="1" MinorAlignment="Center" />
