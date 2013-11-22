@@ -854,10 +854,6 @@
                     </LayoutInput>
                     <Children>
                       <Graphic Name="DetailBackdrop" Layout="Fill" MaintainAspectRatio="false" >
-                        <Animations>
-                          <Animation Animation="animation://anim:FadeIn" />
-                        </Animations>
-                        
                       </Graphic>
                     </Children>
                   </Panel>
@@ -875,12 +871,8 @@
 
               <Panel Layout="Form">
                 <Animations>
-                  <Animation Type="Hide">
-                    <Keyframes>
-                      <AlphaKeyframe Time="0.0" RelativeTo="Absolute" Value="1"/>
-                      <AlphaKeyframe Time="0.3" RelativeTo="Absolute" Value="1"/>
-                    </Keyframes>
-                  </Animation>
+                  <Animation Animation="animation://anim:FadeIn" />
+                  <Animation Animation="animation://anim:FadeOut" />
                 </Animations>
                 <Children>
                   <bd:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]"/>

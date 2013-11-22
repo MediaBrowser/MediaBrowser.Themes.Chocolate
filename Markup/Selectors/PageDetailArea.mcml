@@ -32,12 +32,14 @@
       <KeyHandler Name="DownKey" Key="Down" Handle="false" HandlerStage="Routed"/>
       <MouseWheelHandler Name="Wheel" Handle="false" HandlerStage="Routed"/>
       <ShortcutHandler Name="BackBtn" Shortcut="Back" Handle="false" HandlerStage="Routed" Command="[BackCmd]"/>
+      <cor:Boolean Name="SmallBackdrop" Boolean="false" />
     </Locals>
 
     <Rules>
       <Binding Source="[Direction]" Target="[Backdrops.Direction]"/>
       <Binding Source="[Direction]" Target="[ThumbStripView.Direction]"/>
       <Binding Source="[Direction]" Target="[InfoIconsPanel.Direction]"/>
+      <Binding Source="[SmallBackdrop]" Target="[Backdrops.Constrain]" />
       <Changed Source="[LeftKey.Invoked]">
         <Actions>
           <Set Target="[Direction]" Value="Left"/>
@@ -136,11 +138,13 @@
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="CoverFlow"  >
         <Actions>
           <Set Target="[CoverFlow.Visible]" Value="true" />
-          <Set Target="[Backdrops.Constrain]" Value="true" />
+          <Set Target="[SmallBackdrop]" Value="true" />
           <Set Target="[InfoIconsPanel.Visible]" Value="false" />
         </Actions>
       </Condition>
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="CoverFlow" Target="[CoverFlow.Visible]" Value="false" />
+
+      <Default Target="[SmallBackdrop]" Value="false" />
 
       <Binding Source="[Application.Information.DisplayText]" Target="[InfoPanelText.Content]"/>
       <Binding Source="[Application.Information.MajorActivity]" Target="[ActivityInd.Visible]"/>

@@ -29,6 +29,7 @@
     <Rules>
 
       <Binding Source="[Direction]" Target="[StripBackdrop.Direction]"/>
+      <Binding Source="[Constrain]" Target="[Backdrop.Constrain]"/>
 
       <!--Show Recent EHSBackdrops-->
       <Rule>
@@ -371,7 +372,7 @@
         </Actions>
       </Changed>
 
-      <Rule>
+      <Changed Source="[Constrain]" InitialEvaluate="true">
         <Conditions>
           <Equality Source="[Constrain]" Value="true" />
         </Conditions>
@@ -382,7 +383,7 @@
           <Set Target="[Clip.ShowNear]" Value="true" />
           <Set Target="[ThemeBackground.Visible]" Value="true" />
         </Actions>
-      </Rule>
+      </Changed>
 
       <!--Show Backdrops-->
       <Default Target="[Backdrop.Content]" Value="[Item.BackdropImage]">
