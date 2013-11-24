@@ -381,6 +381,7 @@
           <Set Target="[Clip.Orientation]" Value="Horizontal" />
           <Set Target="[Clip.FadeSize]" Value="500" />
           <Set Target="[Clip.ShowNear]" Value="true" />
+          <Set Target="[Clip2.ShowFar]" Value="true" />
           <Set Target="[ThemeBackground.Visible]" Value="true" />
         </Actions>
       </Changed>
@@ -473,17 +474,21 @@
 
           <Clip Name="Clip" Orientation="Vertical" ShowNear="false" ShowFar="false" FadeSize="75" LayoutInput="[FullLayout]">
             <Children>
-              <Graphic Name="Backdrop" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Visible="true">
-                <Animations>
-                  <Animation Animation="animation://anim:FadeIn" />
-                  <Animation Type="ContentChangeHide">
-                    <Keyframes>
-                      <AlphaKeyframe RelativeTo="Current" Time="0.0" Value="1"/>
-                      <AlphaKeyframe RelativeTo="Current" Time="[Application.Config.BackdropTransitionInterval]" Value="0"/>
-                    </Keyframes>
-                  </Animation>
-                </Animations>
-              </Graphic>
+              <Clip Name="Clip2" Orientation="Vertical" ShowNear="false" ShowFar="false" FadeSize="100" Layout="Fill">
+                <Children>
+                  <Graphic Name="Backdrop" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Visible="true">
+                    <Animations>
+                      <Animation Animation="animation://anim:FadeIn" />
+                      <Animation Type="ContentChangeHide">
+                        <Keyframes>
+                          <AlphaKeyframe RelativeTo="Current" Time="0.0" Value="1"/>
+                          <AlphaKeyframe RelativeTo="Current" Time="[Application.Config.BackdropTransitionInterval]" Value="0"/>
+                        </Keyframes>
+                      </Animation>
+                    </Animations>
+                  </Graphic>
+                </Children>
+              </Clip>
             </Children>
           </Clip>
           <Graphic Name="ThemeBackground" Content="image://vi:BackgroundBlack" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Visible="false">

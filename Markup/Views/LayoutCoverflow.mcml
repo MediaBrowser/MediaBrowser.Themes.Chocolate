@@ -188,6 +188,7 @@
       <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
       <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
       <Binding Target="[Year.Content]" Source="[Item.ProductionYearString]"></Binding>
+      <Binding Target="[Runtime.Content]" Source="[Item.RunningTimeString]"></Binding>
       
       <Rule>
         <Conditions>
@@ -247,6 +248,7 @@
                 <Children>
                   <sr:StarRating Margins="0,6,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
                   <Text Name="Year" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
+                  <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
                   <Graphic Name="HDType" Margins="12,6,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
