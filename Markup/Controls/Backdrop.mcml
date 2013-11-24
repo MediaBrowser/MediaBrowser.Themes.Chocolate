@@ -17,7 +17,7 @@
       <ch:ChocHelper Name="ThemeHelper"/>
       <cor:String Name="Direction" String="Right"/>
       <Command Name="BackCmd"/>
-      <cor:Boolean Name="Constrain" Boolean="false" />
+      <cor:String Name="Constrain" String="none" />
     </Properties>
 
     <Locals>
@@ -342,7 +342,7 @@
       <Image Name="Image" Image="null"/>
       <lib:Item Name="Item" Item="$Required"/>
       <Image Name="LoadBackdropImage" Image="null"/>
-      <cor:Boolean Name="Constrain" Boolean="false" />
+      <cor:String Name="Constrain" String="none" />
     </Properties>
 
     <Locals>
@@ -353,7 +353,7 @@
       <ch:ChocHelper Name="ThemeHelper"/>
       <Environment Name="Environment"/>
       <AnchorLayoutInput Name="LayoutInputFill" Left="Parent,0.5,-683" Top="Parent,0" Right="Parent,0.5,683" Bottom="Parent, 1" ContributesToWidth="false"/>
-      <FormLayoutInput Name="ConstrainedLayout" Left="Parent, .27" Top="Parent,0" Right="Parent, 1" Bottom="Parent, .72" />
+      <FormLayoutInput Name="SmConstrainedLayout" Left="Parent, .27" Top="Parent,0" Right="Parent, 1" Bottom="Parent, .72" />
       <FormLayoutInput Name="FullLayout" Vertical="Near" Horizontal="Fill" />
     </Locals>
 
@@ -374,10 +374,10 @@
 
       <Changed Source="[Constrain]" InitialEvaluate="true">
         <Conditions>
-          <Equality Source="[Constrain]" Value="true" />
+          <Equality Source="[Constrain]" Value="small" />
         </Conditions>
         <Actions>
-          <Set Target="[Clip.LayoutInput]" Value="[ConstrainedLayout]" />
+          <Set Target="[Clip.LayoutInput]" Value="[SmConstrainedLayout]" />
           <Set Target="[Clip.Orientation]" Value="Horizontal" />
           <Set Target="[Clip.FadeSize]" Value="500" />
           <Set Target="[Clip.ShowNear]" Value="true" />
