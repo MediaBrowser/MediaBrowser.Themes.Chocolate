@@ -189,6 +189,7 @@
       <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
       <Binding Target="[Year.Content]" Source="[Item.ProductionYearString]"></Binding>
       <Binding Target="[Runtime.Content]" Source="[Item.RunningTimeString]"></Binding>
+      <Binding Target="[TextBackdrop.Visible]" Source="[Application.IsPlayingVideo]" />
       
       <Rule>
         <Conditions>
@@ -265,6 +266,16 @@
                 </Children>
               </Panel>
 
+              <Clip Name="TextBackdrop" Orientation="Vertical" FadeSize="20" ShowFar="true" ShowNear="true" Layout="Fill" Margins="-10, -10, -10, -10" Visible="false" >
+                <Children>
+                  <Clip Orientation="Horizontal" FadeSize="20" ShowFar="true" ShowNear="true" Layout="Fill" >
+                    <Children>
+                      <ColorFill Content="40,40,40" Alpha=".25" Layout="Fill" />
+                    </Children>
+                  </Clip>
+                </Children>
+                
+              </Clip>
 
 
             </Children>
