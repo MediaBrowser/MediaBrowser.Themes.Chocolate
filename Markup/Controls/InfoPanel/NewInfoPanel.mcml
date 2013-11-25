@@ -3,6 +3,8 @@
 	    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
 	    xmlns:cor="assembly://MSCorLib/System"
       xmlns:me="Me"
+      xmlns:s="file://Styles_DoNotEdit.mcml"
+      xmlns:f="file://Fonts_DoNotEdit.mcml"
       xmlns:cfs="resx://Chocolate/Chocolate.Resources/CoverflowScroller"
       xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
       xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
@@ -14,6 +16,7 @@
     xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
+      xmlns:gl="resx://MediaBrowser/MediaBrowser.Resources/GenreList"
       xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
 
   <UI Name="InfoPanel">
@@ -33,9 +36,30 @@
       <Binding Target="[Summary.Text]" Source="[Item.Overview]"></Binding>
       <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
       <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
-      <Binding Target="[Year.Content]" Source="[Item.ProductionYearString]"></Binding>
       <Binding Target="[Runtime.Content]" Source="[Item.RunningTimeString]"></Binding>
       <Binding Target="[TextBackdrop.Visible]" Source="[Application.IsPlayingVideo]" />
+      <Binding Target="[Director.Content]"     Source="[Item.DirectorString]" />
+
+      <!--Use Production Year-->
+      <Binding Target="[Year.Content]"     Source="[Item.ProductionYearString]">
+        <Conditions>
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
+        </Conditions>
+      </Binding>
+
+      <!--Use First Air-->
+      <Binding Target="[Year.Content]"     Source="[Item.FirstAired]">
+        <Conditions>
+          <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
+        </Conditions>
+      </Binding>
+      
+      <!--Genres For TV Series/Episodes-->
+      <Binding Target="[Genres.SourceData]"    Source="[Item.Series.Genres]">
+        <Conditions>
+          <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
+        </Conditions>
+      </Binding>
 
       <Rule>
         <Conditions>
@@ -92,19 +116,35 @@
                   <Text Name="Year" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
                   <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
-                  <Graphic Name="HDType" Margins="12,6,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <Graphic Name="HDType" Margins="12,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
 
               </Panel>
 
-              <Panel Name="DetailsPanel" Layout="VerticalFlow" Margins="5,0,0,0">
-            
+              <Panel Name="DetailsPanel" Layout="VerticalFlow" Margins="5,0,0,0" Visible="[ShowDetails]">
+
+                <Children>
+                  <Panel Name="GenreInfo" Layout="HorizontalFlow">
+                    <Children>
+                      <gl:GenreList Name="Genres" SourceData="[Item.Genres]" Font="font://uf:Detail_Genres"/>
+                    </Children>
+                  </Panel>
+                  <Panel Name="Directors" Layout="HorizontalFlow" >
+                    <Children>
+                      <Text Name="DirectorLabel" Margins="0,0,5,0" Color="color://s:Choc_Label" Font="font://uf:Detail_Director_Label" WordWrap="false" Content="[Application.LocalStrings.#DirectedByDetail!cor:String]"/>
+                      <Text Name="Director" Margins="0,4,0,0" Color="color://s:Choc_Value"  Font="font://uf:Detail_Director" WordWrap="false" />
+                    </Children>
+                  </Panel>
+
+
+                </Children>
+
               </Panel>
 
 
               <Panel Name="OverviewPanel" Margins="0,5,0,0">
                 <Children>
-                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="Segoe UI Light, 16" Color="color://uc:Light"/>
+                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="Segoe Media Center Light, 16" Color="color://uc:Light"/>
                 </Children>
               </Panel>
               

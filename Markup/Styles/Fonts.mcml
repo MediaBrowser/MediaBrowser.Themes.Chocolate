@@ -72,7 +72,7 @@
   <Font Name="LightMediumMinus" Font="Segoe Media Center Light,18"/>
   <Font Name="Choc_Label" Font="Segoe Media Center Light,16"/>
   <Font Name="OverviewFont" Font="Segoe Media Center Bold,16"/>
-  <Font Name="Choc_Value" Font="Segoe Media Center Bold,16"/>
+  <Font Name="Choc_Value" Font="Segoe Media Center Light, 16, bold"/>
 
   <!-- ========== Config Panel ========== -->
   <Font Name="CP_ConfigTitleFont" Font="Segoe Media Center Light, 25" />

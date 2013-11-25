@@ -80,7 +80,7 @@
           
           <Graphic Name="Back" Content="image://vi:PBBack" Layout="Form" MinimumSize="[Size]" MaximumSize="[Size]">
             <Children>
-              <Graphic Name="Bar" Content="image://vi:PBFill" Alpha=".5" Margins="10,12,10,11">
+              <ColorFill Name="Bar" Content="Green" Alpha=".5" Margins="10,12,10,11">
                 <Animations>
                   <Animation Type="Show">
                     <Keyframes>
@@ -90,7 +90,7 @@
                     </Keyframes>
                   </Animation>
                 </Animations>
-              </Graphic>
+              </ColorFill>
             </Children>
           </Graphic>
 
