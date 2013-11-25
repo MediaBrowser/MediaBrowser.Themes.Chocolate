@@ -354,6 +354,7 @@
       <Environment Name="Environment"/>
       <AnchorLayoutInput Name="LayoutInputFill" Left="Parent,0.5,-683" Top="Parent,0" Right="Parent,0.5,683" Bottom="Parent, 1" ContributesToWidth="false"/>
       <FormLayoutInput Name="SmConstrainedLayout" Left="Parent, .27" Top="Parent,0" Right="Parent, 1" Bottom="Parent, .72" />
+      <FormLayoutInput Name="LgConstrainedLayout" Left="Parent, .20" Top="Parent,0" Right="Parent, 1" Bottom="Parent, .80" />
       <FormLayoutInput Name="FullLayout" Vertical="Near" Horizontal="Fill" />
     </Locals>
 
@@ -380,6 +381,20 @@
           <Set Target="[Clip.LayoutInput]" Value="[SmConstrainedLayout]" />
           <Set Target="[Clip.Orientation]" Value="Horizontal" />
           <Set Target="[Clip.FadeSize]" Value="500" />
+          <Set Target="[Clip.ShowNear]" Value="true" />
+          <Set Target="[Clip2.ShowFar]" Value="true" />
+          <Set Target="[ThemeBackground.Visible]" Value="true" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Constrain]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Constrain]" Value="large" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Clip.LayoutInput]" Value="[LgConstrainedLayout]" />
+          <Set Target="[Clip.Orientation]" Value="Horizontal" />
+          <Set Target="[Clip.FadeSize]" Value="700" />
           <Set Target="[Clip.ShowNear]" Value="true" />
           <Set Target="[Clip2.ShowFar]" Value="true" />
           <Set Target="[ThemeBackground.Visible]" Value="true" />

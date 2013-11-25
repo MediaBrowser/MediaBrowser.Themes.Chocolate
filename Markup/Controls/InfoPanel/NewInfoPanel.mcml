@@ -1,0 +1,132 @@
+<Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
+	    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+	    xmlns:cor="assembly://MSCorLib/System"
+      xmlns:me="Me"
+      xmlns:cfs="resx://Chocolate/Chocolate.Resources/CoverflowScroller"
+      xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
+      xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
+      xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
+	    xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+    xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
+    xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
+    xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
+      xmlns:ch="assembly://Chocolate/Chocolate"
+      xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
+      xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
+
+  <UI Name="InfoPanel">
+    <Properties>
+      <lib:Item Name="Item" Item="$Required"></lib:Item>
+      <a:Application Name="Application" Application="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper"></ch:ChocHelper>
+      <cor:Boolean Name="ShowLogo" Boolean="false" />
+      <cor:Boolean Name="ShowDetails" Boolean="false" />
+    </Properties>
+
+    <Rules>
+
+      <Binding Target="[Title.Text]"       Source="[Item.Name]"/>
+      <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
+
+      <Binding Target="[Summary.Text]" Source="[Item.Overview]"></Binding>
+      <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
+      <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
+      <Binding Target="[Year.Content]" Source="[Item.ProductionYearString]"></Binding>
+      <Binding Target="[Runtime.Content]" Source="[Item.RunningTimeString]"></Binding>
+      <Binding Target="[TextBackdrop.Visible]" Source="[Application.IsPlayingVideo]" />
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[Item.HDType]" ConditionOp="Equals" Value="1080" />
+        </Conditions>
+        <Actions>
+          <Set Target="[HDType.Visible]" Value="true" />
+          <Set Target="[HDType.Content]" Value="image://vi:Icon1080" />
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Item.HDType]" ConditionOp="Equals" Value="720" />
+        </Conditions>
+        <Actions>
+          <Set Target="[HDType.Visible]" Value="true" />
+          <Set Target="[HDType.Content]" Value="image://vi:Icon720" />
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality Source="[ShowLogo]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.HasLogoImage]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Season"/>
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[LogoImage.Visible]" Value="true" />
+          <Set Target="[Title.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+      <Default Target="[LogoImage.Visible]" Value="false"/>
+      <Default Target="[Title.Visible]" Value="true"/>
+
+
+
+    </Rules>
+
+    <Content>
+      <Panel Layout="Form" Margins="30,20,0,0">
+        <Children>
+          <Panel Name="MainPanel" Layout="VerticalFlow" >
+            <Children>
+              <Panel Name="TitlePanel" Margins="5,0,5,0" >
+                <Children>
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,-3" Text="[Item.Name]" Font="Segoe UI Light, 26, bold" Color="color://uc:TitleColor" />
+                  <Graphic Name="LogoImage" Margins="0,5,0,8" Content="[Item.LogoImage]" MinimumSize="0,80" MaximumSize="0,80" MaintainAspectRatio="true" Visible="false"/>
+                </Children>
+              </Panel>
+
+              <Panel Name="InfoPanel" Layout="HorizontalFlow" Margins="5,0,0,0">
+                <Children>
+                  <sr:StarRating Margins="0,6,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
+                  <Text Name="Year" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
+                  <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
+                  <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
+                  <Graphic Name="HDType" Margins="12,6,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                </Children>
+
+              </Panel>
+
+              <Panel Name="DetailsPanel" Layout="VerticalFlow" Margins="5,0,0,0">
+            
+              </Panel>
+
+
+              <Panel Name="OverviewPanel" Margins="0,5,0,0">
+                <Children>
+                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="Segoe UI Light, 16" Color="color://uc:Light"/>
+                </Children>
+              </Panel>
+              
+            </Children>
+          </Panel>
+
+          <Clip Name="TextBackdrop" Orientation="Vertical" FadeSize="20" ShowFar="true" ShowNear="true" Layout="Fill" Margins="-10, -10, -10, -10" Visible="false" >
+            <Children>
+              <Clip Orientation="Horizontal" FadeSize="20" ShowFar="true" ShowNear="true" Layout="Fill" >
+                <Children>
+                  <ColorFill Content="40,40,40" Alpha=".25" Layout="Fill" />
+                </Children>
+              </Clip>
+            </Children>
+
+          </Clip>
+
+
+        </Children>
+
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

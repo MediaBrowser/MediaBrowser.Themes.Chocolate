@@ -1103,6 +1103,26 @@ namespace Chocolate {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] NewDetailMovieView {
+            get {
+                object obj = ResourceManager.GetObject("NewDetailMovieView", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] NewInfoPanel {
+            get {
+                object obj = ResourceManager.GetObject("NewInfoPanel", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] NowPlayingViewport {
             get {
                 object obj = ResourceManager.GetObject("NowPlayingViewport", resourceCulture);
