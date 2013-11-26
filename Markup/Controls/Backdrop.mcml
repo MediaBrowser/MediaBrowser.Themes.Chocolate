@@ -353,8 +353,8 @@
       <ch:ChocHelper Name="ThemeHelper"/>
       <Environment Name="Environment"/>
       <AnchorLayoutInput Name="LayoutInputFill" Left="Parent,0.5,-683" Top="Parent,0" Right="Parent,0.5,683" Bottom="Parent, 1" ContributesToWidth="false"/>
-      <FormLayoutInput Name="SmConstrainedLayout" Left="Parent, .27" Top="Parent,0" Right="Parent, 1" Bottom="Parent, .72" />
-      <FormLayoutInput Name="LgConstrainedLayout" Left="Parent, .10" Top="Parent,0" Right="Parent, 1" Bottom="Parent, .9" />
+      <FormLayoutInput Name="SmConstrainedLayout" Left="Parent, .24" Top="Parent,0" Right="Parent, 1.06" Bottom="Parent, .82" />
+      <FormLayoutInput Name="LgConstrainedLayout" Left="Parent, .14" Top="Parent,0" Right="Parent, 1.04" Bottom="Parent, .9" />
       <FormLayoutInput Name="FullLayout" Vertical="Near" Horizontal="Fill" />
     </Locals>
 
@@ -382,6 +382,7 @@
           <Set Target="[Clip.Orientation]" Value="Horizontal" />
           <Set Target="[Clip.FadeSize]" Value="500" />
           <Set Target="[Clip.ShowNear]" Value="true" />
+          <Set Target="[Clip.NearOffset]" Value="90" />
           <Set Target="[Clip2.ShowFar]" Value="true" />
           <Set Target="[ThemeBackground.Visible]" Value="true" />
         </Actions>

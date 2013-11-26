@@ -238,6 +238,7 @@
     <Content Include="Images\Ultimate\EhsPanel.png" />
     <None Include="Images\Ultimate\Fill.png" />
     <None Include="Images\Ultimate\Fit.png" />
+    <Content Include="Images\Ultimate\GrayGradientRight.png" />
     <Content Include="Images\Ultimate\InfoPanelCorner.png" />
     <None Include="Images\Ultimate\InProgress.png" />
     <None Include="Images\Ultimate\InProgress2.png" />

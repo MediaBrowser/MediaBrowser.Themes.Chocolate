@@ -11,6 +11,7 @@
 	    xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
       
       xmlns:fip="resx://Chocolate/Chocolate.Resources/FullInfoPanel"
+	    xmlns:ib="resx://MediaBrowser/MediaBrowser.Resources/ImageButton"
       
       xmlns:it="resx://Chocolate/Chocolate.Resources/Images"
       
@@ -78,8 +79,8 @@
       <TransformByAttributeAnimation Name="HideSlideRight" Attribute="Width" Magnitude="1.0" Source="animation://anim:HideSlideRight"/>
       <TransformByAttributeAnimation Name="HideSlideLeft" Attribute="Width" Magnitude="1.0" Source="animation://anim:HideSlideLeft"/>
 
-      <FormLayoutInput Name="PortraitButtons" Left="Poster, 1,5" Top="Poster, 0, 5" />
-      <FormLayoutInput Name="LandscapeButtons" Left="Poster, 0,5" Bottom="Poster, 0, -5" />
+      <FormLayoutInput Name="PortraitButtons" Left="Poster, 1,5" Top="Poster, 0, 10" />
+      <FormLayoutInput Name="LandscapeButtons" Left="Poster, 0,10" Bottom="Poster, 0, -5" />
       
     </Locals>
 
@@ -330,17 +331,26 @@
                       <ScaleLayout AllowScaleDown="true" AllowScaleUp="false" MaintainAspectRatio="true"/>
                     </Layout>
                     <Children>
-                      <Panel Layout="VerticalFlow" Name="Buttons" Navigation="RememberFocus">
+                      <Panel Name="Buttons" Navigation="RememberFocus">
+                        <Layout>
+                          <FlowLayout Orientation="Vertical" Spacing="3,3"/>
+                        </Layout>
                         <Children>
-                          <vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:IconResume"  Command="[ResumeMovieCommand]" Application="[Application]" HasFocus="[ResumeBtnHasFocus]"/>
+                          <ib:ImageButton Name="ResumeMovieButton" Text="[Application.LocalStrings.#ResumeDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ResumeMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconResume" Size="200,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="PlayMovieButton" Text="[Application.LocalStrings.#PlayDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PlayMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPlay" Size="200,45" Font="font://f:MM_ButtonFont" />
+                          <ib:ImageButton Name="TrailerButton" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="200,45" Font="font://f:MM_ButtonFont" />
+                          <ib:ImageButton Name="NextItemButton" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="200,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="PreviousItemButton" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="200,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="200,45" Font="font://f:MM_ButtonFont" Visible="false" />
+                          <vsb:SimpleButton Name="ChaptersButton"     ImageNoFocus="image://i:IconChapter" MaximumSize="25,25" Margins="0,2,0,0" Command="[ChaptersCommand]" Application="[Application]"/>
+                          <!--<vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:IconResume"  Command="[ResumeMovieCommand]" Application="[Application]" HasFocus="[ResumeBtnHasFocus]"/>
                           <vsb:SimpleButton Name="PlayMovieButton"   ImageNoFocus="image://it:IconPlay"    Command="[PlayMovieCommand]" Application="[Application]" />
                           <vsb:SimpleButton Name="TrailerButton"     ImageNoFocus="image://it:IconTrailer" Command="[TrailerCommand]" Application="[Application]"/>
-                          <vsb:SimpleButton Name="ChaptersButton"     ImageNoFocus="image://i:IconChapter" MaximumSize="25,25" Margins="0,2,0,0" Command="[ChaptersCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="RefreshButton"     ImageNoFocus="image://it:IconRefresh" Command="[RefreshCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="SummaryButton" ImageNoFocus="image://it:IconSummary" Command="[SummaryCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="ActorsButton"  ImageNoFocus="image://it:IconActor"   Command="[ActorCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="DeleteMovieButton" Visible="false" ImageNoFocus="resx://MediaBrowser/MediaBrowser.Resources/IconDelete"
-                                            Command="[DeleteMovieCommand]" Application="[Application]"/>
+                                            Command="[DeleteMovieCommand]" Application="[Application]"/>-->
                         </Children>
                       </Panel>
                     </Children>
@@ -379,9 +389,9 @@
                     </Children>
                   </Panel>
 
-                  <Graphic Name="LogoImage" Margins="0,10,20,0" Content="[Item.LogoImage]" MaximumSize="0,90" MaintainAspectRatio="true" >
+                  <Graphic Name="LogoImage" Margins="0,10,20,0" Content="[Item.LogoImage]" MaximumSize="0,110" MaintainAspectRatio="true" >
                     <LayoutInput>
-                      <FormLayoutInput Right="Parent,1" Bottom="Parent,.85,-20"/>
+                      <FormLayoutInput Right="Parent,1" Bottom="Parent,.85"/>
                     </LayoutInput>
                     
                   </Graphic>
