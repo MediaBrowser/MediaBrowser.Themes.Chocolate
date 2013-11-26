@@ -326,7 +326,7 @@
                   <Animation Animation="animation://anim:NavigateAwayBackward"/>
                 </Animations>
                 <Children>
-                  <Panel Name="ButtonsPanel" LayoutInput="[PortraitButtons]">
+                  <Panel Name="ButtonsPanel" LayoutInput="[PortraitButtons]" Margins="15,0,0,0">
                     <Layout>
                       <ScaleLayout AllowScaleDown="true" AllowScaleUp="false" MaintainAspectRatio="true"/>
                     </Layout>
@@ -336,12 +336,12 @@
                           <FlowLayout Orientation="Vertical" Spacing="3,3"/>
                         </Layout>
                         <Children>
-                          <ib:ImageButton Name="ResumeMovieButton" Text="[Application.LocalStrings.#ResumeDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ResumeMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconResume" Size="200,45" Font="font://f:MM_ButtonFont"/>
-                          <ib:ImageButton Name="PlayMovieButton" Text="[Application.LocalStrings.#PlayDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PlayMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPlay" Size="200,45" Font="font://f:MM_ButtonFont" />
-                          <ib:ImageButton Name="TrailerButton" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="200,45" Font="font://f:MM_ButtonFont" />
-                          <ib:ImageButton Name="NextItemButton" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="200,45" Font="font://f:MM_ButtonFont"/>
-                          <ib:ImageButton Name="PreviousItemButton" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="200,45" Font="font://f:MM_ButtonFont"/>
-                          <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="200,45" Font="font://f:MM_ButtonFont" Visible="false" />
+                          <ib:ImageButton Name="ResumeMovieButton" Text="[Application.LocalStrings.#ResumeDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ResumeMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconResume" Size="175,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="PlayMovieButton" Text="[Application.LocalStrings.#PlayDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PlayMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPlay" Size="175,45" Font="font://f:MM_ButtonFont" />
+                          <ib:ImageButton Name="TrailerButton" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="175,45" Font="font://f:MM_ButtonFont" />
+                          <ib:ImageButton Name="NextItemButton" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="175,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="PreviousItemButton" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="175,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="175,45" Font="font://f:MM_ButtonFont" Visible="false" />
                           <vsb:SimpleButton Name="ChaptersButton"     ImageNoFocus="image://i:IconChapter" MaximumSize="25,25" Margins="0,2,0,0" Command="[ChaptersCommand]" Application="[Application]"/>
                           <!--<vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:IconResume"  Command="[ResumeMovieCommand]" Application="[Application]" HasFocus="[ResumeBtnHasFocus]"/>
                           <vsb:SimpleButton Name="PlayMovieButton"   ImageNoFocus="image://it:IconPlay"    Command="[PlayMovieCommand]" Application="[Application]" />
