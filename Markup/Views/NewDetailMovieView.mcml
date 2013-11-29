@@ -415,6 +415,28 @@
                   </Clip>
 
 
+                  <Panel Name="ExtraPanel" Layout="VerticalFlow" Alpha=".8">
+                    <LayoutInput>
+                      <FormLayoutInput Left="Parent, .33" Top="Parent, 1, -51" Right="Parent, 1" />
+                    </LayoutInput>
+                    <Children>
+                      <Panel Name="TabPanel" Layout="HorizontalFlow" >
+                        <Children>
+                          <Graphic Name="ActorsTab" Content="image://it:TabItemTab" Padding="0,8,0,0" MinimumSize="0, 50" MaximumSize="150,50" Layout="Center" >
+                            <Children>
+                              <Text Content="[Application.LocalStrings.#Cast!cor:String]" Font="font://uf:Detail_Overview" Color="color://s:Light" />
+                            </Children>
+                          </Graphic>
+                          <Graphic Name="ChaptersTab" Content="image://it:TabItemTab" Padding="0,8,0,0" MinimumSize="0, 50" MaximumSize="150,50" Layout="Center" >
+                            <Children>
+                              <Text Content="[Application.LocalStrings.#Scenes!cor:String]" Font="font://uf:Detail_Overview" Color="color://s:Light" />
+                            </Children>
+                          </Graphic>
+                        </Children>
+                      </Panel>
+                    </Children>
+                  </Panel>
+
                   <Panel Name="MediaInfo" Layout="HorizontalFlow" Alpha="0.8">
                     <LayoutInput>
                       <FormLayoutInput Right="Parent,1,-20" Bottom="Parent,1,-18" />
