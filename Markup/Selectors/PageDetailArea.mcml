@@ -138,11 +138,20 @@
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="CoverFlow"  >
         <Actions>
           <Set Target="[CoverFlow.Visible]" Value="true" />
-          <Set Target="[BackdropConstraint]" Value="small" />
-          <Set Target="[InfoIconsPanel.Visible]" Value="false" />
         </Actions>
       </Condition>
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="CoverFlow" Target="[CoverFlow.Visible]" Value="false" />
+
+      <Rule ConditionLogicalOp="And" >
+        <Conditions>
+          <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="CoverFlow"/>
+          <Equality Source="[ThemeHelper.Config.ShowCoverFlowDetails]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[BackdropConstraint]" Value="small" />
+          <Set Target="[InfoIconsPanel.Visible]" Value="false" />
+        </Actions>
+      </Rule>
 
       <Default Target="[BackdropConstraint]" Value="none" />
 

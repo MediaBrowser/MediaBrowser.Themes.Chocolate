@@ -37,7 +37,7 @@
       <BooleanChoice Name="DisableEHSMovieTitle" Value="[Helper.Config.DisableEHSMovieTitle]" />
       <!--CoverFlow Options-->
       <BooleanChoice Name="ShowCoverFlowTitle" Value="[Helper.Config.ShowCoverFlowTitle]" />
-      <BooleanChoice Name="ShowCoverFlowOverlay" Value="[Helper.Config.ShowCoverFlowOverlay]" />
+      <BooleanChoice Name="ShowCoverFlowDetails" Value="[Helper.Config.ShowCoverFlowDetails]" />
       <BooleanChoice Name="ShowCoverFlowLogos" Value="[Helper.Config.ShowCoverFlowLogos]" />
       <BooleanChoice Name="ShowCoverFlowEndTime" Value="[Helper.Config.ShowCoverFlowEndTime]" />
       <BooleanChoice Name="ShowCoverflowIndicator" Value="[Helper.Config.ShowCoverflowIndicator]" />
@@ -93,9 +93,9 @@
           <Set Target="[Helper.Config.ShowCoverFlowTitle]" Value="[ShowCoverFlowTitleCB.Checked.Value]"/>
         </Actions>
       </Changed>-->
-      <Changed Source="[ShowCoverFlowOverlayCB.Checked.Value]">
+      <Changed Source="[ShowCoverFlowDetailsCB.Checked.Value]">
         <Actions>
-          <Set Target="[Helper.Config.ShowCoverFlowOverlay]" Value="[ShowCoverFlowOverlayCB.Checked.Value]"/>
+          <Set Target="[Helper.Config.ShowCoverFlowDetails]" Value="[ShowCoverFlowDetailsCB.Checked.Value]"/>
         </Actions>
       </Changed>
       <Changed Source="[ShowCoverFlowLogosCB.Checked.Value]">
@@ -188,7 +188,7 @@
             <Children>
               <Text Content="CoverFlow Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <!--<cb:CheckBox Name="ShowCoverFlowTitleCB" Label="[Application.LocalStrings.#ShowCoverFlowTitle!cor:String]" Checked="[ShowCoverFlowTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>-->
-              <cb:CheckBox Name="ShowCoverFlowOverlayCB" Label="[Application.LocalStrings.#ShowCoverFlowOverlay!cor:String]" Checked="[ShowCoverFlowOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverFlowDetailsCB" Label="[Application.LocalStrings.#ShowCoverFlowDetails!cor:String]" Checked="[ShowCoverFlowDetails]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverFlowLogosCB" Label="[Application.LocalStrings.#ShowCoverFlowLogos!cor:String]" Checked="[ShowCoverFlowLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverFlowEndTimeCB" Label="[Application.LocalStrings.#ShowCoverFlowEndTime!cor:String]" Checked="[ShowCoverFlowEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverflowIndicatorCB" Label="[Application.LocalStrings.#ShowCoverflowIndicator!cor:String]" Checked="[ShowCoverflowIndicator]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>

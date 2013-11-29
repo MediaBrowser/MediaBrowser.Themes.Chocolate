@@ -80,9 +80,9 @@
         public string ShowCoverflowIndicator = "Show Coverflow Watched Indicator";
         public string ShowCoverflowIndicatorDesc = "This Option Will Show Coverflow Watched Indicator";
         public string ShowCoverFlowLogos = "Show Coverflow Logos";
-        public string ShowCoverFlowLogosDesc = "Show Logos On Coverflow View.";
-        public string ShowCoverFlowOverlay = "Show Coverflow Overlay";
-        public string ShowCoverFlowOverlayDesc = "This Option will show to overlay image on the backdrop within coverflow.";
+        public string ShowCoverFlowLogosDesc = "Show Logos instead of text On Coverflow View.";
+        public string ShowCoverFlowDetails = "Show Coverflow Details";
+        public string ShowCoverFlowDetailsDesc = "Show Details for selected item within coverflow.";
         public string ShowCoverflowPosterOverlay = "Show Coverflow Poster Overlay";
         public string ShowCoverflowPosterOverlayDesc = "This Option Will Show Poster Overlay Within Coverflow";
         public string ShowCoverFlowTitle = "Show Item Title In Cover Flow";

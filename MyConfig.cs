@@ -355,18 +355,18 @@
             }
         }
 
-        public bool ShowCoverFlowOverlay
+        public bool ShowCoverFlowDetails
         {
             get
             {
-                return this.data.showcoverflowoverlay;
+                return this.data.showcoverflowdetails;
             }
             set
             {
-                if (this.data.showcoverflowoverlay != value)
+                if (this.data.showcoverflowdetails != value)
                 {
-                    this.data.showcoverflowoverlay = value;
-                    base.FirePropertyChanged("ShowCoverFlowOverlay");
+                    this.data.showcoverflowdetails = value;
+                    base.FirePropertyChanged("ShowCoverFlowDetails");
                     this.Save();
                 }
             }

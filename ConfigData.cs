@@ -25,7 +25,7 @@
         public bool showcoverflowendtime;
         public bool showcoverflowindicator;
         public bool showcoverflowlogos;
-        public bool showcoverflowoverlay;
+        public bool showcoverflowdetails;
         public bool showcoverflowposteroverlay;
         public bool showcoverflowtitle;
         public bool showcoverflowtotalnumber;
@@ -61,9 +61,9 @@
             this.themeStyle = "Classic";
             this.shownowplayingicon = true;
             this.showcoverflowtitle = true;
-            this.showcoverflowoverlay = true;
+            this.showcoverflowdetails = true;
             this.disableehsmovietitle = true;
-            this.showcoverflowlogos = true;
+            this.showcoverflowlogos = false;
             this.showlistlogos = true;
             this.showposterlogos = true;
             this.showthumblogos = true;
@@ -89,9 +89,9 @@
             this.themeStyle = "Classic";
             this.shownowplayingicon = true;
             this.showcoverflowtitle = true;
-            this.showcoverflowoverlay = true;
+            this.showcoverflowdetails = true;
             this.disableehsmovietitle = true;
-            this.showcoverflowlogos = true;
+            this.showcoverflowlogos = false;
             this.showlistlogos = true;
             this.showposterlogos = true;
             this.showthumblogos = true;

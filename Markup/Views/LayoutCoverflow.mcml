@@ -87,7 +87,7 @@
       </Changed>
       
       <!--Hide/Show Options-->
-      <Binding Source="[ThemeHelper.Config.ShowCoverFlowOverlay]" Target="[CoverFlowOverlay.Visible]"/>
+      <Binding Source="[ThemeHelper.Config.ShowCoverFlowDetails]" Target="[ItemInfoPanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
       
