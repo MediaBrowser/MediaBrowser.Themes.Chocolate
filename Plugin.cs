@@ -16,7 +16,7 @@
         {
             try
             {
-                kernel.AddTheme("Chocolate", "resx://Chocolate/Chocolate.Resources/Page#PageChocolate", "resx://Chocolate/Chocolate.Resources/NewDetailMovieView#NewChocolateMovieView");
+                kernel.AddTheme("Chocolate", "resx://Chocolate/Chocolate.Resources/Page#PageChocolate", "resx://Chocolate/Chocolate.Resources/DetailMovieView#ChocolateMovieView");
                 if (AppDomain.CurrentDomain.FriendlyName.Contains("ehExtHost"))
                 {
                     this.config = new MyConfig();
