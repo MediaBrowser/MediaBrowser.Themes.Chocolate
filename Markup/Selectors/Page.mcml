@@ -545,12 +545,12 @@
               </Panel>
               <Panel Name="UserKey" FocusOrder="104">
                 <Children>
-                  <vsb:SimpleButton Name="UserMenuButton" Application="[Application]" ImageNoFocus="[Application.CurrentUser.PrimaryImage]" Command="[SwitchUser]" Size="20,20" Margins="3,0,0,0" />
+                  <vsb:SimpleButton Name="UserMenuButton" Application="[Application]" ImageNoFocus="[Application.CurrentUser.PrimaryImage]" Command="[SwitchUser]" Size="20,20" Margins="3,2,0,0" />
                 </Children>
               </Panel>
               <Panel Name="ConfigurationKey" FocusOrder="104">
                 <Children>
-                  <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,3,0,0" Alpha=".8"/>
+                  <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,2,0,0" Alpha=".8"/>
                 </Children>
               </Panel>
             </Children>
