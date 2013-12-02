@@ -37,6 +37,18 @@
     </Content>
   </UI>
 
+  <UI Name="UserMenu">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <Command Name="Close" Command="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+    </Properties>
+
+    <Content>
+      <me:ActionMenu Name="Menu" Close="[Close]" Application="[Application]" ThemeHelper="[ThemeHelper]" MenuType="User"/>
+    </Content>
+  </UI>
+
   <UI Name="ActionMenu">
     <Properties>
       <a:Application Name="Application" Application="$Required"/>
@@ -55,11 +67,21 @@
       <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
       <Default Target="[Input.KeyInteractive]" Value="true" />
       <Default Target="[Input.CreateInterestOnFocus]" Value="true" />
-      <Binding Target="[ListRepeater.Source]" Source="[Application.ContextMenu]" />
+      <Binding Target="[ListRepeater.Source]" Source="[Application.ContextMenu]" >
+        <Conditions>
+          <Equality Source="[MenuType]" Value="Context" />
+        </Conditions>
+      </Binding>
 
       <Default Target="[Title.Content]" Value="[Application.LocalStrings.#PlayMenuCMenu!cor:String]" >
         <Conditions>
           <Equality Source="[MenuType]" Value="Play" />
+        </Conditions>
+      </Default>
+
+      <Default Target="[Title.Content]" Value="[Application.LocalStrings.#UserMenuCMenu!cor:String]" >
+        <Conditions>
+          <Equality Source="[MenuType]" Value="User" />
         </Conditions>
       </Default>
 
@@ -89,6 +111,16 @@
         </Conditions>
         <Actions>
           <Invoke Target="[ListRepeater.NavigateIntoIndex]" index="0" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Application.DisplayUserMenu]"  InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[MenuType]" Value="User" />
+        </Conditions>
+        <Actions>
+          <Set Target="[ListRepeater.Source]" Value="[Application.UserMenu]" />
+          <Set Target="[ItemCount]" Value="[Application.UserMenu.Count]" />
         </Actions>
       </Changed>
 

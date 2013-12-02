@@ -57,6 +57,8 @@
       <Command Name="CloseIndexConfiguration" />
       <Command Name="RefreshCommand" />
       <Command Name="CloseCommand" />
+      <Command Name="CloseUserMenu" />
+      <Command Name="SwitchUser" />
       <Command Name="ConfigOptions" />
       <Command Name="GoToNowPlaying" />
       <Command Name="SetPlayState"/>
@@ -201,6 +203,29 @@
 
       <Rule>
         <Conditions>
+          <Equality Source="[Application.DisplayUserMenu]" ConditionOp="Equals" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[UserMenu.Visible]" Value="true" />
+          <Invoke Target="[UserMenu.NavigateInto]" />
+        </Actions>
+      </Rule>
+
+      <Changed Source="[SwitchUser.Invoked]">
+        <Actions>
+          <Set Target="[Application.DisplayUserMenu]" Value="true"/>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[CloseUserMenu.Invoked]">
+        <Actions>
+          <Set Target="[Application.DisplayUserMenu]" Value="false" />
+          <Invoke Target="[ViewPanel.NavigateInto]" />
+        </Actions>
+      </Changed>
+
+      <Rule>
+        <Conditions>
           <Modified Source="[ViewKey.Invoked]" />
         </Conditions>
         <Actions>
@@ -312,6 +337,7 @@
           <Equality Source="[SortConfig.Visible]" Value="true"/>
           <Equality Source="[IndexConfig.Visible]" Value="true"/>
           <Equality Source="[ContextMenu.Visible]" Value="true"/>
+          <Equality Source="[UserMenu.Visible]" Value="true"/>
           <Equality Source="[PopupPlay.Visible]" Value="true"/>
           <Equality Source="[Application.ShowMessage]" Value="true"/>
           <Equality Source="[Application.ShowSearchPanel]" Value="true"/>
@@ -322,6 +348,8 @@
       </Rule>
       <Default Target="[Helper.IsMenuOpen]" Value="false"/>
 
+      <Binding Source="[Helper.IsMenuOpen]" Target="[MouseBlocker.Visible]" />
+      
       <Changed Source="[ShowViewConfiguration.Invoked]">
         <Actions>
           <Set Target="[ViewConfig.Visible]" Value="true"/>
@@ -348,10 +376,13 @@
 
               <pp:PopupPlay Name="PopupPlay" Visible="false" Item="[Folder]" Close="[ClosePopupPlay]" Application="[Application]" />
               <cm:ContextMenu Name="ContextMenu" Application="[Application]" ThemeHelper="[Helper]" Close="[CloseContextMenu]" Visible="false" />
+              <cm:UserMenu Name="UserMenu" Application="[Application]" ThemeHelper="[Helper]" Close="[CloseUserMenu]" Visible="false" />
 
               <pvm:PopupViewMenu  Name="ViewConfig" Application="[Application]" Visible="false"  Close="[CloseViewConfiguration]"  Prefs="[Folder.DisplayPrefs]"/>
               <prm:PopupRadioMenu Name="SortConfig" Application="[Application]"  Visible="false"  Close="[CloseSortConfiguration]"  Choice="[Folder.DisplayPrefs.SortOrders]"/>
               <prm:PopupRadioMenu Name="IndexConfig" Application="[Application]" Visible="false"  Close="[CloseIndexConfiguration]" Choice="[Folder.DisplayPrefs.IndexByChoice]"/>
+
+              <Panel Name="MouseBlocker" MouseInteractive="true" Layout="Fill" Visible="false" />
 
               <Panel Name="ConfigurationMenu" Visible="false" Navigation="WrapHorizontal,ContainAll,RememberFocus">
                 <Animations>
@@ -400,7 +431,7 @@
 
               <Panel Layout="Form" Navigation="WrapDirectional">
                 <Children>
-                  <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
+                  <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]" SwitchUser="[SwitchUser]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
                     <LayoutInput>
                       <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" Bottom="Parent,0,100"/>
                     </LayoutInput>
@@ -424,6 +455,7 @@
       <lib:FolderModel Name="Folder" FolderModel="$Required"/>
       <Command Name="GoToNowPlaying" Command="$Required"/>
       <Command Name="ConfigOptions" Command="$Required"/>
+      <Command Name="SwitchUser" Command="$Required"/>
       <ch:ChocHelper Name="Helper" ChocHelper="$Required"/>
     </Properties>
 
@@ -509,6 +541,11 @@
               <Panel Name="PCBtn" Visible="true" FocusOrder="103">
                 <Children>
                   <pci:PCIndicatorButton Application="[Application]" Size="28,28"/>
+                </Children>
+              </Panel>
+              <Panel Name="UserKey" FocusOrder="104">
+                <Children>
+                  <vsb:SimpleButton Name="UserMenuButton" Application="[Application]" ImageNoFocus="[Application.CurrentUser.PrimaryImage]" Command="[SwitchUser]" Size="20,20" Margins="3,0,0,0" />
                 </Children>
               </Panel>
               <Panel Name="ConfigurationKey" FocusOrder="104">
