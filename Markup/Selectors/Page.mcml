@@ -382,8 +382,6 @@
               <prm:PopupRadioMenu Name="SortConfig" Application="[Application]"  Visible="false"  Close="[CloseSortConfiguration]"  Choice="[Folder.DisplayPrefs.SortOrders]"/>
               <prm:PopupRadioMenu Name="IndexConfig" Application="[Application]" Visible="false"  Close="[CloseIndexConfiguration]" Choice="[Folder.DisplayPrefs.IndexByChoice]"/>
 
-              <Panel Name="MouseBlocker" MouseInteractive="true" Layout="Fill" Visible="false" />
-
               <Panel Name="ConfigurationMenu" Visible="false" Navigation="WrapHorizontal,ContainAll,RememberFocus">
                 <Animations>
                   <Animation Animation="animation://an:PageHide" />
@@ -407,6 +405,8 @@
 
                 </Children>
               </Panel>
+
+              <Panel Name="MouseBlocker" MouseInteractive="true" Layout="Fill" Visible="false" />
 
               <Panel Name="FindAsYouTypePanel" >
                 <LayoutInput>
