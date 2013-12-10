@@ -24,7 +24,7 @@
       
       xmlns:gl="resx://MediaBrowser/MediaBrowser.Resources/GenreList"
       xmlns:mi="resx://MediaBrowser/MediaBrowser.Resources/MediaInfoPanel"
-      xmlns:pb="resx://MediaBrowser/MediaBrowser.Resources/PersonButton"
+      xmlns:pb="resx://Chocolate/Chocolate.Resources/PersonButton"
       xmlns:nip="resx://Chocolate/Chocolate.Resources/NewInfoPanel"
       
       xmlns:vs="resx://Chocolate/Chocolate.Resources/Studio_Images"
@@ -34,7 +34,7 @@
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
       xmlns:progress="resx://Chocolate/Chocolate.Resources/ProgressBar"
       xmlns:iip="resx://Chocolate/Chocolate.Resources/InfoIconsPanel"
-    xmlns:cb="resx://MediaBrowser/MediaBrowser.Resources/ChapterButton"
+    xmlns:cb="resx://Chocolate/Chocolate.Resources/ChapterButton"
       xmlns:me="Me">
 
   <!-- Movie Details Page -->
@@ -137,6 +137,7 @@
 
           <Set Target="[ActorScrollerTitle.Visible]"    Value="true"/>
           <Set Target="[ActorScroller.Visible]"    Value="true"/>
+          <Set Target="[ExtraPanel.Visible]"    Value="true"/>
         </Actions>
       </Changed>
 
@@ -147,6 +148,7 @@
 
           <Set Target="[ChapterScrollerTitle.Visible]"    Value="true"/>
           <Set Target="[ChapterScroller.Visible]"    Value="true"/>
+          <Set Target="[ExtraPanel.Visible]"    Value="true"/>
         </Actions>
       </Changed>
 
@@ -238,9 +240,14 @@
       </Binding>
       <Binding Target="[ActorScrollerTitle.Text]"           Source="[Item.Name]"/>
       <Binding Target="[ActorScroller.Item]" Source="[Item]"/>
+      <Binding Target="[ChapterScroller.Item]" Source="[Item]"/>
       <Binding Target="[PosterImage.Content]" Source="[Item.PreferredImage]"/>
       <Binding Target="[MediaInfoPanel.Item]" Source="[Item]"/>
-      <Binding Target="[PlayMovieButton.Visible]" Source="[Item.IsPlayable]"/>
+      <Binding Target="[PlayMovieButton.Visible]" Source="[Item.IsPlayable]">
+        <Conditions>
+          <Equality Source="[Item.CanResume]" Value="false" />
+        </Conditions>
+      </Binding>
       <Changed Source="[Item]" InitialEvaluate="true">
         <Actions>
           <Set Target="[ThemeHelper.CurrentItem]" Value="[Item]"/>
@@ -280,7 +287,7 @@
       
       <Binding Source="[ThemeHelper.Config.ShowNowPlayingIcon]" Target="[NowPlayButton.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowNPV]" Target="[NPVOption.Visible]"/>
-      <Binding Source="[Item.HasChapterInfo]" Target="[ChaptersButton.Visible]"/>
+      <!--<Binding Source="[Item.HasChapterInfo]" Target="[ChaptersButton.Visible]"/>-->
       <Binding Source="[Item]" Target="[ItemInfoPanel.Item]"/>
 
       <!--Display Logo-->
@@ -338,30 +345,59 @@
                         <Children>
                           <ib:ImageButton Name="ResumeMovieButton" Text="[Application.LocalStrings.#ResumeDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ResumeMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconResume" Size="175,45" Font="font://f:MM_ButtonFont"/>
                           <ib:ImageButton Name="PlayMovieButton" Text="[Application.LocalStrings.#PlayDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PlayMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPlay" Size="175,45" Font="font://f:MM_ButtonFont" />
-                          <ib:ImageButton Name="TrailerButton" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="175,45" Font="font://f:MM_ButtonFont" />
-                          <ib:ImageButton Name="NextItemButton" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="175,45" Font="font://f:MM_ButtonFont"/>
-                          <ib:ImageButton Name="PreviousItemButton" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="175,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="CastButton" Text="[Application.LocalStrings.#Cast!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ActorCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/UserLoginDefault" Size="175,45" Font="font://f:MM_ButtonFont"/>
+                          <ib:ImageButton Name="ScenesButton" Text="[Application.LocalStrings.#Scenes!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ChaptersCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/Frames" Size="175,45" Font="font://f:MM_ButtonFont" />
+                          <ib:ImageButton Name="TrailerButton" Visible="false" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="175,45" Font="font://f:MM_ButtonFont" Visible="false" />
-                          <vsb:SimpleButton Name="ChaptersButton"     ImageNoFocus="image://i:IconChapter" MaximumSize="25,25" Margins="0,2,0,0" Command="[ChaptersCommand]" Application="[Application]"/>
+                          <vsb:SimpleButton Name="ChaptersButton" Visible="false"    ImageNoFocus="image://i:IconChapter" MaximumSize="25,25" Margins="0,2,0,0" Command="[ChaptersCommand]" Application="[Application]"/>
                           <!--<vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:IconResume"  Command="[ResumeMovieCommand]" Application="[Application]" HasFocus="[ResumeBtnHasFocus]"/>
                           <vsb:SimpleButton Name="PlayMovieButton"   ImageNoFocus="image://it:IconPlay"    Command="[PlayMovieCommand]" Application="[Application]" />
                           <vsb:SimpleButton Name="TrailerButton"     ImageNoFocus="image://it:IconTrailer" Command="[TrailerCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="RefreshButton"     ImageNoFocus="image://it:IconRefresh" Command="[RefreshCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="SummaryButton" ImageNoFocus="image://it:IconSummary" Command="[SummaryCommand]" Application="[Application]"/>
                           <vsb:SimpleButton Name="ActorsButton"  ImageNoFocus="image://it:IconActor"   Command="[ActorCommand]" Application="[Application]"/>
-                          <vsb:SimpleButton Name="DeleteMovieButton" Visible="false" ImageNoFocus="resx://MediaBrowser/MediaBrowser.Resources/IconDelete"
-                                            Command="[DeleteMovieCommand]" Application="[Application]"/>-->
+                          -->
                         </Children>
                       </Panel>
                     </Children>
                   </Panel>
 
-                  <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 330">
+                  <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="175,45" Font="font://f:MM_ButtonFont">
+                    <LayoutInput>
+                      <FormLayoutInput Right="Parent,1,10" Bottom="Parent,1, 5"/>
+                    </LayoutInput>
+                    
+                  </ib:ImageButton>
+
+                  <ib:ImageButton Name="PreviousItemButton" Alpha=".2" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="175,45" Font="font://f:MM_ButtonFont">
+                    <LayoutInput>
+                      <FormLayoutInput Left="Parent,0,2" Bottom="Parent,1, 5"/>
+                    </LayoutInput>
+
+                  </ib:ImageButton>
+                  
+
+                  <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 330" FocusOrder="0">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,0,32" Bottom="Parent,1,-40"/>
                     </LayoutInput>
                     <Children>
-                      <Graphic Name="PosterImage" Content="[Item.PreferredImage]" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint"/>
+                      <Graphic Name="PosterImage" Content="[Item.PreferredImage]" MaintainAspectRatio="true" SizingPolicy="SizeToContent">
+                        <!--<Children>
+                          <vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:MetroResume" Command="[ResumeMovieCommand]"
+                                            FocusOrder="0"
+                                            Application="[Application]"
+                                            Margins="50,97,0,0"/>
+                          <vsb:SimpleButton Name="PlayMovieButton" ImageNoFocus="image://it:MetroPlay" Command="[PlayMovieCommand]" 
+                                            FocusOrder="0"
+                                            Application="[Application]"
+                                            Margins="50,97,0,0"/>
+                          <vsb:SimpleButton Name="DeleteMovieButton" Visible="false" ImageNoFocus="resx://MediaBrowser/MediaBrowser.Resources/IconDelete"
+                                            Size="25,25" Command="[DeleteMovieCommand]" Application="[Application]" FocusOrder="1"/>
+                          
+                          <ColorFill Content="Black" Alpha=".1" Layout="Fill" />
+                        </Children>-->
+                      </Graphic>
                     </Children>
                   </Panel>
 
@@ -389,9 +425,54 @@
                     </Children>
                   </Panel>
 
-                  <Graphic Name="LogoImage" Margins="0,10,20,0" Content="[Item.LogoImage]" MaximumSize="0,110" MaintainAspectRatio="true" >
+                  <Panel Name="ExtraPanel" Visible="false" >
                     <LayoutInput>
-                      <FormLayoutInput Right="Parent,1" Bottom="Parent,.85"/>
+                      <FormLayoutInput Right="Parent,1" Bottom="Parent,.90" Top="Parent, 0" Left="Parent,0,700"/>
+                    </LayoutInput>
+                    <Animations>
+                      <Animation Type="Hide">
+                        <Keyframes>
+                          <PositionKeyframe Time="0.0" Value="0, 0,0" RelativeTo="Current"/>
+                          <PositionKeyframe Time="0.6" Value="1300, 0,0" Interpolation="Log" RelativeTo="Absolute"/>
+                          <AlphaKeyframe Time="0.0" RelativeTo="Absolute" Value="1" Interpolation="EaseIn"/>
+                          <AlphaKeyframe Time="0.6" RelativeTo="Absolute" Value="0"/>
+                        </Keyframes>
+                      </Animation>
+                      <Animation Type="Show">
+                        <Keyframes>
+                          <PositionKeyframe Time="0.0" Value="1300, 0,0" RelativeTo="Absolute"/>
+                          <PositionKeyframe Time="0.6" Value="700, 0,0" Interpolation="Log" RelativeTo="Absolute"/>
+                          <AlphaKeyframe Time="0.0" RelativeTo="Absolute" Value="0" Interpolation="EaseIn"/>
+                          <AlphaKeyframe Time="0.6" RelativeTo="Absolute" Value="1"/>
+                        </Keyframes>
+                      </Animation>
+                    </Animations>
+                    <Children>
+                      <!-- Actors field -->
+                      <Panel Name="Actors">
+                        <Animations>
+                          <Animation Animation="animation://anim:FadeIn" />
+                          <Animation Animation="animation://anim:FadeOut" />
+                        </Animations>
+                        <Children>
+                          <me:ActorList Name="ActorScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" Visible="false"/>
+                        </Children>
+                      </Panel>
+
+                      <!-- Chapters  -->
+                      <Panel Name="Chapters">
+                        <Children>
+                          <me:ChapterList Name="ChapterScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" Visible="false"/>
+                        </Children>
+                      </Panel>
+
+                      <ColorFill Content="Black" Alpha=".75" Layout="Fill" />
+                    </Children>
+                  </Panel>
+
+                  <Graphic Name="LogoImage" Margins="0,10,30,0" Content="[Item.LogoImage]" MaximumSize="0,110" MaintainAspectRatio="true" >
+                    <LayoutInput>
+                      <FormLayoutInput Right="Parent,1" Bottom="Parent,.90"/>
                     </LayoutInput>
                     
                   </Graphic>
@@ -414,28 +495,6 @@
                     </Children>
                   </Clip>
 
-
-                  <Panel Name="ExtraPanel" Layout="VerticalFlow" Alpha=".8">
-                    <LayoutInput>
-                      <FormLayoutInput Left="Parent, .33" Top="Parent, 1, -51" Right="Parent, 1" />
-                    </LayoutInput>
-                    <Children>
-                      <Panel Name="TabPanel" Layout="HorizontalFlow" >
-                        <Children>
-                          <Graphic Name="ActorsTab" Content="image://it:TabItemTab" Padding="0,8,0,0" MinimumSize="0, 50" MaximumSize="150,50" Layout="Center" >
-                            <Children>
-                              <Text Content="[Application.LocalStrings.#Cast!cor:String]" Font="font://uf:Detail_Overview" Color="color://s:Light" />
-                            </Children>
-                          </Graphic>
-                          <Graphic Name="ChaptersTab" Content="image://it:TabItemTab" Padding="0,8,0,0" MinimumSize="0, 50" MaximumSize="150,50" Layout="Center" >
-                            <Children>
-                              <Text Content="[Application.LocalStrings.#Scenes!cor:String]" Font="font://uf:Detail_Overview" Color="color://s:Light" />
-                            </Children>
-                          </Graphic>
-                        </Children>
-                      </Panel>
-                    </Children>
-                  </Panel>
 
                   <Panel Name="MediaInfo" Layout="HorizontalFlow" Alpha="0.8">
                     <LayoutInput>
@@ -512,26 +571,6 @@
                     </Children>
                   </Panel>
 
-                  <!-- Actors field -->
-                  <Panel Name="Actors">
-                    <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,35" Right="Parent,1,-35" Top="Parent,0.64,25" Bottom="Parent,1,-30"/>
-                    </LayoutInput>
-                    <Children>
-                      <me:ActorList Name="ActorScroller" Item="[Item]" Application="[Application]" Visible="false"/>
-                    </Children>
-                  </Panel>
-
-                  <!-- Chapters  -->
-                  <Panel Name="Chapters">
-                    <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,35" Right="Parent,1,-35" Top="Parent,0.64,25" Bottom="Parent,1,-30"/>
-                    </LayoutInput>
-                    <Children>
-                      <me:ChapterList Name="ChapterScroller" Item="[Item]" Application="[Application]" Visible="false"/>
-                    </Children>
-                  </Panel>
-
                   <Panel Layout="VerticalFlow" Visible="false">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,1,-35" Top="Parent,0.67" Right="Parent,1"/>
@@ -594,6 +633,7 @@
   <Image Name="ButtonPressedAfterGlow"  Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonPressedAfterGlow"  NineGrid="7,7,7,7" />
   <Image Name="ButtonPressedHighlight"  Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonPressedHighlight"  NineGrid="7,7,7,7" />
 
+  
   <!-- ActorList-->
   <UI Name="ActorList">
     <Properties>
@@ -602,12 +642,12 @@
     </Properties>
     <Locals>
       <ScrollingHandler Name="ScrollingHandler" HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandlePageKeys="true" HandlePageCommands="true"/>
-      <ScrollingData Name="ScrollingData" LockedAlignment="0.5" LockedPosition="0.55"/>
+      <ScrollingData Name="ScrollingData" />
       <Command Name="ScrollUpCommand" />
       <Command Name="ScrollDownCommand" />
 
       <GridLayout Name="MyLayout" Repeat="Never"  RepeatGap="[Application.Config.GridSpacing.Width]" Orientation="Horizontal" Rows="0" Columns="0"
-						AllowWrap="true" Spacing="[Application.Config.GridSpacing]"/>
+						AllowWrap="true" Spacing="5,15"/>
     </Locals>
     <Rules>
       <Binding Source="[Item.Actors]" Target="[ListRepeater.Source]" />
@@ -665,13 +705,13 @@
               <FormLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent,0" Bottom="Parent,1"/>
             </LayoutInput>
             <Children>
-              <Scroller Name="ActorScroller" Orientation="Vertical" NearOffset="30" FadeSize="5" ScrollingData="[ScrollingData]" Navigation="FlowVertical">
+              <Scroller Name="ActorScroller" Orientation="Vertical" NearOffset="0" FadeSize="5" ScrollingData="[ScrollingData]" Navigation="FlowVertical">
                 <LayoutInput>
                   <FormLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent,0" Bottom="Parent,1"/>
                 </LayoutInput>
                 <Children>
 
-                  <Repeater Name="ListRepeater" Source="[Item.Actors]" Layout="[MyLayout]" Navigation="RememberFocus" Padding="0,30,0,0">
+                  <Repeater Name="ListRepeater" Source="[Item.Actors]" Layout="[MyLayout]" Navigation="PreferFocusOrder" Padding="0,30,0,0">
                     <Content>
                       <me:Actor aiw="[RepeatedItem!lib:ActorItemWrapper]" Font="font://uf:Detail_Actors" Application="[Application]" />
                     </Content>
@@ -718,7 +758,7 @@
     <Content>
       <Panel Layout="HorizontalFlow" >
         <Children>
-          <pb:PersonButton PersonItem="[aiw]" Size="250,100" Color="color://s:FontColorMedium" Command="[NavigateToActorsCommand]" />
+          <pb:PersonButton PersonItem="[aiw]" Size="300,100" Color="color://s:FontColorMedium" Command="[NavigateToActorsCommand]" />
 
         </Children>
       </Panel>
@@ -765,17 +805,6 @@
         </Actions>
       </Changed>
 
-      <Binding Source="[ScrollingData.CurrentPage]" Target="[CurrentPage.Content]">
-        <Transformer>
-          <FormatTransformer Format="{0:F0}"/>
-        </Transformer>
-      </Binding>
-
-      <Binding Source="[ScrollingData.TotalPages]" Target="[TotalPages.Content]">
-        <Transformer>
-          <FormatTransformer Format="{0:F0}"/>
-        </Transformer>
-      </Binding>
 
       <Rule>
         <Conditions>
@@ -783,29 +812,6 @@
         </Conditions>
         <Actions>
           <Set Target="[NoChapters.Visible]" Value="true" />
-        </Actions>
-      </Rule>
-
-      <!-- Hides the page info display if there is only 1 page.  We may what to remove this from the
-           Scoll area and actor list since the selectable areas line up a little nicer if we leave them -->
-      <Rule>
-        <Conditions>
-          <Equality Source="[ScrollingData.TotalPages]" ConditionOp="LessThanOrEquals" Value="1" />
-        </Conditions>
-        <Actions>
-          <Set Target="[ScrollInfo.Visible]" Value="false" />
-          <Set Target="[Input.KeyInteractive]" Value="false" />
-          <Set Target ="[ImagePanel.MouseInteractive]" Value="false" />
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ScrollingData.TotalPages]" ConditionOp="GreaterThan" Value="1" />
-        </Conditions>
-        <Actions>
-          <Set Target="[Input.KeyInteractive]" Value="true" />
-          <Set Target ="[ImagePanel.MouseInteractive]" Value="true" />
         </Actions>
       </Rule>
 
@@ -820,13 +826,13 @@
               <DockLayoutInput Position="Client"/>
             </LayoutInput>
             <Children>
-              <Scroller Name="ChapterScroller" FadeSize="-5" ScrollingData="[ScrollingData]" Orientation="Vertical">
+              <Scroller Name="ChapterScroller" FadeSize="-5" ScrollingData="[ScrollingData]" Orientation="Vertical" Navigation="PreferFocusOrder">
                 <LayoutInput>
                   <AnchorLayoutInput Horizontal="Fill" Vertical="Near"/>
                 </LayoutInput>
 
                 <Children>
-                  <Repeater Name="ListRepeater" Source="[Item.Actors]" Layout="[MyLayout]" >
+                  <Repeater Name="ListRepeater" Source="[Item.Actors]" Layout="[MyLayout]" Padding="0,30,0,0" >
                     <Content>
                       <me:Chapter ChapterItem="[RepeatedItem!lib:ChapterItem]" Font="font://f:MM_ActorFont" Application="[Application]" />
                     </Content>
@@ -842,26 +848,10 @@
                 </Children>
 
               </Scroller>
-              <Text Name="NoChapters" Content="No Chapter Information" Visible="false" Font="Segoe UI, 48" Alpha=".7" Color="color://s:FontColorMedium" />
+              <Text Name="NoChapters" Content="No Chapter Information" Visible="false" Font="Segoe UI, 48" WordWrap="true" Alpha=".7" Color="color://s:FontColorMedium" />
             </Children>
           </Graphic>
 
-          <!-- The pagination display at the bottom of the scroller-->
-          <Panel Name="ScrollInfo"  Visible="true">
-            <LayoutInput>
-              <DockLayoutInput Position="Bottom" Alignment="Center"/>
-            </LayoutInput>
-            <Children>
-              <Panel Layout="HorizontalFlow" Margins="0,0,0,0">
-                <Children>
-                  <Text Name="CurrentPage" Font="font://f:MM_ActorFont" Color="color://s:FontColorLight" />
-                  <Text Content="|" Font="font://f:MM_ActorFont" Color="color://s:FontColorLight" />
-                  <Text Name="TotalPages"  Font="font://f:MM_ActorFont" Color="color://s:FontColorLight" />
-                </Children>
-              </Panel>
-
-            </Children>
-          </Panel>
         </Children>
       </Panel>
     </Content>

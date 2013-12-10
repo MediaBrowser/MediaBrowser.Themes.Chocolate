@@ -43,6 +43,7 @@
   <Image Name="UltimateItemHolder" Source="resx://Chocolate/Chocolate.Resources/ItemHolder"/>
   <Image Name="InfoPanelCorner" Source="resx://Chocolate/Chocolate.Resources/InfoPanelCorner"/>
   <Image Name="TabItemTab" Source="resx://Chocolate/Chocolate.Resources/TabItemTab"/>
+  <Image Name="NewTab" Source="resx://Chocolate/Chocolate.Resources/NewTab"/>
   <Image Name="RootItemTab" Source="resx://Chocolate/Chocolate.Resources/RootItemTab" NineGrid="5,15,5,0"/>
   <Image Name="ZoomPane" Source="resx://Chocolate/Chocolate.Resources/ZoomPane" NineGrid="4,4,4,4"/>
 
@@ -76,6 +77,8 @@
   <Image Name="HDLogo1080" Source="resx://MediaBrowser/MediaBrowser.Resources/hd1080"  />
   <Image Name="Icon1080" Source="resx://Chocolate/Chocolate.Resources/Icon1080"/>
   <Image Name="Icon720" Source="resx://Chocolate/Chocolate.Resources/Icon720"/>
+  <Image Name="MetroPlay" Source="resx://Chocolate/Chocolate.Resources/MetroPlay"/>
+  <Image Name="MetroResume" Source="resx://Chocolate/Chocolate.Resources/MetroResume"/>
 
 
 

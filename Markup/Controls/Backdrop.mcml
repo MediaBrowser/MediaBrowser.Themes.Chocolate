@@ -354,7 +354,7 @@
       <Environment Name="Environment"/>
       <AnchorLayoutInput Name="LayoutInputFill" Left="Parent,0.5,-683" Top="Parent,0" Right="Parent,0.5,683" Bottom="Parent, 1" ContributesToWidth="false"/>
       <FormLayoutInput Name="SmConstrainedLayout" Left="Parent, .24" Top="Parent,0" Right="Parent, 1.06" Bottom="Parent, .82" />
-      <FormLayoutInput Name="LgConstrainedLayout" Left="Parent, .14" Top="Parent,0" Right="Parent, 1.04" Bottom="Parent, .9" />
+      <FormLayoutInput Name="LgConstrainedLayout" Left="Parent, .14" Top="Parent,0" Right="Parent, 1.09" Bottom="Parent, .95" />
       <FormLayoutInput Name="FullLayout" Vertical="Near" Horizontal="Fill" />
     </Locals>
 

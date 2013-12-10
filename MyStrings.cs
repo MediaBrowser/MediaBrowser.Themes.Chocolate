@@ -10,8 +10,8 @@
     public class MyStrings : LocalizedStringData
     {
         public string ACTOR = "ACTOR";
-        public string Cast = "Cast";
-        public string Scenes = "Scenes";
+        public string Cast = "Cast...";
+        public string Scenes = "Scenes...";
         public string Album = "Album";
         public string AlwaysShowPoster = "Always Show Poster";
         public string AlwaysShowPosterDesc = "When using non-widescreen displays, posters are disabled in some screens, enabling this option forces them on.";

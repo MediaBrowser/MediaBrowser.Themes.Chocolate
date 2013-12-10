@@ -101,6 +101,8 @@
     <Content Include="Images\Icons\Icon720.png" />
     <Content Include="Images\Icons\IconCog.png" />
     <Content Include="Images\Icons\IconNowPlay.png" />
+    <Content Include="Images\Icons\MetroPlay.png" />
+    <Content Include="Images\Icons\MetroResume.png" />
     <Content Include="Images\Ratings\13.png" />
     <Content Include="Images\Ratings\ESRB-AO.png" />
     <Content Include="Images\Ratings\ESRB-E.png" />
@@ -249,6 +251,7 @@
     <Content Include="Images\Ultimate\LongPanel.png" />
     <Content Include="Images\Ultimate\MoviePanel.png" />
     <Content Include="Images\Ultimate\MoviePanelDetail.png" />
+    <Content Include="Images\Ultimate\NewTab.png" />
     <Content Include="Images\Ultimate\Panel.png" />
     <Content Include="Images\Ultimate\PosterPanel.png" />
     <None Include="Images\Ultimate\ProgressBar\PBBack.png" />
@@ -268,9 +271,11 @@
     <Content Include="Markup\Controls\Backdrop.mcml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Markup\Controls\Buttons\ChapterButton.mcml" />
     <Content Include="Markup\Controls\Buttons\ListButton.mcml" />
     <Content Include="Markup\Controls\Buttons\MenuButton.mcml" />
     <Content Include="Markup\Controls\Buttons\PCIndicatorButton.mcml" />
+    <Content Include="Markup\Controls\Buttons\PersonButton.mcml" />
     <Content Include="Markup\Controls\Buttons\RadioButton.mcml">
       <SubType>Designer</SubType>
     </Content>
@@ -285,7 +290,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Markup\Controls\LabelValue.mcml" />
-    <Content Include="Markup\Controls\InfoPanel\NewInfoPanel.mcml" />
+    <Content Include="Markup\Controls\InfoPanel\NewInfoPanel.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\MediaInfoPanel.mcml" />
     <Content Include="Markup\Controls\NowPlayingViewport.mcml" />
     <Content Include="Markup\Controls\Popups\PopupPlay.mcml" />
@@ -315,7 +322,9 @@
     </Content>
     <Content Include="Markup\Styles\Colors.mcml" />
     <Content Include="Markup\Styles\FontsSmall.mcml" />
-    <Content Include="Markup\Styles\Fonts.mcml" />
+    <Content Include="Markup\Styles\Fonts.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Views\NewDetailMovieView.mcml">
       <SubType>Designer</SubType>
     </Content>

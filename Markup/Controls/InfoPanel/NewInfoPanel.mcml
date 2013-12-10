@@ -79,14 +79,15 @@
           <Set Target="[HDType.Content]" Value="image://vi:Icon720" />
         </Actions>
       </Rule>
-      <Rule>
+      <Changed Source="[Item]" InitialEvaluate="true">
         <Conditions>
           <Equality Source="[Item.DirectorString]" ConditionOp="Equals" Value="" />
         </Conditions>
         <Actions>
           <Set Target="[Directors.Visible]" Value="false" />
         </Actions>
-      </Rule>
+      </Changed>
+      <Default Target="[Directors.Visible]" Value="true" />
       <Rule>
         <Conditions>
           <Equality Source="[ShowLogo]" ConditionOp="Equals" Value="true" />
