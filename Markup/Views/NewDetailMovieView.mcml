@@ -297,7 +297,7 @@
       
       <Binding Source="[ThemeHelper.Config.ShowNowPlayingIcon]" Target="[NowPlayButton.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowNPV]" Target="[NPVOption.Visible]"/>
-      <!--<Binding Source="[Item.HasChapterInfo]" Target="[ChaptersButton.Visible]"/>-->
+      <Binding Source="[Item.HasChapterInfo]" Target="[ScenesButton.Visible]"/>
       <Binding Source="[Item]" Target="[ItemInfoPanel.Item]"/>
 
       <!--Display Logo-->
@@ -359,7 +359,6 @@
                           <ib:ImageButton Name="ScenesButton" Text="[Application.LocalStrings.#Scenes!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ChaptersCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/Frames" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="TrailerButton" Visible="false" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="175,45" Font="font://f:MM_ButtonFont" Visible="false" />
-                          <vsb:SimpleButton Name="ChaptersButton" Visible="false"    ImageNoFocus="image://i:IconChapter" MaximumSize="25,25" Margins="0,2,0,0" Command="[ChaptersCommand]" Application="[Application]"/>
                           <!--<vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:IconResume"  Command="[ResumeMovieCommand]" Application="[Application]" HasFocus="[ResumeBtnHasFocus]"/>
                           <vsb:SimpleButton Name="PlayMovieButton"   ImageNoFocus="image://it:IconPlay"    Command="[PlayMovieCommand]" Application="[Application]" />
                           <vsb:SimpleButton Name="TrailerButton"     ImageNoFocus="image://it:IconTrailer" Command="[TrailerCommand]" Application="[Application]"/>
@@ -694,29 +693,17 @@
         </Actions>
       </Changed>
 
-      <!-- Hides the page info display if there is only 1 page.  We may what to remove this from the
-           Scoll area and actor list since the selectable areas line up a little nicer if we leave them -->
       <Rule>
         <Conditions>
-          <Equality Source="[ScrollingData.TotalPages]" ConditionOp="LessThanOrEquals" Value="1" />
+          <Equality Source="[Item.Actors.Count]" ConditionOp="Equals" Value="0" />
         </Conditions>
         <Actions>
-          <Set Target="[Input.KeyInteractive]" Value="false" />
-          <Set Target ="[ImagePanel.MouseInteractive]" Value="false" />
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ScrollingData.TotalPages]" ConditionOp="GreaterThan" Value="1" />
-        </Conditions>
-        <Actions>
-          <Set Target="[Input.KeyInteractive]" Value="true" />
-          <Set Target ="[ImagePanel.MouseInteractive]" Value="true" />
+          <Set Target="[NoCast.Visible]" Value="true" />
         </Actions>
       </Rule>
 
     </Rules>
+    
     <Content>
       <!-- Cast (Actors) -->
       <Panel Name="MovieActors" Layout="Form">
@@ -749,6 +736,7 @@
                 </Children>
 
               </Scroller>
+              <Text Name="NoCast" Content="No Cast Information" Visible="false" Font="Segoe UI, 48" WordWrap="true" Alpha=".7" Color="color://s:FontColorMedium" />
             </Children>
           </ColorFill>
         </Children>
