@@ -32,6 +32,7 @@
       <lib:Item Name="SelectedItem" Item="[Folder.SelectedChild]" />
       <Timer AutoRepeat="false" Enabled="true" Interval="3000" Name="NaviTime" />
       <Environment Name="Environment"/>
+      <a:Clock Name="Clock"/>
     </Locals>
 
     <Rules>
@@ -63,8 +64,14 @@
       <!--Info Panel-->
       <Binding Target="[ItemInfoPanel.Item]" Source="[Folder.SelectedChild]"/>
 
-     
+
       <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
+      <Changed Source="[Clock.Time]" >
+        <Actions>
+          <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
+        </Actions>
+      </Changed>
+
       <Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
 
       <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">

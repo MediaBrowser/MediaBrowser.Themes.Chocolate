@@ -64,6 +64,7 @@
       <addin:AddInHost Name="AddInHost" />
       <cor:String Name="MediaPath" String="" />
       <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
+      <a:Clock Name="Clock"/>
       <Environment Name="Environment"/>
       <BooleanChoice Name="ResumeBtnHasFocus" Value="false"/>
       <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled" Command="[PlayMovieCommand]"/>
@@ -243,6 +244,15 @@
       <Binding Target="[ChapterScroller.Item]" Source="[Item]"/>
       <Binding Target="[PosterImage.Content]" Source="[Item.PreferredImage]"/>
       <Binding Target="[MediaInfoPanel.Item]" Source="[Item]"/>
+      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
+      <Changed Source="[Clock.Time]" >
+        <Actions>
+          <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
+        </Actions>
+      </Changed>
+      <Condition Source="[ThemeHelper.EndTime]" SourceValue="" Target="[EndTimePanel.Visible]" Value="false" />
+      <Default Target="[EndTimePanel.Visible]" Value="true" />
+      
       <Binding Target="[PlayMovieButton.Visible]" Source="[Item.IsPlayable]">
         <Conditions>
           <Equality Source="[Item.CanResume]" Value="false" />
@@ -398,6 +408,17 @@
                           <ColorFill Content="Black" Alpha=".1" Layout="Fill" />
                         </Children>-->
                       </Graphic>
+                    </Children>
+                  </Panel>
+
+                  <!--EndTime-->
+                  <Panel Name="EndTimePanel" Layout="HorizontalFlow" Margins="0,0,0,5" >
+                    <LayoutInput>
+                      <FormLayoutInput Vertical="Far" Horizontal="Center"/>
+                    </LayoutInput>
+                    <Children>
+                      <Text Name="EndTimeLbl" Font="font://uf:CF_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
+                      <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
                     </Children>
                   </Panel>
 
