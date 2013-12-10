@@ -58,6 +58,7 @@
       <Command Name="RefreshCommand" />
       <Command Name="NowPlayingPanel"/>
       <Command Name="DeleteMovieCommand" />
+      <Command Name="CloseExtraPanel" />
       <cor:DateTime Name="CurrentTime"/>
       <Timer Name="MyTimer" AutoRepeat="true" Interval="500" Enabled="true"/>
       <IntRangedValue Name="Hour"/>
@@ -95,6 +96,12 @@
         <Actions>
           <Set Target="[ThemeHelper.NavigatingForward]" Value="false"/>
           <Set Target="[ThemeHelper.DefaultBackdrop]" Value="[ThemeHelper.CurrentBackdrop]"/>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[CloseExtraPanel.Invoked]">
+        <Actions>
+          <Set Target="[ExtraPanel.Visible]" Value="false"/>
         </Actions>
       </Changed>
 
@@ -392,20 +399,6 @@
                     </LayoutInput>
                     <Children>
                       <Graphic Name="PosterImage" Content="[Item.PreferredImage]" MaintainAspectRatio="true" SizingPolicy="SizeToContent">
-                        <!--<Children>
-                          <vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:MetroResume" Command="[ResumeMovieCommand]"
-                                            FocusOrder="0"
-                                            Application="[Application]"
-                                            Margins="50,97,0,0"/>
-                          <vsb:SimpleButton Name="PlayMovieButton" ImageNoFocus="image://it:MetroPlay" Command="[PlayMovieCommand]" 
-                                            FocusOrder="0"
-                                            Application="[Application]"
-                                            Margins="50,97,0,0"/>
-                          <vsb:SimpleButton Name="DeleteMovieButton" Visible="false" ImageNoFocus="resx://MediaBrowser/MediaBrowser.Resources/IconDelete"
-                                            Size="25,25" Command="[DeleteMovieCommand]" Application="[Application]" FocusOrder="1"/>
-                          
-                          <ColorFill Content="Black" Alpha=".1" Layout="Fill" />
-                        </Children>-->
                       </Graphic>
                     </Children>
                   </Panel>
@@ -475,14 +468,14 @@
                           <Animation Animation="animation://anim:FadeOut" />
                         </Animations>
                         <Children>
-                          <me:ActorList Name="ActorScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" Visible="false"/>
+                          <me:ActorList Name="ActorScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" CloseCommand="[CloseExtraPanel]" Visible="false"/>
                         </Children>
                       </Panel>
 
                       <!-- Chapters  -->
                       <Panel Name="Chapters">
                         <Children>
-                          <me:ChapterList Name="ChapterScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" Visible="false"/>
+                          <me:ChapterList Name="ChapterScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" CloseCommand="[CloseExtraPanel]" Visible="false"/>
                         </Children>
                       </Panel>
 
@@ -659,6 +652,7 @@
     <Properties>
       <a:Application Name="Application" Application="$Required"/>
       <lib:Item Name="Item" Item="$Required"/>
+      <Command Name="CloseCommand" Command="$Required"/>
     </Properties>
     <Locals>
       <ScrollingHandler Name="ScrollingHandler" HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandlePageKeys="true" HandlePageCommands="true"/>
@@ -713,9 +707,16 @@
               <FormLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent,0" Bottom="Parent,1"/>
             </LayoutInput>
             <Children>
+              <vsb:SimpleButton Name="CloseButton"   ImageNoFocus="resx://Chocolate/Chocolate.Resources/Collapse"    Command="[CloseCommand]" Size="30,25"  Application="[Application]" >
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0,-15" Top="Parent,0, 5"/>
+                </LayoutInput>
+
+              </vsb:SimpleButton>
+
               <Scroller Name="ActorScroller" Orientation="Vertical" NearOffset="0" FadeSize="5" ScrollingData="[ScrollingData]" Navigation="FlowVertical">
                 <LayoutInput>
-                  <FormLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent,0" Bottom="Parent,1"/>
+                  <FormLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent,0, 30" Bottom="Parent,1"/>
                 </LayoutInput>
                 <Children>
 
@@ -779,6 +780,7 @@
     <Properties>
       <a:Application Name="Application" Application="$Required"/>
       <lib:Item Name="Item" Item="$Required"/>
+      <Command Name="CloseCommand" Command="$Required"/>
     </Properties>
     <Locals>
       <ScrollingHandler Name="ScrollingHandler" HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandlePageKeys="true" HandlePageCommands="true" HandleMouseWheel="true"/>
@@ -827,15 +829,20 @@
     </Rules>
     <Content>
       <!-- Chapters -->
-      <Panel Name="Chapters" Layout="Dock">
+      <Panel Name="Chapters" Layout="Dock" Padding="20,0,0,0">
         <Children>
-          <Graphic Content="image://i:BlankImage" Name="ImagePanel" Layout="Form"
-							 Padding="30,5,10,0">
+          <Graphic Content="image://i:BlankImage" Name="ImagePanel" Layout="Form" >
             <LayoutInput>
               <DockLayoutInput Position="Client"/>
             </LayoutInput>
             <Children>
-              <Scroller Name="ChapterScroller" FadeSize="-5" ScrollingData="[ScrollingData]" Orientation="Vertical" Navigation="PreferFocusOrder">
+              <vsb:SimpleButton Name="CloseButton"   ImageNoFocus="resx://Chocolate/Chocolate.Resources/Collapse"    Command="[CloseCommand]" Size="30,25"  Application="[Application]" >
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0,-15" Top="Parent,0, 5"/>
+                </LayoutInput>
+
+              </vsb:SimpleButton>
+              <Scroller Name="ChapterScroller" FadeSize="-5" Margins="0,30,0,0" ScrollingData="[ScrollingData]" Orientation="Vertical" Navigation="PreferFocusOrder">
                 <LayoutInput>
                   <AnchorLayoutInput Horizontal="Fill" Vertical="Near"/>
                 </LayoutInput>

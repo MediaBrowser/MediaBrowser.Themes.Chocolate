@@ -20,6 +20,7 @@
   <Image Name="InProgress" Source="resx://Chocolate/Chocolate.Resources/InProgress" />
   <Image Name="InProgressStrip" Source="resx://Chocolate/Chocolate.Resources/InProgressStrip" />
   <Image Name="GrayGradient" Source="resx://Chocolate/Chocolate.Resources/GrayGradientRight"/>
+  <Image Name="CollapseArrows" Source="resx://Chocolate/Chocolate.Resources/Collapse"/>
 
   <Image Name="LeftMenuBorderDefault"  Source="resx://Chocolate/Chocolate.Resources/LeftMenuBorderDefault" />
   <Image Name="RightMenuBorderDefault" Source="resx://Chocolate/Chocolate.Resources/RightMenuBorderDefault" />
