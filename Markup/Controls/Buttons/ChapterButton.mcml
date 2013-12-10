@@ -101,9 +101,14 @@
           <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
         </Layout>
         <Children>
-          <Graphic Name="Image" Content="resx://MediaBrowser/MediaBrowser.Resources/MissingPerson"
-                   SizingPolicy="SizeToConstraint" MaximumSize="120,80" MaintainAspectRatio="true"/>
-          <Panel Margins="5,0,5,0">
+          <ColorFill Content="100,250,250,250" Padding="3,3,3,3" >
+            <Children>
+              <Graphic Name="Image" Content="resx://MediaBrowser/MediaBrowser.Resources/MissingPerson"
+                       SizingPolicy="SizeToConstraint" MaximumSize="120,80" MaintainAspectRatio="true"/>
+              
+            </Children>
+          </ColorFill>
+          <Panel Margins="10,0,5,0">
             <Layout>
               <FlowLayout Orientation="Vertical" ItemAlignment="Near"/>
             </Layout>

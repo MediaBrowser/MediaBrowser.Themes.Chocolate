@@ -706,7 +706,7 @@
     
     <Content>
       <!-- Cast (Actors) -->
-      <Panel Name="MovieActors" Layout="Form">
+      <Panel Name="MovieActors" Layout="Form" Padding="20,0,0,0">
         <Children>
           <ColorFill Content="Transparent" Name="ImagePanel" Layout="Form">
             <LayoutInput>
@@ -830,7 +830,7 @@
       <Panel Name="Chapters" Layout="Dock">
         <Children>
           <Graphic Content="image://i:BlankImage" Name="ImagePanel" Layout="Form"
-							 Padding="10,5,10,0">
+							 Padding="30,5,10,0">
             <LayoutInput>
               <DockLayoutInput Position="Client"/>
             </LayoutInput>
