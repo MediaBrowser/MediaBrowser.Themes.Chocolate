@@ -489,9 +489,9 @@
           <Equality Source="[Helper.Config.ThemeStyle]" Value="Classic"/>
         </Conditions>
         <Actions>
-          <Set Target="[ButtonPanelRight.Content]" Value="image://vi:ButtonPanelRight"/>
+          <!--<Set Target="[ButtonPanelRight.Content]" Value="image://vi:ButtonPanelRight"/>-->
           <Set Target="[ButtonPanelCenter.Content]" Value="image://vi:ButtonPanelCenter"/>
-          <Set Target="[ButtonPanelLeft.Content]" Value="image://vi:ButtonPanelLeft"/>
+          <!--<Set Target="[ButtonPanelLeft.Content]" Value="image://vi:ButtonPanelLeft"/>-->
         </Actions>
       </Rule>
 
@@ -500,9 +500,9 @@
           <Equality Source="[Helper.Config.ThemeStyle]" Value="Blue"/>
         </Conditions>
         <Actions>
-          <Set Target="[ButtonPanelRight.Content]" Value="image://vi:BlueButtonPanelRight"/>
+          <!--<Set Target="[ButtonPanelRight.Content]" Value="image://vi:BlueButtonPanelRight"/>-->
           <Set Target="[ButtonPanelCenter.Content]" Value="image://vi:BlueButtonPanelCenter"/>
-          <Set Target="[ButtonPanelLeft.Content]" Value="image://vi:BlueButtonPanelLeft"/>
+          <!--<Set Target="[ButtonPanelLeft.Content]" Value="image://vi:BlueButtonPanelLeft"/>-->
         </Actions>
       </Rule>
       
@@ -520,8 +520,8 @@
           </Animation>
         </Animations>
         <Children>
-          <Graphic Name="ButtonPanelLeft" MaintainAspectRatio="true"/>
-          <Graphic FocusOrder="101" Name="ButtonPanelCenter" Layout="HorizontalFlow" MaximumSize="0,49" MinimumSize="0,49" SizingPolicy="SizeToChildren" Padding="0,5,0,13">
+          <!--<Graphic Name="ButtonPanelLeft" MaintainAspectRatio="true"/>-->
+          <Graphic FocusOrder="101" Name="ButtonPanelCenter" Layout="HorizontalFlow" MaximumSize="0,49" MinimumSize="0,49" SizingPolicy="SizeToChildren" Padding="7,5,7,13">
             <Children>
               <Panel Name="ClockDisplay">
                 <Children>
@@ -550,12 +550,12 @@
               </Panel>
               <Panel Name="ConfigurationKey" FocusOrder="104">
                 <Children>
-                  <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,2,0,0" Alpha=".8"/>
+                  <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
                 </Children>
               </Panel>
             </Children>
           </Graphic>
-          <Graphic Name="ButtonPanelRight" MaintainAspectRatio="true"/>
+          <!--<Graphic Name="ButtonPanelRight" MaintainAspectRatio="true"/>-->
         </Children>
       </Panel>
     </Content>
