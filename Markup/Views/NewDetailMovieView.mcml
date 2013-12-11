@@ -146,6 +146,7 @@
           <Set Target="[ActorScrollerTitle.Visible]"    Value="true"/>
           <Set Target="[ActorScroller.Visible]"    Value="true"/>
           <Set Target="[ExtraPanel.Visible]"    Value="true"/>
+          <Invoke Target="[ExtraPanel.NavigateInto]" />
         </Actions>
       </Changed>
 
@@ -157,6 +158,7 @@
           <Set Target="[ChapterScrollerTitle.Visible]"    Value="true"/>
           <Set Target="[ChapterScroller.Visible]"    Value="true"/>
           <Set Target="[ExtraPanel.Visible]"    Value="true"/>
+          <Invoke Target="[ExtraPanel.NavigateInto]" />
         </Actions>
       </Changed>
 
@@ -380,7 +382,7 @@
 
                   <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="175,45" Font="font://f:MM_ButtonFont">
                     <LayoutInput>
-                      <FormLayoutInput Right="Parent,1,10" Bottom="Parent,1, 5"/>
+                      <FormLayoutInput Left="Poster,1, -5" Bottom="Parent,1, 5"/>
                     </LayoutInput>
                     
                   </ib:ImageButton>
@@ -714,7 +716,7 @@
 
               </vsb:SimpleButton>
 
-              <Scroller Name="ActorScroller" Orientation="Vertical" NearOffset="0" FadeSize="5" ScrollingData="[ScrollingData]" Navigation="FlowVertical">
+              <Scroller Name="ActorScroller" FocusOrder="0" Orientation="Vertical" NearOffset="0" FadeSize="5" ScrollingData="[ScrollingData]" Navigation="FlowVertical">
                 <LayoutInput>
                   <FormLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent,0, 30" Bottom="Parent,1"/>
                 </LayoutInput>
@@ -842,7 +844,7 @@
                 </LayoutInput>
 
               </vsb:SimpleButton>
-              <Scroller Name="ChapterScroller" FadeSize="-5" Margins="0,30,0,0" ScrollingData="[ScrollingData]" Orientation="Vertical" Navigation="PreferFocusOrder">
+              <Scroller Name="ChapterScroller" FocusOrder="0" FadeSize="-5" Margins="0,30,0,0" ScrollingData="[ScrollingData]" Orientation="Vertical" Navigation="PreferFocusOrder">
                 <LayoutInput>
                   <AnchorLayoutInput Horizontal="Fill" Vertical="Near"/>
                 </LayoutInput>
