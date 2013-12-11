@@ -350,7 +350,7 @@
                   <Animation Animation="animation://anim:NavigateAwayBackward"/>
                 </Animations>
                 <Children>
-                  <Panel Name="ButtonsPanel" LayoutInput="[PortraitButtons]" Margins="15,0,0,0">
+                  <Panel Name="ButtonsPanel" LayoutInput="[PortraitButtons]" Margins="15,0,0,0" FocusOrder="0">
                     <Layout>
                       <ScaleLayout AllowScaleDown="true" AllowScaleUp="false" MaintainAspectRatio="true"/>
                     </Layout>
