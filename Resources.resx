@@ -590,6 +590,9 @@
   <data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\icons\collapse.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="LayoutSeries" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>markup\views\layoutseries.mcml;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="MetroPlay" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\icons\metroplay.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -601,5 +604,8 @@
   </data>
   <data name="PersonButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>markup\controls\buttons\personbutton.mcml;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="StackedScroller" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>markup\controls\scrollers\stackedscroller.mcml;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

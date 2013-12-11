@@ -763,6 +763,16 @@ namespace Chocolate {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] LayoutSeries {
+            get {
+                object obj = ResourceManager.GetObject("LayoutSeries", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] LayoutThumb {
             get {
                 object obj = ResourceManager.GetObject("LayoutThumb", resourceCulture);
@@ -1457,6 +1467,16 @@ namespace Chocolate {
             get {
                 object obj = ResourceManager.GetObject("spacer", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] StackedScroller {
+            get {
+                object obj = ResourceManager.GetObject("StackedScroller", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

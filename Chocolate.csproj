@@ -300,6 +300,9 @@
     <Content Include="Markup\Controls\Popups\PopupRadioMenu.mcml" />
     <Content Include="Markup\Controls\Popups\PopupViewMenu.mcml" />
     <Content Include="Markup\Controls\Scrollers\BasicPosterScroller.mcml" />
+    <Content Include="Markup\Controls\Scrollers\StackedScroller.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Scrollers\ThumbScroller.mcml">
       <SubType>Designer</SubType>
     </Content>
@@ -326,6 +329,7 @@
     <Content Include="Markup\Styles\Fonts.mcml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Markup\Views\LayoutSeries.mcml" />
     <Content Include="Markup\Views\NewDetailMovieView.mcml">
       <SubType>Designer</SubType>
     </Content>

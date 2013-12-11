@@ -5,13 +5,9 @@
       xmlns:gb="resx://MediaBrowser/MediaBrowser.Resources/PluginUpdateButton"
       xmlns:f="file://Fonts_DoNotEdit.mcml"
       xmlns:ch="assembly://Chocolate/Chocolate"
-	    xmlns:lpo="resx://Chocolate/Chocolate.Resources/LayoutPoster"
-	    xmlns:lth="resx://Chocolate/Chocolate.Resources/LayoutThumb"
-	    xmlns:lde="resx://Chocolate/Chocolate.Resources/LayoutDetails"
-	    xmlns:lcf="resx://Chocolate/Chocolate.Resources/LayoutCoverflow"
 	    xmlns:lr="resx://Chocolate/Chocolate.Resources/LayoutRoot"
-	    xmlns:lts="resx://Chocolate/Chocolate.Resources/LayoutThumbStrip"
       xmlns:iip="resx://Chocolate/Chocolate.Resources/InfoIconsPanel"
+      xmlns:ls="resx://Chocolate/Chocolate.Resources/LayoutSeries"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
       xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop">
 
@@ -37,7 +33,6 @@
 
     <Rules>
       <Binding Source="[Direction]" Target="[Backdrops.Direction]"/>
-      <Binding Source="[Direction]" Target="[ThumbStripView.Direction]"/>
       <Binding Source="[Direction]" Target="[InfoIconsPanel.Direction]"/>
       <Binding Source="[BackdropConstraint]" Target="[Backdrops.Constrain]" />
       <Changed Source="[LeftKey.Invoked]">
@@ -113,12 +108,7 @@
           <Equality Source="[Application.Config.EnableRootPage]" Value="true"/>
         </Conditions>
         <Actions>
-          <Set Target="[LayoutRoot.Visible]" Value="true"/>
-          <Set Target="[DetailsView.Visible]" Value="false"/>
-          <Set Target="[PosterView.Visible]" Value="false"/>
-          <Set Target="[ThumbView.Visible]" Value="false"/>
-          <Set Target="[ThumbStripView.Visible]" Value="false"/>
-          <Set Target="[CoverFlow.Visible]" Value="false"/>
+          <Set Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutRoot]"/>
         </Actions>
       </Rule>
 
@@ -127,20 +117,14 @@
       <Condition Source="[ThemeHelper.ButtonPanelHasFocus]" SourceValue="false" Target="[MainPanel.Alpha]" Value="1"/>
       <Condition Source="[ThemeHelper.IsMenuOpen]"          SourceValue="false" Target="[MainPanel.Alpha]" Value="1"/>
 
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Detail" Target="[DetailsView.Visible]" Value="true" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="Detail" Target="[DetailsView.Visible]" Value="false" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Poster" Target="[PosterView.Visible]" Value="true" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="Poster" Target="[PosterView.Visible]" Value="false" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Thumb" Target="[ThumbView.Visible]" Value="true" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="Thumb" Target="[ThumbView.Visible]" Value="false" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="ThumbStrip" Target="[ThumbStripView.Visible]" Value="true" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="ThumbStrip" Target="[ThumbStripView.Visible]" Value="false" />
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="CoverFlow"  >
-        <Actions>
-          <Set Target="[CoverFlow.Visible]" Value="true" />
-        </Actions>
-      </Condition>
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="NotEquals" SourceValue="CoverFlow" Target="[CoverFlow.Visible]" Value="false" />
+      <!--Specialized Series View-->
+      <!--<Condition Source="[Folder.ItemTypeString]" SourceValue="Series" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutSeries]" />-->
+      
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Detail" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutDetails]" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Poster" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutPoster]" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Thumb" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutThumb]" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="ThumbStrip" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutThumbStrip]" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="CoverFlow" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutCoverflow]" />
 
       <Rule ConditionLogicalOp="And" >
         <Conditions>
@@ -174,16 +158,8 @@
           <Equality Source="[ThemeHelper.NavigatingForward]" Value="false"/>
         </Conditions>
         <Actions>
-          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
-          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
-          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateToBackward" ExclusiveApply="false"/>
-          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateAwayBackward" ExclusiveApply="false"/>
-          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
-          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailArea.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailArea.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
         </Actions>
       </Changed>
       <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
@@ -191,16 +167,8 @@
           <Equality Source="[ThemeHelper.NavigatingForward]" Value="true"/>
         </Conditions>
         <Actions>
-          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
-          <Invoke Target="[LayoutRoot.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
-          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateToForward" ExclusiveApply="false"/>
-          <Invoke Target="[DetailsView.AttachAnimation]" animation="animation://anim:ListViewItem.NavigateAwayForward" ExclusiveApply="false"/>
-          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
-          <Invoke Target="[PosterView.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbView.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
-          <Invoke Target="[ThumbStripView.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailArea.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
+          <Invoke Target="[DetailArea.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
         </Actions>
       </Changed>
 
@@ -329,17 +297,19 @@
               </iip:InfoIconsPanel>
 
               <!--  View Details-->
-              <lr:LayoutRoot ThemeHelper="[ThemeHelper]" Name="LayoutRoot" Folder="[Folder]" Application="[Application]" Visible="false" Navigation="RememberFocus"/>
+              <lr:LayoutRoot ThemeHelper="[ThemeHelper]" Name="DetailArea" Folder="[Folder]" Application="[Application]" Navigation="RememberFocus"/>
 
-              <lde:ChocolateLayoutDetails ThemeHelper="[ThemeHelper]" Name="DetailsView" Visible="false" Folder="[Folder]" Application="[Application]"/>
+              <!--<lde:ChocolateLayoutDetails ThemeHelper="[ThemeHelper]" Name="DetailsView" Visible="false" Folder="[Folder]" Application="[Application]"/>
 
               <lpo:ChocolateLayoutPoster ThemeHelper="[ThemeHelper]" Name="PosterView" Visible="false" Application="[Application]" Folder="[Folder]"/>
+
+              <ls:ChocolateLayoutSeries ThemeHelper="[ThemeHelper]" Name="SeriesView" Visible="false" Application="[Application]" Folder="[Folder]"/>
 
               <lth:ChocolateLayoutThumb ThemeHelper="[ThemeHelper]" Name="ThumbView" Visible="false" Folder="[Folder]" Application="[Application]"/>
 
               <lcf:ChocolateLayoutCoverflow ThemeHelper="[ThemeHelper]" Name="CoverFlow" Visible="false" Folder="[Folder]" Application="[Application]"/>
 
-              <lts:ChocolateLayoutThumbStrip ThemeHelper="[ThemeHelper]" Name="ThumbStripView" Visible="false" Folder="[Folder]" Application="[Application]"/>
+              <lts:ChocolateLayoutThumbStrip ThemeHelper="[ThemeHelper]" Name="ThumbStripView" Visible="false" Folder="[Folder]" Application="[Application]"/>-->
 
             </Children>
           </Panel>

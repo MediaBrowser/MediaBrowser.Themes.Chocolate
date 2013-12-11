@@ -19,6 +19,8 @@
         private static bool navigatingForward = true;
         private Timer OverviewTimer;
 
+        private static SizeRef _seasonPosterSize = new SizeRef(new Size(200,300));
+
         public ChocHelper()
         {
             this.OverviewTimer = new Timer();
@@ -211,6 +213,16 @@
                 this.NavCount = 0;
             };
         }
+
+        public string LayoutRoot { get { return "resx://Chocolate/Chocolate.Resources/LayoutRoot#LayoutRoot"; } }
+        public string LayoutSeries { get { return "resx://Chocolate/Chocolate.Resources/LayoutSeries#ChocolateLayoutSeries"; } }
+        public string LayoutCoverflow { get { return "resx://Chocolate/Chocolate.Resources/LayoutCoverflow#ChocolateLayoutCoverflow"; } }
+        public string LayoutDetails { get { return "resx://Chocolate/Chocolate.Resources/LayoutDetails#ChocolateLayoutDetails"; } }
+        public string LayoutPoster { get { return "resx://Chocolate/Chocolate.Resources/LayoutPoster#ChocolateLayoutPoster"; } }
+        public string LayoutThumb { get { return "resx://Chocolate/Chocolate.Resources/LayoutThumb#ChocolateLayoutThumb"; } }
+        public string LayoutThumbStrip { get { return "resx://Chocolate/Chocolate.Resources/LayoutThumbStrip#ChocolateLayoutThumbStrip"; } }
+
+        public SizeRef SeasonPosterSize {get { return _seasonPosterSize; }}
 
         public string Album
         {

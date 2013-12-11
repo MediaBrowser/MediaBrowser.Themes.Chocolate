@@ -1,0 +1,170 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+	    xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+	    xmlns:cor="assembly://MSCorLib/System"
+      xmlns:me="Me"
+      xmlns:ss="resx://Chocolate/Chocolate.Resources/StackedScroller"
+      xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
+      xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
+      xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
+	    xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+    xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
+    xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
+    xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
+      xmlns:ch="assembly://Chocolate/Chocolate"
+      xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
+      xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
+
+
+  <UI Name="ChocolateLayoutSeries">
+
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+      <AnchorLayoutInput Name="WideLayoutInput" Top="Parent, 1,-72" Bottom="Parent, 1,-3" Left="Parent, 0.5,-500" Right="Parent, 0.5,500" Horizontal="Center" Vertical="Center"/>
+      <AnchorLayoutInput Name="ThinLayoutInput" Top="Parent, 1,-72" Bottom="Parent, 1,-3" Left="Parent, 0.5,-350" Right="Parent, 0.5,350" Horizontal="Center" Vertical="Center"/>
+    </Properties>
+
+    <Locals>
+      <lib:Item Name="SelectedItem" Item="[Folder.SelectedChild]" />
+      <Timer AutoRepeat="false" Enabled="true" Interval="3000" Name="NaviTime" />
+      <Environment Name="Environment"/>
+      <a:Clock Name="Clock"/>
+    </Locals>
+
+    <Rules>
+      <Binding Target="[ThemeHelper.CurrentItem]" Source="[Folder.SelectedChild]"></Binding>
+      <Binding Target="[Application.CurrentItem]" Source="[Folder.SelectedChild]"></Binding>
+
+      <Changed Source="[NaviTime.Tick]" ConditionLogicalOp="And">
+        <Conditions>
+          <Equality Source="[Input.DeepKeyFocus]" Value="false"/>
+          <Equality Source="[ThemeHelper.IsMenuOpen]" ConditionOp="Equals" Value="false"/>
+          <Equality Source="[ThemeHelper.ButtonPanelHasFocus]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[MyItems.NavigateInto]"/>
+        </Actions>
+      </Changed>
+
+      <Binding Source="[Folder.SelectedChildIndex.ToString]" Target="[List_Counter.Content]" >
+        <Transformer>
+          <MathTransformer Add="1"/>
+        </Transformer>
+      </Binding>
+      <Binding Source="[Folder.Children.Count]" Target="[List_Total.Content]" >
+        <Transformer>
+          <FormatTransformer Format="| {0}" />
+        </Transformer>
+      </Binding>
+
+      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
+      <Changed Source="[Clock.Time]" >
+        <Actions>
+          <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
+        </Actions>
+      </Changed>
+
+      <Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
+
+      <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[ThemeHelper.NavigatingForward]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[MainPanel.AttachAnimation]" animation="animation://anim:NavigateToBackward" ExclusiveApply="false"/>
+          <Invoke Target="[MainPanel.AttachAnimation]" animation="animation://anim:NavigateAwayBackward" ExclusiveApply="false"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[ThemeHelper.NavigatingForward]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[MainPanel.AttachAnimation]" animation="animation://anim:NavigateToForward" ExclusiveApply="false"/>
+          <Invoke Target="[MainPanel.AttachAnimation]" animation="animation://anim:NavigateAwayForward" ExclusiveApply="false"/>
+        </Actions>
+      </Changed>
+
+      <!--Hide/Show Options-->
+      <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
+      <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
+
+    </Rules>
+
+    <Content>
+      <Panel Layout="Form">
+        <Children>
+
+          <Panel Name="MainPanel" Layout="Form" Navigation="ContainHorizontal">
+            <Children>
+              <!--Counter-->
+              <Panel>
+                <LayoutInput>
+                  <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Right="Parent,1,-25"/>
+                </LayoutInput>
+                <Children>
+                  <Panel Name="ListPanel" Layout="HorizontalFlow">
+                    <Children>
+                      <Text Name="List_Counter" Content="0" Color="color://uc:Light" Font="font://uf:CF_TotalItems" />
+                      <Text Name="List_Total" Content="0" Color="color://uc:Dark" Font="font://uf:CF_TotalItems"/>
+                    </Children>
+                  </Panel>
+                </Children>
+              </Panel>
+
+              <!--EndTime-->
+              <Panel Name="EndTimePanel" Layout="HorizontalFlow" >
+                <LayoutInput>
+                  <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Left="Parent,0,25"/>
+                </LayoutInput>
+                <Children>
+                  <Text Name="EndTimeLbl" Font="font://uf:CF_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
+                  <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
+                </Children>
+              </Panel>
+
+              <!-- Season Scroller -->
+              <ss:StackedScroller Name="MyItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]" Margins="10,0,0,0">
+                <LayoutInput>
+                  <AnchorLayoutInput Left="Parent,0" Right="Parent,.4" Top="Parent, 0, 100" Bottom="Parent, .45" />
+                </LayoutInput>
+              </ss:StackedScroller>
+
+            </Children>
+          </Panel>
+          <ColorFill Name="CoverFlowOverlay" Content="200,0,0,0">
+            <LayoutInput>
+              <FormLayoutInput Bottom="Parent,1" Horizontal="Fill" Top="Parent,1,-150"/>
+            </LayoutInput>
+            <Animations>
+              <Animation Type="Show" CenterPointPercent="0, 0.5, 0.0">
+                <Keyframes>
+                  <PositionKeyframe Time="0.0" Value="0, 150, 0" RelativeTo="Final"/>
+                  <PositionKeyframe Time="0.5" Value="0, 150, 0" RelativeTo="Final" Interpolation="EaseIn, 3.0, 0.2"/>
+                  <PositionKeyframe Time="1.4" Value="0, 0, 0" RelativeTo="Final"/>
+                  <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
+                  <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute"/>
+                  <AlphaKeyframe Time="1.4" Value="1.0" RelativeTo="Absolute"/>
+                </Keyframes>
+              </Animation>
+              <Animation Type="Hide" CenterPointPercent="0, 0.5, 0.0">
+                <Keyframes>
+                  <PositionKeyframe Time="0.0" RelativeTo="Current" Interpolation="EaseIn, 3.0, 0.2"/>
+                  <PositionKeyframe Time="0.4" Value="0, 150, 0" RelativeTo="Current"/>
+                  <AlphaKeyframe Time="0.0" RelativeTo="Current" Interpolation="Log"/>
+                  <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+          </ColorFill>
+        </Children>
+      </Panel>
+
+    </Content>
+
+  </UI>
+
+</Mcml>
