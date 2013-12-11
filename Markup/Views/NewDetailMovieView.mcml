@@ -293,14 +293,14 @@
 
       <Binding Source="[Item]" Target="[Backdrop.Item]"/>
 
-      <Rule>
+      <Changed Source="[Application.ShowNowPlaying]" InitialEvaluate="true">
         <Conditions>
-          <Equality Source="[Application.PlaybackController.IsPlayingVideo]" Value="true" />
+          <Equality Source="[Application.ShowNowPlaying]" Value="true" />
         </Conditions>
         <Actions>
           <Set Target="[NowPlaying.Visible]" Value="true" />
         </Actions>
-      </Rule>
+      </Changed>
       
       <Binding Source="[ThemeHelper.Config.ShowNowPlayingIcon]" Target="[NowPlayButton.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowNPV]" Target="[NPVOption.Visible]"/>
@@ -622,7 +622,7 @@
                   <Animation Animation="animation://anim:FadeOut" />
                 </Animations>
                 <Children>
-                  <bd:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]"/>
+                  <bd:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]" Constrain="large"/>
                   <bd:Backdrop4 Name="Backdrop" Application="[Application]" Item="[Item]" Constrain="large"/>
                 </Children>
               </Panel>

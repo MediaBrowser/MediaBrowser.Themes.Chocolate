@@ -30,6 +30,7 @@
 
       <Binding Source="[Direction]" Target="[StripBackdrop.Direction]"/>
       <Binding Source="[Constrain]" Target="[Backdrop.Constrain]"/>
+      <Binding Source="[Constrain]" Target="[NowPlayingBackdrop.Constrain]"/>
 
       <!--Show Recent EHSBackdrops-->
       <Rule>
@@ -110,7 +111,7 @@
             </Animations>
             <Children>
 
-              <me:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]"/>
+              <me:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]"  Constrain="[Constrain]" />
 
               <me:Backdrop4 Name="Backdrop" Item="[Folder.SelectedChild]" Application="[Application]" Visible="true" Constrain="[Constrain]"/>
 
@@ -141,24 +142,71 @@
     <Properties>
       <a:Application Name="Application" Application="$Required"/>
       <ch:ChocHelper Name="ThemeHelper"/>
+      <cor:String Name="Constrain" String="none" />
     </Properties>
+
+    <Locals>
+      <FormLayoutInput Name="SmConstrainedLayout" Left="Parent, .24" Top="Parent,0" Right="Parent, 1.06" Bottom="Parent, .82" />
+      <FormLayoutInput Name="LgConstrainedLayout" Left="Parent, .14" Top="Parent,0" Right="Parent, 1.09" Bottom="Parent, .95" />
+      <FormLayoutInput Name="FullLayout" Vertical="Near" Horizontal="Fill" />
+
+    </Locals>
+    
     <Rules>
 
-      <Rule>
+      <Changed Source="[Application.ShowNowPlaying]" InitialEvaluate="true">
         <Conditions>
           <Equality Source="[ThemeHelper.Config.EnableVideoBackdrop]" Value="true" />
-          <Equality Source="[Application.PlaybackController.IsPlayingVideo]" Value="true" />
+          <Equality Source="[Application.ShowNowPlaying]" Value="true" />
         </Conditions>
         <Actions>
           <Set Target="[VideoBackdrop.Visible]" Value="true" />
         </Actions>
-      </Rule>
+      </Changed>
       <Default Target="[VideoBackdrop.Visible]" Value="false"/>
-      
+      <Changed Source="[Constrain]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Constrain]" Value="small" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Clip.LayoutInput]" Value="[SmConstrainedLayout]" />
+          <Set Target="[Clip.Orientation]" Value="Horizontal" />
+          <Set Target="[Clip.FadeSize]" Value="150" />
+          <Set Target="[Clip.ShowNear]" Value="true" />
+          <Set Target="[Clip2.ShowFar]" Value="true" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[Constrain]" InitialEvaluate="true">
+        <Conditions>
+          <Equality Source="[Constrain]" Value="large" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Clip.LayoutInput]" Value="[LgConstrainedLayout]" />
+          <Set Target="[Clip.Orientation]" Value="Horizontal" />
+          <Set Target="[Clip.FadeSize]" Value="150" />
+          <Set Target="[Clip.ShowNear]" Value="true" />
+          <Set Target="[Clip2.ShowFar]" Value="true" />
+        </Actions>
+      </Changed>
+
+
     </Rules>
     
     <Content>
-      <Video Name="VideoBackdrop" Layout="Fill" LetterboxColor="black"/>
+      <Panel Layout="Form">
+        <Children>
+          <Clip Name="Clip" Orientation="Vertical" ShowNear="false" ShowFar="false" FadeSize="75" LayoutInput="[FullLayout]">
+            <Children>
+              <Clip Name="Clip2" Orientation="Vertical" ShowNear="false" ShowFar="false" FadeSize="30" Layout="Fill">
+                <Children>
+                  <Video Name="VideoBackdrop" Layout="Fill" />
+                </Children>
+              </Clip>
+            </Children>
+          </Clip>
+        </Children>
+      </Panel>
     </Content>
   </UI>
 

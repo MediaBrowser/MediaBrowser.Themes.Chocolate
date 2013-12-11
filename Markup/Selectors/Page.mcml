@@ -476,7 +476,7 @@
       <!--Hide/Show Config Button-->
       <Binding Source="[Helper.Config.ShowConfig]" Target="[ConfigurationKey.Visible]"/>
 
-      <Condition Source="[Application.PlaybackController.IsPlayingVideo]" SourceValue="true" Target="[NowPlayKey.Visible]" Value="true"/>
+      <Condition Source="[Application.ShowNowPlaying]" SourceValue="true" Target="[NowPlayKey.Visible]" Value="true"/>
       <Changed Source="[MyTimer.Tick]" InitialEvaluate="true">
         <Actions>
           <Set Target="[CurrentTime]" Value="[Helper.CurrentTime]"/>
