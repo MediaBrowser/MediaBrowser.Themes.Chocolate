@@ -300,6 +300,7 @@
     <Content Include="Markup\Controls\Popups\PopupRadioMenu.mcml" />
     <Content Include="Markup\Controls\Popups\PopupViewMenu.mcml" />
     <Content Include="Markup\Controls\Scrollers\BasicPosterScroller.mcml" />
+    <Content Include="Markup\Controls\Scrollers\SeasonsScroller.mcml" />
     <Content Include="Markup\Controls\Scrollers\StackedScroller.mcml">
       <SubType>Designer</SubType>
     </Content>
@@ -324,7 +325,9 @@
     <Content Include="Markup\Selectors\PageDetailArea.mcml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Markup\Styles\Colors.mcml" />
+    <Content Include="Markup\Styles\Colors.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Styles\FontsSmall.mcml" />
     <Content Include="Markup\Styles\Fonts.mcml">
       <SubType>Designer</SubType>

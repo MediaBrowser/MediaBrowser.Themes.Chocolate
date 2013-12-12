@@ -3,7 +3,7 @@
 	    xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
 	    xmlns:cor="assembly://MSCorLib/System"
       xmlns:me="Me"
-      xmlns:ss="resx://Chocolate/Chocolate.Resources/StackedScroller"
+    xmlns:ls="resx://Chocolate/Chocolate.Resources/SeasonsScroller"
       xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
       xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
       xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
@@ -28,15 +28,35 @@
     </Properties>
 
     <Locals>
-      <lib:Item Name="SelectedItem" Item="[Folder.SelectedChild]" />
+      <lib:FolderModel Name="SelectedSeason"  />
       <Timer AutoRepeat="false" Enabled="true" Interval="3000" Name="NaviTime" />
       <Environment Name="Environment"/>
       <a:Clock Name="Clock"/>
     </Locals>
 
     <Rules>
-      <Binding Target="[ThemeHelper.CurrentItem]" Source="[Folder.SelectedChild]"></Binding>
-      <Binding Target="[Application.CurrentItem]" Source="[Folder.SelectedChild]"></Binding>
+     
+      <Binding Target="[ThemeHelper.CurrentItem]" Source="[SelectedSeason.SelectedChild]"></Binding>
+      <!--<Binding Target="[Application.CurrentItem]" Source="[Folder.SelectedChild]"></Binding>-->
+
+      <Binding Source="[Folder]" Target="[SeasonItems.Folder]" />
+      <Binding Target="[Title.Text]"       Source="[Folder.Name]"/>
+      <Binding Target="[MPAARating.Value]" Source="[Folder.MpaaRating]"></Binding>
+      <Binding Target="[StarRating.Value]" Source="[Folder.ImdbRating]"></Binding>
+      <Binding Target="[Runtime.Content]" Source="[Folder.RunningTimeString]"></Binding>
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowCoverFlowLogos]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Folder.HasLogoImage]" ConditionOp="Equals" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[LogoImage.Visible]" Value="true" />
+          <Set Target="[Title.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+      <Default Target="[LogoImage.Visible]" Value="false"/>
+      <Default Target="[Title.Visible]" Value="true"/>
 
       <Changed Source="[NaviTime.Tick]" ConditionLogicalOp="And">
         <Conditions>
@@ -45,7 +65,7 @@
           <Equality Source="[ThemeHelper.ButtonPanelHasFocus]" Value="false"/>
         </Conditions>
         <Actions>
-          <Invoke Target="[MyItems.NavigateInto]"/>
+          <Invoke Target="[SeasonItems.NavigateInto]"/>
         </Actions>
       </Changed>
 
@@ -60,14 +80,14 @@
         </Transformer>
       </Binding>
 
-      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
+      <!--<Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
       <Changed Source="[Clock.Time]" >
         <Actions>
           <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
         </Actions>
-      </Changed>
+      </Changed>-->
 
-      <Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
+      <!--<Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>-->
 
       <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
         <Conditions>
@@ -91,6 +111,12 @@
       <!--Hide/Show Options-->
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
+      <Binding Source="[Folder.SelectedChild!lib:FolderModel.SelectedChild]" Target="[EpisodePanel.Item]">
+        <Conditions>
+          <IsType Source="[Folder.SelectedChild]" Type="lib:FolderModel"/>
+        </Conditions>
+        
+      </Binding>
 
     </Rules>
 
@@ -100,6 +126,32 @@
 
           <Panel Name="MainPanel" Layout="Form" Navigation="ContainHorizontal">
             <Children>
+              <Panel Name="NamePanel" Layout="VerticalFlow" Margins="20,10,0,0" >
+                <LayoutInput>
+                  <FormLayoutInput Vertical="Near" Horizontal="Near"/>
+                </LayoutInput>
+                <Children>
+                  <Panel Name="TitlePanel" >
+                    <Children>
+                      <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,-3" Text="[Folder.Name]" Font="Segoe UI Light, 32, bold" Color="color://uc:TitleColor" />
+                      <Graphic Name="LogoImage" Margins="0,5,0,8" Content="[Folder.LogoImage]" MinimumSize="0,80" MaximumSize="0,80" MaintainAspectRatio="true" Visible="false"/>
+                    </Children>
+                  </Panel>
+
+                  <Panel Name="InfoPanel" Layout="HorizontalFlow" Margins="5,0,0,0">
+                    <Children>
+                      <sr:StarRating Margins="0,6,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
+                      <Text Name="Year" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
+                      <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
+                      <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
+                      <Graphic Name="HDType" Margins="12,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                    </Children>
+
+                  </Panel>
+                  
+                </Children>
+              </Panel>
+
               <!--Counter-->
               <Panel>
                 <LayoutInput>
@@ -125,17 +177,25 @@
                   <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
                 </Children>
               </Panel>
-
+              
               <!-- Season Scroller -->
-              <ss:StackedScroller Name="MyItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]" Margins="10,0,0,0">
+              <ls:SeasonsScroller FocusOrder="0" Name="SeasonItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]" >
                 <LayoutInput>
-                  <AnchorLayoutInput Left="Parent,0" Right="Parent,.4" Top="Parent, 0, 100" Bottom="Parent, .45" />
+                  <AnchorLayoutInput Left="Parent,0, 30" Right="Parent,.45" Top="Parent, 0, 100" Bottom="Parent, .95" />
                 </LayoutInput>
-              </ss:StackedScroller>
+              </ls:SeasonsScroller>
+              
+              <!--Current Episode Info-->
+              <me:InfoPanel Name="EpisodePanel" Item="[ThemeHelper.CurrentItem]" Application="[Application]" Helper="[ThemeHelper]" MaximumSize="800,500" >
+                <LayoutInput>
+                  <AnchorLayoutInput Vertical="Far" Horizontal="Far" />
+                </LayoutInput>
+                
+              </me:InfoPanel>
 
             </Children>
           </Panel>
-          <ColorFill Name="CoverFlowOverlay" Content="200,0,0,0">
+          <!--<ColorFill Name="CoverFlowOverlay" Content="200,0,0,0">
             <LayoutInput>
               <FormLayoutInput Bottom="Parent,1" Horizontal="Fill" Top="Parent,1,-150"/>
             </LayoutInput>
@@ -159,7 +219,7 @@
                 </Keyframes>
               </Animation>
             </Animations>
-          </ColorFill>
+          </ColorFill>-->
         </Children>
       </Panel>
 
@@ -167,4 +227,79 @@
 
   </UI>
 
-</Mcml>
+  <UI Name="InfoPanel">
+    <Properties>
+      <lib:Item Name="Item" Item="$Required"></lib:Item>
+      <a:Application Name="Application" Application="$Required"/>
+      <ch:ChocHelper Name="Helper" ChocHelper="$Required"/>
+    </Properties>
+    <Locals>
+      <Environment Name="Environment"/>
+      <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
+    </Locals>
+
+    <Rules>
+      <Binding Target="[PosterImage.Content]" Source="[Item.PrimaryImage]"/>
+      <Binding Target="[PosterImage.Visible]" Source="[Environment.IsWidescreen]">
+        <Conditions>
+          <Equality Source="[Helper.Config.AlwaysShowPoster]" Value="false"/>
+        </Conditions>
+      </Binding>
+      <Rule>
+        <Conditions>
+          <Equality Source="[PosterImage.Visible]" Value="true"/>
+          <Equality Source="[Application.Config.ShowHDIndicatorOnPosters]" Value="true"/>
+          <Equality Source="[Item.IsHD]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[HDIndicator.Visible]" Value="true"/>
+        </Actions>
+      </Rule>
+
+    </Rules>
+    
+    <Content>
+      <Panel Layout="Fill">
+        <Children>
+          <Panel Layout="Form" Margins="30,23,30,22">
+            <Children>
+              <Panel  Scale="1,1,1" MaximumSize="48,35" Padding="0,0,0,0" Visible="false" Name="HDIndicator">
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1" Bottom="Parent,1"/>
+                </LayoutInput>
+                <Children>
+                  <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true" />
+                </Children>
+              </Panel>
+
+              <Graphic Name="MissingImage" Visible="false" Content="image://i:MissingBanner" Margins="0,-10,-10,0" MaximumSize="100,100" MaintainAspectRatio="true">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                </LayoutInput>
+              </Graphic>
+              <Graphic Name="FutureImage" Visible="false" Content="image://i:FutureBanner" Margins="0,-10,-10,0" MaximumSize="100,100" MaintainAspectRatio="true">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                </LayoutInput>
+              </Graphic>
+
+              <Panel Name="PosterPanel" Padding="0,0,0,0">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Center"/>
+                </LayoutInput>
+                <Children>
+
+                  <Graphic Name="PosterImage" MaximumSize="300,0" Content="[Item.PrimaryImage]" MaintainAspectRatio="true">
+                  </Graphic>
+                </Children>
+              </Panel>
+
+            </Children>
+          </Panel>
+        </Children>
+      </Panel>
+    </Content>
+
+    
+  </UI>
+  </Mcml>

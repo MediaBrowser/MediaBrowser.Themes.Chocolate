@@ -37,7 +37,6 @@
       <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
       <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
       <Binding Target="[Runtime.Content]" Source="[Item.RunningTimeString]"></Binding>
-      <!--<Binding Target="[TextBackdrop.Visible]" Source="[Application.IsPlayingVideo]" />-->
       <Binding Target="[Director.Content]"     Source="[Item.DirectorString]" />
 
       <!--Use Production Year-->

@@ -170,7 +170,7 @@
 
     <Content>
 
-      <ColorFill Name="ItemColor" Layout="Fill" MinimumSize="252,28" Content="Transparent" Padding="0,0,0,0">
+      <ColorFill Name="ItemColor" Layout="Fill" MinimumSize="200,28" Content="Transparent" Padding="0,0,0,0">
 
         <Children>
           <Panel Layout="Form" Alpha="0.8" Visible="[Application.Config.ParentalControlEnabled]">

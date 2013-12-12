@@ -118,7 +118,7 @@
       <Condition Source="[ThemeHelper.IsMenuOpen]"          SourceValue="false" Target="[MainPanel.Alpha]" Value="1"/>
 
       <!--Specialized Series View-->
-      <!--<Condition Source="[Folder.ItemTypeString]" SourceValue="Series" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutSeries]" />-->
+      <Condition Source="[Folder.ItemTypeString]" SourceValue="Series" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutSeries]" />
       
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Detail" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutDetails]" />
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Poster" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutPoster]" />
@@ -134,6 +134,15 @@
         <Actions>
           <Set Target="[BackdropConstraint]" Value="small" />
           <Set Target="[InfoIconsPanel.Visible]" Value="false" />
+        </Actions>
+      </Rule>
+
+      <Rule ConditionLogicalOp="And" >
+        <Conditions>
+          <Equality Source="[Folder.ItemTypeString]" Value="Series"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[BackdropConstraint]" Value="small" />
         </Actions>
       </Rule>
 
