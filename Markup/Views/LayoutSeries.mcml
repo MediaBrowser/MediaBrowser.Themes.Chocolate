@@ -47,7 +47,7 @@
 
       <Rule>
         <Conditions>
-          <Equality Source="[ThemeHelper.Config.ShowCoverFlowLogos]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[ThemeHelper.Config.ShowListLogos]" ConditionOp="Equals" Value="true" />
           <Equality Source="[Folder.HasLogoImage]" ConditionOp="Equals" Value="true" />
         </Conditions>
         <Actions>
@@ -69,26 +69,6 @@
         </Actions>
       </Changed>
 
-      <Binding Source="[Folder.SelectedChildIndex.ToString]" Target="[List_Counter.Content]" >
-        <Transformer>
-          <MathTransformer Add="1"/>
-        </Transformer>
-      </Binding>
-      <Binding Source="[Folder.Children.Count]" Target="[List_Total.Content]" >
-        <Transformer>
-          <FormatTransformer Format="| {0}" />
-        </Transformer>
-      </Binding>
-
-      <!--<Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
-      <Changed Source="[Clock.Time]" >
-        <Actions>
-          <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
-        </Actions>
-      </Changed>-->
-
-      <!--<Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>-->
-
       <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
         <Conditions>
           <Equality Source="[ThemeHelper.NavigatingForward]" Value="false"/>
@@ -108,9 +88,6 @@
         </Actions>
       </Changed>
 
-      <!--Hide/Show Options-->
-      <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
-      <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
       <Binding Source="[Folder.SelectedChild!lib:FolderModel.SelectedChild]" Target="[EpisodePanel.Item]">
         <Conditions>
           <IsType Source="[Folder.SelectedChild]" Type="lib:FolderModel"/>
@@ -152,74 +129,23 @@
                 </Children>
               </Panel>
 
-              <!--Counter-->
-              <Panel>
-                <LayoutInput>
-                  <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Right="Parent,1,-25"/>
-                </LayoutInput>
-                <Children>
-                  <Panel Name="ListPanel" Layout="HorizontalFlow">
-                    <Children>
-                      <Text Name="List_Counter" Content="0" Color="color://uc:Light" Font="font://uf:CF_TotalItems" />
-                      <Text Name="List_Total" Content="0" Color="color://uc:Dark" Font="font://uf:CF_TotalItems"/>
-                    </Children>
-                  </Panel>
-                </Children>
-              </Panel>
-
-              <!--EndTime-->
-              <Panel Name="EndTimePanel" Layout="HorizontalFlow" >
-                <LayoutInput>
-                  <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Left="Parent,0,25"/>
-                </LayoutInput>
-                <Children>
-                  <Text Name="EndTimeLbl" Font="font://uf:CF_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
-                  <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
-                </Children>
-              </Panel>
-              
               <!-- Season Scroller -->
               <ls:SeasonsScroller FocusOrder="0" Name="SeasonItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]" >
                 <LayoutInput>
-                  <AnchorLayoutInput Left="Parent,0, 30" Right="Parent,.45" Top="Parent, 0, 100" Bottom="Parent, .95" />
+                  <AnchorLayoutInput Left="Parent,0, 30" Right="Parent,.4" Top="Parent, 0, 110" Bottom="Parent, 1" />
                 </LayoutInput>
               </ls:SeasonsScroller>
               
               <!--Current Episode Info-->
-              <me:InfoPanel Name="EpisodePanel" Item="[ThemeHelper.CurrentItem]" Application="[Application]" Helper="[ThemeHelper]" MaximumSize="800,500" >
+              <me:InfoPanel Name="EpisodePanel" Item="[ThemeHelper.CurrentItem]" Application="[Application]" Helper="[ThemeHelper]" >
                 <LayoutInput>
-                  <AnchorLayoutInput Vertical="Far" Horizontal="Far" />
+                  <AnchorLayoutInput Left="Parent, .4" Right="Parent, 1" Top="Parent, .5" Bottom="Parent, 1" />
                 </LayoutInput>
                 
               </me:InfoPanel>
 
             </Children>
           </Panel>
-          <!--<ColorFill Name="CoverFlowOverlay" Content="200,0,0,0">
-            <LayoutInput>
-              <FormLayoutInput Bottom="Parent,1" Horizontal="Fill" Top="Parent,1,-150"/>
-            </LayoutInput>
-            <Animations>
-              <Animation Type="Show" CenterPointPercent="0, 0.5, 0.0">
-                <Keyframes>
-                  <PositionKeyframe Time="0.0" Value="0, 150, 0" RelativeTo="Final"/>
-                  <PositionKeyframe Time="0.5" Value="0, 150, 0" RelativeTo="Final" Interpolation="EaseIn, 3.0, 0.2"/>
-                  <PositionKeyframe Time="1.4" Value="0, 0, 0" RelativeTo="Final"/>
-                  <AlphaKeyframe Time="0.0" Value="0.0" RelativeTo="Absolute"/>
-                  <AlphaKeyframe Time="0.5" Value="0.0" RelativeTo="Absolute"/>
-                  <AlphaKeyframe Time="1.4" Value="1.0" RelativeTo="Absolute"/>
-                </Keyframes>
-              </Animation>
-              <Animation Type="Hide" CenterPointPercent="0, 0.5, 0.0">
-                <Keyframes>
-                  <PositionKeyframe Time="0.0" RelativeTo="Current" Interpolation="EaseIn, 3.0, 0.2"/>
-                  <PositionKeyframe Time="0.4" Value="0, 150, 0" RelativeTo="Current"/>
-                  <AlphaKeyframe Time="0.0" RelativeTo="Current" Interpolation="Log"/>
-                  <AlphaKeyframe Time="0.4" Value="0.0" RelativeTo="Absolute"/>
-                </Keyframes>
-              </Animation>
-            </Animations>
-          </ColorFill>-->
         </Children>
       </Panel>
 
@@ -255,6 +181,24 @@
           <Set Target="[HDIndicator.Visible]" Value="true"/>
         </Actions>
       </Rule>
+      <Binding Source="[Item.IsMissing]" Target="[MissingImage.Visible]" />
+      <Binding Source="[Item.IsFuture]" Target="[FutureImage.Visible]" />
+      <Binding Source="[Item.Name]" Target="[Title.Text]" />
+      <Binding Source="[Item.Overview]" Target="[Summary.Text]" />
+      <Binding Target="[TxtRuntime.Content]"   Source="[Item.RunningTimeString]"/>
+      <Binding Source="[Item.FirstAired]" Target="[TxtAired.Content]" />
+      <Binding Source="[Item.DirectorString]" Target="[TxtDirectedBy.Content]" />
+
+      <Rule>
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
+        </Conditions>
+        <Actions>
+          <Set Target="[InfoBg.Content]" Value="DarkBlue"/>
+        </Actions>
+      </Rule>
+
+      <Binding Target="[EndTime.Content]" Source="[Item.EndTimeString]"/>
 
     </Rules>
     
@@ -263,39 +207,90 @@
         <Children>
           <Panel Layout="Form" Margins="30,23,30,22">
             <Children>
-              <Panel  Scale="1,1,1" MaximumSize="48,35" Padding="0,0,0,0" Visible="false" Name="HDIndicator">
+
+              <Panel Name="TitlePanel" Margins="5,20,5,0" >
                 <LayoutInput>
-                  <FormLayoutInput Right="Parent,1" Bottom="Parent,1"/>
+                  <FormLayoutInput Vertical="Near" Horizontal="Near" />
                 </LayoutInput>
                 <Children>
-                  <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true" />
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[Item.Name]" Font="font://uf:List_Title" Color="color://uc:TitleColor" />
+
                 </Children>
               </Panel>
 
-              <Graphic Name="MissingImage" Visible="false" Content="image://i:MissingBanner" Margins="0,-10,-10,0" MaximumSize="100,100" MaintainAspectRatio="true">
+              <Panel Name="OverviewPanel" Margins="5,0,0,0">
                 <LayoutInput>
-                  <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                  <FormLayoutInput Left="Parent,0" Top="TitlePanel,1,-5" Bottom="Parent,1,-45" Right="PosterPanel,0,-5"/>
                 </LayoutInput>
-              </Graphic>
-              <Graphic Name="FutureImage" Visible="false" Content="image://i:FutureBanner" Margins="0,-10,-10,0" MaximumSize="100,100" MaintainAspectRatio="true">
-                <LayoutInput>
-                  <FormLayoutInput Horizontal="Far" Vertical="Near"/>
-                </LayoutInput>
-              </Graphic>
+                <Children>
+                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" 
+                                     Name="Summary" Text="[Item.Overview]" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:OverviewColor"/>
+                </Children>
+              </Panel>
 
-              <Panel Name="PosterPanel" Padding="0,0,0,0">
+              <Panel Name="DetailPanel" Margins="0,0,0,-10">
                 <LayoutInput>
-                  <FormLayoutInput Horizontal="Far" Vertical="Center"/>
+                  <FormLayoutInput Horizontal="Near" Vertical="Far"/>
+                </LayoutInput>
+                <Layout>
+                  <FlowLayout Orientation="Horizontal" Spacing="2,0"/>
+                </Layout>
+                <Children>
+                  <Text Name="TxtDirectedLbl" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content="[Application.LocalStrings.#Director!cor:String]"/>
+                  <Text Name="DirectorLblSpacer" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content=": " Visible="true"/>
+                  <Text Name="TxtDirectedBy" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
+                  <Text Name="DirectedSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="true"  />
+                  <Text Name="TxtAired" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
+                  <Text Name="AiredSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="true"  />
+                  <Text Name="TxtRuntime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
+                  <Text Name="RunEndSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="true"  />
+                  <Text Name="EndTime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content=""/>
+                </Children>
+              </Panel>
+
+              <Panel Name="PosterPanel" MaximumSize="300,200" Margins="0,0,10,50" Layout="Form" >
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Far" Vertical="Far"/>
                 </LayoutInput>
                 <Children>
 
-                  <Graphic Name="PosterImage" MaximumSize="300,0" Content="[Item.PrimaryImage]" MaintainAspectRatio="true">
+                  <Graphic Name="PosterImage" Content="[Item.PrimaryImage]" MaintainAspectRatio="true" Layout="Form">
+                    <Children>
+                      <Panel  MaximumSize="48,35" Padding="0,0,0,0" Visible="false" Name="HDIndicator">
+                        <LayoutInput>
+                          <FormLayoutInput Right="Parent,1" Bottom="Parent,1"/>
+                        </LayoutInput>
+                        <Children>
+                          <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true" />
+                        </Children>
+                      </Panel>
+
+                      <Graphic Name="MissingImage" Visible="false" Content="image://i:MissingBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
+                        <LayoutInput>
+                          <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                        </LayoutInput>
+                      </Graphic>
+                      <Graphic Name="FutureImage" Visible="false" Content="image://i:FutureBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
+                        <LayoutInput>
+                          <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                        </LayoutInput>
+                      </Graphic>
+                      
+                    </Children>
                   </Graphic>
                 </Children>
               </Panel>
 
             </Children>
           </Panel>
+          <Clip Orientation="Vertical" FadeSize="150" ShowNear="true" ShowFar="false">
+            <LayoutInput>
+              <AnchorLayoutInput Horizontal="Far" Vertical="Far"/>
+            </LayoutInput>
+            <Children>
+              <ColorFill Name="InfoBg" Content="Black" Alpha=".75"/>
+            </Children>
+          </Clip>
         </Children>
       </Panel>
     </Content>

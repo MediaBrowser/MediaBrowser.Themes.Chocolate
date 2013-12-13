@@ -19,9 +19,9 @@
   <!-- ========== List View ========== -->
 
   <Font Name="List_Title" Font="Segoe Media Center Light,26"/>
-  <Font Name="List_Overview" Font="Segoe Media Center Bold,16"/>
+  <Font Name="List_Overview" Font="Segoe Media Center Light, 14, Bold"/>
   <Font Name="List_Genres" Font="Segoe Media Center Bold,18"/>
-  <Font Name="List_RunTime" Font="Segoe Media Center Bold,18"/>
+  <Font Name="List_RunTime" Font="Segoe Media Center Light, 14"/>
   <Font Name="List_Item" Font="Segoe Media Center Bold,14"/>
 
   <!-- ========== Poster View ========== -->

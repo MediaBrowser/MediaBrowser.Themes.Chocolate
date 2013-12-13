@@ -120,7 +120,7 @@
     <Content>
       <Panel Name="MainPanel" Layout="HorizontalFlow">
         <Children>
-          <Graphic Name="SeasonPoster" Content="[Folder.PreferredImage]" MaintainAspectRatio="true" MaximumSize="0,220" Margins="10,10,0,0" >
+          <Graphic Name="SeasonPoster" Content="[Folder.PreferredImage]" MaintainAspectRatio="true" MaximumSize="0,200" Margins="10,10,0,0" >
           </Graphic>
           <Panel Layout="VerticalFlow" Margins="10,20,0,0" >
             <Children>
