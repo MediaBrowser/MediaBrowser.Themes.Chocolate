@@ -4,6 +4,7 @@
 	  xmlns:cor="assembly://MSCorLib/System"
     xmlns:ch="assembly://Chocolate/Chocolate"
     xmlns:ls="resx://Chocolate/Chocolate.Resources/ListScroller"
+    xmlns:lse="resx://Chocolate/Chocolate.Resources/LayoutSeries"
     xmlns:it="resx://Chocolate/Chocolate.Resources/Images"
     xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
     xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
@@ -55,32 +56,10 @@
         </Actions>
       </Changed>
       
-      <Binding Source="[Application.Config.AlphaBlending!cor:Single]" Target="[AlphaPanel.Alpha]">
-        <Transformer>
-          <MathTransformer Divide="100"/>
-        </Transformer>
-      </Binding>
       
       <Binding Target="[ScrollHandler.ScrollingData]" Source="[ScrollData]"/>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[AlphaPanel.Content]" Value="image://it:UltimateLongPanel"/>
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[AlphaPanel.Content]" Value="image://it:BlueUltimateLongPanel"/>
-        </Actions>
-      </Rule>
-      
+     
     </Rules>
     
     
@@ -99,17 +78,11 @@
             </Children>
           </Panel>
 
-          <Graphic Name="AlphaPanel" MaintainAspectRatio="true">
+          <lse:InfoPanel Name="ItemInfoPanel" Helper="[ThemeHelper]" Item="[Folder.SelectedChild]" Application="[Application]" >
             <LayoutInput>
-              <FormLayoutInput Left="Parent,0" Top="Parent,0,80" Bottom="Parent,1,1" Right="Parent,0,440"/>
+              <FormLayoutInput Left="DetailViewListing,1,-5" Top="Parent,0.50" Bottom="Parent,1" Right="Parent,1"/>
             </LayoutInput>
-          </Graphic>
-
-          <me:TypePanelSelector Name="ItemInfoPanel" Helper="[ThemeHelper]" Item="[Folder.SelectedChild]" Application="[Application]" >
-            <LayoutInput>
-              <FormLayoutInput Left="DetailViewListing,1,-5" Top="Parent,0.60" Bottom="Parent,1" Right="Parent,1"/>
-            </LayoutInput>
-          </me:TypePanelSelector>
+          </lse:InfoPanel>
           
         </Children>
       </Panel>
