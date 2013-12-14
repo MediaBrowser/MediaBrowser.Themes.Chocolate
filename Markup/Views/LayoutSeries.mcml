@@ -313,7 +313,11 @@
               <AnchorLayoutInput Horizontal="Far" Vertical="Far"/>
             </LayoutInput>
             <Children>
-              <ColorFill Name="InfoBg" Content="Black" Alpha=".75"/>
+              <!--<Clip Orientation="Horizontal" FadeSize="100" ShowNear="true" ShowFar="false" >
+                <Children>-->
+                  <ColorFill Name="InfoBg" Content="10,10,10" Alpha=".85"/>
+                <!--</Children>
+              </Clip>-->
             </Children>
           </Clip>
         </Children>
