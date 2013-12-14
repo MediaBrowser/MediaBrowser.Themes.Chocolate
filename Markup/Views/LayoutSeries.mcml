@@ -254,29 +254,29 @@
                 </LayoutInput>
                 <Children>
 
-                  <Graphic Name="PosterImage" Content="[Item.PrimaryImage]" MaintainAspectRatio="true" Layout="Form">
+                  <Panel  MaximumSize="48,35" Padding="0,0,0,0" Visible="false" Name="HDIndicator">
+                    <LayoutInput>
+                      <FormLayoutInput Right="Parent,1" Bottom="Parent,1"/>
+                    </LayoutInput>
                     <Children>
-                      <Panel  MaximumSize="48,35" Padding="0,0,0,0" Visible="false" Name="HDIndicator">
-                        <LayoutInput>
-                          <FormLayoutInput Right="Parent,1" Bottom="Parent,1"/>
-                        </LayoutInput>
-                        <Children>
-                          <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true" />
-                        </Children>
-                      </Panel>
-
-                      <Graphic Name="MissingImage" Visible="false" Content="image://i:MissingBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
-                        <LayoutInput>
-                          <FormLayoutInput Horizontal="Far" Vertical="Near"/>
-                        </LayoutInput>
-                      </Graphic>
-                      <Graphic Name="FutureImage" Visible="false" Content="image://i:FutureBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
-                        <LayoutInput>
-                          <FormLayoutInput Horizontal="Far" Vertical="Near"/>
-                        </LayoutInput>
-                      </Graphic>
-                      
+                      <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true" />
                     </Children>
+                  </Panel>
+
+                  <Graphic Name="MissingImage" Visible="false" Content="image://i:MissingBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
+                    <LayoutInput>
+                      <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
+                    </LayoutInput>
+                  </Graphic>
+                  <Graphic Name="FutureImage" Visible="false" Content="image://i:FutureBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
+                    <LayoutInput>
+                      <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                    </LayoutInput>
+                  </Graphic>
+                  <Graphic Name="PosterImage" Content="[Item.PrimaryImage]" MaintainAspectRatio="true" >
+                    <LayoutInput>
+                      <FormLayoutInput Horizontal="Far" Vertical="Near"/>
+                    </LayoutInput>
                   </Graphic>
                 </Children>
               </Panel>
