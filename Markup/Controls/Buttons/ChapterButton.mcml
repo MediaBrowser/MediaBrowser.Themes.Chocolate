@@ -21,7 +21,7 @@
       <cor:String Name="Name" String="" />
       <cor:String Name="Position" String="" />
       
-      <Size Name="Size" Size="280,100" />
+      <Size Name="Size" Size="285,0" />
       <Size Name="MinSize" Size="50,50" />
       <Font Name="Font" Font="Segoe Media Center Light, 16, bold" />
       <Color Name="Color" Color="color://s:FontColorLight"/>
@@ -98,7 +98,7 @@
 
       <Graphic Name="imgButton" Content="[ImageNoFocus]" MinimumSize="[Size]" MaximumSize="[Size]" Padding="5,5,5,5">
         <Layout>
-          <FlowLayout Orientation="Horizontal" ItemAlignment="Center"/>
+          <FlowLayout Orientation="Vertical" ItemAlignment="Near"/>
         </Layout>
         <Children>
           <ColorFill Content="100,250,250,250" Padding="3,3,3,3" >
@@ -108,12 +108,12 @@
               
             </Children>
           </ColorFill>
-          <Panel Margins="10,0,5,0">
+          <Panel Margins="0,0,0,0"  >
             <Layout>
               <FlowLayout Orientation="Vertical" ItemAlignment="Near"/>
             </Layout>
             <Children>
-              <Text Name="CName" Font="[Font]" Color="color://s:FontColorLight" />
+              <Text Name="CName" Font="[Font]" Color="color://s:FontColorLight"/>
               <Text Name="Pos" Font="[Font]" Color="color://s:FontColorMedium" />
             </Children>
           </Panel>
