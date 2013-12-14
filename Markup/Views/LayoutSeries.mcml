@@ -186,7 +186,16 @@
       <Binding Source="[Item.Name]" Target="[Title.Text]" />
       <Binding Source="[Item.Overview]" Target="[Summary.Text]" />
       <Binding Target="[TxtRuntime.Content]"   Source="[Item.RunningTimeString]"/>
-      <Binding Source="[Item.FirstAired]" Target="[TxtAired.Content]" />
+      <Binding Source="[Item.FirstAired]" Target="[TxtAired.Content]" >
+        <Conditions>
+          <Equality Source="[Item.ItemTypeString]" Value="Episode" />
+        </Conditions>
+      </Binding>
+      <Binding Source="[Item.ProductionYearString]" Target="[TxtAired.Content]" >
+        <Conditions>
+          <Equality Source="[Item.ItemTypeString]" ConditionOp="NotEquals" Value="Episode" />
+        </Conditions>
+      </Binding>
       <Binding Source="[Item.DirectorString]" Target="[TxtDirectedBy.Content]" />
 
       <Rule>
@@ -197,6 +206,22 @@
           <Set Target="[InfoBg.Content]" Value="DarkBlue"/>
         </Actions>
       </Rule>
+
+      <Condition Source="[Item.DirectorString]" SourceValue="" Target="[TxtDirectedLbl.Visible]" Value="false" >
+        <Actions>
+          <Set Target="[DirectorLblSpacer.Visible]" Value="false" />
+          <Set Target="[DirectedSpacer.Visible]" Value="false" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Item.RunningTimeString]" SourceValue="" Target="[RunEndSpacer.Visible]" Value="false" >
+      </Condition>
+
+      <Condition Source="[Item.ProductionYearString]" SourceValue="" Target="[AiredSpacer.Visible]" Value="false" >
+        <Conditions>
+          <Equality Source="[Item.FirstAired]" Value="" />
+        </Conditions>
+      </Condition>
 
       <Binding Target="[EndTime.Content]" Source="[Item.EndTimeString]"/>
 
