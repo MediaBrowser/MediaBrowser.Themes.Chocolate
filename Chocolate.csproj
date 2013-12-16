@@ -102,6 +102,7 @@
     <Content Include="Images\Icons\Icon720.png" />
     <Content Include="Images\Icons\IconCog.png" />
     <Content Include="Images\Icons\IconNowPlay.png" />
+    <Content Include="Images\Icons\IconSearch.png" />
     <Content Include="Images\Icons\MetroPlay.png" />
     <Content Include="Images\Icons\MetroResume.png" />
     <Content Include="Images\Ratings\13.png" />

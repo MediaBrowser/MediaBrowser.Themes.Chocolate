@@ -60,6 +60,7 @@
       <Command Name="CloseUserMenu" />
       <Command Name="SwitchUser" />
       <Command Name="ConfigOptions" />
+      <Command Name="OpenSearch" />
       <Command Name="GoToNowPlaying" />
       <Command Name="SetPlayState"/>
       <Command Name="ContextMenuCmd"/>
@@ -131,6 +132,12 @@
       <Changed Source="[Configure.Invoked]">
         <Actions>
           <Invoke Target="[Application.OpenConfiguration]" showFullOptions="true" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[OpenSearch.Invoked]">
+        <Actions>
+          <Set Target="[Application.ShowSearchPanel]" Value="true" />
         </Actions>
       </Changed>
 
@@ -431,7 +438,8 @@
 
               <Panel Layout="Form" Navigation="WrapDirectional">
                 <Children>
-                  <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]" SwitchUser="[SwitchUser]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
+                  <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]"
+                                  SwitchUser="[SwitchUser]" OpenSearch="[OpenSearch]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
                     <LayoutInput>
                       <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" Bottom="Parent,0,100"/>
                     </LayoutInput>
@@ -456,6 +464,7 @@
       <Command Name="GoToNowPlaying" Command="$Required"/>
       <Command Name="ConfigOptions" Command="$Required"/>
       <Command Name="SwitchUser" Command="$Required"/>
+      <Command Name="OpenSearch" Command="$Required"/>
       <ch:ChocHelper Name="Helper" ChocHelper="$Required"/>
     </Properties>
 
@@ -543,7 +552,7 @@
                   <pci:PCIndicatorButton Application="[Application]" Size="28,28"/>
                 </Children>
               </Panel>
-              <Panel Name="UserKey" FocusOrder="104">
+              <Panel Name="UserKey" FocusOrder="105">
                 <Children>
                   <vsb:SimpleButton Name="UserMenuButton" Application="[Application]" ImageNoFocus="[Application.CurrentUser.PrimaryImage]" Command="[SwitchUser]" Size="20,20" Margins="3,2,0,0" />
                 </Children>
@@ -551,6 +560,11 @@
               <Panel Name="ConfigurationKey" FocusOrder="104">
                 <Children>
                   <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                </Children>
+              </Panel>
+              <Panel Name="SearchKey" FocusOrder="106">
+                <Children>
+                  <vsb:SimpleButton Name="SearchButton" Application="[Application]" ImageNoFocus="image://vi:Search" Command="[OpenSearch]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
                 </Children>
               </Panel>
             </Children>
