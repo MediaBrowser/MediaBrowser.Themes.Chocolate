@@ -368,13 +368,6 @@
                           <ib:ImageButton Name="ScenesButton" Text="[Application.LocalStrings.#Scenes!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ChaptersCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/Frames" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="TrailerButton" Visible="false" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="175,45" Font="font://f:MM_ButtonFont" Visible="false" />
-                          <!--<vsb:SimpleButton Name="ResumeMovieButton" ImageNoFocus="image://it:IconResume"  Command="[ResumeMovieCommand]" Application="[Application]" HasFocus="[ResumeBtnHasFocus]"/>
-                          <vsb:SimpleButton Name="PlayMovieButton"   ImageNoFocus="image://it:IconPlay"    Command="[PlayMovieCommand]" Application="[Application]" />
-                          <vsb:SimpleButton Name="TrailerButton"     ImageNoFocus="image://it:IconTrailer" Command="[TrailerCommand]" Application="[Application]"/>
-                          <vsb:SimpleButton Name="RefreshButton"     ImageNoFocus="image://it:IconRefresh" Command="[RefreshCommand]" Application="[Application]"/>
-                          <vsb:SimpleButton Name="SummaryButton" ImageNoFocus="image://it:IconSummary" Command="[SummaryCommand]" Application="[Application]"/>
-                          <vsb:SimpleButton Name="ActorsButton"  ImageNoFocus="image://it:IconActor"   Command="[ActorCommand]" Application="[Application]"/>
-                          -->
                         </Children>
                       </Panel>
                     </Children>
@@ -485,7 +478,7 @@
                     </Children>
                   </Panel>
 
-                  <Graphic Name="LogoImage" Margins="0,10,30,0" Content="[Item.LogoImage]" MaximumSize="0,110" MaintainAspectRatio="true" >
+                  <Graphic Name="LogoImage" Margins="0,10,30,0" Content="[Item.LogoImage]" MaximumSize="0,110" MaintainAspectRatio="true" Visible="[ThemeHelper.Config.ShowLogosOnMovieDetail]" >
                     <LayoutInput>
                       <FormLayoutInput Right="Parent,1" Bottom="Parent,.90"/>
                     </LayoutInput>
@@ -511,7 +504,7 @@
                   </Clip>
 
 
-                  <Panel Name="MediaInfo" Layout="HorizontalFlow" Alpha="0.8">
+                  <Panel Name="MediaInfo" Layout="HorizontalFlow" Alpha="0.8" Visible="[ThemeHelper.Config.ShowInfoIcons]">
                     <LayoutInput>
                       <FormLayoutInput Right="Parent,1,-20" Bottom="Parent,1,-18" />
                     </LayoutInput>

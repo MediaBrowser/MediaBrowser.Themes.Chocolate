@@ -100,7 +100,7 @@
         public string ShowListLogos = "Show List Logos";
         public string ShowListLogosDesc = "Show Logos On List View.";
         public string ShowLogosOnMovieDetail = "Show Logos In Movie Detail View";
-        public string ShowLogosOnMovieDetailDesc = "This Option Will Replace The Movie Title In Movie Detail View With A Logo Image, If There Is One Available";
+        public string ShowLogosOnMovieDetailDesc = "Display a Logo Image, If There Is One Available, on the Movie Detail Screen";
         public string ShowNowPlayingIcon = "Show Now Playing Icon";
         public string ShowNowPlayingIconDesc = "Display Now Playing Icon on the detail page";
         public string ShowNPV = "Show Small NPV";
