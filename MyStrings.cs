@@ -94,7 +94,7 @@
         public string ShowInfoIcons = "Show Info Icons";
         public string ShowInfoIconsBackgrounds = "Show Info Icon Background";
         public string ShowInfoIconsBackgroundsDesc = "Adds semi-transparent background to Info Icons.";
-        public string ShowInfoIconsDesc = "Displays Info Icons at the top of the screen when browsing media.";
+        public string ShowInfoIconsDesc = "Displays Media Info Icons in various views.";
         public string ShowListEndTime = "Show List End Time";
         public string ShowListEndTimeDesc = "This Option Will Show End Time On List View.";
         public string ShowListLogos = "Show List Logos";
