@@ -337,7 +337,7 @@
 
               <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Item]" ShowDetails="true" >
                 <LayoutInput>
-                  <FormLayoutInput Bottom="Parent, .5" Top="Parent, 0" Right="Parent, .4" Left="Parent, 0"/>
+                  <FormLayoutInput Bottom="Parent, .5" Top="Parent, 0" Right="Parent, .7" Left="Parent, 0"/>
                 </LayoutInput>
                 <Animations>
                   <Animation Animation="animation://anim:NavigateToForward"/>

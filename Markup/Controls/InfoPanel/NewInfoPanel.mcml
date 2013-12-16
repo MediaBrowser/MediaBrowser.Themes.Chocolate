@@ -26,6 +26,7 @@
       <ch:ChocHelper Name="ThemeHelper"></ch:ChocHelper>
       <cor:Boolean Name="ShowLogo" Boolean="false" />
       <cor:Boolean Name="ShowDetails" Boolean="false" />
+      <Size Name="OverviewSize" Size="500,450"/>
     </Properties>
 
     <Rules>
@@ -107,9 +108,9 @@
     </Rules>
 
     <Content>
-      <Panel Layout="Form" Margins="30,20,0,0">
+      <Panel Margins="30,20,0,0" >
         <Children>
-          <Panel Name="MainPanel" Layout="VerticalFlow" >
+          <Panel Name="MainPanel" Layout="VerticalFlow"  >
             <Children>
               <Panel Name="TitlePanel" Margins="5,0,5,0" >
                 <Children>
@@ -150,7 +151,7 @@
               </Panel>
 
 
-              <Panel Name="OverviewPanel" Margins="0,5,0,0">
+              <Panel Name="OverviewPanel" Margins="0,5,0,0" MaximumSize="[OverviewSize]">
                 <Children>
                   <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="Segoe Media Center Light, 16" Color="color://uc:Light"/>
                 </Children>
