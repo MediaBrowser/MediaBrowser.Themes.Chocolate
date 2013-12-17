@@ -130,9 +130,7 @@
 
       <Changed Source="[PlayMovieCommand.Invoked]">
         <Actions>
-          <Set Target="[ActorScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ActorScroller.Visible]"    Value="false"/>
-          <Set Target="[ChapterScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ChapterScroller.Visible]"    Value="false"/>
           <Invoke Target="[Application.Play]" item="[Item]"/>
         </Actions>
@@ -140,10 +138,8 @@
 
       <Changed Source="[ActorCommand.Invoked]">
         <Actions>
-          <Set Target="[ChapterScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ChapterScroller.Visible]"    Value="false"/>
 
-          <Set Target="[ActorScrollerTitle.Visible]"    Value="true"/>
           <Set Target="[ActorScroller.Visible]"    Value="true"/>
           <Set Target="[ExtraPanel.Visible]"    Value="true"/>
           <Invoke Target="[ExtraPanel.NavigateInto]" />
@@ -152,10 +148,7 @@
 
       <Changed Source="[ChaptersCommand.Invoked]">
         <Actions>
-          <Set Target="[ActorScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ActorScroller.Visible]"    Value="false"/>
-
-          <Set Target="[ChapterScrollerTitle.Visible]"    Value="true"/>
           <Set Target="[ChapterScroller.Visible]"    Value="true"/>
           <Set Target="[ExtraPanel.Visible]"    Value="true"/>
           <Invoke Target="[ExtraPanel.NavigateInto]" />
@@ -165,9 +158,7 @@
 
       <Changed Source="[MusicCommand.Invoked]">
         <Actions>
-          <Set Target="[ActorScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ActorScroller.Visible]"    Value="false"/>
-          <Set Target="[ChapterScrollerTitle.Visible]"    Value="false"/>
           <Set Target="[ChapterScroller.Visible]"    Value="false"/>
         </Actions>
       </Changed>
@@ -248,7 +239,6 @@
           <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
         </Conditions>
       </Binding>
-      <Binding Target="[ActorScrollerTitle.Text]"           Source="[Item.Name]"/>
       <Binding Target="[ActorScroller.Item]" Source="[Item]"/>
       <Binding Target="[ChapterScroller.Item]" Source="[Item]"/>
       <Binding Target="[PosterImage.Content]" Source="[Item.PreferredImage]"/>
@@ -484,25 +474,6 @@
                     </LayoutInput>
                     
                   </Graphic>
-
-                  <Clip Layout="HorizontalFlow" Visible="true" FadeSize="20" Orientation="Vertical">
-                    <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,32" Top="Parent,0.64,-20" Right="ButtonsPanel,0,-30" Bottom="Parent,0.64,47"/>
-                    </LayoutInput>
-                    <Children>
-                      <ash:AutoScrollHorizontal  Name="ActorScrollerTitle" Text="[Item.Name]" Font="font://uf:Detail_Title" Color="color://s:Choc_EHS_Title" Visible="false" Margins="0,15,0,0"/>
-                    </Children>
-                  </Clip>
-
-                  <Clip Layout="HorizontalFlow" Visible="true" FadeSize="20" Orientation="Vertical">
-                    <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,32" Top="Parent,0.64,-20" Right="ButtonsPanel,0,-30" Bottom="Parent,0.64,47"/>
-                    </LayoutInput>
-                    <Children>
-                      <ash:AutoScrollHorizontal  Name="ChapterScrollerTitle" Text="[Item.Name]" Font="font://uf:Detail_Title" Color="color://s:Choc_EHS_Title" Visible="false" Margins="0,15,0,0"/>
-                    </Children>
-                  </Clip>
-
 
                   <Panel Name="MediaInfo" Layout="HorizontalFlow" Alpha="0.8" Visible="[ThemeHelper.Config.ShowInfoIcons]">
                     <LayoutInput>
