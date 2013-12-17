@@ -335,17 +335,6 @@
                 </Animations>
               </Panel>
 
-              <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Item]" ShowDetails="true" >
-                <LayoutInput>
-                  <FormLayoutInput Bottom="Parent, .5" Top="Parent, 0" Right="Parent, .7" Left="Parent, 0"/>
-                </LayoutInput>
-                <Animations>
-                  <Animation Animation="animation://anim:NavigateToForward"/>
-                  <Animation Animation="animation://anim:NavigateAwayBackward"/>
-                </Animations>
-
-              </nip:InfoPanel>
-
               <Panel Name="MainPanel" Layout="Form">
                 <Animations>
                   <Animation Animation="animation://anim:NavigateToForward"/>
@@ -477,6 +466,17 @@
                       <ColorFill Content="Black" Alpha=".75" Layout="Fill" />
                     </Children>
                   </Panel>
+
+                  <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Item]" ShowDetails="true" >
+                    <LayoutInput>
+                      <FormLayoutInput Bottom="Parent, .5" Top="Parent, 0" Right="Parent, .7" Left="Parent, 0"/>
+                    </LayoutInput>
+                    <Animations>
+                      <Animation Animation="animation://anim:NavigateToForward"/>
+                      <Animation Animation="animation://anim:NavigateAwayBackward"/>
+                    </Animations>
+
+                  </nip:InfoPanel>
 
                   <Graphic Name="LogoImage" Margins="0,10,30,0" Content="[Item.LogoImage]" MaximumSize="0,110" MaintainAspectRatio="true" Visible="[ThemeHelper.Config.ShowLogosOnMovieDetail]" >
                     <LayoutInput>
