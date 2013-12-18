@@ -108,13 +108,31 @@
     <Locals>
       <Command Name="ExpandContract"/>
       <cor:Boolean Name="Expanded" Boolean="false" />
+      <cor:Boolean Name="FirstEntered" Boolean="true" />
     </Locals>
     
     <Rules>
+      <Rule>
+        <Conditions>
+          <Equality Source="[FirstEntered]" Value="true" />
+          <Equality Source="[Index.Value]" Value="[Parent.FirstUnwatchedIndex]" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Expanded]" Value="true" />
+          <Set Target="[FirstEntered]" Value="false" />
+          <Invoke Target="[MyRepeater.NavigateIntoIndex]" index="[Folder.FirstUnwatchedIndex]" />
+        </Actions>
+      </Rule>
       <Binding Source="[Folder.Children]" Target="[MyRepeater.Source]"/>
       <Binding Source="[Folder.BannerImage]" Target="[SeasonPoster.Content]" >
         <Conditions>
           <Equality Source="[Folder.HasBannerImage]" Value="true" />
+        </Conditions>
+      </Binding>
+      <Binding Source="[Parent.BannerImage]" Target="[SeasonPoster.Content]" >
+        <Conditions>
+          <Equality Source="[Folder.HasBannerImage]" Value="false" />
+          <Equality Source="[Parent.HasBannerImage]" Value="true" />
         </Conditions>
       </Binding>
       <Binding Source="[Folder.Children.Count]" Target="[EpisodeCount.Content]" >
