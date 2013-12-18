@@ -614,4 +614,7 @@
   <data name="StackedScroller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>markup\controls\scrollers\stackedscroller.mcml;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="TextButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>markup\controls\buttons\textbutton.mcml;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

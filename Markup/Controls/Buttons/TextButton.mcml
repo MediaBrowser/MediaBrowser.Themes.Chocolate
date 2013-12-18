@@ -1,0 +1,114 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+      xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:ch="assembly://Chocolate/Chocolate"
+      xmlns:an="resx://MediaBrowser/MediaBrowser.Resources/Animations"
+      xmlns:sd="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+    xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
+      xmlns:s="file://Styles_DoNotEdit.mcml"
+      xmlns:me="Me">
+
+
+
+  <UI Name="TextButton">
+
+    <Properties>
+
+      <ICommand Name="Command" ICommand="$Required" />
+      <cor:Boolean Name="IsNavigatingCommand" Boolean="false" />
+      <lib:Item Name="Item" Item="$Required" />
+      <cor:String Name="Text" String="" />
+      <Size Name="Size" Size="0,0" />
+      <Font Name="Font" Font="$Required" />
+      <Color Name="Color" Color="color://s:FontColorLight"/>
+      <a:Application Name="Application" Application="$Required"/>
+      <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
+
+    </Properties>
+
+    <Locals>
+
+      <ClickHandler Name="Clicker" />
+
+    </Locals>
+
+    <Rules>
+
+      <Binding Source="[Command]" Target="[Clicker.Command]" />
+      <Binding Source="[Command.Available]" Target="[Input.KeyInteractive]" />
+      <Binding Source="[Font]" Target="[Label.Font]" />
+      <Binding Source="[Text]" Target="[Label.Content]" />
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+
+      <Rule>
+        <Conditions>
+          <Modified Source="[Clicker.Invoked]"/>
+          <Equality Source="[IsNavigatingCommand]" Value="true" />
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sd:Select" />
+        </Actions>
+      </Rule>
+
+      <Rule>
+        <Conditions>
+          <Modified Source="[Clicker.Invoked]"/>
+          <Equality Source="[IsNavigatingCommand]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sd:Miniselect" />
+        </Actions>
+      </Rule>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Conditions>
+          <Equality Source="[Command.Available]" ConditionOp="Equals" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[Underline.Visible]" Value="true"/>
+          <Set Target="[Application.CurrentItem]" Value="[Item]"/>
+          <Set Target="[ThemeHelper.CurrentItem]" Value="[Item]"/>
+          <PlaySound Sound="sound://sd:Focus" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Command.Available]" ConditionOp="Equals" SourceValue="false">
+        <Actions>
+          <Set Target="[txtButton.Alpha]" Value=".5" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Command.Available]" ConditionOp="Equals" SourceValue="true">
+        <Actions>
+          <Set Target="[txtButton.Alpha]" Value="1" />
+        </Actions>
+      </Condition>
+
+    </Rules>
+
+    <Content>
+
+      <Panel>
+        <Children>
+          <Panel Name="txtButton" Layout="Anchor" >
+            <Children>
+              <Text Name="Label" Color="[Color]" Margins="0,0,0,0" Font="[Font]" HorizontalAlignment="Center" />
+              <Clip FadeAmount=".7" FadeSize="20" Layout="Form">
+                <LayoutInput>
+                  <FormLayoutInput Top="Label,1" Left="Label,0" Right="Label,1" Bottom="Label,1,2"/>
+                </LayoutInput>
+                <Children>
+                  <ColorFill Name="Underline" Visible="false" Content="[Color]" Layout="Fill" />
+                </Children>
+              </Clip>
+            </Children>
+            
+          </Panel>
+
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+</Mcml>

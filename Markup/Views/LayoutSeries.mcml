@@ -88,12 +88,13 @@
         </Actions>
       </Changed>
 
-      <Binding Source="[Folder.SelectedChild!lib:FolderModel.SelectedChild]" Target="[EpisodePanel.Item]">
+      <Binding Source="[ThemeHelper.CurrentItem]" Target="[EpisodePanel.Item]" />
+      <!--<Binding Source="[Folder.SelectedChild!lib:FolderModel.SelectedChild]" Target="[EpisodePanel.Item]">
         <Conditions>
           <IsType Source="[Folder.SelectedChild]" Type="lib:FolderModel"/>
         </Conditions>
         
-      </Binding>
+      </Binding>-->
 
     </Rules>
 

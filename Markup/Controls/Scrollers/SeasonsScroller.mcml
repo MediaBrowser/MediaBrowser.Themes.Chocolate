@@ -7,6 +7,8 @@
       xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
       xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
       xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+	    xmlns:tb="resx://Chocolate/Chocolate.Resources/TextButton"
+      xmlns:it="resx://Chocolate/Chocolate.Resources/Images"
       xmlns:ch="assembly://Chocolate/Chocolate"
   xmlns:me="Me">
 
@@ -21,7 +23,7 @@
     <Locals>
       <!-- Use the MouseWheel handler to handle the mouse wheel.  -->
       <ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollingHandler"/>
-      <ScrollingData Name="ScrollingData" BeginPadding="75" EndPadding="150" />
+      <ScrollingData Name="ScrollingData" BeginPadding="5" EndPadding="150" />
       <cor:Int32 Name="Startup"/>
     </Locals>
 
@@ -64,12 +66,12 @@
         <Children>
           <Scroller Orientation="Vertical" Name="Scroller" ScrollingData="[ScrollingData]" FadeSize="10"  >
             <LayoutInput>
-              <FormLayoutInput Top="Parent,0" Bottom="Parent,1,-40"/>
+              <FormLayoutInput Left="Parent, 0" Top="Parent,0" Bottom="Parent,1,-40"/>
             </LayoutInput>
             <Children>
               <Repeater  Source="[Folder.Children]" Name="MyRepeater" DiscardOffscreenVisuals="false" >
                 <Layout>
-                  <FlowLayout Orientation="Vertical" AllowWrap="false" Repeat="Never"/>
+                  <FlowLayout Orientation="Vertical" Repeat="Never"/>
                 </Layout>
                 <Animations>
                   <Animation Type="Move">
@@ -103,9 +105,22 @@
       <Index Name="Index" Index="$Required"/>
     </Properties>
 
+    <Locals>
+      <Command Name="ExpandContract"/>
+      <cor:Boolean Name="Expanded" Boolean="false" />
+    </Locals>
+    
     <Rules>
       <Binding Source="[Folder.Children]" Target="[MyRepeater.Source]"/>
       <Binding Source="[Folder.PrimaryImage]" Target="[SeasonPoster.Content]" />
+      <Binding Source="[Folder.Children.Count]" Target="[EpisodeCount.Content]" >
+        <Transformer>
+          <FormatTransformer Format="{0} Episodes"/>
+        </Transformer>
+      </Binding>
+      <Binding Source="[Expanded]" Target="[MyRepeater.Visible]" />
+
+      <Condition Source="[Expanded]" SourceValue="true" Target="[SeasonInfoPanel.Layout]" Value="HorizontalFlow" />
 
       <Changed Source="[Input.DeepKeyFocus]" >
         <Conditions>
@@ -113,6 +128,16 @@
         </Conditions>
         <Actions>
           <Set Target="[Parent.SelectedChildIndex]" Value="[Index.Value]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[ExpandContract.Invoked]">
+        <Actions>
+          <Set Target="[Expanded]" Value="[Expanded]" >
+            <Transformer>
+              <BooleanTransformer Inverse="true"/>
+            </Transformer>
+          </Set>
         </Actions>
       </Changed>
 
@@ -124,8 +149,17 @@
           </Graphic>
           <Panel Layout="VerticalFlow" Margins="10,20,0,0" >
             <Children>
-              <Text Name="SeasonName" Content="[Folder.Name]" Font="Segoe UI Light, 24, bold" Color="color://uc:Dark" >
-              </Text>
+              <Panel Name="SeasonInfoPanel" Layout="VerticalFlow" >
+                <Layout>
+                  <FlowLayout ItemAlignment="Center"/>
+                </Layout>
+                <Children>
+                  <tb:TextButton Name="SeasonName" Text="[Folder.Name]" Command="[ExpandContract]" Application="[Application]" ThemeHelper="[ThemeHelper]"
+                                 Font="Segoe UI Light, 24, bold" Color="color://uc:Dark" Item="[Folder]" />
+                  <!--<Text Name="SeasonName" Content="[Folder.Name]" Font="Segoe UI Light, 24, bold" Color="color://uc:Dark" Margins="0,0,20,0" />-->
+                  <Text Name="EpisodeCount" Font="Segoe UI Light, 14, bold" Color="color://uc:Dark" Margins="20,0,0,0"  />
+                </Children>
+              </Panel>
               <Repeater  Source="[Folder.Children]" Name="MyRepeater" DiscardOffscreenVisuals="false" Margins="10,10,0,0">
                 <Layout>
                   <FlowLayout Orientation="Vertical" Spacing="1,1"/>
@@ -135,6 +169,18 @@
                     <Keyframes>
                       <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
                       <PositionKeyframe Time="0.55" RelativeTo="Final"  />
+                    </Keyframes>
+                  </Animation>
+                  <Animation Type="Show">
+                    <Keyframes>
+                      <ScaleKeyframe Time="0" RelativeTo="Absolute" Value="0,0,0" Interpolation="EaseIn, 1.0, 0.25"/>
+                      <ScaleKeyframe Time="0.25" RelativeTo="Final" Value="1,1,1" />
+                    </Keyframes>
+                  </Animation>
+                  <Animation Type="Hide">
+                    <Keyframes>
+                      <ScaleKeyframe Time="0.25" RelativeTo="Absolute" Value="0,0,0" Interpolation="EaseIn, 1.0, 0.25"/>
+                      <ScaleKeyframe Time="0" RelativeTo="Final" Value="1,1,1" />
                     </Keyframes>
                   </Animation>
                 </Animations>
