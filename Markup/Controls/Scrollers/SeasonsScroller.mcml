@@ -112,15 +112,17 @@
     
     <Rules>
       <Binding Source="[Folder.Children]" Target="[MyRepeater.Source]"/>
-      <Binding Source="[Folder.PrimaryImage]" Target="[SeasonPoster.Content]" />
+      <Binding Source="[Folder.BannerImage]" Target="[SeasonPoster.Content]" >
+        <Conditions>
+          <Equality Source="[Folder.HasBannerImage]" Value="true" />
+        </Conditions>
+      </Binding>
       <Binding Source="[Folder.Children.Count]" Target="[EpisodeCount.Content]" >
         <Transformer>
           <FormatTransformer Format="{0} Episodes"/>
         </Transformer>
       </Binding>
       <Binding Source="[Expanded]" Target="[MyRepeater.Visible]" />
-
-      <Condition Source="[Expanded]" SourceValue="true" Target="[SeasonInfoPanel.Layout]" Value="HorizontalFlow" />
 
       <Changed Source="[Input.DeepKeyFocus]" >
         <Conditions>
@@ -143,13 +145,11 @@
 
     </Rules>
     <Content>
-      <Panel Name="MainPanel" Layout="HorizontalFlow">
+      <Panel Name="MainPanel" Layout="VerticalFlow">
         <Children>
-          <Graphic Name="SeasonPoster" Content="[Folder.PreferredImage]" MaintainAspectRatio="true" MaximumSize="0,200" Margins="10,10,0,0" >
-          </Graphic>
           <Panel Layout="VerticalFlow" Margins="10,20,0,0" >
             <Children>
-              <Panel Name="SeasonInfoPanel" Layout="VerticalFlow" >
+              <Panel Name="SeasonInfoPanel" Layout="HorizontalFlow" >
                 <Layout>
                   <FlowLayout ItemAlignment="Center"/>
                 </Layout>
@@ -160,6 +160,8 @@
                   <Text Name="EpisodeCount" Font="Segoe UI Light, 14, bold" Color="color://uc:Dark" Margins="20,0,0,0"  />
                 </Children>
               </Panel>
+              <Graphic Name="SeasonPoster" Content="[Folder.PreferredImage]" MaintainAspectRatio="true" MaximumSize="0,200" Margins="10,10,0,0" >
+              </Graphic>
               <Repeater  Source="[Folder.Children]" Name="MyRepeater" DiscardOffscreenVisuals="false" Margins="10,10,0,0">
                 <Layout>
                   <FlowLayout Orientation="Vertical" Spacing="1,1"/>

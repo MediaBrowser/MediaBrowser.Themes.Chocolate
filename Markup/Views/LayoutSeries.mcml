@@ -215,6 +215,13 @@
         </Actions>
       </Condition>
 
+      <Condition Source="[Item.DirectorString]" ConditionOp="NotEquals" SourceValue="" Target="[TxtDirectedLbl.Visible]" Value="true" >
+        <Actions>
+          <Set Target="[DirectorLblSpacer.Visible]" Value="true" />
+          <Set Target="[DirectedSpacer.Visible]" Value="true" />
+        </Actions>
+      </Condition>
+
       <Condition Source="[Item.RunningTimeString]" SourceValue="" Target="[RunEndSpacer.Visible]" Value="false" >
       </Condition>
 
