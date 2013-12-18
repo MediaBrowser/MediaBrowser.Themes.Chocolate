@@ -20,7 +20,6 @@
   xmlns:vsb="resx://Chocolate/Chocolate.Resources/SimpleButton"
   xmlns:vmb="resx://Chocolate/Chocolate.Resources/MenuButton"
   xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
-  xmlns:pci="resx://Chocolate/Chocolate.Resources/PCIndicatorButton"
   xmlns:pda="resx://Chocolate/Chocolate.Resources/PageDetailArea"
   xmlns:bd="resx://Chocolate/Chocolate.Resources/Backdrop"
   xmlns:ch="assembly://Chocolate/Chocolate"
@@ -471,6 +470,7 @@
     <Locals>
       <cor:String Name="CurrentTime" String="[Helper.CurrentTime]"/>
       <Timer Name="MyTimer" AutoRepeat="true" Interval="1500" Enabled="true"/>
+      <Command Name="GoHome" />
 
     </Locals>
 
@@ -482,6 +482,7 @@
       <Binding Source="[Application.Config.ShowClock]" Target="[ClockDisplay.Visible]"/>
 
       <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[ConfigurationKey.Visible]" Value="true"/>
+      <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[HomeKey.Visible]" Value="false"/>
       <!--Hide/Show Config Button-->
       <Binding Source="[Helper.Config.ShowConfig]" Target="[ConfigurationKey.Visible]"/>
 
@@ -514,7 +515,13 @@
           <!--<Set Target="[ButtonPanelLeft.Content]" Value="image://vi:BlueButtonPanelLeft"/>-->
         </Actions>
       </Rule>
-      
+
+      <Changed Source="[GoHome.Invoked]">
+        <Actions>
+          <Invoke Target="[Application.BackToRoot]" />
+        </Actions>
+      </Changed>
+
     </Rules>
 
     <Content>
@@ -547,11 +554,6 @@
                   <vsb:SimpleButton Name="NowPlayButton" Application="[Application]" ImageNoFocus="image://vi:IconNowPlay" Command="[GoToNowPlaying]" />
                 </Children>
               </Panel>
-              <Panel Name="PCBtn" Visible="true" FocusOrder="103">
-                <Children>
-                  <pci:PCIndicatorButton Application="[Application]" Size="28,28"/>
-                </Children>
-              </Panel>
               <Panel Name="UserKey" FocusOrder="105">
                 <Children>
                   <vsb:SimpleButton Name="UserMenuButton" Application="[Application]" ImageNoFocus="[Application.CurrentUser.PrimaryImage]" Command="[SwitchUser]" Size="20,20" Margins="3,2,0,0" />
@@ -565,6 +567,11 @@
               <Panel Name="SearchKey" FocusOrder="106">
                 <Children>
                   <vsb:SimpleButton Name="SearchButton" Application="[Application]" ImageNoFocus="image://vi:Search" Command="[OpenSearch]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                </Children>
+              </Panel>
+              <Panel Name="HomeKey" FocusOrder="107">
+                <Children>
+                  <vsb:SimpleButton Name="HomeButton" Application="[Application]" ImageNoFocus="image://vi:Home" Command="[GoHome]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
                 </Children>
               </Panel>
             </Children>

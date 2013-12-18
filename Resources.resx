@@ -590,6 +590,9 @@
   <data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\icons\collapse.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="IconHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>images\icons\iconhome.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="IconSearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>images\icons\iconsearch.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
