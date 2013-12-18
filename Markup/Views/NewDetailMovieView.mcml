@@ -307,7 +307,7 @@
     <Content>
       <Panel Layout="Center">
         <Children>
-          <Clip Layout="Form" Padding="[Application.Config.OverScanPadding]" Scale="[Application.Config.OverScanScaling]">
+          <Clip Layout="Form" Padding="[Application.Config.OverScanPadding]" Scale="[Application.Config.OverScanScaling]"  CenterPointPercent="0.5,0.5,0.5">
             <Children>
               
               <!-- Now Playing View -->
