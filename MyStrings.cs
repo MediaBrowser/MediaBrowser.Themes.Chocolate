@@ -116,6 +116,7 @@
         public string ShowThumbLogos = "Show Thumb Logos";
         public string ShowThumbLogosDesc = "Show Logos On Thumb View.";
         public string ShowWeather = "Show Weather Panel on EHS";
+        public string UseCustomTvView = "Use Custom View for Series";
         public string SmallEhs = "Smaller EHS Icons";
         public string SORT = "SORT";
         public string STRIP = "STRIP";

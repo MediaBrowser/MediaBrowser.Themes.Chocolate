@@ -34,6 +34,17 @@
             this.setupHelper();
         }
 
+        public void LoadAllChildren(FolderModel folder)
+        {
+            var ignore = folder.FirstUnwatchedIndex;
+            foreach (var child in folder.Children)
+            {
+                var subfolder = child as FolderModel;
+                if (subfolder != null) ignore = subfolder.Folder.UnwatchedCount;
+                child.NavigatingInto();
+            }
+        }
+
         private string calculateEndTime()
         {
             if (!this.CurrentItem.HasMediaInfo)

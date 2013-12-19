@@ -525,6 +525,23 @@
             }
         }
 
+        public bool UseCustomTvView
+        {
+            get
+            {
+                return this.data.useCustomTvView;
+            }
+            set
+            {
+                if (this.data.useCustomTvView != value)
+                {
+                    this.data.useCustomTvView = value;
+                    base.FirePropertyChanged("UseCustomTvView");
+                    this.Save();
+                }
+            }
+        }
+
         public bool ShowNowPlayingIcon
         {
             get

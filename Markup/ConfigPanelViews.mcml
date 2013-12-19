@@ -54,6 +54,9 @@
       <BooleanChoice Name="ShowThumbEndTime" Value="[Helper.Config.ShowThumbEndTime]" />
       <!--Strip Options-->
       <BooleanChoice Name="ShowStripLogos" Value="[Helper.Config.ShowStripLogos]" />
+      <!--Custom Views-->
+      <BooleanChoice Name="UseCustomTvView" Value="[Helper.Config.UseCustomTvView]" />
+      
     </Locals>
     <Rules>
       <!--EHS Options-->
@@ -162,6 +165,11 @@
           <Set Target="[Helper.Config.ShowStripLogos]" Value="[ShowStripLogosCB.Checked.Value]"/>
         </Actions>
       </Changed>
+      <Changed Source="[UseCustomTvViewCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.UseCustomTvView]" Value="[UseCustomTvViewCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
     </Rules>
 
     <Content>
@@ -209,6 +217,9 @@
               <Text Content="Poster Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <cb:CheckBox Name="ShowPosterLogosCB" Label="[Application.LocalStrings.#ShowPosterLogos!cor:String]" Checked="[ShowPosterLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowPosterEndTimeCB" Label="[Application.LocalStrings.#ShowPosterEndTime!cor:String]" Checked="[ShowPosterEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--Custom Views Panel-->
+              <Text Content="Custom Views" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="UseCustomTvViewCB" Label="[Application.LocalStrings.#UseCustomTvView!cor:String]" Checked="[UseCustomTvView]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
             </Children>
           </Panel>
         </Children>

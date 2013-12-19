@@ -48,6 +48,7 @@
         public string themeCustomFont;
         public string themeStyle;
         public bool useSeasonPoster;
+        public bool useCustomTvView;
 
         public ConfigData()
         {
@@ -75,6 +76,7 @@
             this.showcoverflowindicator = true;
             this.showcoverflowposteroverlay = true;
             this.showcoverflowtotalnumber = true;
+            useCustomTvView = true;
         }
 
         public ConfigData(string file)
@@ -103,6 +105,7 @@
             this.showcoverflowindicator = true;
             this.showcoverflowposteroverlay = true;
             this.showcoverflowtotalnumber = true;
+            useCustomTvView = true;
             this.file = file;
             this.ChocolateSettings = XmlSettings<ConfigData>.Bind(this, file);
         }
