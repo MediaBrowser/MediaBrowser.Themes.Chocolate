@@ -476,8 +476,13 @@
 
     <Rules>
 
-      <Condition Source="[Input.DeepKeyFocus]" SourceValue="true" Target="[Helper.ButtonPanelHasFocus]" Value="true"/>
+      <Condition Source="[Input.DeepKeyFocus]" SourceValue="true" Target="[Helper.ButtonPanelHasFocus]" Value="true">
+        <Actions>
+          <Set Target="[ButtonPanel.Alpha]" Value="1" />
+        </Actions>
+      </Condition>
       <Default Target="[Helper.ButtonPanelHasFocus]" Value="false"/>
+      <Condition Source="[Input.DeepKeyFocus]" SourceValue="false" Target="[ButtonPanel.Alpha]" Value=".7" />
 
       <Binding Source="[Application.Config.ShowClock]" Target="[ClockDisplay.Visible]"/>
 
