@@ -71,7 +71,7 @@
           <!-- DetailView List Panel -->
           <Panel Name="DetailViewListing" Layout="Dock" Margins="0,0,0,0">
             <LayoutInput>
-              <FormLayoutInput Left="Parent,0,14" Top="Parent,0,95" Bottom="Parent,1,-15" Right="Parent,0,420" ContributesToWidth="false"/>
+              <FormLayoutInput Left="Parent,0,14" Top="Parent,0,95" Bottom="Parent,1,-15" Right="Parent,.3" ContributesToWidth="false"/>
             </LayoutInput>
             <Children>
               <ls:ListScroller FocusOrder="1" Name="ListItems" Visible="True" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]"/>
