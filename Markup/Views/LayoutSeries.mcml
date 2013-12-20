@@ -44,6 +44,12 @@
       <Binding Target="[MPAARating.Value]" Source="[Folder.MpaaRating]"></Binding>
       <Binding Target="[StarRating.Value]" Source="[Folder.ImdbRating]"></Binding>
       <Binding Target="[Runtime.Content]" Source="[Folder.RunningTimeString]"></Binding>
+      <Binding Target="[LogoImage.Content]" Source="[Folder.LogoImage]">
+        <Conditions>
+          <Equality Source="[ThemeHelper.Config.ShowListLogos]" ConditionOp="Equals" Value="true" />
+          <Equality Source="[Folder.HasLogoImage]" ConditionOp="Equals" Value="true" />
+        </Conditions>
+      </Binding>
 
       <Rule>
         <Conditions>
