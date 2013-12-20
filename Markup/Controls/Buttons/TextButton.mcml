@@ -4,7 +4,7 @@
       xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:an="resx://MediaBrowser/MediaBrowser.Resources/Animations"
-      xmlns:sd="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
     xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
       xmlns:s="file://Styles_DoNotEdit.mcml"
       xmlns:me="Me">
@@ -30,6 +30,17 @@
     <Locals>
 
       <ClickHandler Name="Clicker" />
+      <ShortcutHandler Name="ClearBtn" Handle="true" Shortcut="Clear" HandlerStage="Bubbled" />
+      <KeyHandler Name="WatchedShortcut" Handle="true" Key="W" Modifiers="Control" HandlerStage="Bubbled"/>
+
+      <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled"/>
+      <ShortcutHandler Name="PlayPauseBtn" Handle="true" Shortcut="PlayPause" HandlerStage="Bubbled"/>
+      <KeyHandler Name="PlayShortcut" Handle="true" HandlerStage="Bubbled" Key="P" Modifiers="Control"/>
+      <Command Name="PlayCommand"/>
+
+      <ShortcutHandler Name="RecordBtn" Handle="true" Shortcut="Record" HandlerStage="Bubbled"/>
+      <KeyHandler Name="RefreshShortcut" Handle="true" Key="R" Modifiers="Control" HandlerStage="Bubbled"/>
+
 
     </Locals>
 
@@ -47,7 +58,7 @@
           <Equality Source="[IsNavigatingCommand]" Value="true" />
         </Conditions>
         <Actions>
-          <PlaySound Sound="sound://sd:Select" />
+          <PlaySound Sound="sound://sounds:Select" />
         </Actions>
       </Rule>
 
@@ -57,7 +68,44 @@
           <Equality Source="[IsNavigatingCommand]" Value="false"/>
         </Conditions>
         <Actions>
-          <PlaySound Sound="sound://sd:Miniselect" />
+          <PlaySound Sound="sound://sounds:Miniselect" />
+        </Actions>
+      </Rule>
+
+      <!-- Watched Toggle Commands -->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Modified Source="[ClearBtn.Invoked]"/>
+          <Modified Source="[WatchedShortcut.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+          <Invoke Target="[Item.ToggleWatched]"/>
+        </Actions>
+      </Rule>
+
+      <!-- Refresh Toggle Commands -->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Modified Source="[RecordBtn.Invoked]"/>
+          <Modified Source="[RefreshShortcut.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+          <Invoke Target="[Item.RefreshMetadata]"/>
+        </Actions>
+      </Rule>
+
+      <!-- Play Rules -->
+      <Rule ConditionLogicalOp ="Or">
+        <Conditions>
+          <Modified Source="[PlayBtn.Invoked]"/>
+          <Modified Source="[PlayPauseBtn.Invoked]"/>
+          <Modified Source="[PlayShortcut.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+          <Invoke Target="[Item.PlayAction]"  />
         </Actions>
       </Rule>
 
@@ -69,7 +117,7 @@
           <Set Target="[Underline.Visible]" Value="true"/>
           <Set Target="[Application.CurrentItem]" Value="[Item]"/>
           <Set Target="[ThemeHelper.CurrentItem]" Value="[Item]"/>
-          <PlaySound Sound="sound://sd:Focus" />
+          <PlaySound Sound="sound://sounds:Focus" />
         </Actions>
       </Condition>
 
