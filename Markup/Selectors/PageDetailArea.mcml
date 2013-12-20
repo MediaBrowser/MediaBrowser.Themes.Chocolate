@@ -122,9 +122,6 @@
         <Conditions>
           <Equality Source="[ThemeHelper.Config.UseCustomTvView]" Value="true" />
         </Conditions>
-        <Actions>
-          <Invoke Target="[ThemeHelper.LoadAllChildren]" folder="[Folder]" />
-        </Actions>
       </Condition>
       
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Detail" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutDetails]" />

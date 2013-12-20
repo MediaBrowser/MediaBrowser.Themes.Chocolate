@@ -1,4 +1,6 @@
-﻿namespace Chocolate
+﻿using Chocolate.ModelItems;
+
+namespace Chocolate
 {
     using MediaBrowser.Library;
     using MediaBrowser.Library.Localization;
@@ -30,6 +32,7 @@
                 kernel.StringData.AddStringData(MyStrings.FromFile(LocalizedStringData.GetFileName("Chocolate-")));
                 CustomResourceManager.AppendFonts("Chocolate", Resources.Fonts, Resources.FontsSmall);
                 CustomResourceManager.AppendStyles("Chocolate", Resources.Colors, Resources.Colors);
+                ItemFactory.Instance.AddFactory(WholeSeriesFolderModel.IsOne, typeof(WholeSeriesFolderModel));
                 Logger.ReportInfo("Chocolate Theme (version " + this.Version + ") Loaded.");
             }
             catch (Exception exception)

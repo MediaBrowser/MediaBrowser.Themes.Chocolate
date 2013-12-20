@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Library\ChocHelper.cs" />
     <Compile Include="ConfigData.cs" />
+    <Compile Include="ModelItems\WholeSeriesFolderModel.cs" />
     <Compile Include="MyConfig.cs" />
     <Compile Include="MyStrings.cs" />
     <Compile Include="Plugin.cs" />

@@ -133,7 +133,7 @@
               <!-- Season Scroller -->
               <ls:SeasonsScroller FocusOrder="0" Name="SeasonItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]" >
                 <LayoutInput>
-                  <AnchorLayoutInput Left="Parent,0, 30" Right="Parent,.3" Top="Parent, 0, 110" Bottom="Parent, 1" />
+                  <AnchorLayoutInput Left="Parent,0, 30" Right="Parent,.3" Top="NamePanel, 1, 20" Bottom="Parent, 1" />
                 </LayoutInput>
               </ls:SeasonsScroller>
               
