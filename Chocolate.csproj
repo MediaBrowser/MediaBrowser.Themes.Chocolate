@@ -314,7 +314,9 @@
     <Content Include="Markup\Controls\Scrollers\CoverflowScroller.mcml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Markup\Controls\Scrollers\ListScroller.mcml" />
+    <Content Include="Markup\Controls\Scrollers\ListScroller.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Scrollers\PosterScroller.mcml" />
     <Content Include="Markup\DetailMovieView.mcml">
       <SubType>Designer</SubType>
@@ -336,7 +338,9 @@
     <Content Include="Markup\Styles\Fonts.mcml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Markup\Views\LayoutSeries.mcml" />
+    <Content Include="Markup\Views\LayoutSeries.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Views\NewDetailMovieView.mcml">
       <SubType>Designer</SubType>
     </Content>

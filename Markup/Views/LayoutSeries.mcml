@@ -272,7 +272,7 @@
                   <FormLayoutInput Horizontal="Near" Vertical="Far"/>
                 </LayoutInput>
                 <Layout>
-                  <FlowLayout Orientation="Horizontal" Spacing="2,0"/>
+                  <FlowLayout Orientation="Horizontal" Spacing="2,0" />
                 </Layout>
                 <Children>
                   <Text Name="TxtDirectedLbl" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content="[Application.LocalStrings.#Director!cor:String]"/>

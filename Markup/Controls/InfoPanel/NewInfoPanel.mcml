@@ -26,7 +26,8 @@
       <ch:ChocHelper Name="ThemeHelper"></ch:ChocHelper>
       <cor:Boolean Name="ShowLogo" Boolean="false" />
       <cor:Boolean Name="ShowDetails" Boolean="false" />
-      <Size Name="OverviewSize" Size="500,450"/>
+      <cor:Boolean Name="ShowOverview" Boolean="true" />
+      <Size Name="OverviewSize" Size="550,0"/>
     </Properties>
 
     <Rules>
@@ -151,9 +152,11 @@
               </Panel>
 
 
-              <Panel Name="OverviewPanel" Margins="0,5,0,0" MaximumSize="[OverviewSize]">
+              <Panel Name="OverviewPanel" Margins="0,5,0,0" Visible="[ShowOverview]">
                 <Children>
-                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" Name="Summary" Text="[Item.Overview]" Font="Segoe Media Center Light, 16" Color="color://uc:Light"/>
+                  <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" 
+                                     Name="Summary" Text="[Item.Overview]" Font="Segoe Media Center Light, 16" Color="color://uc:Light"
+                                     MaximumSize="[OverviewSize]" MinimumSize="[OverviewSize]" />
                 </Children>
               </Panel>
               

@@ -321,18 +321,6 @@
               <!--  View Details-->
               <lr:LayoutRoot ThemeHelper="[ThemeHelper]" Name="DetailArea" Folder="[Folder]" Application="[Application]" Navigation="RememberFocus"/>
 
-              <!--<lde:ChocolateLayoutDetails ThemeHelper="[ThemeHelper]" Name="DetailsView" Visible="false" Folder="[Folder]" Application="[Application]"/>
-
-              <lpo:ChocolateLayoutPoster ThemeHelper="[ThemeHelper]" Name="PosterView" Visible="false" Application="[Application]" Folder="[Folder]"/>
-
-              <ls:ChocolateLayoutSeries ThemeHelper="[ThemeHelper]" Name="SeriesView" Visible="false" Application="[Application]" Folder="[Folder]"/>
-
-              <lth:ChocolateLayoutThumb ThemeHelper="[ThemeHelper]" Name="ThumbView" Visible="false" Folder="[Folder]" Application="[Application]"/>
-
-              <lcf:ChocolateLayoutCoverflow ThemeHelper="[ThemeHelper]" Name="CoverFlow" Visible="false" Folder="[Folder]" Application="[Application]"/>
-
-              <lts:ChocolateLayoutThumbStrip ThemeHelper="[ThemeHelper]" Name="ThumbStripView" Visible="false" Folder="[Folder]" Application="[Application]"/>-->
-
             </Children>
           </Panel>
           
