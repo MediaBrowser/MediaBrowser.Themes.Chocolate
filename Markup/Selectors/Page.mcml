@@ -47,6 +47,9 @@
       <Timer Name="HideFindAsYouType" Interval="3000" AutoRepeat="false"/>
       <cor:String Name="NavigatorText" String="Test"/>
       <addin:AddInHost Name="AddInHost" />
+
+      <cor:Boolean Name="StraightToConfig" Boolean="false" />
+      
       <Command Name="Configure" />
       <Command Name="ShowViewConfiguration" />
       <Command Name="CloseViewConfiguration" />
@@ -65,6 +68,7 @@
       <Command Name="ContextMenuCmd"/>
       <Command Name="OpenContextMenu"/>
       <Command Name="CloseContextMenu"/>
+      <Command Name="ShowConfig"/>
 
 
       <Timer Name="ButtonPanelTimer" AutoRepeat="false" Interval="2000" Enabled="true"/>
@@ -239,6 +243,12 @@
         </Actions>
       </Rule>
 
+      <Default Target="[StraightToConfig]" Value="true" >
+        <Conditions>
+          <Equality Source="[Helper.Config.UseCustomTvView]" Value="true" />
+          <Equality Source="[Folder.ItemTypeString]" Value="Series" />
+        </Conditions>
+      </Default>
 
       <Rule ConditionLogicalOp="Or">
         <Conditions>
@@ -246,10 +256,28 @@
           <Modified Source="[ConfigOptions.Invoked]" />
         </Conditions>
         <Actions>
+          <Invoke Target="[ShowConfig.Invoke]" />
+        </Actions>
+      </Rule>
+
+      <Changed Source="[ShowConfig.Invoked]" >
+        <Conditions>
+          <Equality Source="[StraightToConfig]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Application.OpenConfiguration]" showFullOptions="true" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[ShowConfig.Invoked]" >
+        <Conditions>
+          <Equality Source="[StraightToConfig]" Value="false" />
+        </Conditions>
+        <Actions>
           <Set Target="[ConfigurationMenu.Visible]" Value="true"/>
           <Invoke Target="[ConfigurationMenu.NavigateInto]" />
         </Actions>
-      </Rule>
+      </Changed>
 
       <Rule ConditionLogicalOp="And">
         <Conditions>
