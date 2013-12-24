@@ -471,7 +471,7 @@
 
                   <Panel Name="OverviewPanel" Margins="10,5,0,0" Layout="Form">
                     <LayoutInput>
-                      <FormLayoutInput Bottom="Parent, 1, -10" Right="LogoImage, 0, -20" Left="Parent, 0" Top="Parent, .75"/>
+                      <FormLayoutInput Bottom="Parent, 1, -10" Right="Parent, .65" Left="Parent, 0" Top="Parent, .75"/>
                     </LayoutInput>
                     <Children>
                       <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]"
