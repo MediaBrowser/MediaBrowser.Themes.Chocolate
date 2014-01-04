@@ -93,6 +93,22 @@
     </Locals>
 
     <Rules>
+      <!-- QUIT MEDIA BROWSER PREVENTER IF ENABLED IN CONFIG-->
+      <Binding Source="[Helper.Config.AskToQuit]" Target="[BackHandler.Handle]">
+        <Conditions>
+          <Equality Source="[Folder.IsRoot]" Value="true"/>
+        </Conditions>
+      </Binding>
+      <Changed Source="[BackHandler.Invoked]">
+        <Conditions>
+          <Equality Source="[Folder.IsRoot]" Value="true"/>
+          <Equality Source="[Helper.Config.AskToQuit]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[Helper.AskToQuit]"/>
+        </Actions>
+      </Changed>
+
       <Rule>
         <Actions>
           <Set Target="[Helper.CurrentPage]" Value="Page"/>

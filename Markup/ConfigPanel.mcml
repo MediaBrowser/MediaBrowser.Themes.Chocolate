@@ -42,6 +42,8 @@
       <BooleanChoice Name="EnableVideoBackdrop" Value="[Helper.Config.EnableVideoBackdrop]" />
       <BooleanChoice Name="ShowNowPlayingIcon" Value="[Helper.Config.ShowNowPlayingIcon]" />
       <BooleanChoice Name="ShowNPV" Value="[Helper.Config.ShowNPV]" />
+      
+      <BooleanChoice Name="AskToQuit" Value="[Helper.Config.AskToQuit]" />
 
       <Choice Name="NPVAR">
         <Options>
@@ -134,7 +136,14 @@
         <Actions>
           <Set Target="[Helper.Config.AlwaysShowPoster]" Value="[AlwaysShowPosterCB.Checked.Value]"></Set>
         </Actions>
-      </Changed>      
+      </Changed>  
+      
+      <Changed Source="[AskToQuitCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.AskToQuit]" Value="[AskToQuitCB.Checked.Value]" />
+        </Actions>
+      </Changed>
+      
       <Condition Source="[BackdropStretchCB.Checked.Value]" SourceValue="true" Target="[BackdropImage.Content]" Value="image://i:Stretch"/>
       <Condition Source="[BackdropFillCB.Checked.Value]" SourceValue="true" Target="[BackdropImage.Content]" Value="image://i:Fill"/>
       <Condition Source="[BackdropFitCB.Checked.Value]" SourceValue="true" Target="[BackdropImage.Content]" Value="image://i:Fit"/>
@@ -151,6 +160,7 @@
               <cb:CheckBox Name="ShowConfigCB" Label="[Application.LocalStrings.#ShowConfig!cor:String]" Checked="[ShowConfig]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="Enable24hrCB" Label="[Application.LocalStrings.#Enable24hr!cor:String]" Checked="[Enable24hr]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowLogosOnMovieDetailCB" Label="[Application.LocalStrings.#ShowLogosOnMovieDetail!cor:String]" Checked="[ShowLogosOnMovieDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="AskToQuitCB" Label="[Application.LocalStrings.#AskToQuit!cor:String]" Checked="[AskToQuit]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Media Options Panel-->
               <Text Content="Media Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
               <cb:CheckBox Name="ShowInfoIconsCB" Label="[Application.LocalStrings.#ShowInfoIcons!cor:String]" Checked="[ShowInfoIcons]" FocusItem="[FocusItem]"  Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>

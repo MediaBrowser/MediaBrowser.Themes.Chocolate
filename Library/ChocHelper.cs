@@ -1,4 +1,7 @@
-﻿namespace Chocolate
+﻿using Microsoft.MediaCenter;
+using Microsoft.MediaCenter.Hosting;
+
+namespace Chocolate
 {
     using MediaBrowser;
     using MediaBrowser.Library;
@@ -609,6 +612,19 @@
                 return (num.ToString() + " " + Kernel.Instance.StringData.GetString("KBsStr"));
             }
         }
+
+        #region Prevent Quit from EHS
+        public void AskToQuit()
+        {
+            MediaCenterEnvironment mediaCenterEnvironment = AddInHost.Current.MediaCenterEnvironment;
+            const string text = "Are you sure you want to quit MediaBrowser?";
+            const string caption = "Quit MediaBrowser";
+            if (mediaCenterEnvironment.Dialog(text, caption, DialogButtons.Cancel | DialogButtons.Ok, 0, true) == DialogResult.Ok)
+            {
+                MediaBrowser.Application.CurrentInstance.BackOut();
+            }
+        }
+        #endregion
     }
 }
 

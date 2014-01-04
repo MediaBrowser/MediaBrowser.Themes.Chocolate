@@ -45,6 +45,8 @@
         public string EnableStripBackdropDesc = "The backdrop in Strip view slides back and fourth with navigation.";
         public string EnableVideoBackdrop = "Show Video Backdrop *";
         public string EnableVideoBackdropDesc = "Replace backdrop image with currently playing video. This Won't Take Effect Until Media Browser Restarted.";
+        public string AskToQuit = "Ask to Quit MB";
+        public string AskToQuitDesc = "Select this option if you wish to be asked before leaving MB";
         public string Ends = "Ends";
         public string ENDS = "ENDS";
         public string Episodes = "Episodes";
