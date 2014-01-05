@@ -78,7 +78,6 @@
             this.showcoverflowposteroverlay = true;
             this.showcoverflowtotalnumber = true;
             useCustomTvView = true;
-            AskToQuit = true;
         }
 
         public ConfigData(string file)
@@ -108,7 +107,6 @@
             this.showcoverflowposteroverlay = true;
             this.showcoverflowtotalnumber = true;
             useCustomTvView = true;
-            AskToQuit = true;
             this.file = file;
             this.ChocolateSettings = XmlSettings<ConfigData>.Bind(this, file);
         }
