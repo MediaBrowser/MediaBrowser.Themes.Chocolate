@@ -143,6 +143,7 @@
         public string Watched = "Watched";
         public string Year = "Year";
         public string YEAR = "YEAR";
+        public string ConfirmExit = "Are you sure you wish to exit?";
 
         public static MyStrings FromFile(string file)
         {

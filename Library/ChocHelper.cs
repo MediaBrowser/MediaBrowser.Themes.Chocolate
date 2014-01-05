@@ -1,4 +1,6 @@
-﻿using Microsoft.MediaCenter;
+﻿using MediaBrowser.Library.Localization;
+using MediaBrowser.Library.Threading;
+using Microsoft.MediaCenter;
 using Microsoft.MediaCenter.Hosting;
 
 namespace Chocolate
@@ -616,13 +618,16 @@ namespace Chocolate
         #region Prevent Quit from EHS
         public void AskToQuit()
         {
-            MediaCenterEnvironment mediaCenterEnvironment = AddInHost.Current.MediaCenterEnvironment;
-            const string text = "Are you sure you want to quit MediaBrowser?";
-            const string caption = "Quit MediaBrowser";
-            if (mediaCenterEnvironment.Dialog(text, caption, DialogButtons.Cancel | DialogButtons.Ok, 0, true) == DialogResult.Ok)
-            {
-                MediaBrowser.Application.CurrentInstance.BackOut();
-            }
+            Async.Queue("Exit confirmation", () =>
+                                                 {
+                                                     if (MediaBrowser.Application.CurrentInstance.YesNoBox(LocalizedStrings.Instance.GetString("ConfirmExit")) == "Y")
+                                                     {
+                                                         MediaBrowser.Application.CurrentInstance.BackOut();
+                                                     }
+
+                                                 });
+
+
         }
         #endregion
     }
