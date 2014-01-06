@@ -30,6 +30,11 @@
       <Size Name="OverviewSize" Size="550,0"/>
     </Properties>
 
+    <Locals>
+      <a:Clock Name="Clock"/>
+
+    </Locals>
+
     <Rules>
 
       <Binding Target="[Title.Text]"       Source="[Item.Name]"/>
@@ -104,6 +109,13 @@
       <Default Target="[LogoImage.Visible]" Value="false"/>
       <Default Target="[Title.Visible]" Value="true"/>
 
+      <Binding Target="[EndTime.Content]" Source="[Item.EndTimeString]"/>
+      <Changed Source="[Clock.Time]" >
+        <Actions>
+          <Set Target="[EndTime.Content]"  Value="[Item.EndTimeString]"/>
+        </Actions>
+      </Changed>
+
 
 
     </Rules>
@@ -127,6 +139,7 @@
                   <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="10,0,0,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
                   <Graphic Name="HDType" Margins="12,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <Text Name="EndTime" Font="Segoe UI Light, 16, bold" Color="color://uc:Light" Margins="10,0,0,0" />
                 </Children>
 
               </Panel>

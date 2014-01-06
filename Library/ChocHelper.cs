@@ -41,7 +41,7 @@ namespace Chocolate
 
         private string calculateEndTime()
         {
-            if (!this.CurrentItem.HasMediaInfo)
+            if (CurrentItem == null || !CurrentItem.HasMediaInfo)
             {
                 return "";
             }

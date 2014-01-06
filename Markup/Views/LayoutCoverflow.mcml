@@ -65,15 +65,6 @@
       <Binding Target="[ItemInfoPanel.Item]" Source="[Folder.SelectedChild]"/>
 
 
-      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
-      <Changed Source="[Clock.Time]" >
-        <Actions>
-          <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
-        </Actions>
-      </Changed>
-
-      <Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
-
       <Changed Source="[ThemeHelper.NavigatingForward]" InitialEvaluate="true">
         <Conditions>
           <Equality Source="[ThemeHelper.NavigatingForward]" Value="false"/>
@@ -95,7 +86,6 @@
       
       <!--Hide/Show Options-->
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowDetails]" Target="[ItemInfoPanel.Visible]"/>
-      <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
       
     </Rules>
@@ -118,17 +108,6 @@
                       <Text Name="List_Total" Content="0" Color="color://uc:Dark" Font="font://uf:CF_TotalItems"/>
                     </Children>
                   </Panel>
-                </Children>
-              </Panel>
-
-              <!--EndTime-->
-              <Panel Name="EndTimePanel" Layout="HorizontalFlow" >
-                <LayoutInput>
-                  <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Left="Parent,0,25"/>
-                </LayoutInput>
-                <Children>
-                  <Text Name="EndTimeLbl" Font="font://uf:CF_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
-                  <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
                 </Children>
               </Panel>
 

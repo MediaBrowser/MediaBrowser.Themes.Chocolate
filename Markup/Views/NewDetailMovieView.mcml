@@ -65,7 +65,6 @@
       <addin:AddInHost Name="AddInHost" />
       <cor:String Name="MediaPath" String="" />
       <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
-      <a:Clock Name="Clock"/>
       <Environment Name="Environment"/>
       <BooleanChoice Name="ResumeBtnHasFocus" Value="false"/>
       <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled" Command="[PlayMovieCommand]"/>
@@ -244,15 +243,6 @@
       <Binding Target="[PosterImage.Content]" Source="[Item.PreferredImage]"/>
       <Binding Target="[MediaInfoPanel.Item]" Source="[Item]"/>
       <Binding Target="[Summary.Text]" Source="[Item.Overview]"/>
-      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
-      <Changed Source="[Clock.Time]" >
-        <Actions>
-          <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
-        </Actions>
-      </Changed>
-      <Condition Source="[ThemeHelper.EndTime]" SourceValue="" Target="[EndTimePanel.Visible]" Value="false" />
-      <Default Target="[EndTimePanel.Visible]" Value="true" />
-      
       <Binding Target="[PlayMovieButton.Visible]" Source="[Item.IsPlayable]">
         <Conditions>
           <Equality Source="[Item.CanResume]" Value="false" />
@@ -356,7 +346,7 @@
 
                   <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 330" FocusOrder="0">
                     <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,32" Top="ItemInfoPanel,1,20"/>
+                      <FormLayoutInput Left="Parent,0,32" Bottom="OverviewPanel,0,-50"/>
                     </LayoutInput>
                     <Children>
                       <Graphic Name="PosterImage" Content="[Item.PreferredImage]" MaintainAspectRatio="true" SizingPolicy="SizeToContent">
@@ -378,17 +368,6 @@
 
                   </ib:ImageButton>
                   
-                  <!--EndTime-->
-                  <Panel Name="EndTimePanel" Layout="HorizontalFlow" Margins="0,0,0,5" >
-                    <LayoutInput>
-                      <FormLayoutInput Vertical="Far" Right="OverviewPanel, 1"/>
-                    </LayoutInput>
-                    <Children>
-                      <Text Name="EndTimeLbl" Font="font://uf:CF_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
-                      <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
-                    </Children>
-                  </Panel>
-
                   <Panel Layout="HorizontalFlow">
                     <LayoutInput>
                       <FormLayoutInput Top="Poster,1" Left="Parent,0,37" />
