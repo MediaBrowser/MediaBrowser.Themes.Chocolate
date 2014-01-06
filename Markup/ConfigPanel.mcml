@@ -166,8 +166,8 @@
               <cb:CheckBox Name="ShowInfoIconsCB" Label="[Application.LocalStrings.#ShowInfoIcons!cor:String]" Checked="[ShowInfoIcons]" FocusItem="[FocusItem]"  Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowInfoIconsBackgroundsCB" Label="[Application.LocalStrings.#ShowInfoIconsBackgrounds!cor:String]" Checked="[ShowInfoIconsBackground]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Font Options Panel-->
-              <Text Content="Font Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
-              <st:SpinnerText Name="ThemeCustomFontSpinner"  Model="[ThemeCustomFont]"     FocusItem="[FocusItem]"  Color="color://s:FontColorMedium" Label="[Application.LocalStrings.#ThemeCustomFont!cor:String]" Font="font://f:CP_ConfigItemFont" ValueFont="font://f:CP_ConfigItemFont" Margins="0,0,0,5" DefaultString="[Helper.Config.ThemeCustomFont]"/>
+              <!--<Text Content="Font Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
+              <st:SpinnerText Name="ThemeCustomFontSpinner"  Model="[ThemeCustomFont]"     FocusItem="[FocusItem]"  Color="color://s:FontColorMedium" Label="[Application.LocalStrings.#ThemeCustomFont!cor:String]" Font="font://f:CP_ConfigItemFont" ValueFont="font://f:CP_ConfigItemFont" Margins="0,0,0,5" DefaultString="[Helper.Config.ThemeCustomFont]"/>-->
               </Children>
           </Panel>
           <!--Now Playing Options Panel-->
