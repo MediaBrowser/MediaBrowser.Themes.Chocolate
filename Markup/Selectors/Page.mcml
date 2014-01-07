@@ -446,7 +446,7 @@
                           <vmb:MenuButton Label="[Application.LocalStrings.#CONFIG!cor:String]" Name="ConfigBtn"     Command="[Configure]"              Image="image://vi:MenuOptionConfiguration"/>
                           <vmb:MenuButton Label="[Application.LocalStrings.#VIEW!cor:String]"   Name="ViewsBtn"      Command="[ShowViewConfiguration]"  Image="image://vi:MenuOptionViews"/>
                           <vmb:MenuButton Label="[Application.LocalStrings.#SORT!cor:String]"   Name="SortOrdersBtn" Command="[ShowSortConfiguration]"  Image="image://vi:MenuOptionSort"/>
-                          <vmb:MenuButton Label="[Application.LocalStrings.#FILTER!cor:String]" Name="IndexesBtn"    Command="[ShowIndexConfiguration]" Image="image://vi:MenuOptionIndex" />
+                          <vmb:MenuButton Label="[Application.LocalStrings.#INDEX!cor:String]" Name="IndexesBtn"    Command="[ShowIndexConfiguration]" Image="image://vi:MenuOptionIndex" />
                           <vmb:MenuButton Label="[Application.LocalStrings.#CLOSE!cor:String]"  Name="CloseBtn"      Command="[CloseCommand]"           Image="image://vi:MenuOptionClose" Red="true"/>
                         </Children>
                       </Panel>
