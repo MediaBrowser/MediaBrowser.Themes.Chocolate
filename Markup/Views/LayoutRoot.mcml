@@ -657,7 +657,7 @@
       <ScrollingData Name="SD" BeginPadding="20" BeginPaddingRelativeTo="Near" EndPadding="20" EndPaddingRelativeTo="Far"/>
       <ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true"
                         HandlerStage="Bubbled" Name="ScrollingHandler"/>
-      <FlowLayout Name="FlowLayout" ItemAlignment="Center" Orientation="Horizontal" Repeat="WhenTooBig" HideOffscreenItems="false"/>
+      <FlowLayout Name="FlowLayout" ItemAlignment="Center" Orientation="Horizontal" Repeat="WhenTooBig" HideOffscreenItems="false" Spacing="4,4"/>
     </Locals>
 
     <Rules>
