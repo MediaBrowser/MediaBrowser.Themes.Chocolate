@@ -65,6 +65,7 @@
       <addin:AddInHost Name="AddInHost" />
       <cor:String Name="MediaPath" String="" />
       <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
+      <a:Clock Name="Clock"/>
       <Environment Name="Environment"/>
       <BooleanChoice Name="ResumeBtnHasFocus" Value="false"/>
       <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled" Command="[PlayMovieCommand]"/>
@@ -242,7 +243,15 @@
       <Binding Target="[ChapterScroller.Item]" Source="[Item]"/>
       <Binding Target="[PosterImage.Content]" Source="[Item.PreferredImage]"/>
       <Binding Target="[MediaInfoPanel.Item]" Source="[Item]"/>
-      <Binding Target="[Summary.Text]" Source="[Item.Overview]"/>
+      <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
+      <Changed Source="[Clock.Time]" >
+         <Actions>
+            <Set Target="[EndTime.Content]"  Value="[ThemeHelper.EndTime]"/>
+         </Actions>
+      </Changed>
+      <Condition Source="[ThemeHelper.EndTime]" SourceValue="" Target="[EndTimePanel.Visible]" Value="false" />
+      <Default Target="[EndTimePanel.Visible]" Value="true" />
+      
       <Binding Target="[PlayMovieButton.Visible]" Source="[Item.IsPlayable]">
         <Conditions>
           <Equality Source="[Item.CanResume]" Value="false" />
@@ -292,7 +301,11 @@
 
       <!--Display Logo-->
       <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
-
+      
+      <!--Adjust width of overview based on amount of text-->
+      <Condition Source="[Item.Overview.Length]" ConditionOp="GreaterThan" SourceValue="460" Target="[ItemInfoPanel.OverviewSize]" Value="800,0" />
+      <Condition Source="[Item.Overview.Length]" ConditionOp="GreaterThan" SourceValue="400" Target="[ItemInfoPanel.OverviewSize]" Value="700,0" />
+      <Default  Target="[ItemInfoPanel.OverviewSize]" Value="550,0" />
     </Rules>
 
     <Content>
@@ -344,9 +357,20 @@
                   </Panel>
 
 
-                  <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 330" FocusOrder="0">
+                  <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Item]" ShowDetails="true" OverviewSize="550,0">
                     <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,32" Bottom="OverviewPanel,0,-50"/>
+                      <FormLayoutInput Top="Parent, 0, -10" Right="Parent, .7" Left="Parent, 0" Bottom="Poster, 0, -10"/>
+                    </LayoutInput>
+                    <Animations>
+                      <Animation Animation="animation://anim:NavigateToForward"/>
+                      <Animation Animation="animation://anim:NavigateAwayBackward"/>
+                    </Animations>
+
+                  </nip:InfoPanel>
+
+                  <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 320" FocusOrder="0">
+                    <LayoutInput>
+                      <FormLayoutInput Left="Parent,0,32" Bottom="Parent,1,-40"/>
                     </LayoutInput>
                     <Children>
                       <Graphic Name="PosterImage" Content="[Item.PreferredImage]" MaintainAspectRatio="true" SizingPolicy="SizeToContent">
@@ -356,17 +380,28 @@
 
                   <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="175,45" Font="font://f:MM_ButtonFont">
                     <LayoutInput>
-                      <FormLayoutInput Left="Poster,1, -5" Top="Poster,1, 5"/>
+                      <FormLayoutInput Left="Poster,1, -5" Bottom="Parent,1, 5"/>
                     </LayoutInput>
                     
                   </ib:ImageButton>
 
                   <ib:ImageButton Name="PreviousItemButton" Alpha=".2" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="175,45" Font="font://f:MM_ButtonFont">
                     <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,2" Top="Poster,1, 5"/>
+                      <FormLayoutInput Left="Parent,0,2" Bottom="Parent,1, 5"/>
                     </LayoutInput>
 
                   </ib:ImageButton>
+
+                  <!--EndTime-->
+                  <Panel Name="EndTimePanel" Layout="HorizontalFlow" Margins="0,0,0,5" >
+                    <LayoutInput>
+                      <FormLayoutInput Vertical="Far" Horizontal="Center" />
+                    </LayoutInput>
+                    <Children>
+                      <Text Name="EndTimeLbl" Font="font://uf:CF_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
+                      <Text Name="EndTime" Font="font://uf:CF_EndTime" Color="color://uc:Light" Content="Nothing"></Text>
+                    </Children>
+                  </Panel>
                   
                   <Panel Layout="HorizontalFlow">
                     <LayoutInput>
@@ -434,28 +469,6 @@
                       </Panel>
 
                       <ColorFill Content="Black" Alpha=".75" Layout="Fill" />
-                    </Children>
-                  </Panel>
-
-                  <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Item]" ShowDetails="true" ShowOverview="false">
-                    <LayoutInput>
-                      <FormLayoutInput Top="Parent, 0" Right="Parent, .7" Left="Parent, 0"/>
-                    </LayoutInput>
-                    <Animations>
-                      <Animation Animation="animation://anim:NavigateToForward"/>
-                      <Animation Animation="animation://anim:NavigateAwayBackward"/>
-                    </Animations>
-
-                  </nip:InfoPanel>
-
-                  <Panel Name="OverviewPanel" Margins="10,5,0,0" Layout="Form">
-                    <LayoutInput>
-                      <FormLayoutInput Bottom="Parent, 1, -10" Right="Parent, .65" Left="Parent, 0" Top="Parent, .75"/>
-                    </LayoutInput>
-                    <Children>
-                      <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]"
-                                         Name="Summary" Text="[Item.Overview]" Font="Segoe Media Center Light, 16" Color="color://uc:Light"
-                                          />
                     </Children>
                   </Panel>
 
@@ -579,8 +592,8 @@
                   <Animation Animation="animation://anim:FadeOut" />
                 </Animations>
                 <Children>
-                  <bd:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]" Constrain="small"/>
-                  <bd:Backdrop4 Name="Backdrop" Application="[Application]" Item="[Item]" Constrain="small"/>
+                  <bd:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]" Constrain="large"/>
+                  <bd:Backdrop4 Name="Backdrop" Application="[Application]" Item="[Item]" Constrain="large"/>
                 </Children>
               </Panel>
             </Children>
