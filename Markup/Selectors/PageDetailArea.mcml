@@ -122,6 +122,9 @@
         <Conditions>
           <Equality Source="[ThemeHelper.Config.UseCustomTvView]" Value="true" />
         </Conditions>
+        <Actions>
+          <Set Target="[InfoIconsPanel.Visible]" Value="false" />
+        </Actions>
       </Condition>
       
       <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" ConditionOp="Equals" SourceValue="Detail" Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutDetails]" />
