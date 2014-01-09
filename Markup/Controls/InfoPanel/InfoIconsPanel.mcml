@@ -152,26 +152,9 @@
         </Actions>
       </Changed>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:InfoPanelCorner"/>
-          <Set Target="[InfoIcons.Content]" Value="[InfoIconsBColor]"/>
-        </Actions>
-      </Rule>
+      <Default Target="[InfoIconsCorner.Content]" Value="image://vi:InfoPanelCorner"/>
+      <Default Target="[InfoIcons.Content]" Value="[InfoIconsBColor]"/>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:BlueInfoPanelCorner"/>
-          <Set Target="[InfoIcons.Content]" Value="200,10,56,114"/>
-        </Actions>
-      </Rule>
-      
     </Rules>
 
     <Content>
@@ -337,25 +320,8 @@
       </Binding>
       <Default Target="[InfoIconsPanel.Visible]" Value="true"/>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:InfoPanelCorner"/>
-          <Set Target="[InfoIcons.Content]" Value="[InfoIconsBColor]"/>
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[InfoIconsCorner.Content]" Value="image://vi:BlueInfoPanelCorner"/>
-          <Set Target="[InfoIcons.Content]" Value="200,10,56,114"/>
-        </Actions>
-      </Rule>
+      <Default Target="[InfoIconsCorner.Content]" Value="image://vi:InfoPanelCorner"/>
+      <Default Target="[InfoIcons.Content]" Value="[InfoIconsBColor]"/>
       
     </Rules>
     

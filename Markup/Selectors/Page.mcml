@@ -542,29 +542,9 @@
           <Set Target="[TimeDisplay.Content]" Value="[CurrentTime]"/>
         </Actions>
       </Changed>
+
+      <Default Target="[ButtonPanelCenter.Content]" Value="image://vi:ButtonPanelCenter"/>
       
-      <Rule>
-        <Conditions>
-          <Equality Source="[Helper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <!--<Set Target="[ButtonPanelRight.Content]" Value="image://vi:ButtonPanelRight"/>-->
-          <Set Target="[ButtonPanelCenter.Content]" Value="image://vi:ButtonPanelCenter"/>
-          <!--<Set Target="[ButtonPanelLeft.Content]" Value="image://vi:ButtonPanelLeft"/>-->
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[Helper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <!--<Set Target="[ButtonPanelRight.Content]" Value="image://vi:BlueButtonPanelRight"/>-->
-          <Set Target="[ButtonPanelCenter.Content]" Value="image://vi:BlueButtonPanelCenter"/>
-          <!--<Set Target="[ButtonPanelLeft.Content]" Value="image://vi:BlueButtonPanelLeft"/>-->
-        </Actions>
-      </Rule>
-
       <Changed Source="[GoHome.Invoked]">
         <Actions>
           <Invoke Target="[Application.BackToRoot]" />

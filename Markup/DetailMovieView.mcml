@@ -468,25 +468,8 @@
       <Default Target="[LogoImage.Visible]" Value="false"/>
       <Default Target="[Title.Visible]" Value="true"/>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[DetailPart.Content]" Value="image://it:UltimateMoviePanelDetail"/>
-          <Set Target="[DetailBackdrop.Content]" Value="image://it:UltimateMoviePanel"/>
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[DetailPart.Content]" Value="image://it:BlueUltimateMoviePanelDetail"/>
-          <Set Target="[DetailBackdrop.Content]" Value="image://it:BlueUltimateMoviePanel"/>
-        </Actions>
-      </Rule>
+      <Default Target="[DetailPart.Content]" Value="image://it:UltimateMoviePanelDetail"/>
+      <Default Target="[DetailBackdrop.Content]" Value="image://it:UltimateMoviePanel"/>
       
     </Rules>
 

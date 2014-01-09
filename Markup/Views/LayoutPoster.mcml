@@ -107,23 +107,7 @@
       <!--Hide/Show Options-->
       <Binding Source="[ThemeHelper.Config.ShowPosterEndTime]" Target="[EndTimePanel.Visible]"/>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[AlphaPanel.Content]" Value="image://it:UltimatePosterPanel"/>
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[AlphaPanel.Content]" Value="image://it:BlueUltimatePosterPanel"/>
-        </Actions>
-      </Rule>
+      <Default Target="[AlphaPanel.Content]" Value="image://it:UltimatePosterPanel"/>
       
     </Rules>
     

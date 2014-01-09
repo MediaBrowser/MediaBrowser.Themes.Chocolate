@@ -46,7 +46,6 @@
         public bool smallEhs;
         public bool stripviewExpanded;
         public string themeCustomFont;
-        public string themeStyle;
         public bool useSeasonPoster;
         public bool useCustomTvView;
         public bool AskToQuit;
@@ -60,7 +59,6 @@
             this.showconfig = true;
             this.npvAR = "Normal";
             this.themeCustomFont = "Default";
-            this.themeStyle = "Classic";
             this.shownowplayingicon = true;
             this.showcoverflowtitle = true;
             this.showcoverflowdetails = true;
@@ -89,7 +87,6 @@
             this.showconfig = true;
             this.npvAR = "Normal";
             this.themeCustomFont = "Default";
-            this.themeStyle = "Classic";
             this.shownowplayingicon = true;
             this.showcoverflowtitle = true;
             this.showcoverflowdetails = true;

@@ -205,15 +205,6 @@
       </Binding>
       <Binding Source="[Item.DirectorString]" Target="[TxtDirectedBy.Content]" />
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[InfoBg.Content]" Value="DarkBlue"/>
-        </Actions>
-      </Rule>
-
       <Condition Source="[Item.DirectorString]" SourceValue="" Target="[TxtDirectedLbl.Visible]" Value="false" >
         <Actions>
           <Set Target="[DirectorLblSpacer.Visible]" Value="false" />

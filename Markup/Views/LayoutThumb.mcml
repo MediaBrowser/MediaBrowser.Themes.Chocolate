@@ -149,23 +149,7 @@
       <Binding Target="[Summary.Text]" Source="[Item.Overview]"></Binding>
       <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[DetailAlphaPanel.Content]" Value="image://it:UltimateLongPanel"/>
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[DetailAlphaPanel.Content]" Value="image://it:BlueUltimateLongPanel"/>
-        </Actions>
-      </Rule>
+      <Default Target="[DetailAlphaPanel.Content]" Value="image://it:UltimateLongPanel"/>
       
     </Rules>
     

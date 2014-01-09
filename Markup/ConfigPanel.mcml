@@ -60,20 +60,12 @@
         </Options>
       </Choice>
 
-      <Choice Name="ThemeStyleOptions">
-        <Options>
-          <cor:String String="Classic" />
-          <cor:String String="Blue" />
-        </Options>
-      </Choice>
-      
     </Locals>
     
     <Rules>
 
       <Binding Source="[NPVAR.Chosen!cor:String]"                 Target="[Helper.Config.NPVAR]"/>
       <Binding Source="[ThemeCustomFont.Chosen!cor:String]"       Target="[Helper.Config.ThemeCustomFont]"/>
-      <Binding Source="[ThemeStyleOptions.Chosen!cor:String]"     Target="[Helper.Config.ThemeStyle]"/>
       
       <Changed Source="[ShowInfoIconsCB.Checked.Value]">
         <Actions>
@@ -178,9 +170,6 @@
               <cb:CheckBox Name="ShowNowPlayingIconCB" Label="[Application.LocalStrings.#ShowNowPlayingIcon!cor:String]" Checked="[ShowNowPlayingIcon]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowNPVCB" Label="[Application.LocalStrings.#ShowNPV!cor:String]" Checked="[ShowNPV]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <st:SpinnerText Name="NPVARSpinner" Model="[NPVAR]" FocusItem="[FocusItem]" Color="color://s:FontColorMedium" Label="[Application.LocalStrings.#NPVAR!cor:String]" Font="font://f:CP_ConfigItemFont" ValueFont="font://f:CP_ConfigItemFont" Margins="0,0,0,5" DefaultString="[Helper.Config.NPVAR]"/>
-              <!--Style Options Panel-->
-              <Text Content="Style Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
-              <st:SpinnerText Name="ThemeStyleSpinner"  Model="[ThemeStyleOptions]"   FocusItem="[FocusItem]"  Color="color://s:FontColorMedium" Label="[Application.LocalStrings.#ThemeStyle!cor:String]"      Font="font://f:CP_ConfigItemFont" ValueFont="font://f:CP_ConfigItemFont" Margins="0,0,0,5" DefaultString="[Helper.Config.ThemeStyle]"/>
             </Children>
           </Panel>
           <!--4:3 Options Panel-->

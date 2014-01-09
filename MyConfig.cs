@@ -730,29 +730,6 @@
             }
         }
 
-        public string ThemeStyle
-        {
-            get
-            {
-                if ((this.data.themeStyle != "Classic") && (this.data.themeStyle != "Blue"))
-                {
-                    this.data.themeStyle = "Classic";
-                    base.FirePropertyChanged("ThemeStyle");
-                    this.Save();
-                }
-                return this.data.themeStyle;
-            }
-            set
-            {
-                if (this.data.themeStyle != value)
-                {
-                    this.data.themeStyle = value;
-                    base.FirePropertyChanged("ThemeStyle");
-                    this.Save();
-                }
-            }
-        }
-
         public bool UseSeasonPoster
         {
             get

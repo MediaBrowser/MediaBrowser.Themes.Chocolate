@@ -36,6 +36,7 @@
 
 
       <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Movie" Target="[MovieInfoPanel.Visible]" Value="true" />
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="BoxSet" Target="[MovieInfoPanel.Visible]" Value="true" />
       <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Series" Target="[SeriesInfoPanel.Visible]" Value="true" />
       <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Season" Target="[SeasonInfoPanel.Visible]" Value="true" />
       <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode" Target="[EpisodeInfoPanel.Visible]" Value="true" />

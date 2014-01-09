@@ -130,8 +130,6 @@
         public string Synopsis = "Synopsis";
         public string ThemeCustomFont = "* Choose theme font style";
         public string ThemeCustomFontDesc = "Chose which font file to use with the theme. This Won't Take Effect Until Media Browser Restarted.";
-        public string ThemeStyle = "Change The Theme Style";
-        public string ThemeStyleDesc = "You can chose between the classic black style of chocolate or use the Blue style instead.";
         public string THUMB = "THUMB";
         public string Unwatched = "Unwatched";
         public string UNWATCHED = "UNWATCHED";

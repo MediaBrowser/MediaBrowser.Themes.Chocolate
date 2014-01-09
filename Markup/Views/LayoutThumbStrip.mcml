@@ -193,25 +193,8 @@
         </Actions>
       </Changed>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[DetailBackdrop.Content]" Value="image://it:UltimatePosterPanel"/>
-          <Set Target="[ContentPanel.Content]" Value="image://it:UltimateDetailPanel"/>
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[DetailBackdrop.Content]" Value="image://it:BlueUltimatePosterPanel"/>
-          <Set Target="[ContentPanel.Content]" Value="image://it:BlueUltimateDetailPanel"/>
-        </Actions>
-      </Rule>
+      <Default Target="[DetailBackdrop.Content]" Value="image://it:UltimatePosterPanel"/>
+      <Default Target="[ContentPanel.Content]" Value="image://it:UltimateDetailPanel"/>
       
     </Rules>
     

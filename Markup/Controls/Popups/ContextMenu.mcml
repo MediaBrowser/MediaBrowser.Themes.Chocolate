@@ -147,25 +147,8 @@
         </Transformer>
       </Binding>
 
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Classic"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[ZoomPane.Content]" Value="image://i:ZoomPane"/>
-          <Set Target="[Main.Content]" Value="150,0,0,0"/>
-        </Actions>
-      </Rule>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ThemeStyle]" Value="Blue"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[ZoomPane.Content]" Value="image://i:ZoomPane"/>
-          <Set Target="[Main.Content]" Value="200,10,56,114"/>
-        </Actions>
-      </Rule>
+      <Default Target="[ZoomPane.Content]" Value="image://i:ZoomPane"/>
+      <Default Target="[Main.Content]" Value="150,0,0,0"/>
       
     </Rules>
 
