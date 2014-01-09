@@ -111,8 +111,6 @@
         </Actions>
       </Changed>
 
-      <Condition Source="[SelectedItem.ParentalAllowed]" ConditionOp="Equals" SourceValue="false" Target="[PCLock.Visible]" Value="true"/>
-
       <!-- Commands -->
       <Changed Source="[Configure.Invoked]">
         <Actions>
@@ -132,8 +130,6 @@
           <Set Target="[Overview.Visible]" Value="False"/>
           <Set Target="[RootHasFocusBool]" Value="true"/>
           <Set Target="[EHSItem]" Value="[Folder.SelectedChild]"/>
-          <Set Target="[TopLine.Content]" Value="170,100,100,100"/>
-          <Set Target="[BottomLine.Content]" Value="190,155,155,155"/>
         </Actions>
       </Changed>
       <Changed Source="[RootLostFocus.Invoked]">
@@ -143,8 +139,6 @@
           <Set Target="[RootInfo.Visible]" Value="False"/>
           <Set Target="[ItemInfo.Visible]" Value="True"/>
           <Set Target="[Overview.Visible]" Value="True"/>
-          <Set Target="[TopLine.Content]" Value="50,100,100,100"/>
-          <Set Target="[BottomLine.Content]" Value="70,155,155,155"/>
         </Actions>
       </Changed>
 
@@ -341,23 +335,9 @@
               </Graphic>
               <Graphic Name="AlphaPanel">
                 <LayoutInput>
-                  <AnchorLayoutInput Left="Parent,0,-20" Right="Parent,1,20" Top="Parent,1,-72" Bottom="Parent,1,-9"/>
+                  <AnchorLayoutInput Left="Parent,0,-20" Right="Parent,1,20" Top="Parent,1,-112" Bottom="Parent,1,-9"/>
                 </LayoutInput>
               </Graphic>
-
-              <!--Security Indicator-->
-              <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Anchor" Visible="false" Name="PCLock">
-                <LayoutInput>
-                  <AnchorLayoutInput Left="Parent,0,15" Bottom="Parent,1,-15"/>
-                </LayoutInput>
-                <Children>
-                  <Graphic Name="PCLockImage" Content="image://i:Lock" Margins="0,0,5,5" MaximumSize="35,35" MaintainAspectRatio="true">
-                    <LayoutInput>
-                      <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
-                    </LayoutInput>
-                  </Graphic>
-                </Children>
-              </Panel>
 
               <!--Name of the currently Selected Item-->
               <Clip MaximumSize="0,57" Visible="true" FadeSize="25" FadeAmount="0.7" Orientation="Vertical">
@@ -593,7 +573,6 @@
         <Actions>
           <Set Target="[Title.Color]" Value="color://s:Choc_EHS_RootItem"/>
           <Set Target="[SelectedIndex.Value]" Value="[Index]"/>
-          <Set Target="[Bg.Content]" Value="image://vi:RootItemTab" />
         </Actions>
       </Rule>
     </Rules>
@@ -702,8 +681,6 @@
 
       <Binding Source="[Item.PreferredImage]" Target="[ItemPoster.Content]"/>
 
-      <Condition Source="[Item.ParentalAllowed]" ConditionOp="Equals" SourceValue="false" Target="[PCLock.Visible]" Value="true"/>
-
       <Changed Source="[Input.KeyFocus]" >
         <Conditions>
           <Equality Source="[Input.KeyFocus]" Value="false"/>
@@ -753,11 +730,6 @@
                 </Keyframes>
               </Animation>
             </Animations>
-            <Children>
-
-              <Graphic Name="PCLock" Visible="false" Content="image://i:Lock" MaintainAspectRatio="true" MaximumSize="30,30"/>
-
-            </Children>
           </Graphic>
 
         </Children>
