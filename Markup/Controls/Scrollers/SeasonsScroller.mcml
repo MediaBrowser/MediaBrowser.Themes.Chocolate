@@ -140,6 +140,16 @@
           <FormatTransformer Format="{0} Episodes"/>
         </Transformer>
       </Binding>
+      <Binding Source="[Folder.UnwatchedCount]" Target="[UnwatchedCount.Content]" >
+        <Conditions>
+          <Equality Source="[Folder.UnwatchedCount]" ConditionOp="NotEquals" Value="0" />
+        </Conditions>
+        <Transformer>
+          <FormatTransformer Format="({0} New)"/>
+        </Transformer>
+      </Binding>
+      <Default Target="[UnwatchedCount.Content]" Value="" />
+      
       <Binding Source="[Expanded]" Target="[MyRepeater.Visible]" />
 
       <Changed Source="[Input.DeepKeyFocus]" >
@@ -176,6 +186,7 @@
                                  Font="Segoe UI Light, 24, bold" Color="color://uc:Dark" Item="[Folder]" />
                   <!--<Text Name="SeasonName" Content="[Folder.Name]" Font="Segoe UI Light, 24, bold" Color="color://uc:Dark" Margins="0,0,20,0" />-->
                   <Text Name="EpisodeCount" Font="Segoe UI Light, 14, bold" Color="color://uc:Dark" Margins="20,0,0,0"  />
+                  <Text Name="UnwatchedCount" Font="Segoe UI Light, 14, bold" Color="color://uc:Dark" Margins="10,0,0,0"  />
                 </Children>
               </Panel>
               <Graphic Name="SeasonPoster" Content="[Folder.PreferredImage]" MaintainAspectRatio="true" MaximumSize="0,200" Margins="10,10,0,0" >

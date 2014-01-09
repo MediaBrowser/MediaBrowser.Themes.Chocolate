@@ -306,7 +306,9 @@
     <Content Include="Markup\Controls\Popups\PopupRadioMenu.mcml" />
     <Content Include="Markup\Controls\Popups\PopupViewMenu.mcml" />
     <Content Include="Markup\Controls\Scrollers\BasicPosterScroller.mcml" />
-    <Content Include="Markup\Controls\Scrollers\SeasonsScroller.mcml" />
+    <Content Include="Markup\Controls\Scrollers\SeasonsScroller.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Scrollers\StackedScroller.mcml">
       <SubType>Designer</SubType>
     </Content>
