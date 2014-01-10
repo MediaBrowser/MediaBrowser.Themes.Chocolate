@@ -357,17 +357,6 @@
                   </Panel>
 
 
-                  <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Item]" ShowDetails="true" OverviewSize="550,0">
-                    <LayoutInput>
-                      <FormLayoutInput Top="Parent, 0, -10" Right="Parent, .7" Left="Parent, 0" Bottom="Poster, 0, -10"/>
-                    </LayoutInput>
-                    <Animations>
-                      <Animation Animation="animation://anim:NavigateToForward"/>
-                      <Animation Animation="animation://anim:NavigateAwayBackward"/>
-                    </Animations>
-
-                  </nip:InfoPanel>
-
                   <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 320" FocusOrder="0">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,0,32" Bottom="Parent,1,-40"/>
@@ -471,6 +460,17 @@
                       <ColorFill Content="Black" Alpha=".75" Layout="Fill" />
                     </Children>
                   </Panel>
+
+                  <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[Item]" ShowDetails="true" OverviewSize="550,0">
+                    <LayoutInput>
+                      <FormLayoutInput Top="Parent, 0, -10" Right="Parent, .7" Left="Parent, 0" Bottom="Poster, 0, -10"/>
+                    </LayoutInput>
+                    <Animations>
+                      <Animation Animation="animation://anim:NavigateToForward"/>
+                      <Animation Animation="animation://anim:NavigateAwayBackward"/>
+                    </Animations>
+
+                  </nip:InfoPanel>
 
                   <Graphic Name="LogoImage" Margins="0,10,30,0" Content="[Item.LogoImage]" MaximumSize="0,110" MaintainAspectRatio="true" Visible="[ThemeHelper.Config.ShowLogosOnMovieDetail]" >
                     <LayoutInput>
