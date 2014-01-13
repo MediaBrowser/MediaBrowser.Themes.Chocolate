@@ -17,6 +17,7 @@
       <Image Name="ImageNoFocus" Image="null" />
       <Image Name="BlankImage" Image="null" />
       <BooleanChoice Name="HasFocus" Value="false"/>
+      <Color Name="IconColor" Color="255,255,255"/>
     </Properties>
 
     <Locals>
@@ -27,6 +28,7 @@
     <Rules>
 
       <Binding Source="[Command]" Target="[Clicker.Command]" />
+      <Binding Source="[IconColor]" Target="[Icon.ColorFilter]" />
       <Binding Source="[Command.Available]" Target="[Input.KeyInteractive]" />
       <Default Target="[Input.KeyInteractive]" Value="true" />
 
@@ -93,7 +95,7 @@
             <Children>
               <Panel >
                 <Children>
-                  <Graphic Content="[ImageNoFocus]" MaximumSize="[Size]" MaintainAspectRatio="true" />
+                  <Graphic Name="Icon" Content="[ImageNoFocus]" MaximumSize="[Size]" MaintainAspectRatio="true" ColorFilter="[IconColor]" />
                 </Children>
               </Panel>
             </Children>

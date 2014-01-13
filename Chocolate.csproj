@@ -102,11 +102,13 @@
     <Content Include="Images\Icons\Icon1080.png" />
     <Content Include="Images\Icons\Icon720.png" />
     <Content Include="Images\Icons\IconCog.png" />
+    <Content Include="Images\Icons\IconHeart.png" />
     <Content Include="Images\Icons\IconHome.png" />
     <Content Include="Images\Icons\IconNowPlay.png" />
     <Content Include="Images\Icons\IconSearch.png" />
     <Content Include="Images\Icons\MetroPlay.png" />
     <Content Include="Images\Icons\MetroResume.png" />
+    <Content Include="Images\Icons\NotWatched.png" />
     <Content Include="Images\Ratings\13.png" />
     <Content Include="Images\Ratings\ESRB-AO.png" />
     <Content Include="Images\Ratings\ESRB-E.png" />
@@ -283,7 +285,9 @@
     <Content Include="Markup\Controls\Buttons\RadioButton.mcml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Markup\Controls\Buttons\SimpleButton.mcml" />
+    <Content Include="Markup\Controls\Buttons\SimpleButton.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Buttons\TextButton.mcml" />
     <Content Include="Markup\Controls\InfoPanel\FullInfoPanel.mcml" />
     <None Include="Markup\Animations.mcml">

@@ -623,6 +623,16 @@ namespace Chocolate {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IconHeart {
+            get {
+                object obj = ResourceManager.GetObject("IconHeart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap IconHome {
             get {
                 object obj = ResourceManager.GetObject("IconHome", resourceCulture);
@@ -1206,6 +1216,16 @@ namespace Chocolate {
         internal static System.Drawing.Bitmap NewTab {
             get {
                 object obj = ResourceManager.GetObject("NewTab", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NotWatched {
+            get {
+                object obj = ResourceManager.GetObject("NotWatched", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -515,6 +515,8 @@
       <cor:String Name="CurrentTime" String="[Helper.CurrentTime]"/>
       <Timer Name="MyTimer" AutoRepeat="true" Interval="1500" Enabled="true"/>
       <Command Name="GoHome" />
+      <Command Name="ToggleWatched" />
+      <Command Name="ToggleFavorite" />
 
     </Locals>
 
@@ -532,6 +534,12 @@
 
       <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[ConfigurationKey.Visible]" Value="true"/>
       <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[HomeKey.Visible]" Value="false"/>
+      <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[WatchedKey.Visible]" Value="false"/>
+      <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[FavoriteKey.Visible]" Value="false"/>
+      <Condition Source="[Folder.FilterUnwatched]" SourceValue="true" Target="[FilterWatched.IconColor]" Value="0,255,0"/>
+      <Condition Source="[Folder.FilterFavorite]" SourceValue="true" Target="[FilterFavorite.IconColor]" Value="0,255,0"/>
+      <Condition Source="[Folder.FilterUnwatched]" SourceValue="false" Target="[FilterWatched.IconColor]" Value="255,255,255"/>
+      <Condition Source="[Folder.FilterFavorite]" SourceValue="false" Target="[FilterFavorite.IconColor]" Value="255,255,255"/>
       <!--Hide/Show Config Button-->
       <Binding Source="[Helper.Config.ShowConfig]" Target="[ConfigurationKey.Visible]"/>
 
@@ -548,6 +556,26 @@
       <Changed Source="[GoHome.Invoked]">
         <Actions>
           <Invoke Target="[Application.BackToRoot]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[ToggleWatched.Invoked]">
+        <Actions>
+          <Set Target="[Folder.FilterUnwatched]" Value="[Folder.FilterUnwatched]" >
+            <Transformer>
+              <BooleanTransformer Inverse="true"/>
+            </Transformer>
+          </Set>
+        </Actions>
+      </Changed>
+
+      <Changed Source="[ToggleFavorite.Invoked]">
+        <Actions>
+          <Set Target="[Folder.FilterFavorite]" Value="[Folder.FilterFavorite]" >
+            <Transformer>
+              <BooleanTransformer Inverse="true"/>
+            </Transformer>
+          </Set>
         </Actions>
       </Changed>
 
@@ -591,6 +619,16 @@
               <Panel Name="ConfigurationKey" FocusOrder="104">
                 <Children>
                   <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                </Children>
+              </Panel>
+              <Panel Name="WatchedKey" FocusOrder="106">
+                <Children>
+                  <vsb:SimpleButton Name="FilterWatched" Application="[Application]" ImageNoFocus="resx://Chocolate/Chocolate.Resources/NotWatched" Command="[ToggleWatched]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                </Children>
+              </Panel>
+              <Panel Name="FavoriteKey" FocusOrder="106">
+                <Children>
+                  <vsb:SimpleButton Name="FilterFavorite" Application="[Application]" ImageNoFocus="resx://Chocolate/Chocolate.Resources/IconHeart" Command="[ToggleFavorite]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
                 </Children>
               </Panel>
               <Panel Name="SearchKey" FocusOrder="106">
