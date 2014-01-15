@@ -270,12 +270,12 @@
       
       <Condition Source="[Config.Theme]" SourceValue="Black" Target="[RightMenuBorder.Content]" Value="image://it:RightMenuBorderBlack"/>
       <Condition Source="[Config.Theme]" SourceValue="Black" Target="[LeftMenuBorder.Content]"  Value="image://it:LeftMenuBorderBlack"/>
-      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode"  >
+      <!--<Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode"  >
         <Actions>
           <Set Target="[ButtonsPanel.LayoutInput]"  Value="[LandscapeButtons]"/>
           <Set Target="[Buttons.Layout]"  Value="HorizontalFlow"/>
         </Actions>
-      </Condition>
+      </Condition>-->
 
       <Binding Source="[Environment.IsWidescreen]" Target="[PosterImage.Visible]">
         <Conditions>
