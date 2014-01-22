@@ -738,7 +738,7 @@
     <Content>
       <Panel Layout="HorizontalFlow" >
         <Children>
-          <pb:PersonButton PersonItem="[aiw]" Size="300,100" Color="color://s:FontColorMedium" Command="[NavigateToActorsCommand]" />
+          <pb:PersonButton PersonItem="[aiw]" Size="300,150" Color="color://s:FontColorMedium" Command="[NavigateToActorsCommand]" />
 
         </Children>
       </Panel>
