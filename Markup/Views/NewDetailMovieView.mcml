@@ -418,7 +418,7 @@
 
                   <Panel Name="ExtraPanel" Visible="false" >
                     <LayoutInput>
-                      <FormLayoutInput Right="Parent,1" Bottom="Parent,.90" Top="Parent, 0" Left="Parent,0,700"/>
+                      <FormLayoutInput Right="Parent,1" Bottom="Parent,.90" Top="Parent, 0" Left="Parent,0,650"/>
                     </LayoutInput>
                     <Animations>
                       <Animation Type="Hide">
