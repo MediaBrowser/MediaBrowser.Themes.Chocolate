@@ -378,7 +378,10 @@
           <Invoke Target="[Application.ResetContextMenu]"/>
         </Actions>
       </Changed>
-      
+
+      <!--Show indicator of empty folder-->
+      <Condition Source="[Folder.Children.Count]" SourceValue="0" Target="[NoItems.Visible]" Value="true" />
+
       <!--Hides Media Browser Behind Context Menu-->
       <Rule ConditionLogicalOp="Or">
         <Conditions>
@@ -487,6 +490,9 @@
                       <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" Bottom="Parent,0,100"/>
                     </LayoutInput>
                   </me:ButtonPanel>
+
+                  <!--Empty Folder display-->
+                  <Text Name="NoItems" Content="No Items" Font="Segoe UI Light, 108, Bold" Color="White" Alpha=".7" Visible="false" />
 
                   <pda:PageDetailAreaChocolate ThemeHelper="[Helper]" Name="ViewPanel" Folder="[Folder]" Application="[Application]"  LayoutInput="[FullScreen]" Navigation="RememberFocus"/>
 

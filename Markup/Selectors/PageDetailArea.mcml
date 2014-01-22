@@ -320,7 +320,7 @@
                   </Animation>
                 </Animations>
               </iip:InfoIconsPanel>
-
+              
               <!--  View Details-->
               <lr:LayoutRoot ThemeHelper="[ThemeHelper]" Name="DetailArea" Folder="[Folder]" Application="[Application]" Navigation="RememberFocus"/>
 
