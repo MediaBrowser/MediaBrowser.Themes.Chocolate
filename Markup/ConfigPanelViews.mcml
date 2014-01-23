@@ -56,7 +56,10 @@
       <BooleanChoice Name="ShowStripLogos" Value="[Helper.Config.ShowStripLogos]" />
       <!--Custom Views-->
       <BooleanChoice Name="UseCustomTvView" Value="[Helper.Config.UseCustomTvView]" />
-      
+      <!--Detail Options-->
+      <BooleanChoice Name="ShowLogosOnMovieDetail" Value="[Helper.Config.ShowLogosOnMovieDetail]" />
+      <BooleanChoice Name="ShowDiscDetail" Value="[Helper.Config.ShowDiscDetail]" />
+
     </Locals>
     <Rules>
       <!--EHS Options-->
@@ -170,6 +173,18 @@
           <Set Target="[Helper.Config.UseCustomTvView]" Value="[UseCustomTvViewCB.Checked.Value]"/>
         </Actions>
       </Changed>
+      <!--Detail Options-->
+      <Changed Source="[ShowLogosOnMovieDetailCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowLogosOnMovieDetail]" Value="[ShowLogosOnMovieDetailCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+      <Changed Source="[ShowDiscDetailCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowDiscDetail]" Value="[ShowDiscDetailCB.Checked.Value]"></Set>
+        </Actions>
+      </Changed>
+
     </Rules>
 
     <Content>
@@ -217,6 +232,14 @@
               <Text Content="Poster Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <cb:CheckBox Name="ShowPosterLogosCB" Label="[Application.LocalStrings.#ShowPosterLogos!cor:String]" Checked="[ShowPosterLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowPosterEndTimeCB" Label="[Application.LocalStrings.#ShowPosterEndTime!cor:String]" Checked="[ShowPosterEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--Detail Options Panel-->
+              <Text Content="Detail Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,20,10,10"/>
+              <cb:CheckBox Name="ShowDiscDetailCB" Label="[Application.LocalStrings.#ShowDiscDetail!cor:String]" Checked="[ShowDiscDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowLogosOnMovieDetailCB" Label="[Application.LocalStrings.#ShowLogosOnMovieDetail!cor:String]" Checked="[ShowLogosOnMovieDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+            </Children>
+          </Panel>
+          <Panel Layout="VerticalFlow" MaximumSize="500,400" Padding="20,0,0,20">
+            <Children>
               <!--Custom Views Panel-->
               <Text Content="Custom Views" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <cb:CheckBox Name="UseCustomTvViewCB" Label="[Application.LocalStrings.#UseCustomTvView!cor:String]" Checked="[UseCustomTvView]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>

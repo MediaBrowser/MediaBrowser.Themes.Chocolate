@@ -49,6 +49,7 @@
         public bool useSeasonPoster;
         public bool useCustomTvView;
         public bool AskToQuit;
+        public bool ShowDiscDetail = true;
 
         public ConfigData()
         {

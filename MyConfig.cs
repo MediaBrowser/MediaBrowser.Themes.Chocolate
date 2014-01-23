@@ -525,6 +525,23 @@
             }
         }
 
+        public bool ShowDiscDetail
+        {
+            get
+            {
+                return this.data.ShowDiscDetail;
+            }
+            set
+            {
+                if (this.data.ShowDiscDetail != value)
+                {
+                    this.data.ShowDiscDetail = value;
+                    base.FirePropertyChanged("ShowDiscDetail");
+                    this.Save();
+                }
+            }
+        }
+
         public bool UseCustomTvView
         {
             get
