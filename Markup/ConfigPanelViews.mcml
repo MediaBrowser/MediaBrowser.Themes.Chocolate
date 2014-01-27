@@ -119,11 +119,11 @@
           <Set Target="[Helper.Config.ShowCoverflowIndicator]" Value="[ShowCoverflowIndicatorCB.Checked.Value]"/>
         </Actions>
       </Changed>
-      <Changed Source="[ShowCoverflowPosterOverlayCB.Checked.Value]">
+      <!--<Changed Source="[ShowCoverflowPosterOverlayCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowCoverflowPosterOverlay]" Value="[ShowCoverflowPosterOverlayCB.Checked.Value]"/>
         </Actions>
-      </Changed>
+      </Changed>-->
       <Changed Source="[ShowCoverflowTotalNumberCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowCoverflowTotalNumber]" Value="[ShowCoverflowTotalNumberCB.Checked.Value]"/>
@@ -215,7 +215,7 @@
               <cb:CheckBox Name="ShowCoverFlowLogosCB" Label="[Application.LocalStrings.#ShowCoverFlowLogos!cor:String]" Checked="[ShowCoverFlowLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverFlowEndTimeCB" Label="[Application.LocalStrings.#ShowCoverFlowEndTime!cor:String]" Checked="[ShowCoverFlowEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverflowIndicatorCB" Label="[Application.LocalStrings.#ShowCoverflowIndicator!cor:String]" Checked="[ShowCoverflowIndicator]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowCoverflowPosterOverlayCB" Label="[Application.LocalStrings.#ShowCoverflowPosterOverlay!cor:String]" Checked="[ShowCoverflowPosterOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <!--<cb:CheckBox Name="ShowCoverflowPosterOverlayCB" Label="[Application.LocalStrings.#ShowCoverflowPosterOverlay!cor:String]" Checked="[ShowCoverflowPosterOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>-->
               <cb:CheckBox Name="ShowCoverflowTotalNumberCB" Label="[Application.LocalStrings.#ShowCoverflowTotalNumber!cor:String]" Checked="[ShowCoverflowTotalNumber]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Strip Options Panel-->
               <Text Content="Strip Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
