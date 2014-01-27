@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MediaBrowser.Library;
 using MediaBrowser.Library.Entities;
+using MediaBrowser.Library.Threading;
 
 namespace Chocolate.ModelItems
 {
@@ -11,19 +12,21 @@ namespace Chocolate.ModelItems
     {
         public static bool IsOne(BaseItem item)
         {
-            return item is Series;
+            return !(item is Season) && item is Series;
         }
 
         public override void NavigatingInto()
         {
             base.NavigatingInto();
-            var ignore = UnwatchedCount;
-            //trickle down to all our seasons
-            foreach (var child in Children.OfType<FolderModel>())
+            Async.Queue("Series Whole Child Load", () =>
             {
-                child.NavigatingInto();
-                ignore = child.UnwatchedCount;
-            }
+                //trickle down to all our seasons - first load all children at base item level
+                foreach (var child in Folder.Children.OfType<Folder>())
+                {
+                    child.ReloadChildren();
+                }
+
+            },50);
         }
     }
 }

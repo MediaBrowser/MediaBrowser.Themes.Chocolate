@@ -109,6 +109,7 @@
       <Command Name="ExpandContract"/>
       <cor:Boolean Name="Expanded" Boolean="false" />
       <cor:Boolean Name="FirstEntered" Boolean="true" />
+      <Timer Name="NavTimer" AutoRepeat="false" Enabled="false" Interval="250" />
     </Locals>
     
     <Rules>
@@ -120,9 +121,14 @@
         <Actions>
           <Set Target="[Expanded]" Value="true" />
           <Set Target="[FirstEntered]" Value="false" />
-          <Invoke Target="[MyRepeater.NavigateIntoIndex]" index="[Folder.FirstUnwatchedIndex]" />
+          <Invoke Target="[NavTimer.Start]" />
         </Actions>
       </Rule>
+      <Changed Source="[NavTimer.Tick]" >
+        <Actions>
+          <Invoke Target="[MyRepeater.NavigateIntoIndex]" index="[Folder.FirstUnwatchedIndex]" />
+        </Actions>
+      </Changed>
       <Binding Source="[Folder.Children]" Target="[MyRepeater.Source]"/>
       <Binding Source="[Folder.BannerImage]" Target="[SeasonPoster.Content]" >
         <Conditions>
