@@ -521,6 +521,9 @@
       <Command Name="LostFocus" Command="$Required"/>
     </Properties>
 
+    <Locals>
+      <KeyHandler Name="DownBlocker" Handle="true" HandlerStage ="Direct" Key="Down" />
+    </Locals>
 
     <Rules>
       <Condition Source="[Input.KeyFocus]" SourceValue="true">
@@ -537,6 +540,7 @@
           <Invoke Target="[HasFocus.Invoke]"></Invoke>
           <Set Target="[Bg.Scale]" Value="1.1,1.1,1.1"></Set>
           <Set Target="[Bg.Alpha]" Value="1"></Set>
+          <Set Target="[Bg.Content]" Value="40,40,40" />
         </Actions>
       </Changed>
 
@@ -548,6 +552,7 @@
           <Invoke Target="[LostFocus.Invoke]"></Invoke>
           <Set Target="[Bg.Scale]" Value="1,1,1"></Set>
           <Set Target="[Bg.Alpha]" Value=".9"></Set>
+          <Set Target="[Bg.Content]" Value="Transparent" />
         </Actions>
       </Changed>
 
@@ -558,7 +563,6 @@
         </Conditions>
         <Actions>
           <Set Target="[Title.Color]" Value="color://s:Choc_EHS_RootItem_Idle"/>
-          <Set Target="[Bg.Content]" Value="image://i:BlankImage" />
           <Set Target="[NavCount.Value]" Value="[NavCount.Value]" ExclusiveApply="false">
             <Transformer>
               <MathTransformer Add="1"/>
@@ -580,7 +584,7 @@
     <Content>
 
 
-      <Graphic Name="Bg"   MinimumSize="0,65" MaximumSize="0,65" CenterPointPercent="0.5,0.5,0.5" Content="image://i:BlankImage" SizingPolicy="SizeToChildren" Padding="25,0,25,0" Scale="1,1,1" Alpha=".9">
+      <ColorFill Name="Bg" CenterPointPercent="0.5,0.5,0.5" Content="Transparent" Padding="25,0,25,10" Scale="1,1,1" Alpha=".9">
         <Animations>
           <Animation Type="Scale">
             <Keyframes>
@@ -591,9 +595,8 @@
         </Animations>
         <Children>
           <Text Name="Title" Content="[Item.Name]" Color="color://s:Choc_EHS_RootItem_Idle" Margins="0,0,0,0" Font="font://uf:EHS_RootItem"/>
-          <Text Name="TitleShadow" Content="[Item.Name]" Color="Black" Margins="1,1,0,0" Font="font://uf:EHS_RootItem"/>
         </Children>
-      </Graphic>
+      </ColorFill>
     </Content>
   </UI>
 
