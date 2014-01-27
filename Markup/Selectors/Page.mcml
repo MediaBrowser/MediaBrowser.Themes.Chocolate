@@ -266,6 +266,13 @@
         </Conditions>
       </Default>
 
+      <Default Target="[StraightToConfig]" Value="true" >
+        <Conditions>
+          <Equality Source="[Application.Config.EnableRootPage]" Value="true" />
+          <Equality Source="[Folder.IsRoot]" Value="true" />
+        </Conditions>
+      </Default>
+
       <Rule ConditionLogicalOp="Or">
         <Conditions>
           <Modified Source="[MenuKey.Invoked]" />
