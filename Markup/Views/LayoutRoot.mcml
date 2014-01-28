@@ -775,7 +775,7 @@
         </Conditions>
         <Actions>
           <Set Target="[Application.RecentItemOption]" Value="watched"></Set>
-          <Set Target="[Label.Content]" Value="[Application.LocalStrings.#Watched!cor:String]"></Set>
+          <Set Target="[Label.Content]" Value="[Application.WatchedOptionString]"></Set>
           <Invoke Target="[Command.Invoke]"></Invoke>
         </Actions>
       </Changed>
