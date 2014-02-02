@@ -666,7 +666,11 @@
 
     <Locals>
       <ClickHandler Name="Clicker"/>
+      <Command Name="PlayCommand"/>
       <ch:ChocHelper Name="ThemeHelper" CurrentItem="[Item]"/>
+      <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled"/>
+      <ShortcutHandler Name="PlayPauseBtn" Handle="true" Shortcut="PlayPause" HandlerStage="Bubbled"/>
+      <KeyHandler Name="PlayShortcut" Handle="true" HandlerStage="Bubbled" Key="P" Modifiers="Control"/>
     </Locals>
 
     <Rules>
@@ -710,6 +714,29 @@
           <Invoke Target="[Application.Navigate]" item="[Item]"/>
         </Actions>
       </Changed>
+
+      <!-- Play Rules -->
+      <Rule ConditionLogicalOp ="Or">
+        <Conditions>
+          <Modified Source="[PlayBtn.Invoked]"/>
+          <Modified Source="[PlayPauseBtn.Invoked]"/>
+          <Modified Source="[PlayShortcut.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[PlayCommand.Invoke]"  />
+        </Actions>
+      </Rule>
+
+      <Changed Source="[PlayCommand.Invoked]" >
+        <Conditions>
+          <Equality Source="[Item.IsFolder]" Value="false" />
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="res://ehres!MiniSelect_a.wav"/>
+          <Invoke Target="[Item.PlayAction]"  />
+        </Actions>
+      </Changed>
+
     </Rules>
 
 
