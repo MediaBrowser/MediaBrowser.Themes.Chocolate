@@ -80,7 +80,7 @@
 
           <lse:InfoPanel Name="ItemInfoPanel" Helper="[ThemeHelper]" Item="[Folder.SelectedChild]" Application="[Application]" >
             <LayoutInput>
-              <FormLayoutInput Left="DetailViewListing,1,-5" Top="Parent,0.50" Bottom="Parent,1" Right="Parent,1"/>
+              <FormLayoutInput Left="DetailViewListing,1,-5" Top="Parent,0.45" Bottom="Parent,1" Right="Parent,1"/>
             </LayoutInput>
           </lse:InfoPanel>
           
