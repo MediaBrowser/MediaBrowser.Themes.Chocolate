@@ -21,7 +21,7 @@
 
     <Properties>
       <a:Application Name="Application" Application="$Required"/>
-      <lib:FolderModel Name="Folder" FolderModel="$Required"/>
+      <ch:WholeSeriesFolderModel Name="Folder" WholeSeriesFolderModel="$Required"/>
       <ch:ChocHelper Name="ThemeHelper" ChocHelper="$Required"/>
       <AnchorLayoutInput Name="WideLayoutInput" Top="Parent, 1,-72" Bottom="Parent, 1,-3" Left="Parent, 0.5,-500" Right="Parent, 0.5,500" Horizontal="Center" Vertical="Center"/>
       <AnchorLayoutInput Name="ThinLayoutInput" Top="Parent, 1,-72" Bottom="Parent, 1,-3" Left="Parent, 0.5,-350" Right="Parent, 0.5,350" Horizontal="Center" Vertical="Center"/>
@@ -50,6 +50,12 @@
           <Equality Source="[Folder.HasLogoImage]" ConditionOp="Equals" Value="true" />
         </Conditions>
       </Binding>
+
+      <Changed Source="[Folder.FilterUnwatched]" >
+        <Actions>
+          <Invoke Target="[Folder.UnwatchedChanged]" />
+        </Actions>
+      </Changed>
 
       <Rule>
         <Conditions>

@@ -1,5 +1,4 @@
-﻿using Chocolate.ModelItems;
-
+﻿
 namespace Chocolate
 {
     using MediaBrowser.Library;
