@@ -494,7 +494,7 @@
                   <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]"
                                   SwitchUser="[SwitchUser]" OpenSearch="[OpenSearch]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
                     <LayoutInput>
-                      <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" Bottom="Parent,0,100"/>
+                      <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" />
                     </LayoutInput>
                   </me:ButtonPanel>
 
@@ -530,6 +530,7 @@
       <Command Name="GoHome" />
       <Command Name="ToggleWatched" />
       <Command Name="ToggleFavorite" />
+      <EditableText Name="ToolText"/>
 
     </Locals>
 
@@ -538,10 +539,15 @@
       <Condition Source="[Input.DeepKeyFocus]" SourceValue="true" Target="[Helper.ButtonPanelHasFocus]" Value="true">
         <Actions>
           <Set Target="[ButtonPanel.Alpha]" Value="1" />
+          <Set Target="[ToolTip.Visible]" Value="true" />
         </Actions>
       </Condition>
       <Default Target="[Helper.ButtonPanelHasFocus]" Value="false"/>
-      <Condition Source="[Input.DeepKeyFocus]" SourceValue="false" Target="[ButtonPanel.Alpha]" Value=".7" />
+      <Condition Source="[Input.DeepKeyFocus]" SourceValue="false" Target="[ButtonPanel.Alpha]" Value=".7">
+        <Actions>
+          <Set Target="[ToolTip.Visible]" Value="false" />
+        </Actions>
+      </Condition>
 
       <Binding Source="[Application.Config.ShowClock]" Target="[ClockDisplay.Visible]"/>
 
@@ -555,6 +561,8 @@
       <Condition Source="[Folder.FilterFavorite]" SourceValue="false" Target="[FilterFavorite.IconColor]" Value="255,255,255"/>
       <!--Hide/Show Config Button-->
       <Binding Source="[Helper.Config.ShowConfig]" Target="[ConfigurationKey.Visible]"/>
+
+      <Binding Source="[ToolText.Value]" Target="[ToolTipText.Content]" />
 
       <Condition Source="[Application.ShowNowPlaying]" SourceValue="true" Target="[NowPlayKey.Visible]" Value="true"/>
       <Changed Source="[MyTimer.Tick]" InitialEvaluate="true">
@@ -595,70 +603,109 @@
     </Rules>
 
     <Content>
-      <Panel Name="ButtonPanel" Layout="HorizontalFlow" FocusOrder="100">
-
-        <Animations>
-          <Animation Type="Show">
-            <Keyframes>
-              <AlphaKeyframe Value="0" Time="0"/>
-              <AlphaKeyframe Value="1" Time="1"/>
-            </Keyframes>
-          </Animation>
-        </Animations>
+      <Graphic SizingPolicy="SizeToChildren" Layout="Anchor"  >
         <Children>
-          <!--<Graphic Name="ButtonPanelLeft" MaintainAspectRatio="true"/>-->
-          <Graphic FocusOrder="101" Name="ButtonPanelCenter" Layout="HorizontalFlow" MaximumSize="0,49" MinimumSize="0,49" SizingPolicy="SizeToChildren" Padding="7,5,7,13">
+          <Panel Name="ButtonPanel" Layout="HorizontalFlow" FocusOrder="100">
+
+            <Animations>
+              <Animation Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Value="0" Time="0"/>
+                  <AlphaKeyframe Value="1" Time="1"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
             <Children>
-              <Panel Name="ClockDisplay">
+              <!--<Graphic Name="ButtonPanelLeft" MaintainAspectRatio="true"/>-->
+              <Graphic FocusOrder="101" Name="ButtonPanelCenter" Layout="HorizontalFlow" MaximumSize="0,42" MinimumSize="0,42" SizingPolicy="SizeToChildren" Padding="7,5,7,5">
                 <Children>
-                  <Panel Layout="HorizontalFlow">
+                  <Panel Name="ClockDisplay">
                     <Children>
-                      <Text Name="TimeDisplay" Color="color://s:FontColorLight" Font="font://f:PV_CounterFont"/>
+                      <Panel Layout="HorizontalFlow">
+                        <Children>
+                          <Text Name="TimeDisplay" Color="color://s:FontColorLight" Font="font://f:PV_CounterFont"/>
+                        </Children>
+                      </Panel>
+                    </Children>
+                  </Panel>
+
+                  <Panel Name="NowPlayKey" Visible="false" FocusOrder="102">
+                    <Children>
+                      <vsb:SimpleButton Name="NowPlayButton" Application="[Application]" ImageNoFocus="image://vi:IconNowPlay" Command="[GoToNowPlaying]" />
+                    </Children>
+                  </Panel>
+                  <Panel Name="UserKey" FocusOrder="105">
+                    <Children>
+                      <vsb:SimpleButton Name="UserMenuButton" Application="[Application]"
+                                        DescriptionField="[ToolText]" DescriptionText="User Menu"
+                                        ImageNoFocus="[Application.CurrentUser.PrimaryImage]"
+                                        Command="[SwitchUser]" Size="20,20" Margins="3,2,0,0" />
+                    </Children>
+                  </Panel>
+                  <Panel Name="ConfigurationKey" FocusOrder="104">
+                    <Children>
+                      <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" 
+                                        DescriptionField="[ToolText]" DescriptionText="Config Menu"
+                                        ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                    </Children>
+                  </Panel>
+                  <Panel Name="WatchedKey" FocusOrder="106">
+                    <Children>
+                      <vsb:SimpleButton Name="FilterWatched" Application="[Application]" 
+                                        DescriptionField="[ToolText]" DescriptionText="Show Only Unwatched"
+                                        ImageNoFocus="resx://Chocolate/Chocolate.Resources/NotWatched" Command="[ToggleWatched]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                    </Children>
+                  </Panel>
+                  <Panel Name="FavoriteKey" FocusOrder="106">
+                    <Children>
+                      <vsb:SimpleButton Name="FilterFavorite" Application="[Application]" 
+                                        DescriptionField="[ToolText]" DescriptionText="Show Only Favorites"
+                                        ImageNoFocus="resx://Chocolate/Chocolate.Resources/IconHeart" Command="[ToggleFavorite]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                    </Children>
+                  </Panel>
+                  <Panel Name="SearchKey" FocusOrder="106">
+                    <Children>
+                      <vsb:SimpleButton Name="SearchButton" Application="[Application]" 
+                                        DescriptionField="[ToolText]" DescriptionText="Search"
+                                        ImageNoFocus="image://vi:Search" Command="[OpenSearch]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                    </Children>
+                  </Panel>
+                  <Panel Name="HomeKey" FocusOrder="107">
+                    <Children>
+                      <vsb:SimpleButton Name="HomeButton" Application="[Application]" 
+                                        DescriptionField="[ToolText]" DescriptionText="Return to Home Screen"
+                                        ImageNoFocus="image://vi:Home" Command="[GoHome]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
                     </Children>
                   </Panel>
                 </Children>
-              </Panel>
-
-              <Panel Name="NowPlayKey" Visible="false" FocusOrder="102">
-                <Children>
-                  <vsb:SimpleButton Name="NowPlayButton" Application="[Application]" ImageNoFocus="image://vi:IconNowPlay" Command="[GoToNowPlaying]" />
-                </Children>
-              </Panel>
-              <Panel Name="UserKey" FocusOrder="105">
-                <Children>
-                  <vsb:SimpleButton Name="UserMenuButton" Application="[Application]" ImageNoFocus="[Application.CurrentUser.PrimaryImage]" Command="[SwitchUser]" Size="20,20" Margins="3,2,0,0" />
-                </Children>
-              </Panel>
-              <Panel Name="ConfigurationKey" FocusOrder="104">
-                <Children>
-                  <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
-                </Children>
-              </Panel>
-              <Panel Name="WatchedKey" FocusOrder="106">
-                <Children>
-                  <vsb:SimpleButton Name="FilterWatched" Application="[Application]" ImageNoFocus="resx://Chocolate/Chocolate.Resources/NotWatched" Command="[ToggleWatched]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
-                </Children>
-              </Panel>
-              <Panel Name="FavoriteKey" FocusOrder="106">
-                <Children>
-                  <vsb:SimpleButton Name="FilterFavorite" Application="[Application]" ImageNoFocus="resx://Chocolate/Chocolate.Resources/IconHeart" Command="[ToggleFavorite]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
-                </Children>
-              </Panel>
-              <Panel Name="SearchKey" FocusOrder="106">
-                <Children>
-                  <vsb:SimpleButton Name="SearchButton" Application="[Application]" ImageNoFocus="image://vi:Search" Command="[OpenSearch]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
-                </Children>
-              </Panel>
-              <Panel Name="HomeKey" FocusOrder="107">
-                <Children>
-                  <vsb:SimpleButton Name="HomeButton" Application="[Application]" ImageNoFocus="image://vi:Home" Command="[GoHome]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
-                </Children>
-              </Panel>
+              </Graphic>
+              <!--<Graphic Name="ButtonPanelRight" MaintainAspectRatio="true"/>-->
             </Children>
-          </Graphic>
-          <!--<Graphic Name="ButtonPanelRight" MaintainAspectRatio="true"/>-->
+          </Panel>
+
+          <Panel Name="ToolTip" Visible="false" >
+            <LayoutInput>
+              <AnchorLayoutInput Horizontal="Center" Top="ButtonPanel, 1, 2"/>
+            </LayoutInput>
+            <Animations>
+              <Animation Type="Show">
+                <Keyframes>
+                  <AlphaKeyframe Value="0" Time="0"/>
+                  <AlphaKeyframe Value="1" Time=".4"/>
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Children>
+              <Graphic Content="image://vi:ButtonPanelCenter" MaximumSize="0,39" MinimumSize="0,39" SizingPolicy="SizeToChildren" Padding="7,5,7,3">
+                <Children>
+                  <Text Name="ToolTipText" Content="" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+
+                </Children>
+              </Graphic>
+            </Children>
+          </Panel>
         </Children>
-      </Panel>
+      </Graphic>
     </Content>
   </UI>
 </Mcml>

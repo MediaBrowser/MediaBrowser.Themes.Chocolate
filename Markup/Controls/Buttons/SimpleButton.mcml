@@ -18,6 +18,8 @@
       <Image Name="BlankImage" Image="null" />
       <BooleanChoice Name="HasFocus" Value="false"/>
       <Color Name="IconColor" Color="255,255,255"/>
+      <EditableText Name="DescriptionField" />
+      <cor:String Name="DescriptionText" String="" />
     </Properties>
 
     <Locals>
@@ -63,6 +65,7 @@
           <Set Target="[HasFocus.Value]" Value="true"/>
           <Set Target="[BoxImage.Content]" Value="null"/>
           <Set Target="[BoxImage.ColorFilter]" Value="3,117,165"/>
+          <Set Target="[DescriptionField.Value]" Value="[DescriptionText]"/>
           <PlaySound Sound="sound://sounds:Focus" />
         </Actions>
       </Rule>

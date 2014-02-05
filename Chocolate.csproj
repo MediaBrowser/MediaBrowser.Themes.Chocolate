@@ -109,6 +109,7 @@
     <Content Include="Images\Icons\MetroPlay.png" />
     <Content Include="Images\Icons\MetroResume.png" />
     <Content Include="Images\Icons\NotWatched.png" />
+    <Content Include="Images\Icons\UnWatched.png" />
     <Content Include="Images\Ratings\13.png" />
     <Content Include="Images\Ratings\ESRB-AO.png" />
     <Content Include="Images\Ratings\ESRB-E.png" />
