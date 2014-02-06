@@ -33,6 +33,7 @@
       <Timer AutoRepeat="false" Enabled="true" Interval="3000" Name="NaviTime" />
       <Environment Name="Environment"/>
       <a:Clock Name="Clock"/>
+      <AnchorLayoutInput Name="SmallItemsLayout" Left="Parent,0" Right="Parent,1" Top="ItemInfoPanel, .9" Bottom="Parent, .9" />
     </Locals>
 
     <Rules>
@@ -95,6 +96,7 @@
       
       <!--Hide/Show Options-->
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowDetails]" Target="[ItemInfoPanel.Visible]"/>
+      <Condition Source="[ThemeHelper.Config.ShowCoverFlowDetails]" SourceValue="true" Target="[MyItems.LayoutInput]" Value="[SmallItemsLayout]" />
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
       
@@ -135,7 +137,7 @@
               <!-- Coverflow Scroller -->
               <cfs:CoverflowScroller Name="MyItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]">
                 <LayoutInput>
-                  <AnchorLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent, 0, 100" Bottom="Parent, 1.6" />
+                  <AnchorLayoutInput Left="Parent,0" Right="Parent,1" Top="Parent, 0 " Bottom="Parent, 1.7" />
                 </LayoutInput>
               </cfs:CoverflowScroller>
 
