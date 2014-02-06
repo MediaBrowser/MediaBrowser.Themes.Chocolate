@@ -631,7 +631,9 @@
 
                   <Panel Name="NowPlayKey" Visible="false" FocusOrder="102">
                     <Children>
-                      <vsb:SimpleButton Name="NowPlayButton" Application="[Application]" ImageNoFocus="image://vi:IconNowPlay" Command="[GoToNowPlaying]" />
+                      <vsb:SimpleButton Name="NowPlayButton" Application="[Application]" 
+                                        DescriptionField="[ToolText]" DescriptionText="Return to Full-screen"
+                                        ImageNoFocus="image://vi:IconNowPlay" Command="[GoToNowPlaying]" />
                     </Children>
                   </Panel>
                   <Panel Name="UserKey" FocusOrder="105">
