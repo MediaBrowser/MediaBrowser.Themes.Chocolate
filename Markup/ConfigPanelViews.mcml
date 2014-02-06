@@ -46,6 +46,7 @@
       <!--List Options-->
       <BooleanChoice Name="ShowListLogos" Value="[Helper.Config.ShowListLogos]" />
       <BooleanChoice Name="ShowListEndTime" Value="[Helper.Config.ShowListEndTime]" />
+      <BooleanChoice Name="ShowListBackground" Value="[Helper.Config.ShowListBackground]" />
       <!--Poster Options-->
       <BooleanChoice Name="ShowPosterLogos" Value="[Helper.Config.ShowPosterLogos]" />
       <BooleanChoice Name="ShowPosterEndTime" Value="[Helper.Config.ShowPosterEndTime]" />
@@ -140,6 +141,11 @@
           <Set Target="[Helper.Config.ShowListEndTime]" Value="[ShowListEndTimeCB.Checked.Value]"/>
         </Actions>
       </Changed>
+      <Changed Source="[ShowListBackgroundCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowListBackground]" Value="[ShowListBackgroundCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
       <!--Poster Options-->
       <Changed Source="[ShowPosterLogosCB.Checked.Value]">
         <Actions>
@@ -203,6 +209,7 @@
               <Text Content="List Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <cb:CheckBox Name="ShowListLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowListLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowListEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowListEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowListBackgroundCB" Label="[Application.LocalStrings.#ShowListBackground!cor:String]" Checked="[ShowListBackground]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
             </Children>
           </Panel>
           <!--CoverFlow Options Panel-->

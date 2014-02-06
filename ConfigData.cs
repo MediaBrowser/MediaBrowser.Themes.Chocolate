@@ -50,6 +50,7 @@
         public bool useCustomTvView;
         public bool AskToQuit;
         public bool ShowDiscDetail = true;
+        public bool ShowListBackground = false;
 
         public ConfigData()
         {

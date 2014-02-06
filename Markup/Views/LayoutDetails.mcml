@@ -75,6 +75,7 @@
             </LayoutInput>
             <Children>
               <ls:ListScroller FocusOrder="1" Name="ListItems" Visible="True" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]"/>
+              <ColorFill Name="ListBackground" Content="30,30,30" Margins="-20,0,0,-50" Visible="[ThemeHelper.Config.ShowListBackground]" />
             </Children>
           </Panel>
 

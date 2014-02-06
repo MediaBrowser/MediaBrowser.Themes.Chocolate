@@ -90,6 +90,8 @@
         public string ShowCoverFlowTitleDesc = "This Option will show title display in coverflow";
         public string ShowCoverflowTotalNumber = "Show Total Number";
         public string ShowCoverflowTotalNumberDesc = "This Option Will Show The Total Number Of Items Within Coverflow View";
+        public string ShowListBackground = "Show List Background";
+        public string ShowListBackgroundDesc = "Show A Dark Background Under the List.  Should only be needed in odd screen size situations.";
         public string ShowInfoIcons = "Show Info Icons";
         public string ShowInfoIconsBackgrounds = "Show Info Icon Background";
         public string ShowInfoIconsBackgroundsDesc = "Adds semi-transparent background to Info Icons.";

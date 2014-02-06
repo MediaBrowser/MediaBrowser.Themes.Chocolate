@@ -542,6 +542,23 @@
             }
         }
 
+        public bool ShowListBackground
+        {
+            get
+            {
+                return this.data.ShowListBackground;
+            }
+            set
+            {
+                if (this.data.ShowListBackground != value)
+                {
+                    this.data.ShowListBackground = value;
+                    base.FirePropertyChanged("ShowListBackground");
+                    this.Save();
+                }
+            }
+        }
+
         public bool UseCustomTvView
         {
             get
