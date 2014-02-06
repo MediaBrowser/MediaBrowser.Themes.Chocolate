@@ -26,7 +26,7 @@ namespace Chocolate
         public override void NavigatingInto()
         {
             base.NavigatingInto();
-            FilterUnwatched = PhysicalParent.FilterUnwatched;
+            FilterUnwatched = PhysicalParent != null && PhysicalParent.FilterUnwatched;
             RefreshAllSeasons();
         }
 
