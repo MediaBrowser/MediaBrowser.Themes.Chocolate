@@ -198,12 +198,11 @@
               <cb:CheckBox Name="ShowWeatherCB" Label="[Application.LocalStrings.#ShowWeather!cor:String]" Checked="[ShowWeather]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="SmallEhsCB" Label="[Application.LocalStrings.#SmallEhs!cor:String]" Checked="[SmallEhs]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="UseSeasonPosterCB" Label="[Application.LocalStrings.#UseSeasonPoster!cor:String]" Checked="[UseSeasonPoster]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="EnableStripBackdropCB" Label="[Application.LocalStrings.#EnableStripBackdrop!cor:String]" Checked="[EnableStripBackdrop]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="DisableEHSMovieTitleCB" Label="[Application.LocalStrings.#DisableEHSMovieTitle!cor:String]" Checked="[DisableEHSMovieTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
           <!--List Options Panel-->
               <Text Content="List Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
-              <cb:CheckBox Name="ShowListLogosCB" Label="[Application.LocalStrings.#ShowListLogos!cor:String]" Checked="[ShowListLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowListEndTimeCB" Label="[Application.LocalStrings.#ShowListEndTime!cor:String]" Checked="[ShowListEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowListLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowListLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowListEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowListEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
             </Children>
           </Panel>
           <!--CoverFlow Options Panel-->
@@ -212,30 +211,31 @@
               <Text Content="CoverFlow Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <!--<cb:CheckBox Name="ShowCoverFlowTitleCB" Label="[Application.LocalStrings.#ShowCoverFlowTitle!cor:String]" Checked="[ShowCoverFlowTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>-->
               <cb:CheckBox Name="ShowCoverFlowDetailsCB" Label="[Application.LocalStrings.#ShowCoverFlowDetails!cor:String]" Checked="[ShowCoverFlowDetails]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowCoverFlowLogosCB" Label="[Application.LocalStrings.#ShowCoverFlowLogos!cor:String]" Checked="[ShowCoverFlowLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowCoverFlowEndTimeCB" Label="[Application.LocalStrings.#ShowCoverFlowEndTime!cor:String]" Checked="[ShowCoverFlowEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverFlowLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowCoverFlowLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowCoverFlowEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowCoverFlowEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverflowIndicatorCB" Label="[Application.LocalStrings.#ShowCoverflowIndicator!cor:String]" Checked="[ShowCoverflowIndicator]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--<cb:CheckBox Name="ShowCoverflowPosterOverlayCB" Label="[Application.LocalStrings.#ShowCoverflowPosterOverlay!cor:String]" Checked="[ShowCoverflowPosterOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>-->
               <cb:CheckBox Name="ShowCoverflowTotalNumberCB" Label="[Application.LocalStrings.#ShowCoverflowTotalNumber!cor:String]" Checked="[ShowCoverflowTotalNumber]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Strip Options Panel-->
               <Text Content="Strip Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
-              <cb:CheckBox Name="ShowStripLogosCB" Label="[Application.LocalStrings.#ShowStripLogos!cor:String]" Checked="[ShowStripLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowStripLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowStripLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="EnableStripBackdropCB" Label="[Application.LocalStrings.#EnableStripBackdrop!cor:String]" Checked="[EnableStripBackdrop]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
             </Children>
           </Panel>
           <!--Thumb Options Panel-->
           <Panel Layout="VerticalFlow" MaximumSize="500,400">
             <Children>
               <Text Content="Thumb Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
-              <cb:CheckBox Name="ShowThumbLogosCB" Label="[Application.LocalStrings.#ShowThumbLogos!cor:String]" Checked="[ShowThumbLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowThumbEndTimeCB" Label="[Application.LocalStrings.#ShowThumbEndTime!cor:String]" Checked="[ShowThumbEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowThumbLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowThumbLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowThumbEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowThumbEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Poster Options Panel-->
               <Text Content="Poster Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
-              <cb:CheckBox Name="ShowPosterLogosCB" Label="[Application.LocalStrings.#ShowPosterLogos!cor:String]" Checked="[ShowPosterLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowPosterEndTimeCB" Label="[Application.LocalStrings.#ShowPosterEndTime!cor:String]" Checked="[ShowPosterEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowPosterLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowPosterLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowPosterEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowPosterEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Detail Options Panel-->
               <Text Content="Detail Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,20,10,10"/>
               <cb:CheckBox Name="ShowDiscDetailCB" Label="[Application.LocalStrings.#ShowDiscDetail!cor:String]" Checked="[ShowDiscDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowLogosOnMovieDetailCB" Label="[Application.LocalStrings.#ShowLogosOnMovieDetail!cor:String]" Checked="[ShowLogosOnMovieDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowLogosOnMovieDetailCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowLogosOnMovieDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
             </Children>
           </Panel>
           <Panel Layout="VerticalFlow" MaximumSize="500,400" Padding="20,0,0,20">
