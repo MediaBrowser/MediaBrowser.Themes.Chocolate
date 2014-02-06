@@ -96,7 +96,7 @@
       
       <!--Hide/Show Options-->
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowDetails]" Target="[ItemInfoPanel.Visible]"/>
-      <Condition Source="[ThemeHelper.Config.ShowCoverFlowDetails]" SourceValue="true" Target="[MyItems.LayoutInput]" Value="[SmallItemsLayout]" />
+      <!--<Condition Source="[ThemeHelper.Config.ShowCoverFlowDetails]" SourceValue="true" Target="[MyItems.LayoutInput]" Value="[SmallItemsLayout]" />-->
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
       
