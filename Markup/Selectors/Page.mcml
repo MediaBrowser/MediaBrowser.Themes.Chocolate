@@ -494,7 +494,7 @@
                   <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]"
                                   SwitchUser="[SwitchUser]" OpenSearch="[OpenSearch]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
                     <LayoutInput>
-                      <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" />
+                      <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" Bottom="Parent,0, 200" />
                     </LayoutInput>
                   </me:ButtonPanel>
 
