@@ -603,7 +603,7 @@
     </Rules>
 
     <Content>
-      <Graphic SizingPolicy="SizeToChildren" Layout="Anchor"  >
+      <Panel Layout="Anchor"  >
         <Children>
           <Panel Name="ButtonPanel" Layout="HorizontalFlow" FocusOrder="100">
 
@@ -707,7 +707,7 @@
             </Children>
           </Panel>
         </Children>
-      </Graphic>
+      </Panel>
     </Content>
   </UI>
 </Mcml>
