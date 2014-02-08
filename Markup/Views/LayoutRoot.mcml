@@ -584,7 +584,7 @@
     <Content>
 
 
-      <ColorFill Name="Bg" CenterPointPercent="0.5,0.5,0.5" Content="Transparent" Padding="25,0,25,10" Scale="1,1,1" Alpha=".9">
+      <ColorFill Name="Bg" CenterPointPercent="0.5,0.5,0.5" Content="Transparent" Padding="25,0,25,8" Scale="1,1,1" Alpha=".9">
         <Animations>
           <Animation Type="Scale">
             <Keyframes>
