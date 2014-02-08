@@ -156,8 +156,8 @@
       
       <Binding Target="[TxtRuntime.Content]"   Source="[Item.RunningTimeString]"/>
 
-      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://i:HDLogo720" />
-      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://i:HDLogo1080" />
+      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://it:Icon720" />
+      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://it:Icon1080" />
       
       <Condition Source="[Item.RunningTimeString]" ConditionOp="Equals" SourceValue="">
         <Actions>          
@@ -196,7 +196,7 @@
                   <FormLayoutInput Right="Parent,1" Bottom="Parent,1"/>
                 </LayoutInput>
                 <Children>
-                  <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true" />
+                  <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="35,0" MaintainAspectRatio="true" />
                 </Children>
               </Panel>
               

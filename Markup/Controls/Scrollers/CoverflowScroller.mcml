@@ -310,8 +310,8 @@
       <Condition Source="[SelectRepeaterIndex.Value]" ConditionOp="GreaterThan" SourceValue="[ItemIndex.Value]" Target="[Main.Rotation]" Value="[RRotate]" />
 
       
-      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://i:HDLogo720" />
-      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://i:HDLogo1080" />
+      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://vi:Icon720" />
+      <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://vi:Icon1080" />
 
       <Binding Source="[Item.HaveWatched]" Target="[TickPanel.Visible]" />
       <Binding Source="[ThemeHelper.Config.ShowCoverflowIndicator]" Target="[TickIndicatorPanel.Visible]"/>
@@ -464,7 +464,7 @@
                       <AnchorLayoutInput Horizontal="Far" Vertical="Far"/>
                     </LayoutInput>
                     <Children>
-                      <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="48,35" MaintainAspectRatio="true">
+                      <Graphic Name="HDImage" Content="image://i:HDLogo" Margins="0,0,5,5" MaximumSize="35,0" MaintainAspectRatio="true">
                         <LayoutInput>
                           <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
                         </LayoutInput>
