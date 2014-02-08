@@ -252,7 +252,7 @@
                   <FormLayoutInput Top="Parent, 1, -300" Horizontal="Near" />
                 </LayoutInput>
                 <Children>
-                  <ash:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[Item.Name]" Font="font://uf:List_Title" Color="color://uc:TitleColor" MaximumSize="570,0" />
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[Item.Name]" Font="font://uf:List_Title" Color="color://uc:TitleColor" MaximumSize="560,0" />
 
                 </Children>
               </Panel>
