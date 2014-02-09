@@ -138,7 +138,6 @@
           <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="CoverFlow"/>
           <Equality Source="[ThemeHelper.Config.ShowCoverFlowDetails]" Value="true" />
           <Equality Source="[Folder.IsRoot]" Value="false"/>
-          <Equality Source="[Application.Config.EnableRootPage]" Value="true"/>
         </Conditions>
         <Actions>
           <Set Target="[BackdropConstraint]" Value="small" />
@@ -158,8 +157,6 @@
       <Rule ConditionLogicalOp="And" >
         <Conditions>
           <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="Detail"/>
-          <Equality Source="[Folder.IsRoot]" Value="false"/>
-          <Equality Source="[Application.Config.EnableRootPage]" Value="true"/>
         </Conditions>
         <Actions>
           <Set Target="[BackdropConstraint]" Value="small" />
