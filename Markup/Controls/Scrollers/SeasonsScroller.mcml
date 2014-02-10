@@ -232,7 +232,7 @@
                 </Animations>
                 <Content >
                   <lb:ListButton Application="[Application]" Folder="[Folder]" Index="[RepeatedItemIndex]" 
-                                 TrapExit="true" ExitLeft="[LeftFromList]"
+                                 TrapLeft="true" ExitLeft="[LeftFromList]"
                                  Item="[RepeatedItem!lib:Item]"  Font="font://uf:LightMediumMinus" ThemeHelper="[ThemeHelper]"/>
                 </Content>
               </Repeater>

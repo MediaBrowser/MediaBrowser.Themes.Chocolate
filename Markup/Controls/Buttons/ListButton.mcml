@@ -19,17 +19,15 @@
       <Index Name="Index" Index="$Required"/>
       <Font Name="Font" Font="$Required"/>
       <lib:FolderModel Name="Folder" FolderModel="$Required" />
-      <cor:Boolean Name="TrapExit" Boolean="false" />
+      <cor:Boolean Name="TrapLeft" Boolean="false" />
       <Command Name="ExitLeft" />
-      <Command Name="ExitRight" />
     </Properties>
 
     <Locals>
       <Image Name="Tick" Image="image://i:Tick"/>
       <Image Name="Lock" Image="image://i:Lock"/>
 
-      <KeyHandler Name="LeftKey" Key="Left" Handle="[TrapExit]" Command="[ExitLeft]" HandlerStage="Direct" />
-      <KeyHandler Name="RightKey" Key="Right" Handle="[TrapExit]" Command="[ExitRight]" HandlerStage="Direct" />
+      <KeyHandler Name="LeftKey" Key="Left" Handle="[TrapLeft]" Command="[ExitLeft]" HandlerStage="Direct" />
       
     </Locals>
 

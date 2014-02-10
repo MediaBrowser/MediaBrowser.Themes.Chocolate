@@ -114,7 +114,7 @@
       <Panel Layout="Form">
         <Children>
 
-          <Panel Name="MainPanel" Layout="Form" Navigation="ContainHorizontal">
+          <Panel Name="MainPanel" Layout="Form" >
             <Children>
               <Panel Name="NamePanel" Layout="VerticalFlow" Margins="20,10,0,0" >
                 <LayoutInput>
@@ -143,7 +143,7 @@
               </Panel>
 
               <!-- Season Scroller -->
-              <ls:SeasonsScroller FocusOrder="0" Name="SeasonItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]" >
+              <ls:SeasonsScroller Name="SeasonItems" Application="[Application]" Folder="[Folder]" ThemeHelper="[ThemeHelper]" >
                 <LayoutInput>
                   <AnchorLayoutInput Left="Parent,0, 30" Right="Parent,.3" Top="NamePanel, 1, 20" Bottom="Parent, 1" />
                 </LayoutInput>
