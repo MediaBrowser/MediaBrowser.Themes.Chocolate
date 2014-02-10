@@ -148,6 +148,7 @@
       </Binding>
       <Binding Source="[Folder.UnwatchedCount]" Target="[UnwatchedCount.Content]" >
         <Conditions>
+          <Equality Source="[Application.Config.ShowUnwatchedCount]" Value="true" />
           <Equality Source="[Folder.UnwatchedCount]" ConditionOp="NotEquals" Value="0" />
         </Conditions>
         <Transformer>
