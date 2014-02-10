@@ -107,6 +107,7 @@
 
     <Locals>
       <Command Name="ExpandContract"/>
+      <Command Name="LeftFromList"/>
       <cor:Boolean Name="Expanded" Boolean="false" />
       <cor:Boolean Name="FirstEntered" Boolean="true" />
       <Timer Name="NavTimer" AutoRepeat="false" Enabled="false" Interval="250" />
@@ -116,6 +117,7 @@
       <Rule>
         <Conditions>
           <Equality Source="[FirstEntered]" Value="true" />
+          <Equality Source="[Application.Config.DefaultToFirstUnwatched]" Value="true" />
           <Equality Source="[Index.Value]" Value="[Parent.FirstUnwatchedIndex]" />
         </Conditions>
         <Actions>
@@ -178,6 +180,12 @@
         </Actions>
       </Changed>
 
+      <Changed Source="[LeftFromList.Invoked]">
+        <Actions>
+          <Invoke Target="[SeasonName.NavigateInto]" />
+        </Actions>
+      </Changed>
+
     </Rules>
     <Content>
       <Panel Name="MainPanel" Layout="VerticalFlow">
@@ -223,7 +231,9 @@
                   </Animation>
                 </Animations>
                 <Content >
-                  <lb:ListButton Application="[Application]" Folder="[Folder]" Index="[RepeatedItemIndex]" Item="[RepeatedItem!lib:Item]"  Font="font://uf:LightMediumMinus" ThemeHelper="[ThemeHelper]"/>
+                  <lb:ListButton Application="[Application]" Folder="[Folder]" Index="[RepeatedItemIndex]" 
+                                 TrapExit="true" ExitLeft="[LeftFromList]"
+                                 Item="[RepeatedItem!lib:Item]"  Font="font://uf:LightMediumMinus" ThemeHelper="[ThemeHelper]"/>
                 </Content>
               </Repeater>
               
