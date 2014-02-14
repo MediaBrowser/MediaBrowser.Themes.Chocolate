@@ -69,7 +69,7 @@
               <FormLayoutInput Left="Parent, 0" Top="Parent,0" Bottom="Parent,1,-40"/>
             </LayoutInput>
             <Children>
-              <Repeater  Source="[Folder.Children]" Name="MyRepeater" DiscardOffscreenVisuals="false" >
+              <Repeater  Source="[Folder.Children]" Name="MyRepeater" DiscardOffscreenVisuals="false" Navigation="RememberFocus" >
                 <Layout>
                   <FlowLayout Orientation="Vertical" Repeat="Never"/>
                 </Layout>
@@ -127,6 +127,9 @@
         </Actions>
       </Rule>
       <Changed Source="[NavTimer.Tick]" >
+        <Conditions>
+          <Equality Source="[Application.NavigatingForward]" Value="true"/>
+        </Conditions>
         <Actions>
           <Invoke Target="[MyRepeater.NavigateIntoIndex]" index="[Folder.FirstUnwatchedIndex]" />
         </Actions>
@@ -206,7 +209,7 @@
               </Panel>
               <Graphic Name="SeasonPoster" Content="[Folder.PreferredImage]" MaintainAspectRatio="true" MaximumSize="0,200" Margins="10,10,0,0" >
               </Graphic>
-              <Repeater  Source="[Folder.Children]" Name="MyRepeater" DiscardOffscreenVisuals="false" Margins="10,10,0,0">
+              <Repeater  Source="[Folder.Children]" Name="MyRepeater" DiscardOffscreenVisuals="false" Margins="10,10,0,0" Navigation="RememberFocus">
                 <Layout>
                   <FlowLayout Orientation="Vertical" Spacing="1,1"/>
                 </Layout>
