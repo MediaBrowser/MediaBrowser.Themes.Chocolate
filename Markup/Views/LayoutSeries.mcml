@@ -237,7 +237,15 @@
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://vi:Icon720" />
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://vi:Icon1080" />
 
-      <Binding Target="[EndTime.Content]" Source="[Item.EndTimeString]"/>
+      <Binding Target="[EndTime.Content]" Source="[Item.EndTimeString]" >
+        <Conditions>
+          <Equality Source="[Helper.Config.ShowListEndTime]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[RunEndSpacer.Visible]" Value="true" />
+          <Set Target="[EndTime.Visible]" Value="true" />
+        </Actions>
+      </Binding>
 
     </Rules>
     
@@ -282,8 +290,8 @@
                   <Text Name="TxtAired" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
                   <Text Name="AiredSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="true"  />
                   <Text Name="TxtRuntime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
-                  <Text Name="RunEndSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="true"  />
-                  <Text Name="EndTime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content=""/>
+                  <Text Name="RunEndSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="false"  />
+                  <Text Name="EndTime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content="" Visible="false"/>
                 </Children>
               </Panel>
 
