@@ -12,7 +12,7 @@ namespace Chocolate
     {
         public static bool IsOne(BaseItem item)
         {
-            return !(item is Season) && item is Series;
+            return item is Series && !(item is Season) && !(item is IndexFolder);
         }
 
         /// <summary>
