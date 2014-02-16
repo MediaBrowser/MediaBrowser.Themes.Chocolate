@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Media Browser Team")]
 [assembly: AssemblyProduct("Chocolate")]
-[assembly: AssemblyCopyright("Copyright © Media Browser Team 2009-2013")]
+[assembly: AssemblyCopyright("Copyright © Media Browser Team 2009-2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyTitle("Chocolate")] 
@@ -30,4 +30,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("3.0.3.9")]
+[assembly: AssemblyVersion("3.0.4.0")]
