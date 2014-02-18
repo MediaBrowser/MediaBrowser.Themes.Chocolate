@@ -215,6 +215,8 @@
           <FormatTransformer Format=" on {0}"/>
         </Transformer>
       </Binding>
+      <Binding Target="[PlayedText.Content]" Source="[Item.LastPlayedString]" />
+      <Condition Source="[Item.HaveWatched]" SourceValue="false" Target="[PlayedPrompt.Content]" Value="Not Played" />
       
       <Binding Target="[MediaPath]"            Source="[Item.TrailerPath]" />
       
@@ -369,14 +371,14 @@
                     </Children>
                   </Panel>
 
-                  <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="175,45" Font="font://f:MM_ButtonFont">
+                  <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="150,45" Font="font://f:MM_ButtonFont">
                     <LayoutInput>
                       <FormLayoutInput Left="Poster,1, -5" Bottom="Parent,1, 5"/>
                     </LayoutInput>
                     
                   </ib:ImageButton>
 
-                  <ib:ImageButton Name="PreviousItemButton" Alpha=".2" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="175,45" Font="font://f:MM_ButtonFont">
+                  <ib:ImageButton Name="PreviousItemButton" Alpha=".2" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="150,45" Font="font://f:MM_ButtonFont">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,0,2" Bottom="Parent,1, 5"/>
                     </LayoutInput>
@@ -415,6 +417,12 @@
                           </Animation>
                         </Animations>
                       </progress:ProgressBar>
+                      <Panel Layout="HorizontalFlow" >
+                        <Children>
+                          <Text Name="PlayedPrompt" Font="Segoe Media Center,12" Content="Played " Color="White" />
+                          <Text Name="PlayedText" Font="Segoe Media Center,12" Content="" Color="White" />
+                        </Children>
+                      </Panel>
                     </Children>
                   </Panel>
 

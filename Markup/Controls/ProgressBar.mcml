@@ -10,7 +10,7 @@
       <cor:Single Name="PercentWatched" Single="0.0"/>
       <cor:String Name="ExtraString" String="" /> 
       <!--size of the progress bar-->
-      <Size Name="Size" Size="75,15"/>
+      <Size Name="Size" Size="75,25"/>
     </Properties>
 
     <Locals>
@@ -70,7 +70,7 @@
           <Panel Layout="HorizontalFlow" >
             <Children>
               <!--Watched Percentage Text-->
-              <Text Name="ProgressPercent" Font="Segoe Media Center,10" Color="White">
+              <Text Name="ProgressPercent" Font="Segoe Media Center,12" Color="White">
                 <Animations>
                   <Animation Type="Show">
                     <Keyframes>
@@ -82,7 +82,7 @@
                 </Animations>
               </Text>
               <!--Extra Text-->
-              <Text Name="ExtraText"  Font="Segoe Media Center,10" Color="White" />
+              <Text Name="ExtraText"  Font="Segoe Media Center,12" Color="White" />
             </Children>
           </Panel>
 
