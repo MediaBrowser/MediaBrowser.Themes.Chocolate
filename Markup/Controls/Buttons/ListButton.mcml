@@ -34,11 +34,6 @@
     <Rules>
       
       <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
-      <!--<Default Target="[ItemName.Font]" Value="font://fon:Choc_ListItemFont">
-        <Conditions>
-          <IsValid Source="font://fon:Choc_ListItemFont"/>
-        </Conditions>
-      </Default>-->
       
 
       <Changed Source="[Item.HaveWatched]">
@@ -51,23 +46,7 @@
         </Actions>
       </Changed>
 
-      <!--<Binding Source="[Item.HaveWatched]" Target="[TickIndicator.Visible]" />-->
-
-      <Binding Source="[Item.ParentalAllowed]" Target="[LockIndicator.Visible]" >
-        <Transformer>
-          <BooleanTransformer Inverse="true"/>
-        </Transformer>
-      </Binding>
-
-      <Rule>
-        <Conditions>
-          <Equality Source="[Item.ParentalAllowed]" ConditionOp="Equals" Value="false"></Equality>
-          <Equality Source="[Application.Config.ParentalControlEnabled]" ConditionOp="Equals" Value="true"></Equality>
-        </Conditions>
-        <Actions>
-          <Set Target="[ItemName.Margins]" Value="10,0,40,0"></Set>
-        </Actions>
-      </Rule>
+      <Binding Source="[Item.IsFavorite]" Target="[FavIndicator.Visible]" />
 
       <Rule>
         <Conditions>
@@ -153,22 +132,6 @@
           <BooleanTransformer Inverse="true"/>
         </Transformer>
       </Binding>
-      <!--<Changed Source="[Item.InProgress]" InitialEvaluate="true">
-        <Conditions>
-          <Equality Source="[Item.InProgress]" Value="true" />
-        </Conditions>
-        <Actions>
-          <Set Target="[UnwatchedGlow.ColorFilter]" Value="Cyan" />
-        </Actions>
-      </Changed>
-      <Changed Source="[Item.InProgress]" InitialEvaluate="true">
-        <Conditions>
-          <Equality Source="[Item.InProgress]" Value="false" />
-        </Conditions>
-        <Actions>
-          <Set Target="[UnwatchedGlow.ColorFilter]" Value="White" />
-        </Actions>
-      </Changed>-->
       
       <Binding Target="[ItemBanner.Content]" Source="[Item.BannerImage]"/>
 
@@ -179,21 +142,8 @@
       <ColorFill Name="ItemColor" Layout="Fill" MinimumSize="200,28" Content="Transparent" Padding="0,0,0,0">
 
         <Children>
-          <Panel Layout="Form" Alpha="0.8" Visible="[Application.Config.ParentalControlEnabled]">
-            <Children>
-              <Panel MaximumSize="30,28" MinimumSize="25,28">
-                <LayoutInput>
-                  <FormLayoutInput Right="Parent,1" Bottom="Parent,1,-4"/>
-                </LayoutInput>
-                <Children>
-                  <Graphic Name="LockIndicator" Visible="false" Content="[Lock]" Margins="0,0,5,0">
-                  </Graphic>
-                </Children>
-              </Panel>
-            </Children>
-          </Panel>
 
-          <!--[Application.Config.ShowUnwatchedIndicator]-->
+          <!--Indicators-->
           <Panel Layout="Form">
             <Children>
               <Panel  Margins="2,2,0,0" Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha=".90" Name="UnwatchedGlowPanel" MaximumSize="35,35" Visible="[Application.Config.ShowUnwatchedIndicator]" >
@@ -216,6 +166,14 @@
                     </Animations>
 
                   </Graphic>
+                </Children>
+              </Panel>
+              <Panel  Margins="2,2,0,0" Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha=".90" MaximumSize="20,20" >
+                <LayoutInput>
+                  <FormLayoutInput Right="Parent,1, -28" Top="Parent,0,2"/>
+                </LayoutInput>
+                <Children>
+                  <Graphic Name="FavIndicator" Content="image://i:Heart" Visible="[Item.IsFavorite]" MaintainAspectRatio="true" />
                 </Children>
               </Panel>
             </Children>
