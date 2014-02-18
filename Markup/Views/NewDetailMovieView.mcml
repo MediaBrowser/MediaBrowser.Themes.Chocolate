@@ -208,24 +208,14 @@
         </Actions>
       </Changed>
 
-      <Changed Source="[ThemeHelper.CurrentItem]" InitialEvaluate="true">
-        <Conditions>
-          <Equality Source="[ThemeHelper.PercentWatched]" ConditionOp="GreaterThan"  Value="0"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[ProgressBar.PercentWatched]" Value="[ThemeHelper.PercentWatched]"/>
-          <Set Target="[ProgressBar.Visible]" Value="true" />
-        </Actions>
-      </Changed>
-      <Changed Source="[ThemeHelper.CurrentItem]" InitialEvaluate="true">
-        <Conditions>
-          <Equality Source="[ThemeHelper.PercentWatched]" ConditionOp="LessThan" Value="1"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[ProgressBar.Visible]" Value="false" />
-        </Actions>
-      </Changed>
-
+      <Binding Source="[Item.CanResume]" Target="[ProgressBar.Visible]" />
+      <Binding Source="[ThemeHelper.PercentWatched]" Target="[ProgressBar.PercentWatched]" />
+      <Binding Source="[Item.LastPlayedString]" Target="[ProgressBar.ExtraString]" >
+        <Transformer>
+          <FormatTransformer Format=" on {0}"/>
+        </Transformer>
+      </Binding>
+      
       <Binding Target="[MediaPath]"            Source="[Item.TrailerPath]" />
       
       
@@ -404,9 +394,9 @@
                     </Children>
                   </Panel>
                   
-                  <Panel Layout="HorizontalFlow">
+                  <Panel Layout="Center">
                     <LayoutInput>
-                      <FormLayoutInput Top="Poster,1" Left="Parent,0,37" />
+                      <FormLayoutInput Top="Poster,1" Left="Parent,0,37" Right="Poster,1" />
                     </LayoutInput>
                     <Children>
                       <progress:ProgressBar Name="ProgressBar" Visible="false" Config="[Application.Config]" PercentWatched="[ThemeHelper.PercentWatched]" Size="234,40">

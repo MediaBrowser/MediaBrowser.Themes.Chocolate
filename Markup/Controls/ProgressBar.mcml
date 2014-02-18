@@ -8,6 +8,7 @@
     <Properties>
       <a:Config Name="Config" Config="$Required"/>
       <cor:Single Name="PercentWatched" Single="0.0"/>
+      <cor:String Name="ExtraString" String="" /> 
       <!--size of the progress bar-->
       <Size Name="Size" Size="75,15"/>
     </Properties>
@@ -48,9 +49,11 @@
       <!--Convert to text with percentage symbol (ie: .2 = 20%)-->
       <Binding Source="[PercentWatched]" Target="[ProgressPercent.Content]">
         <Transformer>
-          <FormatTransformer Format="Watched {0}" ExtendedFormat="P0" />
+          <FormatTransformer Format="Played {0}" ExtendedFormat="P0" />
         </Transformer>
       </Binding>
+
+      <Binding Source="[ExtraString]" Target="[ExtraText.Content]" />
 
       <Binding Source="[Config.AlphaBlending!cor:Single]" Target="[Back.Alpha]">
         <Transformer>
@@ -64,19 +67,25 @@
       <Panel Layout="Center" MinimumSize="[Size]" MaximumSize="[Size]">
 
         <Children>
+          <Panel Layout="HorizontalFlow" >
+            <Children>
+              <!--Watched Percentage Text-->
+              <Text Name="ProgressPercent" Font="Segoe Media Center,10" Color="White">
+                <Animations>
+                  <Animation Type="Show">
+                    <Keyframes>
+                      <AlphaKeyframe Time="0" RelativeTo="Absolute" Value="0"/>
+                      <AlphaKeyframe Time="0.5" RelativeTo="Absolute" Value="0" Interpolation="EaseIn"/>
+                      <AlphaKeyframe Time="1.5" RelativeTo="Final"/>
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+              </Text>
+              <!--Extra Text-->
+              <Text Name="ExtraText"  Font="Segoe Media Center,10" Color="White" />
+            </Children>
+          </Panel>
 
-          <!--Watched Percentage Text-->
-          <Text Name="ProgressPercent" Font="Segoe Media Center,10" Color="White">
-            <Animations>
-              <Animation Type="Show">
-                <Keyframes>
-                  <AlphaKeyframe Time="0" RelativeTo="Absolute" Value="0"/>
-                  <AlphaKeyframe Time="0.5" RelativeTo="Absolute" Value="0" Interpolation="EaseIn"/>
-                  <AlphaKeyframe Time="1.5" RelativeTo="Final"/>
-                </Keyframes>
-              </Animation>
-            </Animations>
-          </Text>
           
           <Graphic Name="Back" Content="image://vi:PBBack" Layout="Form" MinimumSize="[Size]" MaximumSize="[Size]">
             <Children>
