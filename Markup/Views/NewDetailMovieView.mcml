@@ -9,6 +9,7 @@
       
       xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
 	    xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
       
       xmlns:fip="resx://Chocolate/Chocolate.Resources/FullInfoPanel"
 	    xmlns:ib="resx://MediaBrowser/MediaBrowser.Resources/ImageButton"
@@ -76,6 +77,9 @@
       <ShortcutHandler Name="SkipBack" Shortcut="SkipBack" Handle="true" HandlerStage="Bubbled" Command="[PreviousItemCommand]"/>
       <ShortcutHandler Name="SkipForward" Shortcut="SkipForward" Handle="true" HandlerStage="Bubbled" Command="[NextItemCommand]"/>
       <ShortcutHandler Name="BackBtn" Shortcut="Back" Handle="false" HandlerStage="Routed"/>
+      <ShortcutHandler Name="ClearBtn" Handle="true" Shortcut="Clear" HandlerStage="Bubbled" />
+      <KeyHandler Name="WatchedShortcut" Handle="true" Key="W" Modifiers="Control" HandlerStage="Bubbled"/>
+
       <TransformByAttributeAnimation Name="ShowSlideRight" Attribute="Width" Magnitude="1.0" Source="animation://anim:ShowSlideRight"/>
       <TransformByAttributeAnimation Name="ShowSlideLeft" Attribute="Width" Magnitude="1.0" Source="animation://anim:ShowSlideLeft"/>
       <TransformByAttributeAnimation Name="HideSlideRight" Attribute="Width" Magnitude="1.0" Source="animation://anim:HideSlideRight"/>
@@ -104,6 +108,18 @@
           <Set Target="[ExtraPanel.Visible]" Value="false"/>
         </Actions>
       </Changed>
+
+      <!-- Watched Toggle Commands -->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Modified Source="[ClearBtn.Invoked]"/>
+          <Modified Source="[WatchedShortcut.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+          <Invoke Target="[Item.ToggleWatched]"/>
+        </Actions>
+      </Rule>
 
       <Changed Source="[NextItemCommand.Invoked]">
         <Conditions>
