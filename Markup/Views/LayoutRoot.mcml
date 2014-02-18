@@ -16,6 +16,7 @@
     xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
     xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
     xmlns:ch="assembly://Chocolate/Chocolate"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
     xmlns:me="Me"
 	  >
 
@@ -671,6 +672,9 @@
       <ShortcutHandler Name="PlayBtn" Handle="true" Shortcut="Play" HandlerStage="Bubbled"/>
       <ShortcutHandler Name="PlayPauseBtn" Handle="true" Shortcut="PlayPause" HandlerStage="Bubbled"/>
       <KeyHandler Name="PlayShortcut" Handle="true" HandlerStage="Bubbled" Key="P" Modifiers="Control"/>
+      <ShortcutHandler Name="ClearBtn" Handle="true" Shortcut="Clear" HandlerStage="Bubbled" />
+      <KeyHandler Name="WatchedShortcut" Handle="true" Key="W" Modifiers="Control" HandlerStage="Bubbled"/>
+
     </Locals>
 
     <Rules>
@@ -714,6 +718,18 @@
           <Invoke Target="[Application.Navigate]" item="[Item]"/>
         </Actions>
       </Changed>
+
+      <!-- Watched Toggle Commands -->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Modified Source="[ClearBtn.Invoked]"/>
+          <Modified Source="[WatchedShortcut.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+          <Invoke Target="[Item.ToggleWatched]"/>
+        </Actions>
+      </Rule>
 
       <!-- Play Rules -->
       <Rule ConditionLogicalOp ="Or">
