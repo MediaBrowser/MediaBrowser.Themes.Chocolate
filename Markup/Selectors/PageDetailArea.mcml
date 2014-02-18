@@ -29,6 +29,7 @@
       <MouseWheelHandler Name="Wheel" Handle="false" HandlerStage="Routed"/>
       <ShortcutHandler Name="BackBtn" Shortcut="Back" Handle="false" HandlerStage="Routed" Command="[BackCmd]"/>
       <cor:String Name="BackdropConstraint" String="none" />
+      <cor:Boolean Name="OnEHS" Boolean="false" />
     </Locals>
 
     <Rules>
@@ -109,6 +110,7 @@
         </Conditions>
         <Actions>
           <Set Target="[DetailArea.Source]" Value="[ThemeHelper.LayoutRoot]"/>
+          <Set Target="[OnEHS]" Value="true"/>
         </Actions>
       </Rule>
 
@@ -137,7 +139,7 @@
         <Conditions>
           <Equality Source="[Folder.DisplayPrefs.ViewTypeString]" Value="CoverFlow"/>
           <Equality Source="[ThemeHelper.Config.ShowCoverFlowDetails]" Value="true" />
-          <Equality Source="[Folder.IsRoot]" Value="false"/>
+          <Equality Source="[OnEHS]" Value="false" />
         </Conditions>
         <Actions>
           <Set Target="[BackdropConstraint]" Value="small" />
