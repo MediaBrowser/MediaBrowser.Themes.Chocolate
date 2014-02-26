@@ -329,7 +329,7 @@
     <Content>
       <ColorFill Name="Main" Content="255,0,15,60"  Navigation="ContainAll,Group">
         <Children>
-          <Graphic Name="ZoomPane"  MaximumSize="550,0" MaintainAspectRatio="false" Padding="10,10,10,10" >
+          <Graphic Name="ZoomPane"  MaximumSize="650,0" MaintainAspectRatio="false" Padding="10,10,10,10" >
             <Layout>
               <FlowLayout Orientation="Vertical" ItemAlignment="Far"/>
             </Layout>
@@ -425,10 +425,10 @@
         <Children>
           <Graphic Name="Image" Content="[User.PrimaryImage]" MaximumSize="80,80" MaintainAspectRatio="true" />
           <Text Name="Title" Content="[User.Name]" Font="Segoe Media Center Light, 24" Color="White" Margins="25,3,20,0" MinimumSize="200,0" MaximumSize="200,0" HorizontalAlignment="Near" WordWrap="true" MaximumLines="2" FadeSize="150" />
-          <Panel Layout="VerticalFlow" MaximumSize="200,0" MinimumSize="200,0" Margins="5,5,0,0" >
+          <Panel Layout="HorizontalFlow" MaximumSize="300,0" MinimumSize="300,0" Margins="5,20,0,0" >
             <Children>
               <sb:SimpleButton Name="SwitchButton" Text="[Application.LocalStrings.#SwitchTo!cor:String]" Command="[SwitchUser]" Visible="true" Size="150,40" Font="Segoe Media Center Light, 18"/>
-              <cb:CheckBox Label="[Application.LocalStrings.#AlsoHere!cor:String]" Checked="[AlsoHere]" Margins="4,5,0,0"  Font="Segoe Media Center Light, 18"/>
+              <cb:CheckBox Label="[Application.LocalStrings.#AlsoHere!cor:String]" Checked="[AlsoHere]" Margins="4,0,0,0"  Font="Segoe Media Center Light, 18"/>
 
             </Children>
           </Panel>
