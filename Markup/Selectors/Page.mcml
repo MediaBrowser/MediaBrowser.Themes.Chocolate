@@ -11,6 +11,7 @@
   xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
   xmlns:an="resx://MediaBrowser/MediaBrowser.Resources/Animations"
   xmlns:cm="resx://Chocolate/Chocolate.Resources/ContextMenu"
+  xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
 
   xmlns:cc="resx://Chocolate/Chocolate.Resources/Colors"
   xmlns:cf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
@@ -600,6 +601,8 @@
         </Actions>
       </Changed>
 
+      <Binding Source="[Application.MultipleUsersHere]" Target="[PlusUsers.Visible]" />
+
     </Rules>
 
     <Content>
@@ -638,6 +641,7 @@
                   </Panel>
                   <Panel Name="UserKey" FocusOrder="105">
                     <Children>
+                      <Graphic Name="PlusUsers" Content="image://i:IconPlus" Margins="18,18,0,0" MaximumSize="10,10" MinimumSize="10,10" MaintainAspectRatio="true" Visible="false" />
                       <vsb:SimpleButton Name="UserMenuButton" Application="[Application]"
                                         DescriptionField="[ToolText]" DescriptionText="User Menu"
                                         ImageNoFocus="[Application.CurrentUser.PrimaryImage]"
