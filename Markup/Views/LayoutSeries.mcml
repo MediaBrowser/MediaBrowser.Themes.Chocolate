@@ -199,6 +199,28 @@
       <Binding Source="[Item.Name]" Target="[Title.Text]" />
       <Binding Source="[Item.Overview]" Target="[Summary.Text]" />
       <Binding Target="[TxtRuntime.Content]"   Source="[Item.RunningTimeString]"/>
+      <Binding Target="[MPAARating.Value]" Source="[Item.MpaaRating]"></Binding>
+      <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
+      <Binding Target="[CriticScore.Content]" Source="[Item.CriticRatingString]" />
+      <Binding Target="[RTIcon.Content]" Source="[Item.RottenTomatoImage]" />
+      <Rule>
+        <Conditions>
+          <Equality Source="[Item.HDType]" ConditionOp="Equals" Value="1080" />
+        </Conditions>
+        <Actions>
+          <Set Target="[HDType.Visible]" Value="true" />
+          <Set Target="[HDType.Content]" Value="image://vi:Icon1080" />
+        </Actions>
+      </Rule>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Item.HDType]" ConditionOp="Equals" Value="720" />
+        </Conditions>
+        <Actions>
+          <Set Target="[HDType.Visible]" Value="true" />
+          <Set Target="[HDType.Content]" Value="image://vi:Icon720" />
+        </Actions>
+      </Rule>
       <Binding Source="[Item.FirstAired]" Target="[TxtAired.Content]" >
         <Conditions>
           <Equality Source="[Item.ItemTypeString]" Value="Episode" />
@@ -257,7 +279,7 @@
 
               <Panel Name="TitlePanel" Margins="5,20,5,0" >
                 <LayoutInput>
-                  <FormLayoutInput Top="Parent, 1, -300" Horizontal="Near" />
+                  <FormLayoutInput Top="Parent, 1, -340" Horizontal="Near" />
                 </LayoutInput>
                 <Children>
                   <ash:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[Item.Name]" Font="font://uf:List_Title" Color="color://uc:TitleColor" MaximumSize="560,0" />
@@ -265,9 +287,22 @@
                 </Children>
               </Panel>
 
+              <Panel Name="RatingPanel" Layout="HorizontalFlow" Margins="7,0,0,0">
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Near" Top="TitlePanel, 1, -10"/>
+                </LayoutInput>
+                <Children>
+                  <sr:StarRating Margins="0,6,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
+                  <Graphic Name="RTIcon" Margins="10,6,0,0" MaintainAspectRatio="true" MaximumSize="0,20" />
+                  <Text Name="CriticScore" Font="Segoe UI Light, 14, bold" Color="color://uc:TitleColor" Margins="2,2,0,0" />
+                  <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
+                  <Graphic Name="HDType" Margins="12,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                </Children>
+              </Panel>
+
               <Panel Name="OverviewPanel" Margins="5,0,0,0">
                 <LayoutInput>
-                  <FormLayoutInput Left="Parent,0" Top="TitlePanel,1,-5" Bottom="Parent,1,-45" Right="PosterPanel,0,-5"/>
+                  <FormLayoutInput Left="Parent,0" Top="RatingPanel,1" Bottom="Parent,1,-45" Right="PosterPanel,0,-5"/>
                 </LayoutInput>
                 <Children>
                   <as:AutoScrollText ScrollSpeed="[Application.Config.AutoScrollSpeed]" ScrollDelay="[Application.Config.AutoScrollDelay]" 
@@ -328,7 +363,7 @@
                 </Children>
               </Panel>
 
-            </Children>
+              </Children>
           </Panel>
           <Clip Orientation="Vertical" FadeSize="150" ShowNear="true" ShowFar="false">
             <LayoutInput>
