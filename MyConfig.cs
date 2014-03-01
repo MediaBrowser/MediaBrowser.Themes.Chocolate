@@ -559,6 +559,23 @@
             }
         }
 
+        public bool ShowPosterInfo
+        {
+            get
+            {
+                return this.data.ShowPosterInfo;
+            }
+            set
+            {
+                if (this.data.ShowPosterInfo != value)
+                {
+                    this.data.ShowPosterInfo = value;
+                    base.FirePropertyChanged("ShowPosterInfo");
+                    this.Save();
+                }
+            }
+        }
+
         public bool UseCustomTvView
         {
             get

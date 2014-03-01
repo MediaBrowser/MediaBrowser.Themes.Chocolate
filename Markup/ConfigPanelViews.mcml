@@ -48,6 +48,7 @@
       <BooleanChoice Name="ShowListEndTime" Value="[Helper.Config.ShowListEndTime]" />
       <BooleanChoice Name="ShowListBackground" Value="[Helper.Config.ShowListBackground]" />
       <!--Poster Options-->
+      <BooleanChoice Name="ShowPosterInfo" Value="[Helper.Config.ShowPosterInfo]" />
       <BooleanChoice Name="ShowPosterLogos" Value="[Helper.Config.ShowPosterLogos]" />
       <BooleanChoice Name="ShowPosterEndTime" Value="[Helper.Config.ShowPosterEndTime]" />
       <!--Thumb Options-->
@@ -152,6 +153,11 @@
           <Set Target="[Helper.Config.ShowPosterLogos]" Value="[ShowPosterLogosCB.Checked.Value]"/>
         </Actions>
       </Changed>
+      <Changed Source="[ShowPosterInfoCB.Checked.Value]">
+        <Actions>
+          <Set Target="[Helper.Config.ShowPosterInfo]" Value="[ShowPosterInfoCB.Checked.Value]"/>
+        </Actions>
+      </Changed>
       <Changed Source="[ShowPosterEndTimeCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowPosterEndTime]" Value="[ShowPosterEndTimeCB.Checked.Value]"/>
@@ -237,6 +243,7 @@
               <cb:CheckBox Name="ShowThumbEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowThumbEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Poster Options Panel-->
               <Text Content="Poster Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
+              <cb:CheckBox Name="ShowPosterInfoCB" Label="[Application.LocalStrings.#ShowPosterInfo!cor:String]" Checked="[ShowPosterInfo]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowPosterLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowPosterLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowPosterEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowPosterEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Detail Options Panel-->

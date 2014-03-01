@@ -38,7 +38,7 @@
 
   <Image Name="UltimatePanel" Source="resx://Chocolate/Chocolate.Resources/Panel"/>
   <Image Name="UltimateLongPanel" Source="resx://Chocolate/Chocolate.Resources/LongPanel" NineGrid="25,25,25,25"/>
-  <Image Name="UltimatePosterPanel" Source="resx://Chocolate/Chocolate.Resources/PosterPanel" NineGrid="25,25,25,25"/>
+  <Image Name="UltimatePosterPanel" Source="resx://Chocolate/Chocolate.Resources/PosterPanel"/>
   <Image Name="UltimateDetailPanel" Source="resx://Chocolate/Chocolate.Resources/DetailPanel" NineGrid="25,25,25,25"/>
   <Image Name="UltimateMoviePanel" Source="resx://Chocolate/Chocolate.Resources/MoviePanel"/>
   <Image Name="UltimateMoviePanelDetail" Source="resx://Chocolate/Chocolate.Resources/MoviePanelDetail"/>

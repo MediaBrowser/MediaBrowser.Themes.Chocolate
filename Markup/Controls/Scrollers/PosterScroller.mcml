@@ -31,7 +31,7 @@
 
 			<ScrollingData Name="VScrollingData" EndPadding="100" BeginPadding="100" />
 			<ScrollingData Name="HScrollingData" EndPaddingRelativeTo="Far" EndPadding="500" BeginPadding="500" BeginPaddingRelativeTo="Near"/>
-			<ScrollingData Name="CenterScollingData" LockedAlignment="0.5" LockedPosition="0.5" />
+			<ScrollingData Name="CenterScollingData" LockedAlignment="0.6" LockedPosition="0.6" />
 			<ScrollingData Name="ScrollingData" />
       
       <Environment Name="Environment" />

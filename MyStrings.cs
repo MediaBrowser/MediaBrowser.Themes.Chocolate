@@ -108,6 +108,8 @@
         public string ShowPosterEndTimeDesc = "This Option Will Show End Time On Poster View.";
         public string ShowPosterLogos = "Show Logos";
         public string ShowPosterLogosDesc = "Show Logos On Poster View.";
+        public string ShowPosterInfo = "Show Info Box";
+        public string ShowPosterInfoDesc = "Show An Information Box for the Selected Item in Poster View.";
         public string ShowStripLogos = "Show Logos";
         public string ShowStripLogosDesc = "Show Logos On Strip View.";
         public string ShowEndTime = "Show End Time";

@@ -12,6 +12,7 @@
     xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
     xmlns:uc="resx://Chocolate/Chocolate.Resources/Colors"
     xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
+      xmlns:nip="resx://Chocolate/Chocolate.Resources/NewInfoPanel"
     xmlns:ch="assembly://Chocolate/Chocolate">
 
 	<UI Name="ChocolateLayoutPoster">
@@ -74,23 +75,8 @@
       </Binding>
 
       <!--Display Logo/Title-->
-      <Binding Target="[Title.Text]"       Source="[Folder.SelectedChild.Name]"/>
-      <Binding Target="[LogoImage.Content]" Source="[Folder.SelectedChild.LogoImage]"/>
-     
-      <Rule>
-        <Conditions>
-          <Equality Source="[ThemeHelper.Config.ShowPosterLogos]" ConditionOp="Equals" Value="true" />
-          <Equality Source="[Folder.SelectedChild.HasLogoImage]" ConditionOp="Equals" Value="true" />
-          <Equality Source="[Folder.SelectedChild.ItemTypeString]" ConditionOp="NotEquals" Value="Season"/>
-          <Equality Source="[Folder.SelectedChild.ItemTypeString]" ConditionOp="NotEquals" Value="Episode"/>
-        </Conditions>
-        <Actions>
-          <Set Target="[LogoPanel.Visible]" Value="true" />
-          <Set Target="[TitlePanel.Visible]" Value="false" />
-        </Actions>
-      </Rule>
-      <Default Target="[LogoPanel.Visible]" Value="false"/>
-      <Default Target="[TitlePanel.Visible]" Value="true"/>
+      <Binding Target="[ItemInfoPanel.Item]" Source="[Folder.SelectedChild]" />
+      <Binding Target="[ItemInfoPanel.ShowLogo]" Source="[ThemeHelper.Config.ShowPosterLogos]" />
       
       <!--End Dislay Logo/Title Code-->
       
@@ -119,7 +105,7 @@
           <!--Counters, screen bottom right-->
           <Panel>
             <LayoutInput>
-              <FormLayoutInput Vertical="Center" Top="Parent,1,-100" Bottom="Parent,1,-3" Right="Parent,1,-40"/>
+              <FormLayoutInput Vertical="Center" Top="Parent,1,-70" Bottom="Parent,1,10" Right="Parent,1,-40"/>
             </LayoutInput>
             <Children>
               <Panel Layout="HorizontalFlow">
@@ -134,7 +120,7 @@
           <!--EndTime-->
           <Panel Name="EndTimePanel" Layout="HorizontalFlow" >
             <LayoutInput>
-              <FormLayoutInput Vertical="Center" Top="Parent,1,-100" Bottom="Parent,1,-3" Left="Parent,0,40"/>
+              <FormLayoutInput Vertical="Center" Top="Parent,1,-70" Bottom="Parent,1,10" Left="Parent,0,40"/>
             </LayoutInput>
             <Children>
               <Text Name="EndTimeLbl" Font="font://uf:Poster_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
@@ -142,39 +128,31 @@
             </Children>
           </Panel>
           
-          <!--Selected item title-->
-          <Panel Name="TitlePanel" Layout="HorizontalFlow" MaximumSize="800,60" Visible="false">
+          <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[SelectedItem]" ShowOverview="false" ShowDetails="false" Visible="[ThemeHelper.Config.ShowPosterInfo]"  >
             <LayoutInput>
-              <FormLayoutInput Vertical="Center" Top="Parent,1,-100" Bottom="Parent,1,-3"/>
+              <FormLayoutInput Left="Parent,0,10" Top="Parent,1,-220" Bottom="Parent,1" Right="Parent,.4"/>
             </LayoutInput>
-            <Children>
-              <ash:AutoScrollHorizontal Name="Title" Margins="0,5,0,5" Text="[SelectedItem.Name]" Font="font://uf:Poster_Title" Color="color://uc:Light"/>
-            </Children>
-          </Panel>
 
-          <Panel Name="LogoPanel" Layout="HorizontalFlow" MaximumSize="206,80" Visible="false">
-            <LayoutInput>
-              <FormLayoutInput Vertical="Center" Top="Parent,1,-100" Bottom="Parent,1,-3"/>
-            </LayoutInput>
-            <Children>
-              <Graphic Name="LogoImage" Margins="0,10,0,10" Content="[SelectedItem.LogoImage]" MaintainAspectRatio="true"/>
-            </Children>
-          </Panel>
+          </nip:InfoPanel>
           
           <!--Alpha panel-->
-          <Panel Name="PosterShadow">
+          <Clip Name="PosterShadow" Orientation="Horizontal" FadeAmount="1" FadeSize="30" ShowFar="true" ShowNear="false" Visible="[ThemeHelper.Config.ShowPosterInfo]" >
             <LayoutInput>
-              <FormLayoutInput Left="Parent,0,10" Top="Parent,1,-100" Bottom="Parent,1" Right="Parent,1,-10"/>
+              <FormLayoutInput Left="Parent,0" Top="Parent,1,-240" Bottom="Parent,1,10" Right="Parent,.45"/>
             </LayoutInput>
             <Children>
-              <Graphic Name="AlphaPanel"/>
+              <Clip Orientation="Vertical"  FadeAmount="1" FadeSize="30" ShowFar="false" ShowNear="true" >
+                <Children>
+                  <Graphic Name="AlphaPanel"/>
+                </Children>
+              </Clip>
             </Children>
-          </Panel>
+          </Clip>
           
           <!--Post Scroller-->
           <Panel Layout="Form">
             <LayoutInput>
-              <FormLayoutInput Left="Parent,0" Top="Parent,0,10" Right="Parent,1" Bottom="Parent,1,-10" />
+              <FormLayoutInput Left="Parent,0" Top="Parent,0,10" Right="Parent,1" Bottom="Parent,1" />
             </LayoutInput>
             <Children>
               <Panel Name="PosterScroller" FocusOrder="1" >
