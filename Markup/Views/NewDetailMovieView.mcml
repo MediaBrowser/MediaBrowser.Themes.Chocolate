@@ -36,6 +36,7 @@
       xmlns:progress="resx://Chocolate/Chocolate.Resources/ProgressBar"
       xmlns:iip="resx://Chocolate/Chocolate.Resources/InfoIconsPanel"
     xmlns:cb="resx://Chocolate/Chocolate.Resources/ChapterButton"
+    xmlns:spb="resx://Chocolate/Chocolate.Resources/SpecialButton"
       xmlns:me="Me">
 
   <!-- Movie Details Page -->
@@ -53,6 +54,7 @@
       <Command Name="ResumeMovieCommand" />
       <Command Name="ActorCommand" />
       <Command Name="ChaptersCommand" />
+      <Command Name="SpecialsCommand" />
       <Command Name="SummaryCommand" />
       <Command Name="MusicCommand" />
       <Command Name="TrailerCommand" />
@@ -146,8 +148,6 @@
 
       <Changed Source="[PlayMovieCommand.Invoked]">
         <Actions>
-          <Set Target="[ActorScroller.Visible]"    Value="false"/>
-          <Set Target="[ChapterScroller.Visible]"    Value="false"/>
           <Invoke Target="[Application.Play]" item="[Item]"/>
         </Actions>
       </Changed>
@@ -155,6 +155,7 @@
       <Changed Source="[ActorCommand.Invoked]">
         <Actions>
           <Set Target="[ChapterScroller.Visible]"    Value="false"/>
+          <Set Target="[SpecialScroller.Visible]"    Value="false"/>
 
           <Set Target="[ActorScroller.Visible]"    Value="true"/>
           <Set Target="[ExtraPanel.Visible]"    Value="true"/>
@@ -164,8 +165,19 @@
 
       <Changed Source="[ChaptersCommand.Invoked]">
         <Actions>
+          <Set Target="[SpecialScroller.Visible]"    Value="false"/>
           <Set Target="[ActorScroller.Visible]"    Value="false"/>
           <Set Target="[ChapterScroller.Visible]"    Value="true"/>
+          <Set Target="[ExtraPanel.Visible]"    Value="true"/>
+          <Invoke Target="[ExtraPanel.NavigateInto]" />
+        </Actions>
+      </Changed>
+
+      <Changed Source="[SpecialsCommand.Invoked]">
+        <Actions>
+          <Set Target="[SpecialScroller.Visible]"    Value="true"/>
+          <Set Target="[ActorScroller.Visible]"    Value="false"/>
+          <Set Target="[ChapterScroller.Visible]"    Value="false"/>
           <Set Target="[ExtraPanel.Visible]"    Value="true"/>
           <Invoke Target="[ExtraPanel.NavigateInto]" />
         </Actions>
@@ -249,6 +261,7 @@
       </Binding>
       <Binding Target="[ActorScroller.Item]" Source="[Item]"/>
       <Binding Target="[ChapterScroller.Item]" Source="[Item]"/>
+      <Binding Target="[SpecialScroller.Item]" Source="[Item]"/>
       <Binding Target="[PosterImage.Content]" Source="[Item.PreferredImage]"/>
       <Binding Target="[DiscImage.Content]" Source="[Item.DiscImage]"/>
       <Binding Target="[MediaInfoPanel.Item]" Source="[Item]"/>
@@ -307,6 +320,7 @@
       <Binding Source="[ThemeHelper.Config.ShowDiscDetail]" Target="[Disc.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowNPV]" Target="[NPVOption.Visible]"/>
       <Binding Source="[Item.HasChapterInfo]" Target="[ScenesButton.Visible]"/>
+      <Binding Source="[Item.HasSpecialFeatures]" Target="[SpecialsButton.Visible]"/>
       <Binding Source="[Item]" Target="[ItemInfoPanel.Item]"/>
 
       <!--Display Logo-->
@@ -360,6 +374,7 @@
                           <ib:ImageButton Name="CastButton" Text="[Application.LocalStrings.#Cast!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ActorCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/UserLoginDefault" Size="175,45" Font="font://f:MM_ButtonFont"/>
                           <ib:ImageButton Name="ScenesButton" Text="[Application.LocalStrings.#Scenes!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ChaptersCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/Frames" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="TrailerButton" Visible="false" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="175,45" Font="font://f:MM_ButtonFont" />
+                          <ib:ImageButton Name="SpecialsButton" Visible="false" Text="[Application.LocalStrings.#SpecialFeatures!cor:String]" ImageFocus="image://it:GrayGradient" Command="[SpecialsCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconAsterisk" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="175,45" Font="font://f:MM_ButtonFont" Visible="false" />
                         </Children>
                       </Panel>
@@ -480,6 +495,13 @@
                       <Panel Name="Chapters">
                         <Children>
                           <me:ChapterList Name="ChapterScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" CloseCommand="[CloseExtraPanel]" Visible="false"/>
+                        </Children>
+                      </Panel>
+
+                      <!-- Specials  -->
+                      <Panel Name="Specials">
+                        <Children>
+                          <me:SpecialsList Name="SpecialScroller" Margins="20,20,20,50" Item="[Item]" Application="[Application]" CloseCommand="[CloseExtraPanel]" Visible="false"/>
                         </Children>
                       </Panel>
 
@@ -893,6 +915,118 @@
       <Panel Layout="HorizontalFlow" >
         <Children>
           <cb:ChapterButton ChapterItem="[ChapterItem]" Color="color://s:FontColorMedium" Command="[PlayCommand]" />
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <!-- SpecialsList-->
+  <UI Name="SpecialsList">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:Item Name="Item" Item="$Required"/>
+      <Command Name="CloseCommand" Command="$Required"/>
+    </Properties>
+    <Locals>
+      <ScrollingHandler Name="ScrollingHandler" HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandlePageKeys="true" HandlePageCommands="true" HandleMouseWheel="true"/>
+      <ScrollingData Name="ScrollingData" />
+      <Command Name="ScrollUpCommand" />
+      <Command Name="ScrollDownCommand" />
+
+      <GridLayout Name="MyLayout" Orientation="Horizontal" Rows="0"
+							  AllowWrap="true" Spacing="0,5"  />
+
+    </Locals>
+    <Rules>
+      <Binding Source="[Item.SpecialFeatures]" Target="[ListRepeater.Source]" />
+      <Default Target="[ScrollingHandler.ScrollingData]" Value="[ScrollingData]"/>
+      <Changed Source="[ScrollUpCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollUp]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ScrollDownCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollDown]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ScrollUpCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollUp]"/>
+        </Actions>
+      </Changed>
+      <Changed Source="[ScrollDownCommand.Invoked]">
+        <Actions>
+          <Invoke Target="[ScrollingData.ScrollDown]"/>
+        </Actions>
+      </Changed>
+
+
+      <Binding Source="[Item.HasSpecialFeatures]" Target="[NoItems.Visible]" >
+        <Transformer>
+          <BooleanTransformer Inverse="true"/>
+        </Transformer>
+      </Binding>
+
+    </Rules>
+    <Content>
+      <!-- specials -->
+      <Panel Name="Specials" Layout="Dock" Padding="20,0,0,0">
+        <Children>
+          <Graphic Content="image://i:BlankImage" Name="ImagePanel" Layout="Form" >
+            <LayoutInput>
+              <DockLayoutInput Position="Client"/>
+            </LayoutInput>
+            <Children>
+              <vsb:SimpleButton Name="CloseButton"   ImageNoFocus="resx://Chocolate/Chocolate.Resources/Collapse"    Command="[CloseCommand]" Size="30,25"  Application="[Application]" >
+                <LayoutInput>
+                  <FormLayoutInput Left="Parent,0,-15" Top="Parent,0, 5"/>
+                </LayoutInput>
+
+              </vsb:SimpleButton>
+              <Scroller Name="SpecialsScroller" FocusOrder="0" FadeSize="-5" Margins="0,30,0,0" ScrollingData="[ScrollingData]" Orientation="Vertical" Navigation="PreferFocusOrder">
+                <LayoutInput>
+                  <AnchorLayoutInput Horizontal="Fill" Vertical="Near"/>
+                </LayoutInput>
+
+                <Children>
+                  <Repeater Name="ListRepeater" Source="[Item.SpecialFeatures]" Layout="[MyLayout]" Padding="0,30,0,0" >
+                    <Content>
+                      <me:Special Item="[RepeatedItem!lib:Item]" Font="font://f:MM_ActorFont" Application="[Application]" />
+                    </Content>
+                    <Animations>
+                      <Animation Type="Move">
+                        <Keyframes>
+                          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+                          <PositionKeyframe Time="0.65" RelativeTo="Final"/>
+                        </Keyframes>
+                      </Animation>
+                    </Animations>
+                  </Repeater>
+                </Children>
+
+              </Scroller>
+              <Text Name="NoItems" Content="No Special Features" Visible="false" Font="Segoe UI, 48" WordWrap="true" Alpha=".7" Color="color://s:FontColorMedium" />
+            </Children>
+          </Graphic>
+
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <!--Special-->
+  <UI Name="Special">
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+      <lib:Item Name="Item" Item="$Required" />
+      <Font Name="Font" Font="$Required"/>
+    </Properties>
+
+    <Content>
+      <Panel Layout="HorizontalFlow" >
+        <Children>
+          <spb:SpecialButton Item="[Item]" Color="color://s:FontColorMedium" />
         </Children>
       </Panel>
     </Content>

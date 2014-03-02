@@ -14,7 +14,6 @@
   <UI Name="ListButton" BaseUI="ib:ItemButton">
 
     <Properties>
-      <!--<IntRangedValue Name="SelectedIndex" IntRangedValue="$Required"/>-->
       <cor:String Name="Text" String="" />
       <Index Name="Index" Index="$Required"/>
       <Font Name="Font" Font="$Required"/>

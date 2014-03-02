@@ -1523,6 +1523,16 @@ namespace Chocolate {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] SpecialButton {
+            get {
+                object obj = ResourceManager.GetObject("SpecialButton", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] StackedScroller {
             get {
                 object obj = ResourceManager.GetObject("StackedScroller", resourceCulture);

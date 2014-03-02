@@ -1,0 +1,106 @@
+<Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
+      xmlns:cor="assembly://MSCorLib/System" 
+      xmlns:lib="assembly://MediaBrowser/MediaBrowser.Library"
+      xmlns:a="assembly://MediaBrowser/MediaBrowser"
+	    xmlns:an="resx://MediaBrowser/MediaBrowser.Resources/Animations"
+	    xmlns:sd="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+      xmlns:f="file://Fonts_DoNotEdit.mcml"
+	    xmlns:s="file://Styles_DoNotEdit.mcml"
+      xmlns:me="Me">
+
+  <UI Name="SpecialButton">
+
+    <Properties>
+
+      <cor:Boolean Name="IsNavigatingCommand" Boolean="false" />
+      <cor:Boolean Name="LeftAlign" Boolean="true" />
+      <lib:Item Name="Item" Item="$Required" />
+      
+      <cor:String Name="Name" String="" />
+      <cor:String Name="Position" String="" />
+      
+      <Size Name="Size" Size="285,0" />
+      <Size Name="MinSize" Size="50,50" />
+      <Font Name="Font" Font="Segoe Media Center Light, 16, bold" />
+      <Color Name="Color" Color="color://s:FontColorLight"/>
+      
+      <Image Name="ImageFocus" Image="image://me:ButtonLeftFocus" />
+      <Image Name="ImageNoFocus" Image="image://me:ButtonNoFocus" />
+      <Image Name="ImageDormant" Image="image://me:ButtonDormant" />
+
+    </Properties>
+
+    <Locals>
+      <ClickHandler Name="Clicker" />
+    </Locals>
+
+    <Rules>
+      <Default Target="[Input.KeyInteractive]" Value="true" />
+      
+      <Binding Source="[Font]" Target="[CName.Font]" />
+      <Binding Source="[Item.Name]" Target="[CName.Content]" />
+      <Binding Source="[Item.PrimaryImage]" Target="[Image.Content]" />     
+       
+      <Rule>
+        <Conditions>
+          <Modified Source="[Clicker.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sd:Select" />
+          <Invoke Target="[Item.PlayAction]" />
+        </Actions>
+      </Rule>
+
+      <Condition Source="[Input.KeyFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[imgButton.Content]" Value="[ImageFocus]"/>
+          <PlaySound Sound="sound://sd:Focus" />
+        </Actions>
+      </Condition>
+
+      <Condition Source="[Input.MouseFocus]" SourceValue="true">
+        <Actions>
+          <Set Target="[imgButton.Content]" Value="[ImageFocus]"/>
+        </Actions>
+      </Condition>
+
+    </Rules>
+
+    <Content>
+
+      <Graphic Name="imgButton" Content="[ImageNoFocus]" MinimumSize="[Size]" MaximumSize="[Size]" Padding="5,5,5,5">
+        <Layout>
+          <FlowLayout Orientation="Vertical" ItemAlignment="Near"/>
+        </Layout>
+        <Children>
+          <ColorFill Content="100,250,250,250" Padding="3,3,3,3" >
+            <Children>
+              <Graphic Name="Image" Content="resx://MediaBrowser/MediaBrowser.Resources/DefaultVideo"
+                       SizingPolicy="SizeToConstraint" MaximumSize="300,150" MaintainAspectRatio="true"/>
+            </Children>
+          </ColorFill>
+          <Panel Margins="0,0,0,0"  >
+            <Layout>
+              <FlowLayout Orientation="Vertical" ItemAlignment="Near"/>
+            </Layout>
+            <Children>
+              <Text Name="CName" Font="[Font]" Color="color://s:FontColorLight" />
+            </Children>
+          </Panel>
+        </Children>
+      </Graphic>
+      
+    </Content>
+  </UI>
+
+  <Image Name="ButtonDisabled"          Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonDisabled"          NineGrid="7,7,7,7" />
+  <Image Name="ButtonDormant"           Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonDormant"           NineGrid="7,7,7,7" />
+  <Image Name="ButtonLeftFocus"         Source="resx://Chocolate/Chocolate.Resources/GrayGradientRight"         />
+  <Image Name="ButtonLeftFocusOverlay"  Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonLeftFocusOverlay"  NineGrid="7,7,7,7" />
+  <Image Name="ButtonNoFocus"           Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonNoFocus"           NineGrid="7,7,7,7" />
+  <Image Name="ButtonPressedAfterGlow"  Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonPressedAfterGlow"  NineGrid="7,7,7,7" />
+  <Image Name="ButtonPressedHighlight"  Source="resx://MediaBrowser/MediaBrowser.Resources/ButtonPressedHighlight"  NineGrid="7,7,7,7" />
+
+	
+	
+</Mcml>

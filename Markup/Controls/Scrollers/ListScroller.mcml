@@ -21,7 +21,6 @@
 			<!-- Use the MouseWheel handler to handle the mouse wheel.  -->
 			<ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollingHandler"/>
 			<ScrollingData Name="ScrollingData" BeginPadding="5" EndPadding="35" />
-      <GridLayout Name="MyLayout" Orientation="Horizontal" AllowWrap="true" Spacing="0,0" Repeat="Always" RepeatGap="0" MinorAlignment="Center" />
       <cor:Int32 Name="Startup"/>
     </Locals>
    
@@ -102,7 +101,7 @@
                 <Children>
                   <Repeater  Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" DiscardOffscreenVisuals="false">
                     <Layout>
-                      <FlowLayout Orientation="Vertical" Spacing="1,1"/>
+                      <FlowLayout Orientation="Vertical" Spacing="1,1" AllowWrap="true" Repeat="Never"/>
                     </Layout>
                     <Animations>
                       <Animation Type="Move">

@@ -122,6 +122,7 @@
         public string UseCustomTvViewDesc = "Show TV Series in a special view that shows all seasons and episodes on one screen";
         public string SmallEhs = "Smaller Recent List Images";
         public string SmallEhsDesc = "Show slightly smaller images in the Recent List on EHS.";
+        public string SpecialFeatures = "Specials...";
         public string SORT = "SORT";
         public string STRIP = "STRIP";
         public string StripviewExpandedDesc = "Set whether the Strip view will be expanded by default.";

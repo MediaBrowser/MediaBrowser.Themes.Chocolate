@@ -278,6 +278,7 @@
     <Content Include="Markup\Controls\Backdrop.mcml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Markup\Controls\Buttons\SpecialButton.mcml" />
     <Content Include="Markup\Controls\Buttons\ChapterButton.mcml" />
     <Content Include="Markup\Controls\Buttons\ListButton.mcml" />
     <Content Include="Markup\Controls\Buttons\MenuButton.mcml" />
