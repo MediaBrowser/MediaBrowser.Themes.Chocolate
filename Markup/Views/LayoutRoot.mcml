@@ -262,7 +262,7 @@
       <Binding Source="[ThemeHelper.Config.DisableEHSMovieTitle]" Target="[Title.Visible]"/>
       <Binding Source="[ThemeHelper.Config.DisableEHSMovieTitle]" Target="[TitleShadow.Visible]"/>
 
-      <Default Target="[AlphaPanel.Content]" Value="image://vi:UltimatePosterPanel"/>
+      <Default Target="[AlphaPanel.Content]" Value="image://vi:EhsScrollerPanel"/>
       <Default Target="[Scrollers.Content]" Value="150,0,0,0"/>
 
     </Rules>
