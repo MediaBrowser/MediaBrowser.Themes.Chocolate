@@ -106,6 +106,9 @@
           <Set Target="[Title.Visible]" Value="false" />
         </Actions>
       </Rule>
+
+      <Binding Source="[Item.HasSubTitle]" Target="[SubTitles.Visible]" />
+      <Binding Source="[Item.SubTitle]" Target="[SubTitle.Content]" />
       <Default Target="[LogoImage.Visible]" Value="false"/>
       <Default Target="[Title.Visible]" Value="true"/>
 
@@ -118,7 +121,7 @@
             <Children>
               <Panel Name="TitlePanel" Margins="5,0,5,0" >
                 <Children>
-                  <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,-3" Text="[Item.Name]" Font="Segoe UI Light, 26, bold" Color="color://uc:TitleColor" />
+                  <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,-3" Text="[Item.Name]" Font="Segoe UI Light, 34, bold" Color="color://uc:TitleColor" />
                   <Graphic Name="LogoImage" Margins="0,5,0,8" Content="[Item.LogoImage]" MinimumSize="0,80" MaximumSize="0,80" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
               </Panel>
@@ -148,6 +151,12 @@
                     <Children>
                       <Text Name="DirectorLabel" Margins="0,0,5,0" Color="color://s:Choc_Label" Font="font://uf:Detail_Director_Label" WordWrap="false" Content="[Application.LocalStrings.#DirectedByDetail!cor:String]"/>
                       <Text Name="Director" Margins="0,4,0,0" Color="color://s:Choc_Value"  Font="font://uf:Detail_Director" WordWrap="false" />
+                      <Panel Name="SubTitles" Layout="HorizontalFlow" Margins="10,0,0,0" >
+                        <Children>
+                          <Text Name="SubLabel" Margins="0,0,5,0" Color="color://s:Choc_Label" Font="font://uf:Detail_Director_Label" WordWrap="false" Content="[Application.LocalStrings.#SubsDetail!cor:String]"/>
+                          <Text Name="SubTitle" Margins="0,4,0,0" Color="color://s:Choc_Value"  Font="font://uf:Detail_Director" WordWrap="false" />
+                        </Children>
+                      </Panel>
                     </Children>
                   </Panel>
 

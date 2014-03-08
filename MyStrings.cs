@@ -128,6 +128,7 @@
         public string StripviewExpandedDesc = "Set whether the Strip view will be expanded by default.";
         public string STUDIO = "STUDIO";
         public string SUBTITLES = "SUBTITLES : ";
+        public string SubsDetail = "Subs: ";
         public string Synopsis = "Synopsis";
         public string ThemeCustomFont = "* Choose theme font style";
         public string ThemeCustomFontDesc = "Chose which font file to use with the theme. This Won't Take Effect Until Media Browser Restarted.";
