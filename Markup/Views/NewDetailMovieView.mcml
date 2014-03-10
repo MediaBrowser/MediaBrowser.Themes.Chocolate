@@ -353,7 +353,7 @@
                 </Animations>
               </Panel>
 
-              <Panel Name="MainPanel" Layout="Form" >
+              <Panel Name="MainPanel" Layout="Form" Navigation="PreferFocusOrder" >
                 <Animations>
                   <Animation Animation="animation://anim:NavigateToForward"/>
                   <Animation Animation="animation://anim:NavigateAwayBackward"/>
@@ -394,7 +394,7 @@
 
                   <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 320">
                     <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,35" Bottom="Parent,1,-40"/>
+                      <FormLayoutInput Left="Parent,0,40" Bottom="Parent,1,-40"/>
                     </LayoutInput>
                     <Children>
                       <Graphic Name="PosterImage" Content="[Item.PreferredImage]" MaintainAspectRatio="true" SizingPolicy="SizeToContent">
@@ -404,14 +404,14 @@
 
                   <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="150,45" Font="font://f:MM_ButtonFont" FocusOrder="10">
                     <LayoutInput>
-                      <FormLayoutInput Left="Poster,1, -5" Bottom="Parent,1, 5"/>
+                      <FormLayoutInput Left="Poster,1,15" Bottom="Parent,1, 5"/>
                     </LayoutInput>
                     
                   </ib:ImageButton>
 
                   <ib:ImageButton Name="PreviousItemButton" Alpha=".2" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="150,45" Font="font://f:MM_ButtonFont" FocusOrder="20">
                     <LayoutInput>
-                      <FormLayoutInput Left="Parent,0,2" Bottom="Parent,1, 5"/>
+                      <FormLayoutInput Left="Parent,0" Bottom="Parent,1, 5"/>
                     </LayoutInput>
 
                   </ib:ImageButton>
