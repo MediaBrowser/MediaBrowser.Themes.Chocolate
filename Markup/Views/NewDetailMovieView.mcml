@@ -359,7 +359,7 @@
                   <Animation Animation="animation://anim:NavigateAwayBackward"/>
                 </Animations>
                 <Children>
-                  <Panel Name="ButtonsPanel" LayoutInput="[PortraitButtons]" Margins="15,0,0,0" FocusOrder="0">
+                  <Panel Name="ButtonsPanel" LayoutInput="[PortraitButtons]" Margins="10,0,0,0" FocusOrder="0">
                     <Layout>
                       <ScaleLayout AllowScaleDown="true" AllowScaleUp="false" MaintainAspectRatio="true"/>
                     </Layout>
@@ -404,7 +404,7 @@
 
                   <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="150,45" Font="font://f:MM_ButtonFont" FocusOrder="10">
                     <LayoutInput>
-                      <FormLayoutInput Left="Poster,1,15" Bottom="Parent,1, 5"/>
+                      <FormLayoutInput Left="Poster,1,10" Bottom="Parent,1, 5"/>
                     </LayoutInput>
                     
                   </ib:ImageButton>
