@@ -333,7 +333,7 @@
     </Rules>
 
     <Content>
-      <Panel Layout="Center">
+      <Panel Layout="Center" Navigation="PreferFocusOrder" >
         <Children>
           <Clip Layout="Form" Padding="[Application.Config.OverScanPadding]" Scale="[Application.Config.OverScanScaling]"  CenterPointPercent="0.5,0.5,0.5">
             <Children>
@@ -353,7 +353,7 @@
                 </Animations>
               </Panel>
 
-              <Panel Name="MainPanel" Layout="Form">
+              <Panel Name="MainPanel" Layout="Form" >
                 <Animations>
                   <Animation Animation="animation://anim:NavigateToForward"/>
                   <Animation Animation="animation://anim:NavigateAwayBackward"/>
@@ -392,7 +392,7 @@
                     </Children>
                   </Panel>
 
-                  <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 320" FocusOrder="0">
+                  <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 320">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,0,35" Bottom="Parent,1,-40"/>
                     </LayoutInput>
@@ -402,14 +402,14 @@
                     </Children>
                   </Panel>
 
-                  <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="150,45" Font="font://f:MM_ButtonFont">
+                  <ib:ImageButton Name="NextItemButton" Alpha=".2" Text="[Application.LocalStrings.#NextItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[NextItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconNext" Size="150,45" Font="font://f:MM_ButtonFont" FocusOrder="10">
                     <LayoutInput>
                       <FormLayoutInput Left="Poster,1, -5" Bottom="Parent,1, 5"/>
                     </LayoutInput>
                     
                   </ib:ImageButton>
 
-                  <ib:ImageButton Name="PreviousItemButton" Alpha=".2" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="150,45" Font="font://f:MM_ButtonFont">
+                  <ib:ImageButton Name="PreviousItemButton" Alpha=".2" Text="[Application.LocalStrings.#PreviousItemDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[PreviousItemCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconPrevious" Size="150,45" Font="font://f:MM_ButtonFont" FocusOrder="20">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,0,2" Bottom="Parent,1, 5"/>
                     </LayoutInput>

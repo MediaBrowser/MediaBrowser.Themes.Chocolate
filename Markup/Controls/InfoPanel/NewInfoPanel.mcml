@@ -16,7 +16,7 @@
     xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
-      xmlns:gl="resx://MediaBrowser/MediaBrowser.Resources/GenreList"
+      xmlns:gb="resx://MediaBrowser/MediaBrowser.Resources/GenreButton"
       xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
 
   <UI Name="InfoPanel">
@@ -61,7 +61,7 @@
       </Binding>
       
       <!--Genres For TV Series/Episodes-->
-      <Binding Target="[Genres.SourceData]"    Source="[Item.Series.Genres]">
+      <Binding Target="[GenreRepeater.Source]"    Source="[Item.Series.Genres]">
         <Conditions>
           <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
         </Conditions>
@@ -117,7 +117,7 @@
     <Content>
       <Panel Margins="30,20,0,0" >
         <Children>
-          <Panel Name="MainPanel" Layout="VerticalFlow"  >
+          <Panel Name="MainPanel" Layout="VerticalFlow" >
             <Children>
               <Panel Name="TitlePanel" Margins="5,0,5,0" >
                 <Children>
@@ -144,7 +144,21 @@
                 <Children>
                   <Panel Name="GenreInfo" Layout="HorizontalFlow">
                     <Children>
-                      <gl:GenreList Name="Genres" SourceData="[Item.Genres]" Font="font://uf:Detail_Genres"/>
+                      <Repeater Name="GenreRepeater" Source="[Item.Genres]" >
+                        <Layout>
+                          <FlowLayout Orientation="Horizontal" Spacing="25,0"/>
+                        </Layout>
+                        <Divider>
+                          <Text Content="●" Font="font://uf:Detail_Genres" Color="color://s:FontColorMedium" Alpha="0.6"  />
+                        </Divider>
+                        <Content>
+                          <gb:GenreButton Text="[RepeatedItem!cor:String]"
+                                  Application="[Application]" Item="[Item]"
+                                  GenreCategory="[RepeatedItem!cor:String]"
+                                  Font="font://uf:Detail_Genres" Color="color://s:FontColorMedium"
+													/>
+                        </Content>
+                      </Repeater>
                     </Children>
                   </Panel>
                   <Panel Name="Directors" Layout="HorizontalFlow" >
