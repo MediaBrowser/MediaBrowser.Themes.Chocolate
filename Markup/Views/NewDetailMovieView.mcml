@@ -333,18 +333,18 @@
     </Rules>
 
     <Content>
-      <Panel Layout="Center" Navigation="PreferFocusOrder" >
+      <Panel Layout="Center" Navigation="PreferFocusOrder"  >
         <Children>
           <Clip Layout="Form" Padding="[Application.Config.OverScanPadding]" Scale="[Application.Config.OverScanScaling]"  CenterPointPercent="0.5,0.5,0.5">
             <Children>
               
               <!-- Now Playing View -->
-              <Panel Name="NowPlaying" Layout="Anchor" Scale="1,1,1" Visible="false" >
+              <Panel Name="NowPlaying" Visible="false" Margins="0,40,20,0" FocusOrder="100" >
                 <LayoutInput>
-                  <AnchorLayoutInput Top="Parent,0" Horizontal="Far"/>
+                  <AnchorLayoutInput Vertical="Near" Horizontal="Far"/>
                 </LayoutInput>
                 <Children>
-                  <vsb:SimpleButton Name="NowPlayButton" Application="[Application]" ImageNoFocus="image://it:IconNowPlay" Command="[NowPlayingPanel]" />
+                  <vsb:SimpleButton Name="NowPlayButton" Application="[Application]" Size="150,150" ImageNoFocus="image://it:IconNowPlay" Command="[NowPlayingPanel]" />
                   <vnpv:LargeNPV Name="NPVOption" Command="[NowPlayingPanel]" NPVSize="600,330"/>
                 </Children>
                 <Animations>
@@ -353,7 +353,7 @@
                 </Animations>
               </Panel>
 
-              <Panel Name="MainPanel" Layout="Form" Navigation="PreferFocusOrder" >
+              <Panel Name="MainPanel" Layout="Form" FocusOrder="0" >
                 <Animations>
                   <Animation Animation="animation://anim:NavigateToForward"/>
                   <Animation Animation="animation://anim:NavigateAwayBackward"/>
