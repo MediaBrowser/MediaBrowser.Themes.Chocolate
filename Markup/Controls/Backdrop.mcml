@@ -93,7 +93,8 @@
       <Binding Source="[ThemeHelper.CurrentPage]" Target="[Test.Content]"/>
       
       <!--Fade backdrop on poster view-->
-      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" SourceValue="Poster" Target="[Backdrop.Alpha]" Value=".45" />
+      <Condition Source="[Folder.DisplayPrefs.ViewTypeString]" SourceValue="Poster" Target="[FadePanel.Visible]" Value="true" />
+      <Default Target="[FadePanel.Visible]" Value="false" />
 
     </Rules>
 
@@ -115,6 +116,8 @@
             <Children>
 
               <me:NowPlayingBackdrop Name="NowPlayingBackdrop" Application="[Application]"  Constrain="[Constrain]" />
+
+              <ColorFill Name="FadePanel" Content="Black" Alpha=".55" Visible="false" Layout="Fill" />
 
               <me:Backdrop4 Name="Backdrop" Item="[Folder.SelectedChild]" Application="[Application]" Visible="true" Constrain="[Constrain]"/>
 
