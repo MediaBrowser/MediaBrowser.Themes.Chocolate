@@ -392,6 +392,31 @@
                     </Children>
                   </Panel>
 
+                  <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Anchor" Visible="[Item.IsExternalDisc]" Name="ExternalIndicator">
+                    <LayoutInput>
+                      <FormLayoutInput Right="Poster, 1" Top="Poster,0"/>
+                    </LayoutInput>
+                    <Children>
+                      <Graphic Name="ExternalImage" Content="image://i:ExternalBanner" Margins="0,0,0,0" MaximumSize="75,75" MaintainAspectRatio="true">
+                        <LayoutInput>
+                          <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                        </LayoutInput>
+                      </Graphic>
+                    </Children>
+                  </Panel>
+                  <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Anchor" Visible="[Item.IsOffline]" Name="OfflineIndicator">
+                    <LayoutInput>
+                      <FormLayoutInput Right="Poster, 1" Top="Poster,0"/>
+                    </LayoutInput>
+                    <Children>
+                      <Graphic Name="OfflineImage" Content="image://i:OfflineBanner" Margins="0,0,0,0" MaximumSize="75,75" MaintainAspectRatio="true">
+                        <LayoutInput>
+                          <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                        </LayoutInput>
+                      </Graphic>
+                    </Children>
+                  </Panel>
+
                   <Panel Name="Poster" Padding="0,0,0,0" MaximumSize="400, 320">
                     <LayoutInput>
                       <FormLayoutInput Left="Parent,0,40" Bottom="Parent,1,-40"/>

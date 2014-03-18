@@ -196,6 +196,8 @@
       </Rule>
       <Binding Source="[Item.IsMissing]" Target="[MissingImage.Visible]" />
       <Binding Source="[Item.IsFuture]" Target="[FutureImage.Visible]" />
+      <Binding Source="[Item.IsOffline]" Target="[OfflineImage.Visible]" />
+      <Binding Source="[Item.IsExternalDisc]" Target="[ExternalImage.Visible]" />
       <Binding Source="[Item.Name]" Target="[Title.Text]" />
       <Binding Source="[Item.Overview]" Target="[Summary.Text]" />
       <Binding Target="[TxtRuntime.Content]"   Source="[Item.RunningTimeString]"/>
@@ -345,6 +347,16 @@
                     </Children>
                   </Panel>
 
+                  <Graphic Name="ExternalImage" Visible="false" Content="image://i:ExternalBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
+                    <LayoutInput>
+                      <AnchorLayoutInput Horizontal="Far" Top="PosterImage,0"/>
+                    </LayoutInput>
+                  </Graphic>
+                  <Graphic Name="OfflineImage" Visible="false" Content="image://i:OfflineBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
+                    <LayoutInput>
+                      <AnchorLayoutInput Horizontal="Far" Top="PosterImage,0"/>
+                    </LayoutInput>
+                  </Graphic>
                   <Graphic Name="MissingImage" Visible="false" Content="image://i:MissingBanner"  MaximumSize="100,100" MaintainAspectRatio="true">
                     <LayoutInput>
                       <AnchorLayoutInput Horizontal="Far" Top="PosterImage,0"/>

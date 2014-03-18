@@ -233,6 +233,8 @@
       <Binding Source="[Item.IsFavorite]" Target="[FavIndicator.Visible]" />
       <Binding Source="[Item.IsMissing]" Target="[MissingIndicator.Visible]" />
       <Binding Source="[Item.IsFuture]" Target="[FutureIndicator.Visible]" />
+      <Binding Source="[Item.IsOffline]" Target="[OfflineIndicator.Visible]" />
+      <Binding Source="[Item.IsExternalDisc]" Target="[ExternalIndicator.Visible]" />
       <Binding Source="[Item.IsHD]" Target="[HDIndicator.Visible]"  ConditionLogicalOp="And"  >
         <Conditions>
           <Equality Source="[Application.Config.ShowHDIndicatorOnPosters]" Value="true" />
@@ -374,6 +376,30 @@
                         </LayoutInput>
                         <Children>
                           <Graphic Name="MissingImage" Content="image://i:MissingBanner" Margins="0,0,0,0" MaximumSize="75,75" MaintainAspectRatio="true">
+                            <LayoutInput>
+                              <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                            </LayoutInput>
+                          </Graphic>
+                        </Children>
+                      </Panel>
+                      <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Anchor" Visible="[Item.IsExternalDisc]" Name="ExternalIndicator">
+                        <LayoutInput>
+                          <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
+                        </LayoutInput>
+                        <Children>
+                          <Graphic Name="ExternalImage" Content="image://i:ExternalBanner" Margins="0,0,0,0" MaximumSize="75,75" MaintainAspectRatio="true">
+                            <LayoutInput>
+                              <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                            </LayoutInput>
+                          </Graphic>
+                        </Children>
+                      </Panel>
+                      <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Anchor" Visible="[Item.IsOffline]" Name="OfflineIndicator">
+                        <LayoutInput>
+                          <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
+                        </LayoutInput>
+                        <Children>
+                          <Graphic Name="OfflineImage" Content="image://i:OfflineBanner" Margins="0,0,0,0" MaximumSize="75,75" MaintainAspectRatio="true">
                             <LayoutInput>
                               <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
                             </LayoutInput>
