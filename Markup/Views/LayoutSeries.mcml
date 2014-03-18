@@ -238,32 +238,24 @@
       <Condition Source="[Item.DirectorString]" SourceValue="" Target="[TxtDirectedLbl.Visible]" Value="false" >
         <Actions>
           <Set Target="[DirectorLblSpacer.Visible]" Value="false" />
-          <Set Target="[DirectedSpacer.Visible]" Value="false" />
         </Actions>
       </Condition>
 
       <Condition Source="[Item.DirectorString]" ConditionOp="NotEquals" SourceValue="" Target="[TxtDirectedLbl.Visible]" Value="true" >
         <Actions>
           <Set Target="[DirectorLblSpacer.Visible]" Value="true" />
-          <Set Target="[DirectedSpacer.Visible]" Value="true" />
         </Actions>
       </Condition>
 
-      <Condition Source="[Item.RunningTimeString]" SourceValue="" Target="[RunEndSpacer.Visible]" Value="false" >
-      </Condition>
-
-      <Condition Source="[Item.ProductionYearString]" SourceValue="" Target="[AiredSpacer.Visible]" Value="false" >
-        <Conditions>
-          <Equality Source="[Item.FirstAired]" Value="" />
-        </Conditions>
-      </Condition>
-
+      <Binding Source="[Item.SubTitle]" Target="[SubTitle.Content]" />
+      <Binding Source="[Item.HasSubTitle]" Target="[DirectedSpacer.Visible]" />
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://vi:Icon720" />
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://vi:Icon1080" />
 
       <Binding Target="[EndTime.Content]" Source="[Item.EndTimeString]" >
         <Conditions>
           <Equality Source="[Helper.Config.ShowListEndTime]" Value="true" />
+          <Equality Source="[Item.EndTimeString]" ConditionOp="NotEquals" Value="" />
         </Conditions>
         <Actions>
           <Set Target="[RunEndSpacer.Visible]" Value="true" />
@@ -294,11 +286,13 @@
                   <FormLayoutInput Horizontal="Near" Top="TitlePanel, 1, -10"/>
                 </LayoutInput>
                 <Children>
-                  <sr:StarRating Margins="0,6,0,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
-                  <Graphic Name="RTIcon" Margins="10,6,0,0" MaintainAspectRatio="true" MaximumSize="0,20" />
-                  <Text Name="CriticScore" Font="Segoe UI Light, 14, bold" Color="color://uc:TitleColor" Margins="2,2,0,0" />
-                  <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="10,6,0,0" />
-                  <Graphic Name="HDType" Margins="12,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <sr:StarRating Margins="0,6,10,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
+                  <Graphic Name="RTIcon" Margins="0,6,10,0" MaintainAspectRatio="true" MaximumSize="0,20" />
+                  <Text Name="CriticScore" Font="Segoe UI Light, 14, bold" Color="color://uc:TitleColor" Margins="2,2,10,0" />
+                  <Text Name="TxtAired" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:TitleColor" Margins="0,0,10,0"/>
+                  <Text Name="TxtRuntime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:TitleColor" Margins="0,0,10,0"/>
+                  <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="0,6,12,0" />
+                  <Graphic Name="HDType" Margins="0,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
               </Panel>
 
@@ -321,12 +315,10 @@
                 </Layout>
                 <Children>
                   <Text Name="TxtDirectedLbl" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content="[Application.LocalStrings.#Director!cor:String]"/>
-                  <Text Name="DirectorLblSpacer" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content=": " Visible="true"/>
+                  <Text Name="DirectorLblSpacer" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content=": " Visible="false"/>
                   <Text Name="TxtDirectedBy" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
-                  <Text Name="DirectedSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="true"  />
-                  <Text Name="TxtAired" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
-                  <Text Name="AiredSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="true"  />
-                  <Text Name="TxtRuntime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark"/>
+                  <Text Name="DirectedSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="false"  />
+                  <Text Name="SubTitle" Color="color://uc:Dark"  Font="Segoe Media Center Light, 16, Bold" WordWrap="false" />
                   <Text Name="RunEndSpacer" Content=" ● " Font="font://uf:List_RunTime" Color="color://uc:Dark" Alpha="0.6" Visible="false"  />
                   <Text Name="EndTime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:Dark" Content="" Visible="false"/>
                 </Children>
