@@ -686,6 +686,16 @@
         <Conditions>
           <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
           <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season"/>
+          <Equality Source="[Item.PhysicalParent.HasPreferredImage]" Value="true"/>
+          <Equality Source="[ThemeHelper.Config.UseSeasonPoster]" Value="true"/>
+        </Conditions>
+      </Binding>
+
+      <Binding Source="[Item.Series.PreferredImage]" Target="[ItemPoster.Content]">
+        <Conditions>
+          <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
+          <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season"/>
+          <Equality Source="[Item.PhysicalParent.HasPreferredImage]" Value="false"/>
           <Equality Source="[ThemeHelper.Config.UseSeasonPoster]" Value="true"/>
         </Conditions>
       </Binding>
