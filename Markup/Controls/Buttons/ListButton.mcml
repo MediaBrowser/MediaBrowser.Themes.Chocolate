@@ -93,7 +93,8 @@
         <Actions>
           <Set Target="[ItemColor.Content]" Value="80,3,117,200"/>
           <!--<PlaySound Sound="sound://sd:Focus" />-->
-          <Set Target="[Folder.SelectedChildIndex]" Value="[Index.Value]"/>
+          <Set Target="[Folder.SelectedChildIndex]" Value="[Index.SourceValue]"/>
+          <Set Target="[Application.CurrentItem]" Value="[Item]"/>
           <!--<Set Target="[SelectedIndex.Value]" Value="[Index.Value]"/>-->
           <Set Target="[ItemBanner.Visible]" Value="true" />
           <Set Target="[ItemBanner.Alpha]" Value="1" />
