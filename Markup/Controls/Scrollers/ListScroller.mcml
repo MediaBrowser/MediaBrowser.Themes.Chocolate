@@ -94,14 +94,14 @@
               </Panel>
 
               <!-- List Repeater -->
-              <Scroller Orientation="Vertical" Name="Scroller" Navigation="RememberFocus" ScrollingData="[ScrollingData]" FadeSize="10"  >
+              <Scroller Orientation="Vertical" Name="Scroller" ScrollingData="[ScrollingData]" FadeSize="10"  >
                 <LayoutInput>
                   <FormLayoutInput Top="Parent,0" Bottom="Parent,1,-40"/>
                 </LayoutInput>
                 <Children>
-                  <Repeater  Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" DiscardOffscreenVisuals="false">
+                  <Repeater  Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" Navigation="RememberFocus, Column" DiscardOffscreenVisuals="true">
                     <Layout>
-                      <FlowLayout Orientation="Vertical" Spacing="1,1" AllowWrap="true" Repeat="Never"/>
+                      <FlowLayout Orientation="Vertical" Spacing="1,1" Repeat="WhenTooBig" HideOffscreenItems="true" MissingItemPolicy="SizeToSmallest"/>
                     </Layout>
                     <Animations>
                       <Animation Type="Move">
