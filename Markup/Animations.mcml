@@ -1,7 +1,31 @@
 <Mcml xmlns="http://schemas.microsoft.com/2008/mcml"
-      xmlns:cor="assembly://MSCorLib/System">
+      xmlns:cor="assembly://MSCorLib/System"
+      xmlns:s="file://Styles_DoNotEdit.mcml">
 
-  
+  <Animation Name="PosterDim.GainFocus" Type="GainFocus">
+    <Keyframes>
+      <ColorKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve, 0.8"/>
+      <ColorKeyframe Time="0.8" RelativeTo="Absolute" Value="White"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="PosterDim.LoseFocus" Type="LoseFocus">
+    <Keyframes>
+      <ColorKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve, 0.8"/>
+      <ColorKeyframe Time="0.8" RelativeTo="Absolute" Value="color://s:DimPosterFilter"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="PosterView.PosterDim.GainFocus" Type="GainFocus">
+    <Keyframes>
+      <ColorKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve, 0.8"/>
+      <ColorKeyframe Time="0.45" RelativeTo="Absolute" Value="White"/>
+    </Keyframes>
+  </Animation>
+  <Animation Name="PosterView.PosterDim.LoseFocus" Type="LoseFocus">
+    <Keyframes>
+      <ColorKeyframe Time="0" RelativeTo="Current" Interpolation="SCurve, 0.8"/>
+      <ColorKeyframe Time="0.45" RelativeTo="Absolute" Value="color://s:DimPosterFilter"/>
+    </Keyframes>
+  </Animation>
 
   <Animation Name="ShowSlideRight" Type="ContentChangeShow">
     <Keyframes>

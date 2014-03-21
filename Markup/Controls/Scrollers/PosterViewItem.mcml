@@ -7,7 +7,8 @@
       xmlns:pp="resx://MediaBrowser/MediaBrowser.Resources/PopupPlay"
       xmlns:ib="resx://Chocolate/Chocolate.Resources/ItemButton"
       xmlns:me="Me"
-      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images">
+      xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations">
 
   <UI Name="PosterViewItem" BaseUI="ib:ItemButton">
     <Properties>
@@ -139,8 +140,25 @@
         </Actions>
       </Changed>
 
-      <Condition Source="[Application.Config.DimUnselectedPosters]" ConditionOp="Equals" SourceValue="false" Target="[ConstraintPanel.ColorFilter]" Value="White" />
-      <Condition Source="[Application.Config.DimUnselectedPosters]" ConditionOp="Equals" SourceValue="false" Target="[ConstraintPanel.Alpha]" Value="1" />
+      <!--Dim Unselected Posters-->
+      <Default Target="[ConstraintPanel.ColorFilter]" Value="color://s:DimPosterFilter">
+        <Conditions>
+          <Equality Source="[Application.Config.DimUnselectedPosters]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ConstraintPanel.AttachAnimation]" animation="animation://anim:PosterView.PosterDim.GainFocus" ExclusiveApply="false"/>
+          <Invoke Target="[ConstraintPanel.AttachAnimation]" animation="animation://anim:PosterView.PosterDim.LoseFocus"/>
+        </Actions>
+      </Default>
+      <Default Target="[ConstraintPanel.ColorFilter]" Value="White">
+        <Conditions>
+          <Equality Source="[Application.Config.DimUnselectedPosters]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ConstraintPanel.DetachAnimation]" type="GainFocus" ExclusiveApply="false"/>
+          <Invoke Target="[ConstraintPanel.DetachAnimation]" type="LoseFocus"/>
+        </Actions>
+      </Default>
 
       <Condition Source="[InFocus.Value]" SourceValue="true">
         <Actions>
@@ -149,8 +167,6 @@
           <!--<Set Target="[BelowLabelPanel.Alpha]" Value="1" />-->
           <Set Target="[BoxItem.Content]" Value="color://s:PosterZoomBackground"/>
           <Set Target="[BoxArt.Content]" Value="[Item.PreferredImage]"/>
-          <Set Target="[ConstraintPanel.ColorFilter]" Value="White" />
-          <Set Target="[ConstraintPanel.Alpha]" Value="1" />
           <!--<Set Target="[BoxArt.MaintainAspectRatio]" Value="[Item.SmallImageIsDistorted]">
             <Transformer>
               <BooleanTransformer Inverse="true"/>
@@ -278,7 +294,7 @@
                 <Children>
                   <Text Name="BelowLabelPanel" Margins="0,5,0,-3" Alpha="1" Color="color://s:FontColorLight"  Font="[TopLabelFont]" Content="[Item.Name]" WordWrap="false" HorizontalAlignment="Near">
                   </Text>
-                  <Panel Name="ConstraintPanel" Padding="0,0,0,0" MaximumSize="[ImageSize.Value]" MinimumSize="[ImageSize.Value]" ColorFilter="color://s:DimPosterFilter" Alpha="global://s:PosterDimAlpha" >
+                  <Panel Name="ConstraintPanel" Padding="0,0,0,0" MaximumSize="[ImageSize.Value]" MinimumSize="[ImageSize.Value]">
                     <Layout>
                       <AnchorLayout SizeToHorizontalChildren="false" SizeToVerticalChildren="false"/>
                     </Layout>
