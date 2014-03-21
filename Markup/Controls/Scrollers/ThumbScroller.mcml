@@ -14,7 +14,8 @@
       xmlns:shell ="assembly://Microsoft.MediaCenter.Shell/Microsoft.MediaCenter.Shell"
       xmlns:input ="assembly://Microsoft.MediaCenter.UI/Microsoft.MediaCenter.UI.Input"
       xmlns:ui ="assembly://Microsoft.MediaCenter.UI/Microsoft.MediaCenter.UI"
-      xmlns:ch="assembly://Chocolate/Chocolate">
+      xmlns:ch="assembly://Chocolate/Chocolate"
+      xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations">
 
   <UI Name="ThumbScroller">
     <Properties>
@@ -252,8 +253,6 @@
         <Actions>
           <Set Target="[Main.Scale]" Value="1.1,1.1,2"/>
           <Set Target="[Main.Rotation]" Value="0deg;0,1,0" />
-          <Set Target="[ConstraintPanel1.ColorFilter]" Value="White" />
-          <Set Target="[ConstraintPanel1.Alpha]" Value="1" />
           <Set Value="[Item.PreferredImage]" Target="[g1.Content]"/>
         </Actions>
       </Condition>
@@ -302,8 +301,25 @@
         </Actions>
       </Condition>
 
-      <Condition Source="[Application.Config.DimUnselectedPosters]" ConditionOp="Equals" SourceValue="false" Target="[ConstraintPanel1.ColorFilter]" Value="White" />
-      <Condition Source="[Application.Config.DimUnselectedPosters]" ConditionOp="Equals" SourceValue="false" Target="[ConstraintPanel1.Alpha]" Value="1" />
+      <!--Dim Unselected Posters-->
+      <Default Target="[ConstraintPanel1.ColorFilter]" Value="color://s:DimPosterFilter">
+        <Conditions>
+          <Equality Source="[Application.Config.DimUnselectedPosters]" Value="true"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ConstraintPanel1.AttachAnimation]" animation="animation://anim:PosterDim.GainFocus" ExclusiveApply="false"/>
+          <Invoke Target="[ConstraintPanel1.AttachAnimation]" animation="animation://anim:PosterDim.LoseFocus"/>
+        </Actions>
+      </Default>
+      <Default Target="[ConstraintPanel1.ColorFilter]" Value="White">
+        <Conditions>
+          <Equality Source="[Application.Config.DimUnselectedPosters]" Value="false"/>
+        </Conditions>
+        <Actions>
+          <Invoke Target="[ConstraintPanel1.DetachAnimation]" type="GainFocus" ExclusiveApply="false"/>
+          <Invoke Target="[ConstraintPanel1.DetachAnimation]" type="LoseFocus"/>
+        </Actions>
+      </Default>
 
       <!-- Set proper rotation. -->
 
@@ -394,7 +410,7 @@
             <Children>
 
               <Text Name="BelowLabelPanel" Margins="0,5,0,-3" Alpha="1" Color="color://s:FontColorLight"  Font="[TopLabelFont]" Content="[Item.Name]" WordWrap="false" HorizontalAlignment="Near"></Text>
-              <Panel Name="ConstraintPanel1" CenterPointPercent="0.5,0.5,0.5" Padding="0,0,0,0" MaximumSize="[ImageSize.Value]" MinimumSize="[ImageSize.Value]" ColorFilter="150,150,150" >
+              <Panel Name="ConstraintPanel1" CenterPointPercent="0.5,0.5,0.5" Padding="0,0,0,0" MaximumSize="[ImageSize.Value]" MinimumSize="[ImageSize.Value]">
                 <Layout>
                   <AnchorLayout SizeToHorizontalChildren="false" SizeToVerticalChildren="false"/>
                 </Layout>
