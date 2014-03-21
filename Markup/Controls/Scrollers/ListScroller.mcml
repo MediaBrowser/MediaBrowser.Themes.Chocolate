@@ -101,7 +101,7 @@
                 <Children>
                   <Repeater  Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" Navigation="RememberFocus, Column" DiscardOffscreenVisuals="true">
                     <Layout>
-                      <FlowLayout Orientation="Vertical" Spacing="1,1" Repeat="WhenTooBig" HideOffscreenItems="true" MissingItemPolicy="SizeToSmallest"/>
+                      <FlowLayout Orientation="Vertical" Spacing="1,1" Repeat="Never" HideOffscreenItems="true" MissingItemPolicy="SizeToSmallest"/>
                     </Layout>
                     <Animations>
                       <Animation Type="Move">
