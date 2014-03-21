@@ -78,6 +78,7 @@
           <!--<PlaySound Sound="sound://sd:Focus" />-->
           <!--<Set Target="[SelectedIndex.Value]" Value="[Index.Value]"/>-->
           <Set Target="[Folder.SelectedChildIndex]" Value="[Index.SourceValue]"/>
+          <Set Target="[Application.CurrentItem]" Value="[Item]"/>
           <Set Target="[ThemeHelper.CurrentItem]" Value="[Item]"/>
           <Set Target="[ItemBanner.Visible]" Value="false" />
           <Set Target="[ItemColor.MaximumSize]" Value="400,28" />
