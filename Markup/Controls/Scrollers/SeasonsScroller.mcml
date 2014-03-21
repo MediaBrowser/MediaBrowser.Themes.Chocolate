@@ -82,7 +82,16 @@
                   </Animation>
                 </Animations>
                 <Content >
-                  <me:SeasonList Application="[Application]" Index="[RepeatedItemIndex]" Parent="[Folder]" Folder="[RepeatedItem!lib:FolderModel]"  ThemeHelper="[ThemeHelper]"/>
+                  <me:SeasonList Application="[Application]" Index="[RepeatedItemIndex]" Parent="[Folder]" Folder="[RepeatedItem!lib:FolderModel]"  ThemeHelper="[ThemeHelper]">
+                    <Animations>
+                      <Animation Type="Move">
+                        <Keyframes>
+                          <PositionKeyframe Time="0" RelativeTo="Current" Interpolation="EaseIn, 1.0, 0.25"/>
+                          <PositionKeyframe Time="0.25" RelativeTo="Final"  />
+                        </Keyframes>
+                      </Animation>
+                    </Animations>
+                  </me:SeasonList>
                 </Content>
               </Repeater>
             </Children>
