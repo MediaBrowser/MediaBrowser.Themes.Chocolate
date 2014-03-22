@@ -99,7 +99,7 @@
                   <FormLayoutInput Top="Parent,0" Bottom="Parent,1,-40"/>
                 </LayoutInput>
                 <Children>
-                  <Repeater  Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" Navigation="RememberFocus, Column" DiscardOffscreenVisuals="true">
+                  <Repeater  Source="[Folder.Children]" Name="MyRepeater" ContentName="BaseItem" Navigation="RememberFocus, ContainVertical" DiscardOffscreenVisuals="true">
                     <Layout>
                       <FlowLayout Orientation="Vertical" Spacing="1,1" Repeat="Never" HideOffscreenItems="true" MissingItemPolicy="SizeToSmallest"/>
                     </Layout>
