@@ -327,6 +327,7 @@
       <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
       
       <!--Adjust width of overview based on amount of text-->
+      <Condition Source="[Item.Overview.Length]" ConditionOp="GreaterThan" SourceValue="520" Target="[ItemInfoPanel.OverviewSize]" Value="950,0" />
       <Condition Source="[Item.Overview.Length]" ConditionOp="GreaterThan" SourceValue="460" Target="[ItemInfoPanel.OverviewSize]" Value="800,0" />
       <Condition Source="[Item.Overview.Length]" ConditionOp="GreaterThan" SourceValue="400" Target="[ItemInfoPanel.OverviewSize]" Value="700,0" />
       <Default  Target="[ItemInfoPanel.OverviewSize]" Value="550,0" />
