@@ -22,7 +22,7 @@
 
     <Locals>
       <Timer Name="ScrollAnimTimer" AutoRepeat="false" Enabled="false" Interval="150"/>
-      <ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollingHandler"/>
+      <ScrollingHandler HandleDirectionalKeys="true" HandleHomeEndKeys="true" GesturePanEnabled="true" HandleMouseWheel="true" HandlePageCommands="true" HandlePageKeys="true" HandlerStage="Bubbled" Name="ScrollingHandler"/>
       <ScrollingData Name="SD" LockedAlignment="0.7" LockedPosition="0.7"/>
       <IntRangedValue Name="SelectRepeaterIndex"/>
       <GridLayout Name="MyLayout" Orientation="Horizontal" AllowWrap="true"
