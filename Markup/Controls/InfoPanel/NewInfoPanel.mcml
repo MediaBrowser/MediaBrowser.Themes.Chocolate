@@ -44,6 +44,7 @@
       <Binding Target="[Runtime.Content]" Source="[Item.RunningTimeString]"></Binding>
       <Binding Target="[Summary.MaximumSize]" Source="[OverviewSize]" />
       <Binding Target="[Summary.MinimumSize]" Source="[OverviewSize]" />
+      <Binding Target="[DirectorRepeater.Source]" Source="[Item.Directors]" />
       <Condition Source="[OverviewSize.Width]" SourceValue="600" ConditionOp="GreaterThan" Target="[TextBackdrop.Visible]" Value="true" />
 
       <!--Use Production Year-->
@@ -161,25 +162,29 @@
                       </Repeater>
                     </Children>
                   </Panel>
-                  <Panel Name="Directors" Layout="HorizontalFlow" FocusOrder="10" >
+                  <Panel Name="Sub2" Layout="HorizontalFlow" FocusOrder="10" >
                     <Children>
-                      <Text Name="DirectorLabel" Margins="0,0,5,0" Color="color://s:Choc_Label" Font="font://uf:Detail_Director_Label" WordWrap="false" Content="[Application.LocalStrings.#DirectedByDetail!cor:String]"/>
-                      <Repeater Name="DirectorRepeater" Source="[Item.Directors]" Margins="0,0,0,0" MaximumSize="0,150" >
-                        <Layout>
-                          <FlowLayout Orientation="Horizontal" AllowWrap="true"  Spacing="25,0"  />
-                        </Layout>
+                      <Panel Name="Directors" Layout="HorizontalFlow" >
+                        <Children>
+                          <Text Name="DirectorLabel" Margins="0,0,5,0" Color="color://s:Choc_Label" Font="font://uf:Detail_Director_Label" WordWrap="false" Content="[Application.LocalStrings.#DirectedByDetail!cor:String]"/>
+                          <Repeater Name="DirectorRepeater" Source="[Item.Directors]" Margins="0,0,0,0" MaximumSize="0,150" >
+                            <Layout>
+                              <FlowLayout Orientation="Horizontal" AllowWrap="true"  Spacing="25,0"  />
+                            </Layout>
 
-                        <Divider>
-                          <Text Content="●" Font="font://f:MM_GenreFont" Color="color://s:FontColorMedium" Alpha="0.6"  />
-                        </Divider>
-                        <Content>
-                          <db:DirectorButton Text="[RepeatedItem!cor:String]"
-                                  Application="[Application]" Item="[Item]"
-                                  DirectorName="[RepeatedItem!cor:String]" Margins="0,4,0,0"
-                                  Font="font://uf:Detail_Director" Color="color://s:Choc_Value"
-													/>
-                        </Content>
-                      </Repeater>
+                            <Divider>
+                              <Text Content="●" Font="font://f:MM_GenreFont" Color="color://s:FontColorMedium" Alpha="0.6"  />
+                            </Divider>
+                            <Content>
+                              <db:DirectorButton Text="[RepeatedItem!cor:String]"
+                                      Application="[Application]" Item="[Item]"
+                                      DirectorName="[RepeatedItem!cor:String]" Margins="0,4,0,0"
+                                      Font="font://uf:Detail_Director" Color="color://s:Choc_Value"
+													    />
+                            </Content>
+                          </Repeater>
+                        </Children>
+                      </Panel>
                       <Panel Name="SubTitles" Layout="HorizontalFlow" Margins="10,0,0,0" >
                         <Children>
                           <Text Name="SubLabel" Margins="0,0,5,0" Color="color://s:Choc_Label" Font="font://uf:Detail_Director_Label" WordWrap="false" Content="[Application.LocalStrings.#SubsDetail!cor:String]"/>
