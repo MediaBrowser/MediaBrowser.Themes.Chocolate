@@ -76,8 +76,8 @@
       <KeyHandler Name="PlayShortcut" Handle="true" HandlerStage="Bubbled" Key="P" Modifiers="Control" Command="[PlayMovieCommand]"/>
       <ShortcutHandler Name="ChannelDown" Shortcut="ChannelDown" Handle="true" HandlerStage="Bubbled" Command="[PreviousItemCommand]"/>
       <ShortcutHandler Name="ChannelUp" Shortcut="ChannelUp" Handle="true" HandlerStage="Bubbled" Command="[NextItemCommand]"/>
-      <ShortcutHandler Name="SkipBack" Shortcut="SkipBack" Handle="true" HandlerStage="Bubbled" Command="[PreviousItemCommand]"/>
-      <ShortcutHandler Name="SkipForward" Shortcut="SkipForward" Handle="true" HandlerStage="Bubbled" Command="[NextItemCommand]"/>
+      <!--<ShortcutHandler Name="SkipBack" Shortcut="SkipBack" Handle="true" HandlerStage="Bubbled" Command="[PreviousItemCommand]"/>
+      <ShortcutHandler Name="SkipForward" Shortcut="SkipForward" Handle="true" HandlerStage="Bubbled" Command="[NextItemCommand]"/>-->
       <ShortcutHandler Name="BackBtn" Shortcut="Back" Handle="false" HandlerStage="Routed"/>
       <ShortcutHandler Name="ClearBtn" Handle="true" Shortcut="Clear" HandlerStage="Bubbled" />
       <KeyHandler Name="WatchedShortcut" Handle="true" Key="W" Modifiers="Control" HandlerStage="Bubbled"/>
