@@ -41,17 +41,7 @@ namespace Chocolate
 
         private string calculateEndTime()
         {
-            if (CurrentItem == null || !CurrentItem.HasMediaInfo)
-            {
-                return "";
-            }
-            int runTime = this.CurrentItem.MediaInfo.RunTime;
-            DateTime time = DateTime.Now.AddMinutes((double) runTime);
-            if (this.Config.Enable24hr)
-            {
-                return time.ToString("HH:mm");
-            }
-            return time.ToString("h:mm");
+            return CurrentItem == null ? "" : CurrentItem.EndTime.ToString(Config.Enable24hr ? "HH:mm" : "h:mm");
         }
 
         private float calculatePercentWatched()
