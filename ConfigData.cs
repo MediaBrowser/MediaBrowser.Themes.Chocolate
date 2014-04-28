@@ -52,6 +52,7 @@
         public bool ShowDiscDetail = true;
         public bool ShowListBackground = false;
         public bool ShowPosterInfo = true;
+        public bool ShowLegend = true;
 
         public ConfigData()
         {

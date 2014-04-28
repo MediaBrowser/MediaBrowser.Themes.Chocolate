@@ -275,7 +275,9 @@
     <Content Include="Images\Ultimate\Untitled-2.png" />
     <None Include="Images\Ultimate\zoompane.png" />
     <None Include="Images\Ultimate\Unwatched.png" />
-    <Content Include="Markup\ConfigPanel.mcml" />
+    <Content Include="Markup\ConfigPanel.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Backdrop.mcml">
       <SubType>Designer</SubType>
     </Content>

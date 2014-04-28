@@ -387,6 +387,8 @@
         </Actions>
       </Changed>
 
+      <Binding Source="[Helper.ShowLegend]" Target="[Legend.Visible]" />
+
       <!--Show indicator of empty folder-->
       <Condition Source="[Folder.Children.Count]" SourceValue="0" Target="[NoItems.Visible]" Value="true" />
 
@@ -490,14 +492,17 @@
                 </Children>
               </Panel>
 
+
               <Panel Layout="Form" Navigation="WrapDirectional">
                 <Children>
                   <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]"
                                   SwitchUser="[SwitchUser]" OpenSearch="[OpenSearch]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
                     <LayoutInput>
-                      <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" Bottom="Parent,0, 200" />
+                      <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" />
                     </LayoutInput>
                   </me:ButtonPanel>
+
+                  <me:SCLegend Name="Legend" Application="[Application]" Visible="false" />
 
                   <!--Empty Folder display-->
                   <Text Name="NoItems" Content="No Items" Font="Segoe UI Light, 108, Bold" Color="White" Alpha=".7" Visible="false" />
@@ -541,12 +546,14 @@
         <Actions>
           <Set Target="[ButtonPanel.Alpha]" Value="1" />
           <Set Target="[ToolTip.Visible]" Value="true" />
+          <Set Target="[Helper.ShowLegend]" Value="true" />
         </Actions>
       </Condition>
       <Default Target="[Helper.ButtonPanelHasFocus]" Value="false"/>
       <Condition Source="[Input.DeepKeyFocus]" SourceValue="false" Target="[ButtonPanel.Alpha]" Value=".7">
         <Actions>
           <Set Target="[ToolTip.Visible]" Value="false" />
+          <Set Target="[Helper.ShowLegend]" Value="false" />
         </Actions>
       </Condition>
 
@@ -609,7 +616,6 @@
       <Panel Layout="Anchor"  >
         <Children>
           <Panel Name="ButtonPanel" Layout="HorizontalFlow" FocusOrder="100">
-
             <Animations>
               <Animation Type="Show">
                 <Keyframes>
@@ -710,6 +716,73 @@
               </Graphic>
             </Children>
           </Panel>
+          
+
+        </Children>
+      </Panel>
+    </Content>
+  </UI>
+
+  <UI Name="SCLegend" >
+    <Properties>
+      <a:Application Name="Application" Application="$Required"/>
+    </Properties>
+    <Content>
+      <Panel Name="Legend" MaximumSize="600, 280" >
+        <Animations>
+          <Animation Type="Show">
+            <Keyframes>
+              <AlphaKeyframe Value="0" Time="0"/>
+              <AlphaKeyframe Value="1" Time=".8"/>
+            </Keyframes>
+          </Animation>
+        </Animations>
+        <Children>
+          <Graphic Content="image://vi:ButtonPanelCenter" SizingPolicy="SizeToChildren" Layout="Form" Padding="20,20,20,20">
+            <Children>
+              <Panel Name="Title" Margins="0,0,0,10" >
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Center" Top="Parent, 0"/>
+                </LayoutInput>
+                <Children>
+                  <Text Content="[Application.LocalStrings.#ShortcutsSC!cor:String]" Font="Segoe Media Center, 18, Bold" Color="White" Alpha=".7" />
+                </Children>
+              </Panel>
+              <ColorFill Name="Line" Content="LightGray" Margins="0,0,0,20" MaximumSize="0,2" Layout="Fill" Alpha=".7" >
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Center" Top="Title, 1"/>
+                </LayoutInput>
+                
+              </ColorFill>
+
+              <Panel Layout="HorizontalFlow" >
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Center" Top="Line, 1"/>
+                </LayoutInput>
+                <Children>
+                  <Panel Layout="VerticalFlow" MaximumSize="200, 0" MinimumSize="200,0" Padding="5,0,5,0" >
+                    <Children>
+                      <Text Content="[Application.LocalStrings.#HomeSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#SearchSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#ContextSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#WatchedSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#PlaySC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                    </Children>
+                  </Panel>
+                  <Panel Layout="VerticalFlow" Padding="5,0,5,0" >
+                    <Children>
+                      <Text Content="[Application.LocalStrings.#HomeSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#SearchSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#ContextSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#WatchedSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#PlaySCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                    </Children>
+                  </Panel>
+                </Children>
+              </Panel>
+
+            </Children>
+          </Graphic>
         </Children>
       </Panel>
     </Content>

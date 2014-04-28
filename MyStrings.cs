@@ -93,6 +93,8 @@
         public string ShowListBackground = "Show List Background";
         public string ShowListBackgroundDesc = "Show A Dark Background Under the List.  Should only be needed in odd screen size situations.";
         public string ShowInfoIcons = "Show Info Icons";
+        public string ShowLegend = "Show Shortcut Legend";
+        public string ShowLegendDesc = "Show A Legend of Available Shortcuts when config menu is in focus";
         public string ShowInfoIconsBackgrounds = "Show Info Icon Background";
         public string ShowInfoIconsBackgroundsDesc = "Adds semi-transparent background to Info Icons.";
         public string ShowInfoIconsDesc = "Displays Media Info Icons in various views.";

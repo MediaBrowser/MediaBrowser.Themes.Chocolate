@@ -610,6 +610,23 @@
             }
         }
 
+        public bool ShowLegend
+        {
+            get
+            {
+                return this.data.ShowLegend;
+            }
+            set
+            {
+                if (this.data.ShowLegend != value)
+                {
+                    this.data.ShowLegend = value;
+                    base.FirePropertyChanged("ShowLegend");
+                    this.Save();
+                }
+            }
+        }
+
         public bool ShowNPV
         {
             get

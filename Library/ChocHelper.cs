@@ -25,6 +25,7 @@ namespace Chocolate
         private Timer OverviewTimer;
 
         private static SizeRef _seasonPosterSize = new SizeRef(new Size(200,300));
+        private bool showLegend;
 
         public ChocHelper()
         {
@@ -471,6 +472,19 @@ namespace Chocolate
             {
                 isMenuOpen = value;
                 base.FirePropertyChanged("IsMenuOpen");
+            }
+        }
+
+        public bool ShowLegend
+        {
+            get
+            {
+                return showLegend && Config.ShowLegend;
+            }
+            set
+            {
+                showLegend = value;
+                FirePropertyChanged("ShowLegend");
             }
         }
 
