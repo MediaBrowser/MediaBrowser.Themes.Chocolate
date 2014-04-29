@@ -43,8 +43,6 @@
       <BooleanChoice Name="ShowNPV" Value="[Helper.Config.ShowNPV]" />
       <BooleanChoice Name="ShowLegend" Value="[Helper.Config.ShowLegend]" />
       
-      <BooleanChoice Name="AskToQuit" Value="[Helper.Config.AskToQuit]" />
-
       <Choice Name="NPVAR">
         <Options>
           <cor:String String="Normal" />
@@ -124,12 +122,6 @@
         </Actions>
       </Changed>  
       
-      <Changed Source="[AskToQuitCB.Checked.Value]">
-        <Actions>
-          <Set Target="[Helper.Config.AskToQuit]" Value="[AskToQuitCB.Checked.Value]" />
-        </Actions>
-      </Changed>
-      
       <Changed Source="[ShowLegendCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowLegend]" Value="[ShowLegendCB.Checked.Value]" />
@@ -151,7 +143,6 @@
               <Text Content="General Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>
               <cb:CheckBox Name="ShowConfigCB" Label="[Application.LocalStrings.#ShowConfig!cor:String]" Checked="[ShowConfig]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="Enable24hrCB" Label="[Application.LocalStrings.#Enable24hr!cor:String]" Checked="[Enable24hr]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="AskToQuitCB" Label="[Application.LocalStrings.#AskToQuit!cor:String]" Checked="[AskToQuit]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowLegendCB" Label="[Application.LocalStrings.#ShowLegend!cor:String]" Checked="[ShowLegend]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Media Options Panel-->
               <Text Content="Media Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="0,10,0,10"/>

@@ -619,21 +619,6 @@ namespace Chocolate
             }
         }
 
-        #region Prevent Quit from EHS
-        public void AskToQuit()
-        {
-            Async.Queue("Exit confirmation", () =>
-                                                 {
-                                                     if (MediaBrowser.Application.CurrentInstance.YesNoBox(LocalizedStrings.Instance.GetString("ConfirmExit")) == "Y")
-                                                     {
-                                                         MediaBrowser.Application.CurrentInstance.BackOut();
-                                                     }
-
-                                                 });
-
-
-        }
-        #endregion
     }
 }
 

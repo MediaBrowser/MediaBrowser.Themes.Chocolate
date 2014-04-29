@@ -815,22 +815,6 @@
             }
         }
 
-        public bool AskToQuit
-        {
-            get
-            {
-                return this.data.AskToQuit;
-            }
-            set
-            {
-                if (this.data.AskToQuit != value)
-                {
-                    this.data.AskToQuit = value;
-                    base.FirePropertyChanged("AskToQuit");
-                    this.Save();
-                }
-            }
-        }
     }
 }
 
