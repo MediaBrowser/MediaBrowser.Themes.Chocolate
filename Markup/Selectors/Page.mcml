@@ -11,6 +11,7 @@
   xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
   xmlns:an="resx://MediaBrowser/MediaBrowser.Resources/Animations"
   xmlns:cm="resx://Chocolate/Chocolate.Resources/ContextMenu"
+    xmlns:um="resx://MediaBrowser/MediaBrowser.Resources/UserMenu"
   xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
 
   xmlns:cc="resx://Chocolate/Chocolate.Resources/Colors"
@@ -424,7 +425,7 @@
 
               <pp:PopupPlay Name="PopupPlay" Visible="false" Item="[Folder]" Close="[ClosePopupPlay]" Application="[Application]" />
               <cm:ContextMenu Name="ContextMenu" Application="[Application]" ThemeHelper="[Helper]" Close="[CloseContextMenu]" Visible="false" />
-              <cm:UserMenu Name="UserMenu" Application="[Application]" ThemeHelper="[Helper]" Close="[CloseUserMenu]" Visible="false" />
+              <um:UserMenu Name="UserMenu" Application="[Application]" Close="[CloseUserMenu]" Visible="false" />
 
               <pvm:PopupViewMenu  Name="ViewConfig" Application="[Application]" Visible="false"  Close="[CloseViewConfiguration]"  Prefs="[Folder.DisplayPrefs]"/>
               <prm:PopupRadioMenu Name="SortConfig" Application="[Application]"  Visible="false"  Close="[CloseSortConfiguration]"  Choice="[Folder.DisplayPrefs.SortOrders]"/>
