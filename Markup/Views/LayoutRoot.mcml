@@ -701,13 +701,14 @@
       </Binding>
 
       <Binding Source="[Item.PreferredImage]" Target="[ItemPoster.Content]"/>
+      <Binding Source="[Item.HaveWatched]" Target="[TickIndicatorPanel.Visible]" />
 
       <Changed Source="[Input.KeyFocus]" >
         <Conditions>
           <Equality Source="[Input.KeyFocus]" Value="false"/>
         </Conditions>
         <Actions>
-          <Set Target="[ItemPoster.Scale]" Value="1,1,1"/>
+          <Set Target="[ConstraintPanel.Scale]" Value="1,1,1"/>
         </Actions>
       </Changed>
 
@@ -716,7 +717,7 @@
           <Equality Source="[Input.KeyFocus]" Value="true"/>
         </Conditions>
         <Actions>
-          <Set Target="[ItemPoster.Scale]" Value="1.15,1.15,1"/>
+          <Set Target="[ConstraintPanel.Scale]" Value="1.15,1.15,1"/>
           <Set Target="[Application.CurrentItem]" Value="[Item]"/>
         </Actions>
       </Changed>
@@ -773,11 +774,7 @@
           <AnchorLayout SizeToHorizontalChildren="true" SizeToVerticalChildren="false"/>
         </Layout>
         <Children>
-
-          <Graphic Name="ItemPoster" Content="resx://MediaBrowser/Mediabrowser.Resources/MissingPerson" MaximumSize="380,380" MaintainAspectRatio="true" SizingPolicy="SizeToConstraint" Scale="1,1,1" CenterPointPercent="0.5,0.5,1.0">
-            <LayoutInput>
-              <AnchorLayoutInput ContributesToWidth="true" Vertical="Center"/>
-            </LayoutInput>
+          <Panel Name="ConstraintPanel" Layout="Anchor" MaximumSize="380,380" Scale="1,1,1" CenterPointPercent="0.5,0.5,1.0" >
             <Animations>
               <Animation CenterPointPercent="0.5,0.5,1.0" Type="Scale">
                 <Keyframes>
@@ -786,7 +783,28 @@
                 </Keyframes>
               </Animation>
             </Animations>
-          </Graphic>
+            <Children>
+              <Panel Alpha="0.8" Name="TickIndicatorPanel" MaximumSize="42,42" Margins="5,10,10,0">
+                <LayoutInput>
+                  <AnchorLayoutInput Right="ItemPoster,1" Top="ItemPoster,0"/>
+                </LayoutInput>
+                <Children>
+                  <Panel Name="TickPanel">
+                    <Children>
+                      <Graphic Content="image://i:Watched"  MaximumSize="40,40"  />
+                      <ColorFill Layout="Fill" Content="color://s:WatchedColor" MinimumSize="40,40" MaximumSize="40,40" Visible="global://s:ShowWatchedMarkerBackgrounds" Alpha="global://s:WatchedAlpha"/>
+                    </Children>
+                  </Panel>
+                </Children>
+              </Panel>
+              <Graphic Name="ItemPoster" Content="resx://MediaBrowser/Mediabrowser.Resources/DefaultVideo" MaximumSize="380,380" MaintainAspectRatio="true">
+                <LayoutInput>
+                  <AnchorLayoutInput ContributesToWidth="true" Vertical="Center"/>
+                </LayoutInput>
+              </Graphic>
+              
+            </Children>
+          </Panel>
 
         </Children>
       </Panel>
