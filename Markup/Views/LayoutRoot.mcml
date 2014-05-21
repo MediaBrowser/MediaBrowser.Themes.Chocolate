@@ -792,7 +792,6 @@
                   <Panel Name="TickPanel">
                     <Children>
                       <Graphic Content="image://i:Watched"  MaximumSize="40,40"  />
-                      <ColorFill Layout="Fill" Content="color://s:WatchedColor" MinimumSize="40,40" MaximumSize="40,40" Visible="global://s:ShowWatchedMarkerBackgrounds" Alpha="global://s:WatchedAlpha"/>
                     </Children>
                   </Panel>
                 </Children>

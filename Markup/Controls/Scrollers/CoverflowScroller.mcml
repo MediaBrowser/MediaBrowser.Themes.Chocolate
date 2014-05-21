@@ -446,28 +446,21 @@
                       </Graphic>
                     </Children>
                   </Panel>
-                  <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha="0.8" Name="TickIndicatorPanel" Visible="[Item.HaveWatched]" MaximumSize="42,42" Margins="5,5,0,0">
+                  <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha="0.9" Name="TickIndicatorPanel" Visible="[Item.HaveWatched]" MaximumSize="42,42" Margins="5,5,0,0">
                     <LayoutInput>
-                      <AnchorLayoutInput Horizontal="Near" Vertical="Near" />
+                      <AnchorLayoutInput Horizontal="Far" Vertical="Near" />
                     </LayoutInput>
                     <Children>
                       <Panel Name="TickPanel" Layout="Center" Visible="false">
                         <Children>
                           <Graphic Content="image://i:Watched"  MaximumSize="40,40"  />
-                          <ColorFill Layout="Fill" Content="color://s:WatchedColor" MinimumSize="40,40" MaximumSize="40,40" Visible="global://s:ShowWatchedMarkerBackgrounds" Alpha="global://s:WatchedAlpha"/>
                         </Children>
                       </Panel>
-                      <!--<Panel Name="InProgressPanel" Layout="Center">
-                        <Children>
-                          <Graphic Content="image://vi:InProgress"  MaximumSize="30,30"  />
-                          <Graphic Content="image://i:TickPosterBase" ColorFilter="color://s:FilterColor" MaximumSize="30,30"  Visible="global://s:ShowWatchedMarkerBackgrounds" />
-                        </Children>
-                      </Panel>-->
                     </Children>
                   </Panel>
-                  <Panel  Margins="2,2,0,0" Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Name="UnwatchedIndicator" MaximumSize="47,47" >
+                  <Panel  Margins="2,2,2,2" Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Name="UnwatchedIndicator" MaximumSize="47,47" >
                     <LayoutInput>
-                      <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
+                      <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
                     </LayoutInput>
                     <Children>
                       <Text Name="UnwatchedCount" Content="" Color="color://s:FontColorLight" Font="[UnwatchedCountFont]" Margins="0,0,-3,-10"></Text>
