@@ -246,14 +246,14 @@
               <cb:CheckBox Name="ShowPosterInfoCB" Label="[Application.LocalStrings.#ShowPosterInfo!cor:String]" Checked="[ShowPosterInfo]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowPosterLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowPosterLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowPosterEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowPosterEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <!--Detail Options Panel-->
-              <Text Content="Detail Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,20,10,10"/>
-              <cb:CheckBox Name="ShowDiscDetailCB" Label="[Application.LocalStrings.#ShowDiscDetail!cor:String]" Checked="[ShowDiscDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowLogosOnMovieDetailCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowLogosOnMovieDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
             </Children>
           </Panel>
           <Panel Layout="VerticalFlow" MaximumSize="500,400" Padding="20,0,0,20">
             <Children>
+              <!--Detail Options Panel-->
+              <Text Content="Detail Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,20,10,10"/>
+              <cb:CheckBox Name="ShowDiscDetailCB" Label="[Application.LocalStrings.#ShowDiscDetail!cor:String]" Checked="[ShowDiscDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
+              <cb:CheckBox Name="ShowLogosOnMovieDetailCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowLogosOnMovieDetail]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Custom Views Panel-->
               <Text Content="Custom Views" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <cb:CheckBox Name="UseCustomTvViewCB" Label="[Application.LocalStrings.#UseCustomTvView!cor:String]" Checked="[UseCustomTvView]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
