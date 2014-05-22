@@ -316,9 +316,8 @@
                           <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
                         </LayoutInput>
                         <Children>
-                          <Text Name="UnwatchedCount" Content="" Color="color://s:FontColorLight" Font="[UnwatchedCountFont]" Margins="0,0,-3,-10"></Text>
-                          <Graphic Visible="global://s:ShowWatchedMarkerBackgrounds" Content="image://i:Unwatched"  MinimumSize="40,40" MaximumSize="40,40" MaintainAspectRatio="true" Layout="Center" ></Graphic>
-                          <ColorFill Layout="Fill" Content="color://s:UnwatchedColor" MinimumSize="40,40" MaximumSize="40,40" Visible="global://s:ShowWatchedMarkerBackgrounds" Alpha="global://s:WatchedAlpha"/>
+                          <Text Name="UnwatchedCount" Content="" Color="color://s:FontColorLight" Font="[UnwatchedCountFont]" Margins="0,0,0,0"></Text>
+                          <Graphic Visible="global://s:ShowWatchedMarkerBackgrounds" Content="image://i:GreenCircle"  MinimumSize="40,40" MaximumSize="40,40" MaintainAspectRatio="true" Layout="Center" ></Graphic>
                         </Children>
                       </Panel>
                       <Panel  Margins="2,2,0,0" Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha=".90" Name="UnwatchedGlowPanel" MaximumSize="[GlowSize]" Visible="[Application.Config.ShowUnwatchedIndicator]" >

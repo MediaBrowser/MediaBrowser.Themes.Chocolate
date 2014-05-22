@@ -160,7 +160,7 @@
                   <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1" Bottom="Parent,1" />
                 </LayoutInput>
                 <Children>
-                  <ps:PosterScroller Name="MyItems" Application="[Application]" Folder="[Folder]" TopLabelFont="font://uf:Poster_TopLabel" LabelFont="font://uf:Poster_Label" UnwatchedCountFont="font://uf:Poster_Unwatched" ThemeHelper="[ThemeHelper]"/>
+                  <ps:PosterScroller Name="MyItems" Application="[Application]" Folder="[Folder]" TopLabelFont="font://uf:Poster_TopLabel" LabelFont="font://uf:Poster_Label" UnwatchedCountFont="Segoe Media Center Semibold ,14" ThemeHelper="[ThemeHelper]"/>
                 </Children>
               </Panel>
             </Children>

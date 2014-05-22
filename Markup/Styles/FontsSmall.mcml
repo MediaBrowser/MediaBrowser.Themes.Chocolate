@@ -35,6 +35,6 @@
   <Font Name="ListItemFont" Font="Segoe Media Center Bold,14"/>
   <Font Name="SmallDetailsFont" Font="Segoe Media Center Light,16"/>
 
-  <Font Name="Choc_UnwatchedCountFont" Font="Segoe Media Center, 12"/>
+  <Font Name="Choc_UnwatchedCountFont" Font="Segoe Media Center, 10"/>
   
 </Mcml>

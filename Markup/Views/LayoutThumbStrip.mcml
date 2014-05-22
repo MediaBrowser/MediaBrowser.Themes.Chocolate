@@ -257,9 +257,8 @@
 
                       <Panel Name="UnwatchedIndicator" MaximumSize="37,37" Layout="Anchor">
                         <Children>
-                          <Text Name="UnwatchedCount" Padding="0,-5,0,0" Content="" Color="color://s:FontColorLight" Font="font://uf:Strip_Unwatched" HorizontalAlignment="Center"/>
-                          <Graphic Visible="global://s:ShowWatchedMarkerBackgrounds" Content="image://i:Unwatched"  MinimumSize="35,35" MaximumSize="35,35" MaintainAspectRatio="true" Layout="Center" ></Graphic>
-                          <ColorFill Layout="Fill" Content="color://s:UnwatchedColor" MinimumSize="35,35" MaximumSize="35,35" Visible="global://s:ShowWatchedMarkerBackgrounds" Alpha="global://s:WatchedAlpha"/>
+                          <Text Name="UnwatchedCount" Padding="0,0,0,0" Content="" Color="color://s:FontColorLight" Font="Segoe Media Center Semibold ,12" HorizontalAlignment="Center"/>
+                          <Graphic Visible="global://s:ShowWatchedMarkerBackgrounds" Content="image://i:GreenCircle"  MinimumSize="35,35" MaximumSize="35,35" MaintainAspectRatio="true" Layout="Center" ></Graphic>
                         </Children>
                       </Panel>
 
