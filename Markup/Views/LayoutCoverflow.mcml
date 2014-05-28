@@ -17,7 +17,6 @@
       xmlns:nip="resx://Chocolate/Chocolate.Resources/NewInfoPanel"
       xmlns:jil="resx://MediaBrowser/MediaBrowser.Resources/JilSelector"
       xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
-    xmlns:edge="resx://MediaBrowser/MediaBrowser.Resources/EdgeDetection"
       xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
   
 
@@ -41,7 +40,6 @@
       <ShortcutHandler Name="Blue" Shortcut="Blue" HandlerStage="Bubbled" Handle="true"/>
       <KeyHandler Name="JilKey" Key="J" Handle="true" Modifiers="Control" HandlerStage="Bubbled"/>
       <Command Name="HideJil"/>
-      <BooleanChoice Name="BottomEdgeHasFocus" />
     </Locals>
 
     <Rules>
@@ -64,7 +62,6 @@
         <Conditions>
           <Modified Source="[JilKey.Invoked]"/>
           <Modified Source="[Blue.Invoked]"/>
-          <!--<Equality Source="[BottomEdgeHasFocus.Value]" Value="true" />-->
         </Conditions>
         <Actions>
           <PlaySound Sound="sound://sounds:Miniselect" />
@@ -157,14 +154,6 @@
 
                 </Children>
               </Panel>
-
-              <!-- Bottom Edge Detection --><!--
-              <edge:EdgeDetect Name="BottomEdge" InFocus="[BottomEdgeHasFocus]">
-                <LayoutInput>
-                  <FormLayoutInput Bottom="Parent, 1, 120" />
-                </LayoutInput>
-              </edge:EdgeDetect>-->
-
 
               <!--Counter-->
               <Panel>
