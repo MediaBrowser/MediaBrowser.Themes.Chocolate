@@ -303,7 +303,9 @@
     <None Include="Markup\ConfigPanelViews.mcml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Markup\Controls\Buttons\ItemButton.mcml" />
+    <None Include="Markup\Controls\Buttons\ItemButton.mcml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Markup\Controls\InfoPanel\InfoIconsPanel.mcml">
       <SubType>Designer</SubType>
     </None>

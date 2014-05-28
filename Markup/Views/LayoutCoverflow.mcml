@@ -15,6 +15,9 @@
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
       xmlns:nip="resx://Chocolate/Chocolate.Resources/NewInfoPanel"
+      xmlns:jil="resx://MediaBrowser/MediaBrowser.Resources/JilSelector"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
+    xmlns:edge="resx://MediaBrowser/MediaBrowser.Resources/EdgeDetection"
       xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
   
 
@@ -34,6 +37,11 @@
       <Environment Name="Environment"/>
       <a:Clock Name="Clock"/>
       <AnchorLayoutInput Name="SmallItemsLayout" Left="Parent,0" Right="Parent,1" Top="ItemInfoPanel, .9" Bottom="Parent, .9" />
+
+      <ShortcutHandler Name="Blue" Shortcut="Blue" HandlerStage="Bubbled" Handle="true"/>
+      <KeyHandler Name="JilKey" Key="J" Handle="true" Modifiers="Control" HandlerStage="Bubbled"/>
+      <Command Name="HideJil"/>
+      <BooleanChoice Name="BottomEdgeHasFocus" />
     </Locals>
 
     <Rules>
@@ -48,6 +56,26 @@
         </Conditions>
         <Actions>
           <Invoke Target="[MyItems.NavigateInto]"/>
+        </Actions>
+      </Changed>
+
+      <!-- JIL Command -->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Modified Source="[JilKey.Invoked]"/>
+          <Modified Source="[Blue.Invoked]"/>
+          <!--<Equality Source="[BottomEdgeHasFocus.Value]" Value="true" />-->
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+          <Set Target="[JilPanel.Visible]" Value="true" />
+          <Invoke Target="[JilPanel.NavigateInto]" />
+        </Actions>
+      </Rule>
+
+      <Changed Source="[HideJil.Invoked]" >
+        <Actions>
+          <Set Target="[JilPanel.Visible]" Value="false" />
         </Actions>
       </Changed>
       
@@ -108,6 +136,36 @@
 
           <Panel Name="MainPanel" Layout="Form" Navigation="ContainHorizontal">
             <Children>
+
+              <!--Jil Selector-->
+              <Panel Name="JilPanel" Visible="false" Layout="Scale" Margins="150,0,150,20">
+                <LayoutInput>
+                  <FormLayoutInput Bottom="Parent,1,0" />
+                </LayoutInput>
+                <Animations>
+                  <Animation Type="Show" >
+                    <Keyframes>
+                      <AlphaKeyframe Time="0.0" Value="0" />
+                      <AlphaKeyframe Time="0.4" Value="1" Interpolation="SCurve" />
+                      <PositionKeyframe Time="0.0" Value="0,50,0" />
+                      <PositionKeyframe Time="0.4" Value="0,0,0" Interpolation="SCurve" />
+                    </Keyframes>
+                  </Animation>
+                </Animations>
+                <Children>
+                  <jil:JilSelector Name="JIL" Application="[Application]" Folder="[Folder]" LostFocus="[HideJil]" Margins="0,0,4,0"/>
+
+                </Children>
+              </Panel>
+
+              <!-- Bottom Edge Detection --><!--
+              <edge:EdgeDetect Name="BottomEdge" InFocus="[BottomEdgeHasFocus]">
+                <LayoutInput>
+                  <FormLayoutInput Bottom="Parent, 1, 120" />
+                </LayoutInput>
+              </edge:EdgeDetect>-->
+
+
               <!--Counter-->
               <Panel>
                 <LayoutInput>
