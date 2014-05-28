@@ -11,6 +11,8 @@
     xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
     xmlns:as="resx://MediaBrowser/MediaBrowser.Resources/AutoScroller"
     xmlns:it="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:jil="resx://MediaBrowser/MediaBrowser.Resources/JilSelector"
+      xmlns:sounds="resx://MediaBrowser/MediaBrowser.Resources/Sounds"
     xmlns:ch="assembly://Chocolate/Chocolate">
 
 
@@ -25,6 +27,10 @@
     <Locals>
       <lib:Item Name="SelectedItem" Item="[Folder.SelectedChild]" />
       <Timer AutoRepeat="false" Enabled="true" Interval="3000" Name="NaviTime" />
+
+      <ShortcutHandler Name="Blue" Shortcut="Blue" HandlerStage="Bubbled" Handle="true"/>
+      <KeyHandler Name="JilKey" Key="J" Handle="true" Modifiers="Control" HandlerStage="Bubbled"/>
+      <Command Name="HideJil"/>
     </Locals>
 
     <Rules>
@@ -57,6 +63,25 @@
       <Binding Target="[EndTime.Content]" Source="[ThemeHelper.EndTime]"/>
       <Condition Source="[Folder.SelectedChild.HasMediaInfo]" SourceValue="false" Target="[EndTimeLbl.Visible]" Value="false"/>
 
+      <!-- JIL Command -->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Modified Source="[JilKey.Invoked]"/>
+          <Modified Source="[Blue.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sounds:Miniselect" />
+          <Set Target="[JilPanel.Visible]" Value="true" />
+          <Invoke Target="[JilPanel.NavigateInto]" />
+        </Actions>
+      </Rule>
+
+      <Changed Source="[HideJil.Invoked]" >
+        <Actions>
+          <Set Target="[JilPanel.Visible]" Value="false" />
+        </Actions>
+      </Changed>
+
       <!--Hide/Show Options-->
       <Binding Source="[ThemeHelper.Config.ShowThumbEndTime]" Target="[EndTimePanel.Visible]"/>
       
@@ -87,6 +112,27 @@
             <Children>
               <Text Name="EndTimeLbl" Font="font://uf:Thumb_EndTime" Color="color://uc:Dark" Content="[Application.LocalStrings.#ENDS!cor:String]" Visible="true"></Text>
               <Text Name="EndTime" Font="font://uf:Thumb_EndTime" Color="color://uc:Light" Content="Nothing"/>
+            </Children>
+          </Panel>
+
+          <!--Jil Selector-->
+          <Panel Name="JilPanel" Visible="false" Layout="Scale" Margins="150,100,150,20">
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,0" />
+            </LayoutInput>
+            <Animations>
+              <Animation Type="Show" >
+                <Keyframes>
+                  <AlphaKeyframe Time="0.0" Value="0" />
+                  <AlphaKeyframe Time="0.4" Value="1" Interpolation="SCurve" />
+                  <PositionKeyframe Time="0.0" Value="0,-50,0" />
+                  <PositionKeyframe Time="0.4" Value="0,0,0" Interpolation="SCurve" />
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Children>
+              <jil:JilSelector Name="JIL" Application="[Application]" Folder="[Folder]" LostFocus="[HideJil]" Margins="0,0,4,0"/>
+
             </Children>
           </Panel>
 

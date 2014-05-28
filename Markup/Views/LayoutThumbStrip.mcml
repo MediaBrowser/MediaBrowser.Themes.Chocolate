@@ -10,7 +10,7 @@
       xmlns:it="resx://Chocolate/Chocolate.Resources/Images"
       xmlns:fip="resx://Chocolate/Chocolate.Resources/FullInfoPanel"
       xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
-      
+      xmlns:jil="resx://MediaBrowser/MediaBrowser.Resources/JilSelector"
       xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
       xmlns:uf="file://Plugins\Chocolate\Chocolate_Fonts.mcml"
@@ -53,6 +53,10 @@
       <TransformByAttributeAnimation Name="ShowSlideLeft" Attribute="Width" Magnitude="1.0" Source="animation://anim:ShowSlideLeft"/>
       <TransformByAttributeAnimation Name="HideSlideRight" Attribute="Width" Magnitude="1.0" Source="animation://anim:HideSlideRight"/>
       <TransformByAttributeAnimation Name="HideSlideLeft" Attribute="Width" Magnitude="1.0" Source="animation://anim:HideSlideLeft"/>
+
+      <ShortcutHandler Name="Blue" Shortcut="Blue" HandlerStage="Bubbled" Handle="true"/>
+      <KeyHandler Name="JilKey" Key="J" Handle="true" Modifiers="Control" HandlerStage="Bubbled"/>
+      <Command Name="HideJil"/>
     </Locals>
 
     <Rules>
@@ -193,6 +197,25 @@
         </Actions>
       </Changed>
 
+      <!-- JIL Command -->
+      <Rule ConditionLogicalOp="Or">
+        <Conditions>
+          <Modified Source="[JilKey.Invoked]"/>
+          <Modified Source="[Blue.Invoked]"/>
+        </Conditions>
+        <Actions>
+          <PlaySound Sound="sound://sd:Miniselect" />
+          <Set Target="[JilPanel.Visible]" Value="true" />
+          <Invoke Target="[JilPanel.NavigateInto]" />
+        </Actions>
+      </Rule>
+
+      <Changed Source="[HideJil.Invoked]" >
+        <Actions>
+          <Set Target="[JilPanel.Visible]" Value="false" />
+        </Actions>
+      </Changed>
+
       <Default Target="[DetailBackdrop.Content]" Value="image://it:UltimatePosterPanel"/>
       <Default Target="[ContentPanel.Content]" Value="image://it:UltimateDetailPanel"/>
       
@@ -204,6 +227,26 @@
           <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1" Bottom="Parent,1"/>
         </LayoutInput>
         <Children>
+          <!--Jil Selector-->
+          <Panel Name="JilPanel" Visible="false" Layout="Scale" Margins="150,100,150,20">
+            <LayoutInput>
+              <FormLayoutInput Top="Parent,0" />
+            </LayoutInput>
+            <Animations>
+              <Animation Type="Show" >
+                <Keyframes>
+                  <AlphaKeyframe Time="0.0" Value="0" />
+                  <AlphaKeyframe Time="0.4" Value="1" Interpolation="SCurve" />
+                  <PositionKeyframe Time="0.0" Value="0,-50,0" />
+                  <PositionKeyframe Time="0.4" Value="0,0,0" Interpolation="SCurve" />
+                </Keyframes>
+              </Animation>
+            </Animations>
+            <Children>
+              <jil:JilSelector Name="JIL" Application="[Application]" Folder="[Folder]" LostFocus="[HideJil]" Margins="0,0,4,0"/>
+            </Children>
+          </Panel>
+          
           <Panel Name="Test" Layout="Form" Navigation="ContainHorizontal">
             <LayoutInput>
               <FormLayoutInput Left="Parent,0" Top="Parent,0" Right="Parent,1" Bottom="Parent,1"/>
@@ -223,6 +266,7 @@
                   </Panel>
                 </Children>
               </Panel>
+
 
               <Panel>
                 <LayoutInput>
