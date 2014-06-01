@@ -14,6 +14,7 @@
     xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
+      xmlns:vs="resx://Chocolate/Chocolate.Resources/Studio_Images"
       xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
 
 
@@ -51,7 +52,9 @@
         </Conditions>
       </Binding>
 
-      <Changed Source="[Folder.FilterUnwatched]" >
+      <Binding Target="[StudioRepeater.Source]"    Source="[Folder.StudioItems]" />
+
+        <Changed Source="[Folder.FilterUnwatched]" >
         <Actions>
           <Invoke Target="[Folder.UnwatchedChanged]" />
         </Actions>
@@ -116,6 +119,7 @@
 
           <Panel Name="MainPanel" Layout="Form" >
             <Children>
+
               <Panel Name="NamePanel" Layout="VerticalFlow" Margins="20,10,0,0" >
                 <LayoutInput>
                   <FormLayoutInput Vertical="Near" Horizontal="Near"/>
@@ -138,7 +142,7 @@
                     </Children>
 
                   </Panel>
-                  
+
                 </Children>
               </Panel>
 
@@ -148,15 +152,39 @@
                   <AnchorLayoutInput Left="Parent,0, 30" Right="Parent,.3" Top="NamePanel, 1, 20" Bottom="Parent, 1" />
                 </LayoutInput>
               </ls:SeasonsScroller>
-              
+
+
               <!--Current Episode Info-->
               <me:InfoPanel Name="EpisodePanel" Item="[ThemeHelper.CurrentItem]" Application="[Application]" Helper="[ThemeHelper]" >
                 <LayoutInput>
                   <AnchorLayoutInput Left="Parent, .3" Right="Parent, 1" Top="Parent, .45" Bottom="Parent, 1" />
                 </LayoutInput>
-                
+
               </me:InfoPanel>
 
+              <Panel Name="Studios" Layout="HorizontalFlow" Padding="0,0,0,0" Margins="0,20,40,-80" Alpha=".6">
+                <LayoutInput>
+                  <FormLayoutInput Bottom="EpisodePanel, 0" Horizontal="Far"/>
+                </LayoutInput>
+                <Layout>
+                  <FlowLayout ItemAlignment="Center" Orientation="Vertical"/>
+                </Layout>
+                <Children>
+                  <Panel Name="Studio" MaximumSize="0,55" Layout="Scale" >
+                    <Children>
+                      <Repeater Name="StudioRepeater" Source="[Folder.StudioItems]">
+                        <Layout>
+                          <FlowLayout Orientation="Horizontal" ItemAlignment="Center" Spacing="10,10" />
+                        </Layout>
+                        <Content>
+                          <vs:Studio StudioItem="[RepeatedItem!lib:StudioItemWrapper]" Name="StudioLogo"/>
+                        </Content>
+                      </Repeater>
+                    </Children>
+                  </Panel>
+
+                </Children>
+              </Panel>
             </Children>
           </Panel>
         </Children>

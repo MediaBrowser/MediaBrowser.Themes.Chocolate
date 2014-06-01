@@ -290,8 +290,6 @@
       
       <Binding Source="[Item.ContainsTrailers]" Target="[TrailerButton.Visible]"/>
       
-      <Condition Source="[Config.Theme]" SourceValue="Black" Target="[RightMenuBorder.Content]" Value="image://it:RightMenuBorderBlack"/>
-      <Condition Source="[Config.Theme]" SourceValue="Black" Target="[LeftMenuBorder.Content]"  Value="image://it:LeftMenuBorderBlack"/>
       <!--<Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode"  >
         <Actions>
           <Set Target="[ButtonsPanel.LayoutInput]"  Value="[LandscapeButtons]"/>
@@ -603,16 +601,16 @@
                   </Panel>-->
                   
                
-                  <Panel Name="ExtraInfo" Layout="HorizontalFlow" Padding="0,0,0,0" Visible="false">
+                  <Panel Name="Studios" Layout="HorizontalFlow" Padding="0,0,0,0" Margins="0,20,20,0" Alpha=".6">
                     <LayoutInput>
-                      <FormLayoutInput Top="Parent, .85,-15" Right="Parent,1,-30"/>
+                      <FormLayoutInput Vertical="Near" Horizontal="Far"/>
                     </LayoutInput>
                     <Layout>
                       <FlowLayout ItemAlignment="Center" Orientation="Vertical"/>
                     </Layout>
                     <Children>
 
-                      <Panel Name="Studio" MaximumSize="0,35" Layout="Scale" >
+                      <Panel Name="Studio" MaximumSize="0,55" Layout="Scale" >
                         <Children>
                           <Repeater Name="StudioRepeater" Source="[Item.StudioItems]">
                             <Layout>
@@ -627,35 +625,6 @@
 
                     </Children>
                   </Panel>
-
-                  <Panel Layout="VerticalFlow" Visible="false">
-                    <LayoutInput>
-                      <FormLayoutInput Left="Parent,1,-35" Top="Parent,0.67" Right="Parent,1"/>
-                    </LayoutInput>
-                    <Children>
-                      <Graphic Name="RightMenuBorder" Layout="Fill" Content="image://it:RightMenuBorderDefault"/>
-                    </Children>
-                  </Panel>
-
-                  <Panel Layout="VerticalFlow" Visible="false">
-                    <LayoutInput>
-                      <FormLayoutInput Left="Parent,0" Top="Parent,0.67" Right="Parent,0,35"/>
-                    </LayoutInput>
-                    <Children>
-                      <Graphic Name="LeftMenuBorder" Layout="Fill" Content="image://it:LeftMenuBorderDefault"/>
-                    </Children>
-                  </Panel>
-
-                  <!-- Bottom Edge -->
-                  <!--<Panel Name="BottomEdge" Layout="HorizontalFlow" Visible="false">
-                <LayoutInput>
-                  <FormLayoutInput Left="Parent,0,10" Right="Parent,1" Top="Parent,0.67,-2" Bottom="Parent,0.67"/>
-                </LayoutInput>
-                <Children>
-                  <Graphic Layout="Fill" MaintainAspectRatio="true" Content="image://it:DetailBorderShadow"/>
-                </Children>
-              </Panel>-->
-
                 </Children>
               </Panel>
               <!-- Background -->
