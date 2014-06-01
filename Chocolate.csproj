@@ -427,7 +427,6 @@
     <None Include="Markup\Controls\Scrollers\PosterViewItem.mcml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Markup\Images\Studio_Images.mcml" />
     <None Include="Markup\Weather.mcml" />
     <None Include="Theme.snk" />
   </ItemGroup>

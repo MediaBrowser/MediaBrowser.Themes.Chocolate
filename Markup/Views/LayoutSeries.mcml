@@ -14,7 +14,7 @@
     xmlns:sr="resx://MediaBrowser/MediaBrowser.Resources/StarRating"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:anim="resx://Chocolate/Chocolate.Resources/Animations"
-      xmlns:vs="resx://Chocolate/Chocolate.Resources/Studio_Images"
+      xmlns:vs="resx://MediaBrowser/MediaBrowser.Resources/StudioImages"
       xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images">
 
 

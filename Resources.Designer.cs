@@ -1561,16 +1561,6 @@ namespace Chocolate {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Studio_Images {
-            get {
-                object obj = ResourceManager.GetObject("Studio_Images", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap TabItemTab {

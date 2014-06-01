@@ -26,7 +26,7 @@
       xmlns:pb="resx://MediaBrowser/MediaBrowser.Resources/PersonButton"
       xmlns:mp="resx://MediaBrowser/MediaBrowser.Resources/MPAARating"
       
-      xmlns:vs="resx://Chocolate/Chocolate.Resources/Studio_Images"
+      xmlns:vs="resx://MediaBrowser/MediaBrowser.Resources/StudioImages"
       xmlns:vnpv="resx://Chocolate/Chocolate.Resources/NowPlayingViewport"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"

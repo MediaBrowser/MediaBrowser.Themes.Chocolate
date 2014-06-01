@@ -28,7 +28,7 @@
       xmlns:pb="resx://Chocolate/Chocolate.Resources/PersonButton"
       xmlns:nip="resx://Chocolate/Chocolate.Resources/NewInfoPanel"
       
-      xmlns:vs="resx://Chocolate/Chocolate.Resources/Studio_Images"
+      xmlns:vs="resx://MediaBrowser/MediaBrowser.Resources/StudioImages"
       xmlns:vnpv="resx://Chocolate/Chocolate.Resources/NowPlayingViewport"
       xmlns:ch="assembly://Chocolate/Chocolate"
       xmlns:ash="resx://Chocolate/Chocolate.Resources/AutoScrollHorizontal"
