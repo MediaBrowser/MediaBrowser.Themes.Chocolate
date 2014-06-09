@@ -786,7 +786,7 @@
             <Children>
               <Panel Alpha="0.8" Name="TickIndicatorPanel" MaximumSize="42,42" Margins="5,10,10,0">
                 <LayoutInput>
-                  <AnchorLayoutInput Right="ItemPoster,1" Top="ItemPoster,0"/>
+                  <AnchorLayoutInput Left="ItemPoster,0" Top="ItemPoster,0"/>
                 </LayoutInput>
                 <Children>
                   <Panel Name="TickPanel">
