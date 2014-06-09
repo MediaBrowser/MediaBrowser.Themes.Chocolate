@@ -301,7 +301,7 @@
                     <Children>
                       <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha="0.9" Name="TickIndicatorPanel" Visible="[Application.Config.ShowWatchTickInPosterView]" MaximumSize="42,42" Margins="5,5,0,0">
                         <LayoutInput>
-                          <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
+                          <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
                         </LayoutInput>
                         <Children>
                           <Panel Name="TickPanel" Layout="Center">
@@ -311,9 +311,9 @@
                           </Panel>
                         </Children>
                       </Panel>
-                      <Panel  Margins="2,2,2,2" Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Name="UnwatchedIndicator" MaximumSize="42,42" >
+                      <Panel  Margins="5,5,5,5" Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Name="UnwatchedIndicator" MaximumSize="42,42" >
                         <LayoutInput>
-                          <AnchorLayoutInput Horizontal="Far" Vertical="Near"/>
+                          <AnchorLayoutInput Horizontal="Near" Vertical="Near"/>
                         </LayoutInput>
                         <Children>
                           <Text Name="UnwatchedCount" Content="" Color="color://s:FontColorLight" Font="[UnwatchedCountFont]" Margins="0,0,0,0"></Text>
