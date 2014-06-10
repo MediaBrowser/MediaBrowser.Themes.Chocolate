@@ -391,23 +391,23 @@
                           <AlphaKeyframe Time="0" Value="0" RelativeTo="Absolute"/>
                           <AlphaKeyframe Time=".7" Value="0" RelativeTo="Absolute"/>
                           <AlphaKeyframe Time=".8" Value="1" RelativeTo="Final"/>
-                          <PositionKeyframe Interpolation="EaseOut" Time="0" Value="-300,0,0" RelativeTo="Current"/>
-                          <PositionKeyframe Interpolation="EaseOut" Time=".8" Value="-300,0,0" RelativeTo="Current"/>
-                          <PositionKeyframe Interpolation="EaseOut" Time="2" Value="150,0,0" RelativeTo="Final"/>
-                          <PositionKeyframe Interpolation="EaseIn" Time="2.7" Value="0,0,0" RelativeTo="Final"/>
-                          <RotateKeyframe Interpolation="Linear" Time="0" Value="-180deg;0,0,1"/>
+                          <PositionKeyframe Time="0" Value="-300,0,0" RelativeTo="Current"/>
+                          <PositionKeyframe Interpolation="Linear" Time=".8" Value="-300,0,0" RelativeTo="Current"/>
+                          <PositionKeyframe Interpolation="Linear" Time="2" Value="150,0,0" RelativeTo="Final"/>
+                          <PositionKeyframe Interpolation="Exp" Time="2.7" Value="0,0,0" RelativeTo="Final"/>
+                          <RotateKeyframe Interpolation="Exp" Time="0" Value="-180deg;0,0,1"/>
                           <RotateKeyframe Interpolation="Linear" Time=".8" Value="-180deg;0,0,1"/>
                           <RotateKeyframe Interpolation="Linear" Time="2" Value="180deg;0,0,1"/>
-                          <RotateKeyframe Interpolation="Linear" Time="2.7" Value="0deg;0,0,1"/>
+                          <RotateKeyframe Interpolation="Exp" Time="2.7" Value="0deg;0,0,1"/>
                         </Keyframes>
                       </Animation>
-                      <Animation Loop="2" >
+                      <Animation Loop="1" >
                         <Keyframes>
-                          <RotateKeyframe Interpolation="Linear" Time="0" Value="0deg;0,0,1"/>
-                          <RotateKeyframe Interpolation="Linear" Time="10" Value="0deg;0,0,1"/>
-                          <RotateKeyframe Interpolation="Linear" Time="10.8" Value="360deg;0,0,1"/>
-                          <RotateKeyframe Interpolation="Linear" Time="20" Value="360deg;0,0,1"/>
-                          <RotateKeyframe Interpolation="Linear" Time="20.8" Value="0deg;0,0,1"/>
+                          <RotateKeyframe Time="0" Value="0deg;0,0,1"/>
+                          <RotateKeyframe Interpolation="Log" Time="10" Value="0deg;0,0,1"/>
+                          <RotateKeyframe Interpolation="Log" Time="10.8" Value="360deg;0,0,1"/>
+                          <RotateKeyframe Interpolation="Log" Time="20" Value="360deg;0,0,1"/>
+                          <RotateKeyframe Interpolation="Log" Time="20.8" Value="0deg;0,0,1"/>
                         </Keyframes>
                       </Animation>
                     </Animations>
