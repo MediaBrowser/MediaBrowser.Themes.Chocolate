@@ -325,6 +325,7 @@
         <Actions>
           <Set Target="[Application.DisplayPopupPlay]" Value="false" />
           <Set Target="[PopupPlay.Visible]" Value="false"/>
+          <Invoke Target="[ViewPanel.NavigateInto]" />
         </Actions>
       </Changed>
 
