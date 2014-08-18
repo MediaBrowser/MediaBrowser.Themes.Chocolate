@@ -78,8 +78,6 @@
         public string Seasons = "Seasons";
         public string ShowConfig = "Show Config Button";
         public string ShowConfigDesc = "Show config button on all levels of media browser";
-        public string ShowCoverflowIndicator = "Show Watched Indicator";
-        public string ShowCoverflowIndicatorDesc = "This Option Will Show Coverflow Watched Indicator";
         public string ShowCoverFlowDetails = "Show Details";
         public string ShowCoverFlowDetailsDesc = "Show Details for selected item within coverflow.";
         public string ShowCoverflowPosterOverlay = "Show Poster Floor";
@@ -152,6 +150,7 @@
             MyStrings strings = new MyStrings();
             XmlSettings<MyStrings>.Bind(strings, file);
             Logger.ReportInfo("Using String Data from " + file);
+            Logger.ReportInfo("****Version is: {0}",strings.Version);
             if ("1.0001" != strings.Version)
             {
                 File.Delete(file);

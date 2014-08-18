@@ -23,7 +23,6 @@
         public string npvAR;
         public bool showconfig;
         public bool showcoverflowendtime;
-        public bool showcoverflowindicator;
         public bool showcoverflowlogos;
         public bool showcoverflowdetails;
         public bool showcoverflowposteroverlay;
@@ -75,7 +74,6 @@
             this.showlistendtime = true;
             this.showposterendtime = true;
             this.showthumbendtime = true;
-            this.showcoverflowindicator = true;
             this.showcoverflowposteroverlay = true;
             this.showcoverflowtotalnumber = true;
             useCustomTvView = true;
@@ -103,7 +101,6 @@
             this.showlistendtime = true;
             this.showposterendtime = true;
             this.showthumbendtime = true;
-            this.showcoverflowindicator = true;
             this.showcoverflowposteroverlay = true;
             this.showcoverflowtotalnumber = true;
             useCustomTvView = true;

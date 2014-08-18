@@ -321,23 +321,6 @@
             }
         }
 
-        public bool ShowCoverflowIndicator
-        {
-            get
-            {
-                return this.data.showcoverflowindicator;
-            }
-            set
-            {
-                if (this.data.showcoverflowindicator != value)
-                {
-                    this.data.showcoverflowindicator = value;
-                    base.FirePropertyChanged("ShowCoverflowIndicator");
-                    this.Save();
-                }
-            }
-        }
-
         public bool ShowCoverFlowLogos
         {
             get

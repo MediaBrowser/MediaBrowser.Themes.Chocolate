@@ -312,8 +312,6 @@
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://vi:Icon1080" />
 
       <Binding Source="[Item.HaveWatched]" Target="[TickPanel.Visible]" />
-      <Binding Source="[ThemeHelper.Config.ShowCoverflowIndicator]" Target="[TickIndicatorPanel.Visible]"/>
-      <!--<Binding Source="[Item.InProgress]" Target="[InProgressPanel.Visible]" />-->
       <Binding Source="[Item.UnwatchedCountString]" Target="[UnwatchedCount.Content]" />
       <Binding Source="[Item.ShowUnwatched]" Target="[UnwatchedIndicator.Visible]" />
 

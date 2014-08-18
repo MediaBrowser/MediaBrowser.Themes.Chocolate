@@ -40,7 +40,6 @@
       <BooleanChoice Name="ShowCoverFlowDetails" Value="[Helper.Config.ShowCoverFlowDetails]" />
       <BooleanChoice Name="ShowCoverFlowLogos" Value="[Helper.Config.ShowCoverFlowLogos]" />
       <BooleanChoice Name="ShowCoverFlowEndTime" Value="[Helper.Config.ShowCoverFlowEndTime]" />
-      <BooleanChoice Name="ShowCoverflowIndicator" Value="[Helper.Config.ShowCoverflowIndicator]" />
       <BooleanChoice Name="ShowCoverflowPosterOverlay" Value="[Helper.Config.ShowCoverflowPosterOverlay]" />
       <BooleanChoice Name="ShowCoverflowTotalNumber" Value="[Helper.Config.ShowCoverflowTotalNumber]" />
       <!--List Options-->
@@ -116,16 +115,6 @@
           <Set Target="[Helper.Config.ShowCoverFlowEndTime]" Value="[ShowCoverFlowEndTimeCB.Checked.Value]"/>
         </Actions>
       </Changed>
-      <Changed Source="[ShowCoverflowIndicatorCB.Checked.Value]">
-        <Actions>
-          <Set Target="[Helper.Config.ShowCoverflowIndicator]" Value="[ShowCoverflowIndicatorCB.Checked.Value]"/>
-        </Actions>
-      </Changed>
-      <!--<Changed Source="[ShowCoverflowPosterOverlayCB.Checked.Value]">
-        <Actions>
-          <Set Target="[Helper.Config.ShowCoverflowPosterOverlay]" Value="[ShowCoverflowPosterOverlayCB.Checked.Value]"/>
-        </Actions>
-      </Changed>-->
       <Changed Source="[ShowCoverflowTotalNumberCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowCoverflowTotalNumber]" Value="[ShowCoverflowTotalNumberCB.Checked.Value]"/>
@@ -222,12 +211,9 @@
           <Panel Layout="VerticalFlow" MaximumSize="500,400">
             <Children>
               <Text Content="CoverFlow Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
-              <!--<cb:CheckBox Name="ShowCoverFlowTitleCB" Label="[Application.LocalStrings.#ShowCoverFlowTitle!cor:String]" Checked="[ShowCoverFlowTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>-->
               <cb:CheckBox Name="ShowCoverFlowDetailsCB" Label="[Application.LocalStrings.#ShowCoverFlowDetails!cor:String]" Checked="[ShowCoverFlowDetails]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverFlowLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowCoverFlowLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowCoverFlowEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowCoverFlowEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowCoverflowIndicatorCB" Label="[Application.LocalStrings.#ShowCoverflowIndicator!cor:String]" Checked="[ShowCoverflowIndicator]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <!--<cb:CheckBox Name="ShowCoverflowPosterOverlayCB" Label="[Application.LocalStrings.#ShowCoverflowPosterOverlay!cor:String]" Checked="[ShowCoverflowPosterOverlay]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>-->
               <cb:CheckBox Name="ShowCoverflowTotalNumberCB" Label="[Application.LocalStrings.#ShowCoverflowTotalNumber!cor:String]" Checked="[ShowCoverflowTotalNumber]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <!--Strip Options Panel-->
               <Text Content="Strip Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>

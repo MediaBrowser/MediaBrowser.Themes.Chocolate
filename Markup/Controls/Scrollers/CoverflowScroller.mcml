@@ -330,8 +330,6 @@
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://vi:Icon1080" />
 
       <Binding Source="[Item.HaveWatched]" Target="[TickPanel.Visible]" />
-      <Binding Source="[ThemeHelper.Config.ShowCoverflowIndicator]" Target="[TickIndicatorPanel.Visible]"/>
-      <!--<Binding Source="[Item.InProgress]" Target="[InProgressPanel.Visible]" />-->
       <Binding Source="[Item.UnwatchedCountString]" Target="[UnwatchedCount.Content]" />
       <Binding Source="[Item.ShowUnwatched]" Target="[UnwatchedIndicator.Visible]" />
 
@@ -446,7 +444,7 @@
                       </Graphic>
                     </Children>
                   </Panel>
-                  <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha="0.9" Name="TickIndicatorPanel" Visible="[Item.HaveWatched]" MaximumSize="42,42" Margins="5,5,0,0">
+                  <Panel  Scale="1,1,1" Padding="0,0,0,0" Layout="Center" Alpha="0.9" Name="TickIndicatorPanel" Visible="[Application.Config.ShowWatchTickInPosterView]" MaximumSize="42,42" Margins="5,5,0,0">
                     <LayoutInput>
                       <AnchorLayoutInput Horizontal="Near" Vertical="Near" />
                     </LayoutInput>
