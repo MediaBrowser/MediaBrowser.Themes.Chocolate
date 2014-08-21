@@ -73,6 +73,8 @@
         </Transformer>
       </Binding>
 
+      <Binding Source="[Folder.DisplayPrefs.SortOrders.Chosen!cor:String]" Target="[List_SortBy.Content]"/>
+
       <!-- JIL Command -->
       <Rule ConditionLogicalOp="Or">
         <Conditions>
@@ -126,6 +128,17 @@
       <Panel Layout="Form" Navigation="RememberFocus">
         <Children>
 
+
+          <!--Sort indicator-->
+          <Panel Layout="HorizontalFlow">
+            <LayoutInput>
+              <FormLayoutInput Vertical="Center" Top="Parent,1,-70" Bottom="Parent,1,10" Right="Parent,1,-160"/>
+            </LayoutInput>
+            <Children>
+              <Text Content="[Application.LocalStrings.#SORT!cor:String]" Color="color://uc:Dark" Font="font://uf:CF_TotalItems" />
+              <Text Name="List_SortBy" Color="color://uc:Light" Font="font://uf:CF_TotalItems"/>
+            </Children>
+          </Panel>
 
           <!--Counters, screen bottom right-->
           <Panel>

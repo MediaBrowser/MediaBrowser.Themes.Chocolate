@@ -445,7 +445,6 @@
                         <Children>
                           <vmb:MenuButton Label="[Application.LocalStrings.#CONFIG!cor:String]" Name="ConfigBtn"     Command="[Configure]"              Image="image://vi:MenuOptionConfiguration"/>
                           <vmb:MenuButton Label="[Application.LocalStrings.#VIEW!cor:String]"   Name="ViewsBtn"      Command="[ShowViewConfiguration]"  Image="image://vi:MenuOptionViews"/>
-                          <vmb:MenuButton Label="[Application.LocalStrings.#SORT!cor:String]"   Name="SortOrdersBtn" Command="[ShowSortConfiguration]"  Image="image://vi:MenuOptionSort"/>
                           <vmb:MenuButton Label="[Application.LocalStrings.#INDEX!cor:String]" Name="IndexesBtn"    Command="[ShowIndexConfiguration]" Image="image://vi:MenuOptionIndex" />
                           <vmb:MenuButton Label="[Application.LocalStrings.#CLOSE!cor:String]"  Name="CloseBtn"      Command="[CloseCommand]"           Image="image://vi:MenuOptionClose" Red="true"/>
                         </Children>
@@ -482,7 +481,7 @@
 
               <Panel Layout="Form" Navigation="WrapDirectional">
                 <Children>
-                  <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]"
+                  <me:ButtonPanel Name="ButtonPanel" Application="[Application]" Folder="[Folder]" GoToNowPlaying="[GoToNowPlaying]" ShowSort="[ShowSortConfiguration]"
                                   SwitchUser="[SwitchUser]" OpenSearch="[OpenSearch]" Visible="false" ConfigOptions="[ConfigOptions]" Helper="[Helper]">
                     <LayoutInput>
                       <FormLayoutInput Top="Parent,0,40" Right="Parent,1,-5" />
@@ -514,6 +513,7 @@
       <Command Name="ConfigOptions" Command="$Required"/>
       <Command Name="SwitchUser" Command="$Required"/>
       <Command Name="OpenSearch" Command="$Required"/>
+      <Command Name="ShowSort" Command="$Required"/>
       <ch:ChocHelper Name="Helper" ChocHelper="$Required"/>
     </Properties>
 
@@ -550,6 +550,15 @@
       <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[HomeKey.Visible]" Value="false"/>
       <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[WatchedKey.Visible]" Value="false"/>
       <Condition Source="[Folder.IsRoot]" SourceValue="true" Target="[FavoriteKey.Visible]" Value="false"/>
+      <Rule>
+        <Conditions>
+          <Equality Source="[Folder.IsRoot]" Value="true" />
+          <Equality Source="[Application.Config.EnableRootPage]" Value="true" />
+        </Conditions>
+        <Actions>
+          <Set Target="[SortKey.Visible]" Value="false" />
+        </Actions>
+      </Rule>
       <Condition Source="[Folder.FilterUnwatched]" SourceValue="true" Target="[FilterWatched.IconColor]" Value="0,255,0"/>
       <Condition Source="[Folder.FilterFavorite]" SourceValue="true" Target="[FilterFavorite.IconColor]" Value="0,255,0"/>
       <Condition Source="[Folder.FilterUnwatched]" SourceValue="false" Target="[FilterWatched.IconColor]" Value="255,255,255"/>
@@ -646,6 +655,13 @@
                       <vsb:SimpleButton Name="ConfigMenuButton" Application="[Application]" 
                                         DescriptionField="[ToolText]" DescriptionText="Config Menu"
                                         ImageNoFocus="image://vi:Config" Command="[ConfigOptions]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
+                    </Children>
+                  </Panel>
+                  <Panel Name="SortKey" FocusOrder="105">
+                    <Children>
+                      <vsb:SimpleButton Name="SortMenuButton" Application="[Application]" 
+                                        DescriptionField="[ToolText]" DescriptionText="Sort Order"
+                                        ImageNoFocus="image://vi:Sort" Command="[ShowSort]" Size="20,20" Margins="3,1,0,0" Alpha=".8"/>
                     </Children>
                   </Panel>
                   <Panel Name="WatchedKey" FocusOrder="106">

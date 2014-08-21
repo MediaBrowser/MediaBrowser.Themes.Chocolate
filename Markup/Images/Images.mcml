@@ -23,6 +23,7 @@
   <Image Name="CollapseArrows" Source="resx://Chocolate/Chocolate.Resources/Collapse"/>
   <Image Name="Search" Source="resx://Chocolate/Chocolate.Resources/IconSearch"/>
   <Image Name="Home" Source="resx://Chocolate/Chocolate.Resources/IconHome"/>
+  <Image Name="Sort" Source="resx://Chocolate/Chocolate.Resources/IconSort"/>
 
   <Image Name="LeftMenuBorderDefault"  Source="resx://Chocolate/Chocolate.Resources/LeftMenuBorderDefault" />
   <Image Name="RightMenuBorderDefault" Source="resx://Chocolate/Chocolate.Resources/RightMenuBorderDefault" />

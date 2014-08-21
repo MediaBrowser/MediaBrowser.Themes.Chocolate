@@ -124,6 +124,7 @@
       <!--<Condition Source="[ThemeHelper.Config.ShowCoverFlowDetails]" SourceValue="true" Target="[MyItems.LayoutInput]" Value="[SmallItemsLayout]" />-->
       <Binding Source="[ThemeHelper.Config.ShowCoverFlowEndTime]" Target="[EndTimePanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.ShowCoverflowTotalNumber]" Target="[ListPanel.Visible]"/>
+      <Binding Source="[Folder.DisplayPrefs.SortOrders.Chosen!cor:String]" Target="[List_SortBy.Content]"/>
       
     </Rules>
 
@@ -167,6 +168,17 @@
                       <Text Name="List_Total" Content="0" Color="color://uc:Dark" Font="font://uf:CF_TotalItems"/>
                     </Children>
                   </Panel>
+                </Children>
+              </Panel>
+
+              <!--Sort indicator-->
+              <Panel Layout="HorizontalFlow">
+                <LayoutInput>
+                  <FormLayoutInput Top="Parent,1,-43" Bottom="Parent,1,0" Right="Parent,1,-150"/>
+                </LayoutInput>
+                <Children>
+                  <Text Content="[Application.LocalStrings.#SORT!cor:String]" Color="color://uc:Dark" Font="font://uf:CF_TotalItems" />
+                  <Text Name="List_SortBy" Color="color://uc:Light" Font="font://uf:CF_TotalItems"/>
                 </Children>
               </Panel>
 

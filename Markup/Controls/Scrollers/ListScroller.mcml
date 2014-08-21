@@ -45,6 +45,8 @@
 
 			<Binding Source="[Folder.Children]" Target="[MyRepeater.Source]"/>
 
+      <Binding Source="[Folder.DisplayPrefs.SortOrders.Chosen!cor:String]" Target="[List_SortBy.Content]"/>
+
       <!--The below default dummy rule is used to navigate to the proper first item.  using a generic rule or changed does not work the first time-->
       <Default Target="[Startup]" Value="1" ConditionLogicalOp="And">
         <Conditions>
@@ -78,6 +80,17 @@
             </LayoutInput>
             
             <Children>
+              <!--Sort indicator-->
+              <Panel Layout="HorizontalFlow">
+                <LayoutInput>
+                  <FormLayoutInput Bottom="Parent,1, 0" Left="Parent,0"/>
+                </LayoutInput>
+                <Children>
+                  <Text Content="[Application.LocalStrings.#SORT!cor:String]" Color="color://uc:Dark" Font="font://uf:CF_TotalItems" />
+                  <Text Name="List_SortBy" Color="color://uc:Light" Font="font://uf:CF_TotalItems"/>
+                </Children>
+              </Panel>
+
               <!-- List Counter -->
               <Panel>
                 <LayoutInput>
@@ -86,8 +99,8 @@
                 <Children>
                   <Panel Layout="HorizontalFlow" Margins="0,5,0,0" >
                     <Children>
-                      <Text Name="List_Counter" Content="0" Color="color://uc:Medium" Font="font://uf:LightMediumMinus" />
-                      <Text Name="List_Total" Content="0" Color="color://uc:Medium" Font="font://uf:LightMediumMinus" Margins="0,0,20,0" />
+                      <Text Name="List_Counter" Content="0" Color="color://uc:Light" Font="font://uf:LightMediumMinus" />
+                      <Text Name="List_Total" Content="0" Color="color://uc:Dark" Font="font://uf:LightMediumMinus" Margins="0,0,20,0" />
                     </Children>
                   </Panel>
                 </Children>

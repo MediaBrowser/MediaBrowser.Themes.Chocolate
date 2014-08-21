@@ -106,6 +106,7 @@
     <Content Include="Images\Icons\IconHome.png" />
     <Content Include="Images\Icons\IconNowPlay.png" />
     <Content Include="Images\Icons\IconSearch.png" />
+    <Content Include="Images\Icons\IconSort.png" />
     <Content Include="Images\Icons\MetroPlay.png" />
     <Content Include="Images\Icons\MetroResume.png" />
     <Content Include="Images\Icons\NotWatched.png" />
@@ -315,7 +316,9 @@
     </Content>
     <Content Include="Markup\Controls\MediaInfoPanel.mcml" />
     <Content Include="Markup\Controls\NowPlayingViewport.mcml" />
-    <Content Include="Markup\Controls\Popups\PopupPlay.mcml" />
+    <Content Include="Markup\Controls\Popups\PopupPlay.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Popups\PopupRadioMenu.mcml" />
     <Content Include="Markup\Controls\Popups\PopupViewMenu.mcml" />
     <Content Include="Markup\Controls\Scrollers\BasicPosterScroller.mcml" />
