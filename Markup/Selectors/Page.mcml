@@ -177,15 +177,14 @@
       <Changed Source="[CloseSortConfiguration.Invoked]">
         <Actions>
           <Set Target="[SortConfig.Visible]" Value="false"/>
-          <Set Target="[ConfigurationMenu.Visible]" Value="true"/>
-          <Invoke Target="[ConfigurationMenu.NavigateInto]" />
+          <Invoke Target="[ViewPanel.NavigateInto]" />
         </Actions>
       </Changed>
 
       <Changed Source="[Folder.DisplayPrefs.SortOrders.Chosen]" >
         <Actions>
           <Set Target="[SortConfig.Visible]" Value="false"/>
-          <Invoke Target="[ConfigurationMenu.NavigateInto]" />
+          <Invoke Target="[ViewPanel.NavigateInto]" />
         </Actions>
       </Changed>
 
