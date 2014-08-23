@@ -730,7 +730,7 @@
       <a:Application Name="Application" Application="$Required"/>
     </Properties>
     <Content>
-      <Panel Name="Legend" MaximumSize="600, 280" >
+      <Panel Name="Legend" MaximumSize="600, 350" >
         <Animations>
           <Animation Type="Show">
             <Keyframes>
@@ -757,7 +757,7 @@
                 
               </ColorFill>
 
-              <Panel Layout="HorizontalFlow" >
+              <Panel Name="Shortcuts" Layout="HorizontalFlow" >
                 <LayoutInput>
                   <FormLayoutInput Horizontal="Center" Top="Line, 1"/>
                 </LayoutInput>
@@ -768,6 +768,7 @@
                       <Text Content="[Application.LocalStrings.#SearchSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                       <Text Content="[Application.LocalStrings.#ContextSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                       <Text Content="[Application.LocalStrings.#WatchedSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#JumpSC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                       <Text Content="[Application.LocalStrings.#PlaySC!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                     </Children>
                   </Panel>
@@ -777,11 +778,19 @@
                       <Text Content="[Application.LocalStrings.#SearchSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                       <Text Content="[Application.LocalStrings.#ContextSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                       <Text Content="[Application.LocalStrings.#WatchedSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
+                      <Text Content="[Application.LocalStrings.#JumpSCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                       <Text Content="[Application.LocalStrings.#PlaySCDesc!cor:String]" Margins="0,0,0,5" Font="Segoe Media Center, 14, Bold" Color="White" Alpha=".7" />
                     </Children>
                   </Panel>
                 </Children>
               </Panel>
+
+              <Text Color ="White" Alpha=".45" Font="Segoe Media Center, 12, Bold" HorizontalAlignment="Center" Content="You can hide this panel by de-selecting 'Show Shortcut Legend' in the Chocolate General options page." WordWrap="true" >
+                <LayoutInput>
+                  <FormLayoutInput Horizontal="Center" Top="Shortcuts, 1, 20"/>
+                </LayoutInput>
+                
+              </Text>
 
             </Children>
           </Graphic>
