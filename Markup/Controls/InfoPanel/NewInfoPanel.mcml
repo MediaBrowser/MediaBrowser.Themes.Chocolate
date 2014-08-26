@@ -110,6 +110,7 @@
 
       <Binding Source="[Item.HasSubTitle]" Target="[SubTitles.Visible]" />
       <Binding Source="[Item.SubTitle]" Target="[SubTitle.Content]" />
+      <Binding Source="[Item.Is3D]" Target="[Ind3d.Visible]" />
       <Default Target="[LogoImage.Visible]" Value="false"/>
       <Default Target="[Title.Visible]" Value="true"/>
 
@@ -136,6 +137,7 @@
                   <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="0,6,12,0" />
                   <Graphic Name="HDType" Margins="0,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <Graphic Name="Ind3d" Margins="0,7,0,0" Content="image://vi:Icon3d" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
 
               </Panel>

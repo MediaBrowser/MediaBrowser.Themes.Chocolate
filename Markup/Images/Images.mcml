@@ -82,6 +82,7 @@
   <Image Name="HDLogo1080" Source="resx://MediaBrowser/MediaBrowser.Resources/hd1080"  />
   <Image Name="Icon1080" Source="resx://Chocolate/Chocolate.Resources/Icon1080"/>
   <Image Name="Icon720" Source="resx://Chocolate/Chocolate.Resources/Icon720"/>
+  <Image Name="Icon3d" Source="resx://Chocolate/Chocolate.Resources/Icon3d"/>
   <Image Name="MetroPlay" Source="resx://Chocolate/Chocolate.Resources/MetroPlay"/>
   <Image Name="MetroResume" Source="resx://Chocolate/Chocolate.Resources/MetroResume"/>
 

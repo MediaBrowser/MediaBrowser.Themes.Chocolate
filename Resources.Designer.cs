@@ -613,6 +613,16 @@ namespace Chocolate {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Icon3d {
+            get {
+                object obj = ResourceManager.GetObject("Icon3d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Icon720 {
             get {
                 object obj = ResourceManager.GetObject("Icon720", resourceCulture);
