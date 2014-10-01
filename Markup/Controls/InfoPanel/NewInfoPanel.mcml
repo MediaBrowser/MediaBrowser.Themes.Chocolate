@@ -29,6 +29,7 @@
       <cor:Boolean Name="ShowDetails" Boolean="false" />
       <cor:Boolean Name="ShowOverview" Boolean="true" />
       <Size Name="OverviewSize" Size="550,0"/>
+      <Size Name="MaxLogoSize" Size="1000,80"/>
     </Properties>
 
     <Rules>
@@ -124,7 +125,7 @@
               <Panel Name="TitlePanel" Margins="5,0,5,0" >
                 <Children>
                   <ash:AutoScrollHorizontal Name="Title" Margins="0,2,0,-3" Text="[Item.Name]" Font="Segoe UI Light, 34, bold" Color="color://uc:TitleColor" />
-                  <Graphic Name="LogoImage" Margins="0,5,0,8" Content="[Item.LogoImage]" MinimumSize="0,80" MaximumSize="0,80" MaintainAspectRatio="true" Visible="false"/>
+                  <Graphic Name="LogoImage" Margins="0,5,0,8" Content="[Item.LogoImage]" MaximumSize="[MaxLogoSize]" MaintainAspectRatio="true" Visible="false"/>
                 </Children>
               </Panel>
 

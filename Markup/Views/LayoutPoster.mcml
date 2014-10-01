@@ -187,9 +187,9 @@
             </Children>
           </Panel>
 
-          <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" Item="[SelectedItem]" ShowOverview="false" ShowDetails="false" Visible="[ThemeHelper.Config.ShowPosterInfo]"  >
+          <nip:InfoPanel Name="ItemInfoPanel" Application="[Application]" MaxLogoSize="550,80" Item="[SelectedItem]" ShowOverview="false" ShowDetails="false" Visible="[ThemeHelper.Config.ShowPosterInfo]"  >
             <LayoutInput>
-              <FormLayoutInput Left="Parent,0,10" Top="Parent,1,-220" Bottom="Parent,1" Right="Parent,.4"/>
+              <FormLayoutInput Left="Parent,0,10" Top="Parent,1,-220" />
             </LayoutInput>
 
           </nip:InfoPanel>
