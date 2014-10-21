@@ -684,6 +684,7 @@
 
       <Binding Source="[Item.PhysicalParent.PreferredImage]" Target="[ItemPoster.Content]">
         <Conditions>
+          <IsValid Source="[Item.PhysicalParent]"/>
           <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
           <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season"/>
           <Equality Source="[Item.PhysicalParent.HasPreferredImage]" Value="true"/>
@@ -693,6 +694,7 @@
 
       <Binding Source="[Item.Series.PreferredImage]" Target="[ItemPoster.Content]">
         <Conditions>
+          <IsValid Source="[Item.PhysicalParent]"/>
           <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
           <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season"/>
           <Equality Source="[Item.PhysicalParent.HasPreferredImage]" Value="false"/>
