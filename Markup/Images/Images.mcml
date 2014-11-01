@@ -6,6 +6,8 @@
   <Image Name="MenuOptionViews" Source="resx://Chocolate/Chocolate.Resources/view"/>
   <Image Name="MenuOptionSort" Source="resx://Chocolate/Chocolate.Resources/sort"/>
   <Image Name="MenuOptionIndex" Source="resx://Chocolate/Chocolate.Resources/index"/>
+  <Image Name="MenuOptionCritic" Source="resx://Chocolate/Chocolate.Resources/MenuOptionCritic"/>
+  <Image Name="MenuOptionUser" Source="resx://Chocolate/Chocolate.Resources/MenuOptionUser"/>
   <Image Name="MenuOptionClose" Source="resx://Chocolate/Chocolate.Resources/close"/>
 
   <Image Name="ButtonPanelLeft" Source="resx://Chocolate/Chocolate.Resources/ButtonPanelLeft"/>

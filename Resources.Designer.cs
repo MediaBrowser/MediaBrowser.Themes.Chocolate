@@ -963,6 +963,16 @@ namespace Chocolate {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap MenuOptionCritic {
+            get {
+                object obj = ResourceManager.GetObject("MenuOptionCritic", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap MenuOptionDate {
             get {
                 object obj = ResourceManager.GetObject("MenuOptionDate", resourceCulture);
@@ -1136,6 +1146,16 @@ namespace Chocolate {
         internal static System.Drawing.Bitmap MenuOptionUnwatched {
             get {
                 object obj = ResourceManager.GetObject("MenuOptionUnwatched", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap MenuOptionUser {
+            get {
+                object obj = ResourceManager.GetObject("MenuOptionUser", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

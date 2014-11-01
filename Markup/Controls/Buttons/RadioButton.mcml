@@ -1,6 +1,7 @@
 <Mcml xmlns="http://schemas.microsoft.com/2006/mcml"
 	    xmlns:cor="assembly://MSCorLib/System"
       xmlns:vi="resx://Chocolate/Chocolate.Resources/Images"
+      xmlns:i="resx://MediaBrowser/MediaBrowser.Resources/Images"
       xmlns:a="assembly://MediaBrowser/MediaBrowser"
       xmlns:c="file://Styles_DoNotEdit.mcml"
       xmlns:f="file://Fonts_DoNotEdit.mcml"
@@ -54,6 +55,8 @@
       <Image Name="MenuOptionName" Image="image://vi:MenuOptionName"/>
       <Image Name="MenuOptionDate" Image="image://vi:MenuOptionDate"/>
       <Image Name="MenuOptionRating" Image="image://vi:MenuOptionRating"/>
+      <Image Name="MenuOptionUser" Image="image://vi:MenuOptionUser"/>
+      <Image Name="MenuOptionCritic" Image="image://vi:MenuOptionCritic"/>
       <Image Name="MenuOptionRuntime" Image="image://vi:MenuOptionRuntime"/>
       <Image Name="MenuOptionUnwatched" Image="image://vi:MenuOptionUnwatched"/>
       <Image Name="MenuOptionYear" Image="image://vi:MenuOptionYear"/>
@@ -167,8 +170,10 @@
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#NameDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#NAME!cor:String]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DateDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionDate]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#DateDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#DATE!cor:String]"/>
-      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RatingDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionRating]"/>
-      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RatingDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#RATING!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#CriticRatingDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionCritic]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#CriticRatingDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#Critic!cor:String]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#UserRatingDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionUser]"/>
+      <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#UserRatingDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#UserRating!cor:String]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RuntimeDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionRuntime]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#RuntimeDispPref!cor:String]" Target="[GraphicLabel.Content]" Value="[Application.LocalStrings.#RUNTIME!cor:String]"/>
       <Condition Source="[Option]" SourceValue="[Application.LocalStrings.#UnWatchedDispPref!cor:String]" Target="[GraphicImage.Content]" Value="[MenuOptionUnwatched]"/>
@@ -196,7 +201,7 @@
             <Children>
               <Panel >
                 <Children>
-                  <Graphic Name="GraphicImage" Content="[Image]" MaximumSize="[Size]" MaintainAspectRatio="true">
+                  <Graphic Name="GraphicImage" Content="[Image]" MaximumSize="[Size]" MinimumSize="[Size]" MaintainAspectRatio="true">
                     <Children>
                       <Panel Layout="Form">
                         <Children>

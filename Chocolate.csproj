@@ -216,6 +216,8 @@
     <None Include="Images\Ultimate\buttons\MenuOptionUnwatched.png" />
     <None Include="Images\Ultimate\buttons\MenuOptionVertScroll.png" />
     <None Include="Images\Ultimate\buttons\MenuOptionYear.png" />
+    <Content Include="Images\Ultimate\buttons\MenuOptionCritic.png" />
+    <Content Include="Images\Ultimate\buttons\MenuOptionUser.png" />
     <Content Include="Images\Ultimate\buttons\name.png" />
     <Content Include="Images\Ultimate\buttons\none.png" />
     <Content Include="Images\Ultimate\buttons\pin.png" />
@@ -320,7 +322,9 @@
     <Content Include="Markup\Controls\Popups\PopupPlay.mcml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Markup\Controls\Popups\PopupRadioMenu.mcml" />
+    <Content Include="Markup\Controls\Popups\PopupRadioMenu.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Popups\PopupViewMenu.mcml" />
     <Content Include="Markup\Controls\Scrollers\BasicPosterScroller.mcml" />
     <Content Include="Markup\Controls\Scrollers\SeasonsScroller.mcml">

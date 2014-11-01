@@ -144,6 +144,8 @@
         public string YEAR = "YEAR";
         public string ConfirmExit = "Are you sure you wish to exit?";
         public string InProgressEHS = "In-Progress";
+        public string Critic = "CRITIC";
+        public string UserRating = "IMDb";
 
         public static MyStrings FromFile(string file)
         {
