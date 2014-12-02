@@ -81,6 +81,12 @@
         </Conditions>
       </Default>
 
+      <Default Target="[Status.Content]" Value="image://vi:IconContinuing" >
+        <Conditions>
+          <Equality Source="[Folder.Status]" Value="Continuing" />
+        </Conditions>
+      </Default>
+
       <Changed Source="[NaviTime.Tick]" ConditionLogicalOp="And">
         <Conditions>
           <Equality Source="[Input.DeepKeyFocus]" Value="false"/>
@@ -149,7 +155,7 @@
                       <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                       <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="0,6,12,0" />
                       <Graphic Name="HDType" Margins="0,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
-                      <Graphic Name="Status" Margins="0,7,0,0" Content="image://vi:IconContinuing" MaximumSize="0,20" MaintainAspectRatio="true"/>
+                      <Graphic Name="Status" Margins="0,7,0,0" MaximumSize="0,20" MaintainAspectRatio="true"/>
                     </Children>
 
                   </Panel>
