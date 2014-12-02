@@ -46,7 +46,21 @@
       <Binding Target="[Summary.MaximumSize]" Source="[OverviewSize]" />
       <Binding Target="[Summary.MinimumSize]" Source="[OverviewSize]" />
       <Binding Target="[DirectorRepeater.Source]" Source="[Item.Directors]" />
+      <Binding Target="[Airtime.Content]" Source="[Item.AirTime]"></Binding>
+      <Binding Target="[AirDay.Content]" Source="[Item.AirDay]"></Binding>
       <Condition Source="[OverviewSize.Width]" SourceValue="600" ConditionOp="GreaterThan" Target="[TextBackdrop.Visible]" Value="true" />
+
+      <Default Target="[Status.Content]" Value="image://vi:IconEnded" >
+        <Conditions>
+          <Equality Source="[Item.Status]" Value="Ended" />
+        </Conditions>
+      </Default>
+
+      <Default Target="[Status.Content]" Value="image://vi:IconContinuing" >
+        <Conditions>
+          <Equality Source="[Item.Status]" Value="Continuing" />
+        </Conditions>
+      </Default>
 
       <!--Use Production Year-->
       <Binding Target="[Year.Content]"     Source="[Item.ProductionYearString]">
@@ -135,10 +149,13 @@
                   <Graphic Name="RTIcon" Margins="10,6,0,0" MaintainAspectRatio="true" MaximumSize="0,20" />
                   <Text Name="CriticScore" Font="Segoe UI Light, 14, bold" Color="color://uc:TitleColor" Margins="2,2,10,0" />
                   <Text Name="Year" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
+                  <Text Name="AirDay" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
+                  <Text Name="Airtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                   <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="0,6,12,0" />
                   <Graphic Name="HDType" Margins="0,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
                   <Graphic Name="Ind3d" Margins="0,7,0,0" Content="image://vi:Icon3d" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <Graphic Name="Status" Margins="0,7,0,0" MaximumSize="0,20" MaintainAspectRatio="true"/>
                 </Children>
 
               </Panel>

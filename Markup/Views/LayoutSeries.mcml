@@ -250,6 +250,21 @@
       <Binding Target="[StarRating.Value]" Source="[Item.ImdbRating]"></Binding>
       <Binding Target="[CriticScore.Content]" Source="[Item.CriticRatingString]" />
       <Binding Target="[RTIcon.Content]" Source="[Item.RottenTomatoImage]" />
+      <Binding Target="[Airtime.Content]" Source="[Item.AirTime]"></Binding>
+      <Binding Target="[AirDay.Content]" Source="[Item.AirDay]"></Binding>
+
+      <Default Target="[Status.Content]" Value="image://vi:IconEnded" >
+        <Conditions>
+          <Equality Source="[Item.Status]" Value="Ended" />
+        </Conditions>
+      </Default>
+
+      <Default Target="[Status.Content]" Value="image://vi:IconContinuing" >
+        <Conditions>
+          <Equality Source="[Item.Status]" Value="Continuing" />
+        </Conditions>
+      </Default>
+
       <Rule>
         <Conditions>
           <Equality Source="[Item.HDType]" ConditionOp="Equals" Value="1080" />
@@ -336,8 +351,11 @@
                   <Text Name="CriticScore" Font="Segoe UI Light, 14, bold" Color="color://uc:TitleColor" Margins="2,2,10,0" />
                   <Text Name="TxtAired" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:TitleColor" Margins="0,0,10,0"/>
                   <Text Name="TxtRuntime" Font="Segoe Media Center Light, 16, Bold" Color="color://uc:TitleColor" Margins="0,0,10,0"/>
+                  <Text Name="AirDay" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
+                  <Text Name="Airtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="0,6,12,0" />
                   <Graphic Name="HDType" Margins="0,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <Graphic Name="Status" Margins="0,7,0,0" MaximumSize="0,20" MaintainAspectRatio="true"/>
                 </Children>
               </Panel>
 
