@@ -103,6 +103,8 @@
     <Content Include="Images\Icons\Icon3d.png" />
     <Content Include="Images\Icons\Icon720.png" />
     <Content Include="Images\Icons\IconCog.png" />
+    <Content Include="Images\Icons\IconContinuing.png" />
+    <Content Include="Images\Icons\IconEnded.png" />
     <Content Include="Images\Icons\IconHeart.png" />
     <Content Include="Images\Icons\IconHome.png" />
     <Content Include="Images\Icons\IconNowPlay.png" />

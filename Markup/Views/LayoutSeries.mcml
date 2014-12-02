@@ -45,6 +45,8 @@
       <Binding Target="[MPAARating.Value]" Source="[Folder.MpaaRating]"></Binding>
       <Binding Target="[StarRating.Value]" Source="[Folder.ImdbRating]"></Binding>
       <Binding Target="[Runtime.Content]" Source="[Folder.RunningTimeString]"></Binding>
+      <Binding Target="[Airtime.Content]" Source="[Folder.AirTime]"></Binding>
+      <Binding Target="[AirDay.Content]" Source="[Folder.AirDay]"></Binding>
       <Binding Target="[LogoImage.Content]" Source="[Folder.LogoImage]">
         <Conditions>
           <Equality Source="[ThemeHelper.Config.ShowListLogos]" ConditionOp="Equals" Value="true" />
@@ -72,6 +74,12 @@
       </Rule>
       <Default Target="[LogoImage.Visible]" Value="false"/>
       <Default Target="[Title.Visible]" Value="true"/>
+
+      <Default Target="[Status.Content]" Value="image://vi:IconEnded" >
+        <Conditions>
+          <Equality Source="[Folder.Status]" Value="Ended" />
+        </Conditions>
+      </Default>
 
       <Changed Source="[NaviTime.Tick]" ConditionLogicalOp="And">
         <Conditions>
@@ -136,9 +144,12 @@
                     <Children>
                       <sr:StarRating Margins="0,6,10,0" MaximumSize="0,20" Name="StarRating" ></sr:StarRating>
                       <Text Name="Year" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
+                      <Text Name="AirDay" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
+                      <Text Name="Airtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                       <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                       <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="0,6,12,0" />
                       <Graphic Name="HDType" Margins="0,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                      <Graphic Name="Status" Margins="0,7,0,0" Content="image://vi:IconContinuing" MaximumSize="0,20" MaintainAspectRatio="true"/>
                     </Children>
 
                   </Panel>

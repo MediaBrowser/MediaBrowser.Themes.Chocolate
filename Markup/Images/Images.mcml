@@ -79,6 +79,8 @@
   <Image Name="IconSummary" Source="resx://MediaBrowser/MediaBrowser.Resources/IconSummary"  />
   <Image Name="IconTrailer" Source="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer"  />
   <Image Name="IconRefresh" Source="resx://MediaBrowser/MediaBrowser.Resources/IconRefresh"  />
+  <Image Name="IconContinuing" Source="resx://Chocolate/Chocolate.Resources/IconContinuing"  />
+  <Image Name="IconEnded" Source="resx://Chocolate/Chocolate.Resources/IconEnded"  />
   <Image Name="BlankActor" Source="resx://MediaBrowser/MediaBrowser.Resources/MissingPerson"  />
   <Image Name="HDLogo720" Source="resx://MediaBrowser/MediaBrowser.Resources/hd720"  />
   <Image Name="HDLogo1080" Source="resx://MediaBrowser/MediaBrowser.Resources/hd1080"  />
