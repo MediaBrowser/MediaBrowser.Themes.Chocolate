@@ -91,11 +91,8 @@
       <Condition Source="[Item.ParentalAllowed]" ConditionOp="Equals" SourceValue="false" Target="[PCLock.Visible]" Value="true" />
 
       <Changed Source="[Item.HaveWatched]">
-        <Conditions>
-          <Equality Source="[Application.Config.ShowWatchTickInPosterView]" ConditionOp="Equals" Value="true" />
-        </Conditions>
         <Actions>
-          <Set Target="[TickIndicatorPanel.Visible]" Value="[Application.Config.ShowWatchTickInPosterView]" />
+          <Set Target="[TickIndicatorPanel.Visible]" Value="[Item.ShowWatched]" />
         </Actions>
       </Changed>
       <Changed Source="[Application.Config.ShowWatchedTickOnFolders]" InitialEvaluate="true">
@@ -103,7 +100,7 @@
           <Equality Source="[Item.IsPlayable]" Value="false" />
         </Conditions>
         <Actions>
-          <Set Target="[TickIndicatorPanel.Visible]" Value="[Application.Config.ShowWatchedTickOnFolders]" />
+          <Set Target="[TickIndicatorPanel.Visible]" Value="[Item.ShowWatched]" />
         </Actions>
       </Changed>
 
@@ -112,7 +109,7 @@
           <Equality Source="[Item.IsPlayable]" Value="true" />
         </Conditions>
         <Actions>
-          <Set Target="[TickIndicatorPanel.Visible]" Value="[Application.Config.ShowWatchTickInPosterView]" />
+          <Set Target="[TickIndicatorPanel.Visible]" Value="[Item.ShowWatched]" />
         </Actions>
       </Changed>
 

@@ -329,7 +329,11 @@
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="720" Target="[HDImage.Content]" Value="image://vi:Icon720" />
       <Condition Source="[Item.HDType]" ConditionOp="Equals" SourceValue="1080" Target="[HDImage.Content]" Value="image://vi:Icon1080" />
 
-      <Binding Source="[Item.HaveWatched]" Target="[TickPanel.Visible]" />
+      <Binding Source="[Item.HaveWatched]" Target="[TickPanel.Visible]" >
+        <Conditions>
+          <Equality Source="[Item.ShowWatched]" Value="true" />
+        </Conditions>
+      </Binding>
       <Binding Source="[Item.UnwatchedCountString]" Target="[UnwatchedCount.Content]" />
       <Binding Source="[Item.ShowUnwatched]" Target="[UnwatchedIndicator.Visible]" />
 
