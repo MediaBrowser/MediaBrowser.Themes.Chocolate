@@ -152,7 +152,7 @@
             MyStrings strings = new MyStrings();
             XmlSettings<MyStrings>.Bind(strings, file);
             Logger.ReportInfo("Using String Data from " + file);
-            Logger.ReportInfo("****Version is: {0}",strings.Version);
+            //Logger.ReportInfo("****Version is: {0}",strings.Version);
             if ("1.0001" != strings.Version)
             {
                 File.Delete(file);
