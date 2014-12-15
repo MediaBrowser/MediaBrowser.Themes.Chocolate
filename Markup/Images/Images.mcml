@@ -90,6 +90,7 @@
   <Image Name="MetroPlay" Source="resx://Chocolate/Chocolate.Resources/MetroPlay"/>
   <Image Name="MetroResume" Source="resx://Chocolate/Chocolate.Resources/MetroResume"/>
 
+  <Image Name="Media3d" Source="resx://MediaBrowser/MediaBrowser.Resources/media_3d"  />
 
 
   <Image Name="MenuOptionClose" Source="resx://MediaBrowser/MediaBrowser.Resources/MenuOptionClose"/>

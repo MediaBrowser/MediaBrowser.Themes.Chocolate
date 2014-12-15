@@ -153,8 +153,8 @@
                   <Text Name="Airtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                   <Text Name="Runtime" Font="Segoe UI Light, 16, bold" Color="color://uc:TitleColor" Margins="0,0,10,0" />
                   <mp:MPAARating Name="MPAARating" MaximumSize="0,21" Margins="0,6,12,0" />
-                  <Graphic Name="HDType" Margins="0,7,0,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
-                  <Graphic Name="Ind3d" Margins="0,7,0,0" Content="image://vi:Icon3d" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <Graphic Name="HDType" Margins="0,7,10,0" Content="image://vi:Icon1080" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
+                  <Graphic Name="Ind3d" Margins="0,7,10,0" Content="image://vi:Icon3d" MaximumSize="0,20" MaintainAspectRatio="true" Visible="false"/>
                   <Graphic Name="Status" Margins="0,7,0,0" MaximumSize="0,20" MaintainAspectRatio="true"/>
                 </Children>
 

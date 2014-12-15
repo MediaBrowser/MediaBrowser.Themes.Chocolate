@@ -19,6 +19,7 @@
           <Set Target="[AspectRatio.Value]" Value="[Item.AspectRatioString]"/>
           <Set Target="[HDResolution.Value]" Value="[Item.HDType]"/>
           <Set Target="[MediaFormat.Value]" Value="[Item.MediaTypeString]"/>
+          <Set Target="[Media3d.Value]" Value="[Item.Is3D]"/>
         </Actions>
       </Changed>
     </Rules>
@@ -30,6 +31,7 @@
         </Layout>
         <Children>
           <me:MediaFormat   Name="MediaFormat"  MaximumSize="[MaxIconSize]" />
+          <me:Icon3d        Name="Media3d"  MaximumSize="[MaxIconSize]" />
           <me:VideoCodec    Name="VideoCodec"   MaximumSize="[MaxIconSize]" />
 
           <me:HDResolution  Name="HDResolution" MaximumSize="[MaxIconSize]" />
@@ -126,6 +128,20 @@
 
     <Content>
       <Graphic Name="Image" Visible="false" Content="image://i:BlankImage" SizingPolicy="SizeToContent" MaintainAspectRatio="true" />
+    </Content>
+  </UI>
+
+  <UI Name="Icon3d">
+    <Properties>
+      <cor:Boolean Name="Value" Boolean="false"/>
+    </Properties>
+    <Rules>
+      <Binding Source="[Value]" Target="[Image.Visible]" />
+
+    </Rules>
+
+    <Content>
+      <Graphic Name="Image" Content="image://i:Media3d" SizingPolicy="SizeToContent" MaintainAspectRatio="true" />
     </Content>
   </UI>
 

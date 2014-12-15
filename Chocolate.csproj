@@ -319,7 +319,9 @@
     <Content Include="Markup\Controls\InfoPanel\NewInfoPanel.mcml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Markup\Controls\MediaInfoPanel.mcml" />
+    <Content Include="Markup\Controls\MediaInfoPanel.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\NowPlayingViewport.mcml" />
     <Content Include="Markup\Controls\Popups\PopupPlay.mcml">
       <SubType>Designer</SubType>
