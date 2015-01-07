@@ -33,7 +33,14 @@
     <Rules>
       
       <Default Target="[Input.MakeTopmostOnFocus]" Value="true"/>
-      
+
+      <Binding Target="[ItemName.Content]"       Source="[Item.LongName]" >
+        <Conditions>
+          <IsValid Source="[Item.PhysicalParent]"/>
+          <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season" ConditionOp="NotEquals" />
+        </Conditions>
+      </Binding>
+      <Binding Target="[ItemName.Content]"       Source="[Item.Name]"/>
 
       <Changed Source="[Item.HaveWatched]">
         <Conditions>

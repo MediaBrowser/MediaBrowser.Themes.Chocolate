@@ -34,6 +34,12 @@
 
     <Rules>
 
+      <Binding Target="[Title.Text]"       Source="[Item.LongName]" >
+        <Conditions>
+          <IsValid Source="[Item.PhysicalParent]"/>
+          <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season" ConditionOp="NotEquals" />
+        </Conditions>
+      </Binding>
       <Binding Target="[Title.Text]"       Source="[Item.Name]"/>
       <Binding Target="[LogoImage.Content]" Source="[Item.LogoImage]"/>
 

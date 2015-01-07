@@ -289,7 +289,9 @@
     </Content>
     <Content Include="Markup\Controls\Buttons\SpecialButton.mcml" />
     <Content Include="Markup\Controls\Buttons\ChapterButton.mcml" />
-    <Content Include="Markup\Controls\Buttons\ListButton.mcml" />
+    <Content Include="Markup\Controls\Buttons\ListButton.mcml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Markup\Controls\Buttons\MenuButton.mcml" />
     <Content Include="Markup\Controls\Buttons\PCIndicatorButton.mcml" />
     <Content Include="Markup\Controls\Buttons\PersonButton.mcml">
