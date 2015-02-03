@@ -88,7 +88,7 @@
       <TransformByAttributeAnimation Name="HideSlideLeft" Attribute="Width" Magnitude="1.0" Source="animation://anim:HideSlideLeft"/>
 
       <FormLayoutInput Name="PortraitButtons" Left="Poster, 1,5" Top="Poster, 0, 10" />
-      <FormLayoutInput Name="LandscapeButtons" Left="Poster, 0,10" Bottom="Poster, 0, -5" />
+      <FormLayoutInput Name="LandscapeButtons" Left="Poster, 1,5" Bottom="Poster, 1, -15" />
       
     </Locals>
 
@@ -290,12 +290,17 @@
       
       <Binding Source="[Item.ContainsTrailers]" Target="[TrailerButton.Visible]"/>
       
-      <!--<Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode"  >
+      <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode"  >
+        <Conditions>
+          <Equality Source="[Application.Config.Advanced_EnableDelete]" Value="true" />
+          <Equality Source="[Item.CanResume]" Value="true" />
+        </Conditions>
         <Actions>
           <Set Target="[ButtonsPanel.LayoutInput]"  Value="[LandscapeButtons]"/>
-          <Set Target="[Buttons.Layout]"  Value="HorizontalFlow"/>
         </Actions>
-      </Condition>-->
+      </Condition>
+      
+      <Default Target="[ButtonsPanel.LayoutInput]"  Value="[PortraitButtons]"/>
 
       <Binding Source="[Environment.IsWidescreen]" Target="[PosterImage.Visible]">
         <Conditions>
