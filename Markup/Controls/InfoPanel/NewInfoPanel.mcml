@@ -51,7 +51,11 @@
       <Binding Target="[Runtime.Content]" Source="[Item.RunningTimeString]"></Binding>
       <Binding Target="[Summary.MaximumSize]" Source="[OverviewSize]" />
       <Binding Target="[Summary.MinimumSize]" Source="[OverviewSize]" />
-      <Binding Target="[DirectorRepeater.Source]" Source="[Item.Directors]" />
+      <Binding Target="[DirectorRepeater.Source]" Source="[Item.Directors]" >
+        <Conditions>
+          <Equality Source="[ShowDetails]" Value="true" />
+        </Conditions>
+      </Binding>
       <Binding Target="[Airtime.Content]" Source="[Item.AirTime]"></Binding>
       <Binding Target="[AirDay.Content]" Source="[Item.AirDay]"></Binding>
       <Condition Source="[OverviewSize.Width]" SourceValue="600" ConditionOp="GreaterThan" Target="[TextBackdrop.Visible]" Value="true" />
@@ -85,7 +89,15 @@
       <!--Genres For TV Series/Episodes-->
       <Binding Target="[GenreRepeater.Source]"    Source="[Item.Series.Genres]">
         <Conditions>
+          <Equality Source="[ShowDetails]" Value="true" />
           <Equality Source="[Item.ItemTypeString]" Value="Episode"/>
+        </Conditions>
+      </Binding>
+
+      <Binding Target="[GenreRepeater.Source]"    Source="[Item.Genres]">
+        <Conditions>
+          <Equality Source="[ShowDetails]" Value="true" />
+          <Equality Source="[Item.ItemTypeString]" Value="Episode" ConditionOp="NotEquals"/>
         </Conditions>
       </Binding>
 
@@ -109,6 +121,7 @@
       </Rule>
       <Changed Source="[Item]" InitialEvaluate="true">
         <Conditions>
+          <Equality Source="[ShowDetails]" Value="true" />
           <Equality Source="[Item.DirectorString]" ConditionOp="Equals" Value="" />
         </Conditions>
         <Actions>
@@ -171,7 +184,7 @@
                 <Children>
                   <Panel Name="GenreInfo" Layout="HorizontalFlow" FocusOrder="0">
                     <Children>
-                      <Repeater Name="GenreRepeater" Source="[Item.Genres]" >
+                      <Repeater Name="GenreRepeater" >
                         <Layout>
                           <FlowLayout Orientation="Horizontal" Spacing="25,0"/>
                         </Layout>
@@ -193,7 +206,7 @@
                       <Panel Name="Directors" Layout="HorizontalFlow" >
                         <Children>
                           <Text Name="DirectorLabel" Margins="0,0,5,0" Color="color://s:Choc_Label" Font="font://uf:Detail_Director_Label" WordWrap="false" Content="[Application.LocalStrings.#DirectedByDetail!cor:String]"/>
-                          <Repeater Name="DirectorRepeater" Source="[Item.Directors]" Margins="0,0,0,0" MaximumSize="0,150" >
+                          <Repeater Name="DirectorRepeater" Margins="0,0,0,0" MaximumSize="0,150" >
                             <Layout>
                               <FlowLayout Orientation="Horizontal" AllowWrap="true"  Spacing="25,0"  />
                             </Layout>
