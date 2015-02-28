@@ -221,15 +221,6 @@
         </Actions>
       </Changed>
 
-      <Rule ConditionLogicalOp="And">
-        <Conditions>
-          <Equality Source="[Application.Config.Advanced_EnableDelete]" ConditionOp="Equals" Value="true" />
-          <Equality Source="[Application.Config.EnableAdvancedCmds]" ConditionOp="Equals" Value="true" />
-        </Conditions>
-        <Actions>
-          <Set Target="[DeleteMovieButton.Visible]" Value="true" />
-        </Actions>
-      </Rule>
       <Changed Source="[MyTimer.Tick]" InitialEvaluate="true">
         <Actions>
           <Set Value="[Item.CanResume]" Target="[ResumeMovieButton.Visible]"/>
@@ -292,7 +283,7 @@
       
       <Condition Source="[Item.ItemTypeString]" ConditionOp="Equals" SourceValue="Episode"  >
         <Conditions>
-          <Equality Source="[Application.Config.Advanced_EnableDelete]" Value="true" />
+          <Equality Source="[Item.CanDelete]" Value="true" />
           <Equality Source="[Item.CanResume]" Value="true" />
         </Conditions>
         <Actions>
@@ -379,7 +370,7 @@
                           <ib:ImageButton Name="ScenesButton" Text="[Application.LocalStrings.#Scenes!cor:String]" ImageFocus="image://it:GrayGradient" Command="[ChaptersCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/Frames" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="TrailerButton" Visible="false" Text="[Application.LocalStrings.#PlayTrailersDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[TrailerCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconTrailer" Size="175,45" Font="font://f:MM_ButtonFont" />
                           <ib:ImageButton Name="SpecialsButton" Visible="false" Text="[Application.LocalStrings.#SpecialFeatures!cor:String]" ImageFocus="image://it:GrayGradient" Command="[SpecialsCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconAsterisk" Size="175,45" Font="font://f:MM_ButtonFont" />
-                          <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="175,45" Font="font://f:MM_ButtonFont" Visible="false" />
+                          <ib:ImageButton Name="DeleteMovieButton" Text="[Application.LocalStrings.#DeleteDetail!cor:String]" ImageFocus="image://it:GrayGradient" Command="[DeleteMovieCommand]" Icon="resx://MediaBrowser/MediaBrowser.Resources/IconDelete" Size="175,45" Font="font://f:MM_ButtonFont" Visible="[Item.CanDelete]" />
                         </Children>
                       </Panel>
                     </Children>
