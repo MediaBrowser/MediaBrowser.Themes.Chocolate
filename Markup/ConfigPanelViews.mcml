@@ -43,7 +43,6 @@
       <BooleanChoice Name="ShowCoverflowPosterOverlay" Value="[Helper.Config.ShowCoverflowPosterOverlay]" />
       <BooleanChoice Name="ShowCoverflowTotalNumber" Value="[Helper.Config.ShowCoverflowTotalNumber]" />
       <!--List Options-->
-      <BooleanChoice Name="ShowListLogos" Value="[Helper.Config.ShowListLogos]" />
       <BooleanChoice Name="ShowListEndTime" Value="[Helper.Config.ShowListEndTime]" />
       <BooleanChoice Name="ShowListBackground" Value="[Helper.Config.ShowListBackground]" />
       <!--Poster Options-->
@@ -121,11 +120,6 @@
         </Actions>
       </Changed>
       <!--List Options-->
-      <Changed Source="[ShowListLogosCB.Checked.Value]">
-        <Actions>
-          <Set Target="[Helper.Config.ShowListLogos]" Value="[ShowListLogosCB.Checked.Value]"/>
-        </Actions>
-      </Changed>
       <Changed Source="[ShowListEndTimeCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.ShowListEndTime]" Value="[ShowListEndTimeCB.Checked.Value]"/>
@@ -202,7 +196,6 @@
               <cb:CheckBox Name="DisableEHSMovieTitleCB" Label="[Application.LocalStrings.#DisableEHSMovieTitle!cor:String]" Checked="[DisableEHSMovieTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
           <!--List Options Panel-->
               <Text Content="List Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
-              <cb:CheckBox Name="ShowListLogosCB" Label="[Application.LocalStrings.#ShowLogos!cor:String]" Checked="[ShowListLogos]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowListEndTimeCB" Label="[Application.LocalStrings.#ShowEndTime!cor:String]" Checked="[ShowListEndTime]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="ShowListBackgroundCB" Label="[Application.LocalStrings.#ShowListBackground!cor:String]" Checked="[ShowListBackground]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
             </Children>
