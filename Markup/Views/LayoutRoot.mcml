@@ -630,7 +630,7 @@
           <Scroller Orientation="Horizontal" FadeSize="10" Name="Scroller" ScrollingData="[SD]" Padding="10,10,0,0">
             <Children>
 
-              <Repeater Name="Repeater" Layout="[FlowLayout]" DiscardOffscreenVisuals="false">
+              <Repeater Name="Repeater" Layout="[FlowLayout]" DiscardOffscreenVisuals="false" Navigation="PreferFocusOrder">
                 <Animations>
                   <Animation Type="Move">
                     <Keyframes>
