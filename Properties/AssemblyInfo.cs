@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Media Browser Team")]
+[assembly: AssemblyCompany("Emby Media")]
 [assembly: AssemblyProduct("Chocolate")]
-[assembly: AssemblyCopyright("Copyright © Media Browser Team 2009-2014")]
+[assembly: AssemblyCopyright("Copyright © Emby Media 2009-2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyTitle("Chocolate")] 
@@ -30,4 +30,4 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("3.0.8.3")]
+[assembly: AssemblyVersion("3.0.8.4")]
