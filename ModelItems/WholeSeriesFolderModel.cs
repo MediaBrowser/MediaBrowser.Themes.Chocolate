@@ -32,7 +32,7 @@ namespace Chocolate
 
         protected void RefreshAllSeasons()
         {
-            Async.Queue("Series Whole Child Load", () =>
+            Async.Queue(Async.ThreadPoolName.TVRefresh, () =>
             {
                 //trickle down to all our seasons
                 foreach (var child in Children.OfType<FolderModel>().Where(f => f.Folder is Season))
