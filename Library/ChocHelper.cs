@@ -27,10 +27,13 @@ namespace Chocolate
         private static SizeRef _seasonPosterSize = new SizeRef(new Size(200,300));
         private bool showLegend;
 
+        public static ChocHelper Instance { get; set; }
+
         public ChocHelper()
         {
             this.OverviewTimer = new Timer();
             this.setupHelper();
+            Instance = this;
         }
 
         public ChocHelper(MediaBrowser.Library.Item Item)
@@ -38,6 +41,7 @@ namespace Chocolate
             this.OverviewTimer = new Timer();
             this.CurrentItem = Item;
             this.setupHelper();
+            Instance = this;
         }
 
         private string calculateEndTime()

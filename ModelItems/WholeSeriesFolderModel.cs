@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using MediaBrowser.Library;
 using MediaBrowser.Library.Entities;
 using MediaBrowser.Library.Threading;
@@ -27,7 +24,7 @@ namespace Chocolate
         {
             base.NavigatingInto();
             FilterUnwatched = PhysicalParent != null && PhysicalParent.FilterUnwatched;
-            RefreshAllSeasons();
+            if (ChocHelper.Instance.Config.UseCustomTvView) RefreshAllSeasons();
         }
 
         protected void RefreshAllSeasons()
