@@ -24,7 +24,7 @@ namespace Chocolate
         {
             base.NavigatingInto();
             FilterUnwatched = PhysicalParent != null && PhysicalParent.FilterUnwatched;
-            if (ChocHelper.Instance.Config.UseCustomTvView) RefreshAllSeasons();
+            if (ChocHelper.Instance != null && ChocHelper.Instance.Config.UseCustomTvView) RefreshAllSeasons();
         }
 
         protected void RefreshAllSeasons()
