@@ -38,6 +38,7 @@
         <Conditions>
           <IsValid Source="[Item.PhysicalParent]"/>
           <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="Season" ConditionOp="NotEquals" />
+          <Equality Source="[Item.PhysicalParent.ItemTypeString]" Value="MusicAlbum" ConditionOp="NotEquals" />
         </Conditions>
       </Binding>
       <Binding Target="[ItemName.Content]"       Source="[Item.Name]"/>
