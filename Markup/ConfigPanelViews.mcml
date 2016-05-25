@@ -31,7 +31,6 @@
       <!--EHS Options-->
       <BooleanChoice Name="SmallEhs" Value="[Helper.Config.SmallEhs]" />
       <BooleanChoice Name="UseSeasonPoster" Value="[Helper.Config.UseSeasonPoster]" />
-      <BooleanChoice Name="ShowWeather" Value="[Helper.Config.ShowWeather]" />
       <BooleanChoice Name="EnableEHSBackdrop" Value="[Helper.Config.EnableEHSBackdrop]" />
       <BooleanChoice Name="EnableStripBackdrop" Value="[Helper.Config.EnableStripBackdrop]" />
       <BooleanChoice Name="DisableEHSMovieTitle" Value="[Helper.Config.DisableEHSMovieTitle]" />
@@ -71,11 +70,6 @@
       <Changed Source="[UseSeasonPosterCB.Checked.Value]">
         <Actions>
           <Set Target="[Helper.Config.UseSeasonPoster]" Value="[UseSeasonPosterCB.Checked.Value]"></Set>
-        </Actions>
-      </Changed>
-      <Changed Source="[ShowWeatherCB.Checked.Value]">
-        <Actions>
-          <Set Target="[Helper.Config.ShowWeather]" Value="[ShowWeatherCB.Checked.Value]"></Set>
         </Actions>
       </Changed>
       <Changed Source="[EnableEHSBackdropCB.Checked.Value]">
@@ -190,7 +184,6 @@
             <Children>
               <Text Content="EHS Options" Color="color://s:FontColorLight" Font="font://f:CP_ConfigHeaderFont" Margins="10,15,10,10"/>
               <cb:CheckBox Name="EnableEHSBackdropCB" Label="[Application.LocalStrings.#EnableEHSBackdrop!cor:String]" Checked="[EnableEHSBackdrop]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
-              <cb:CheckBox Name="ShowWeatherCB" Label="[Application.LocalStrings.#ShowWeather!cor:String]" Checked="[ShowWeather]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="SmallEhsCB" Label="[Application.LocalStrings.#SmallEhs!cor:String]" Checked="[SmallEhs]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="UseSeasonPosterCB" Label="[Application.LocalStrings.#UseSeasonPoster!cor:String]" Checked="[UseSeasonPoster]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
               <cb:CheckBox Name="DisableEHSMovieTitleCB" Label="[Application.LocalStrings.#DisableEHSMovieTitle!cor:String]" Checked="[DisableEHSMovieTitle]" FocusItem="[FocusItem]" Margins="[CMargin]" Font="font://f:CP_ConfigItemFont"/>
