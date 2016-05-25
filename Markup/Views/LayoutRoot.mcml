@@ -258,7 +258,6 @@
         </Actions>
       </Rule>
 
-      <Binding Source="[ThemeHelper.Config.ShowWeather]" Target="[WeatherPanel.Visible]"/>
       <Binding Source="[ThemeHelper.Config.DisableEHSMovieTitle]" Target="[Title.Visible]"/>
       <Binding Source="[ThemeHelper.Config.DisableEHSMovieTitle]" Target="[TitleShadow.Visible]"/>
 
@@ -274,12 +273,12 @@
                 CenterPointPercent="0.5,0.5,0.5">
             <Children>
 
-              <!--Weather Panel-->
-              <wea:YahooWeatherLarge Name="WeatherPanel">
+              <!--Logo-->
+              <Graphic Name="Logo" Content="image://i:MBLogo" SizingPolicy="SizeToConstraint" MaximumSize="300,100" MaintainAspectRatio="true">
                 <LayoutInput>
-                  <AnchorLayoutInput Top="Parent,0,15" Left="Parent,0,35"/>
+                  <AnchorLayoutInput Top="Parent,0,40" Left="Parent,0,50"/>
                 </LayoutInput>
-              </wea:YahooWeatherLarge>
+              </Graphic>
 
               <!-- Gradient Center Panel Borders -->
               <Panel>
