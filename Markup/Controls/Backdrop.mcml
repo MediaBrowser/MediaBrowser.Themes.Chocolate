@@ -250,8 +250,8 @@
 
       <Changed Source="[StartTimer.Tick]">
         <Conditions>
-          <IsValid Source="[Folder.NewestItems]"/>
-          <Equality Source="[Folder.NewestItems.Count]" ConditionOp="GreaterThan" Value="0"/>
+          <IsValid Source="[Folder.RecentItems]"/>
+          <Equality Source="[Folder.RecentItems.Count]" ConditionOp="GreaterThan" Value="0"/>
         </Conditions>
         <Actions>
           <Set Target="[BackdropItems.Options]" Value="[Folder.NewestItems]"/>
@@ -266,11 +266,11 @@
         <Conditions>
           <Equality Source="[Application.Config.RotateBackdrops]" Value="true"/>
           <Equality Source="[Application.Config.RandomizeBackdrops]" Value="false"/>
-          <IsValid Source="[Folder.NewestItems]"/>
-          <Equality Source="[Folder.NewestItems.Count]" ConditionOp="GreaterThan" Value="0"/>
+          <IsValid Source="[Folder.RecentItems]"/>
+          <Equality Source="[Folder.RecentItems.Count]" ConditionOp="GreaterThan" Value="0"/>
         </Conditions>
         <Actions>
-          <Set Target="[BackdropItems.Options]" Value="[Folder.NewestItems]"/>
+          <Set Target="[BackdropItems.Options]" Value="[Folder.RecentItems]"/>
           <Invoke Target="[BackdropItems.NextValue]"
                   allowWrap="true"/>
         </Actions>
@@ -281,11 +281,11 @@
         <Conditions>
           <Equality Source="[Application.Config.RotateBackdrops]" Value="true"/>
           <Equality Source="[Application.Config.RandomizeBackdrops]" Value="true"/>
-          <IsValid Source="[Folder.NewestItems]"/>
-          <Equality Source="[Folder.NewestItems.Count]" ConditionOp="GreaterThan" Value="0"/>
+          <IsValid Source="[Folder.RecentItems]"/>
+          <Equality Source="[Folder.RecentItems.Count]" ConditionOp="GreaterThan" Value="0"/>
         </Conditions>
         <Actions>
-          <Set Target="[BackdropItems.Options]" Value="[Folder.NewestItems]"/>
+          <Set Target="[BackdropItems.Options]" Value="[Folder.RecentItems]"/>
           <Invoke ResultTarget="[BackdropItems.ChosenIndex]"
                   Target="[RandomNumberGenerator.Next]"
                   maxValue="[BackdropItems.Options.Count]"/>
